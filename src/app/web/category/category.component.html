@@ -1,0 +1,229 @@
+<section class="web_homePage" (scroll)="onWindowScroll($event);">
+
+
+
+<section class="category-listing">
+  
+  <div class="category-page-inner">
+    <a class="toggle" (click)="sidebarToggle()" title="Filter">
+      <i class="fa fa-list filter-icon"></i>
+     </a>
+    <a class="toggle-mobile" (click)="sidebarMobileToggle()" title="Filter">
+     <span> Filter </span>
+      <span class="icon">
+     <i class="fa fa-list filter-icon"></i>
+    </span>
+     </a>
+     <div class="back-div">
+       <button class="close" (click)="closeFilter()">
+      <span>&times;</span>
+    </button>
+     </div>
+      <div class="filter flex-grow-0 flex-shrink-0">
+        
+        <a (click)="clear()">Clear All</a>
+        <div class="sort-sec">
+          <h4>Sort by</h4>  <a (click)="clearSort()">Clear Sort</a>
+          <div class="filter-item">
+            <input type="radio" id="test4" name="radio-group1" value="response" [(ngModel)]="filterStatus" (change)="filterRecords()">
+            <label for="test4">Response Time</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="test3" name="radio-group1" value="asc" [(ngModel)]="filterStatus" (change)="filterRecords()">
+            <label for="test3">Price - Low to High</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="test2" name="radio-group1" value="desc" [(ngModel)]="filterStatus" (change)="filterRecords()">
+            <label for="test2">Price - High to Low</label>
+          </div>
+        </div>
+
+        <div class="sort-sec">
+          <h4>Service</h4> <a (click)="clearService()">Clear Service</a>
+          <div class="filter-item">
+            <input type="radio" id="service1" name="radio-group2" value="1" [(ngModel)]="filterService" (change)="filterRecords()">
+            <label for="service1">Shout-Out</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="service2" name="radio-group2" value="2" [(ngModel)]="filterService" (change)="filterRecords()">
+            <label for="service2">I-Got Talent</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="service3" name="radio-group2" value="4" [(ngModel)]="filterService" (change)="filterRecords()">
+            <label for="service3">Zoom</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="service4" name="radio-group2" value="3" [(ngModel)]="filterService" (change)="filterRecords()">
+            <label for="service4">Webinar</label>
+          </div>
+        </div>
+
+        <div class="sort-sec">
+          <h4>Avg Rating</h4> <a (click)="clearRating()">Clear Rating</a>
+          <div class="filter-item">
+            <input type="radio" id="test10" name="radio-group3" value="5" [(ngModel)]="filterRating" (change)="filterRecords()">
+            <label for="test10">5 stars</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="test6" name="radio-group3" value="4" [(ngModel)]="filterRating" (change)="filterRecords()">
+            <label for="test6">4 stars</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="test7" name="radio-group3" value="3" [(ngModel)]="filterRating" (change)="filterRecords()">
+            <label for="test7">3 stars</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="test8" name="radio-group3" value="2" [(ngModel)]="filterRating" (change)="filterRecords()">
+            <label for="test8">2 stars</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="test9" name="radio-group3" value="1" [(ngModel)]="filterRating" (change)="filterRecords()">
+            <label for="test9">1 stars</label>
+          </div>
+        </div>
+
+        <div class="sort-sec">
+          <h4>Price Range</h4> <a (click)="clearPrice()">Clear Price</a>
+          <div class="filter-item">
+            <input type="radio" id="price1" name="radio-group4" value="1" [(ngModel)]="filterPrice" (change)="filterRecords()">
+            <label for="price1">$0 - $100</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="price2" name="radio-group4" value="2" [(ngModel)]="filterPrice" (change)="filterRecords()">
+            <label for="price2">$100 - $200</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="price3" name="radio-group4" value="3" [(ngModel)]="filterPrice" (change)="filterRecords()">
+            <label for="price3">$200 - $300</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="price4" name="radio-group4" value="4" [(ngModel)]="filterPrice" (change)="filterRecords()">
+            <label for="price4">$300 - $400</label>
+          </div>
+          <div class="filter-item">
+            <input type="radio" id="price5" name="radio-group4" value="5" [(ngModel)]="filterPrice" (change)="filterRecords()">
+            <label for="price5">$400+</label>
+          </div>
+        </div>
+        
+      </div>
+      
+
+      <div class="category-listing-items">
+          <div class="custom-tabs-parent">
+            <h2 *ngIf="selectedLang =='en'">Featured in {{catDetail.category_name_en}}</h2>
+            <div class="tabs-content-parent">
+              <div *ngIf="featured.length == 0">
+                No records found
+              </div>
+              <div id="tab1" class="tab-data" style="display: block" *ngIf="featured.length > 0">
+                <div class="form-row">
+                  <div class="custom-item col-md-6 col-lg-4" *ngFor="let hd of featured;  let j = index">
+                    <div class="celeb-img">
+                        <a [routerLink]="['/celebrities',hd.userData.slug]" routerLinkActive="router-link-active">
+                          <img src="{{hd.userData.image}}" alt="{{hd.userData.fname_en}}"
+                            title="{{hd.userData.fname_en}}" id="{{hd.createdAt}}{{hd.userData._id}}{{hd._id}}{{j}}">
+                        </a>
+                        <div class="celeb-actions">
+                          <a class="list-shoutout"> <img  src="../../../assets/img/celeb-profile/shoutout-service-category-filter.svg" > ${{hd.userData.dedicated_price}}</a>&nbsp;
+                          <a class="list-shoutout-price"> <img src="../../../assets/img/celeb-profile/igt-service-filter.svg" > ${{hd.userData.i_got_talent_price}}</a>&nbsp;
+                          <a class="list-shoutout"> <img src="../../../assets/img/celeb-profile/chat-service-filter.svg"> ${{hd.userData.dm_text_price}}</a>
+                      </div>
+                    </div>
+                    <div class="celeb-details">
+                      <div class="celeb-name">
+                        {{hd.userData.fname_en}}
+                        <span>Actor</span>
+                      </div>
+                      <div *ngIf="hd.userData.isLogin == true" class="celeb-status">Online</div>
+                    </div>
+                  </div>
+        
+                </div>
+              </div>
+        
+            </div>
+          </div>
+        
+          <div class="custom-tabs-parent">
+            <h2 *ngIf="selectedLang =='en'">New in {{catDetail.category_name_en}}</h2>
+            <div class="tabs-content-parent">
+              <div *ngIf="newCategory.length == 0">
+                No records found
+              </div>
+              <div id="tab1" class="tab-data" style="display: block" *ngIf="newCategory.length > 0">
+                <div class="form-row">
+                  <div class="custom-item col-md-6 col-lg-4" *ngFor="let hd of newCategory;  let j = index">
+                    <div class="celeb-img">
+                        <a [routerLink]="['/celebrities',hd.userData.slug]" routerLinkActive="router-link-active">
+                          <img src="{{hd.userData.image}}" alt="{{hd.userData.fname_en}}"
+                            title="{{hd.userData.fname_en}}" id="{{hd.createdAt}}{{hd.userData._id}}{{hd._id}}{{j}}">
+                        </a>
+                        <div class="celeb-actions">
+                            <a class="list-shoutout"> <img  src="../../../assets/img/celeb-profile/shoutout-service-category-filter.svg" > ${{hd.userData.dedicated_price}}</a>&nbsp;
+                            <a class="list-shoutout-price"> <img src="../../../assets/img/celeb-profile/igt-service-filter.svg" > ${{hd.userData.i_got_talent_price}}</a>&nbsp;
+                            <a class="list-shoutout"> <img src="../../../assets/img/celeb-profile/chat-service-filter.svg"> ${{hd.userData.dm_text_price}}</a>
+                        </div>
+                    </div>
+                    <div class="celeb-details">
+                      <div class="celeb-name">
+                        {{hd.userData.fname_en}}
+                        <span>Actor</span>
+                      </div>
+                      <div *ngIf="hd.userData.isLogin == true" class="celeb-status">Online</div>
+                    </div>
+                  </div>
+        
+                </div>
+              </div>
+        
+            </div>
+          </div>
+        
+          <div class="custom-tabs-parent">
+            <h2 *ngIf="selectedLang =='en'">All in {{catDetail.category_name_en}}</h2>
+            <div class="tabs-content-parent">
+              <div *ngIf="homeData.length == 0">
+                No records found
+              </div>
+              <div id="tab1" class="tab-data" style="display: block" *ngIf="homeData.length > 0">
+                <div class="form-row">
+                  <div class="custom-item col-md-6 col-lg-4" *ngFor="let hd of homeData;  let j = index">
+                    <div class="celeb-img">
+                        <a [routerLink]="['/celebrities',hd.userData.slug]" routerLinkActive="router-link-active">
+                          <img src="{{hd.userData.image}}" alt="{{hd.userData.fname_en}}"
+                            title="{{hd.userData.fname_en}}" id="{{hd.createdAt}}{{hd.userData._id}}{{hd._id}}{{j}}">
+                        </a>
+                        <div class="celeb-actions">
+                            
+                          <a class="list-shoutout"><img src="../../../assets/img/celeb-profile/shoutout-service-category-filter.svg" >${{hd.userData.dedicated_price}}</a>&nbsp;
+                            <a class="list-shoutout-price"> <img src="../../../assets/img/celeb-profile/igt-service-filter.svg">${{hd.userData.i_got_talent_price}}</a>&nbsp;
+                            <a class="list-shoutout"> <img src="../../../assets/img/celeb-profile/chat-service-filter.svg">${{hd.userData.dm_text_price}}</a>
+
+
+
+                        </div>
+                    </div>
+                    <div class="celeb-details">
+                      <div class="celeb-name">
+                        {{hd.userData.fname_en}}
+                        <span>Actor</span>
+                      </div>
+                      <div *ngIf="hd.userData.isLogin == true" class="celeb-status">Online</div>
+                    </div>
+                  </div>
+        
+                </div>
+              </div>
+        
+            </div>
+          </div>
+          <div class="custom-pagination-outer">
+            <pagination [totalItems]="totalRecords" [itemsPerPage]="10" (pageChanged)="pageChanged($event)">
+            </pagination>
+          </div>
+        </div>
+  </div>
+</section>
+
+</section>

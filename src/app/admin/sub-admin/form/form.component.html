@@ -1,0 +1,185 @@
+<div class="" id="page-wrapper">
+  <div class="">
+    <div class="row row-stat">
+      <div class="col-sm-12">
+        <div class="panel panel-default">
+          <div class="panel-heading panel-heading-divider">
+            <div class="db-hdd-1">
+              <h2> {{ isEditable ? "Update" : 'Add' }} Sub-Admin </h2>
+            </div>
+          </div>
+          <div class="panel-body p-a-15 bx-shadow-white">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+                  <form [formGroup]="frm" (submit)="save()" class="form-horizontal">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="pro-lbl-one" for="form-control-1">First Name<em>*</em></label>
+                          <input class="form-control pro-input-des" id="fname_en" placeholder="Enter First Name"
+                            formControlName="fname_en" maxlength="100" name="fname_en" required type="text">
+                          <div *ngIf="frm.controls['fname_en'].hasError('required') && isSubmited"
+                            class="error-div help-block requiredClass">
+                            First Name is required.
+                          </div>
+                          <div *ngIf="frm.controls['fname_en'].hasError('pattern')"
+                            class="error-div help-block requiredClass">
+                            Enter text only
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="pro-lbl-one" for="form-control-2">Last Name<em>*</em></label>
+                          <input class="form-control pro-input-des" id="lname_en" placeholder="Enter Last Name"
+                            formControlName="lname_en" #LastName maxlength="100" name="lname_en" type="text" required>
+                          <div *ngIf="frm.controls['lname_en'].hasError('required') && isSubmited"
+                            class="error-div help-block requiredClass">
+                            Last Name is required.
+                          </div>
+                          <div *ngIf="frm.controls['lname_en'].hasError('pattern')"
+                            class="error-div help-block requiredClass">
+                            Enter text only
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="pro-lbl-one" for="form-control-2">Email<em>*</em></label>
+                          <input class="form-control pro-input-des" id="email" placeholder="Enter Email"
+                            formControlName="email" maxlength="50" #Email
+                            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$" required type="text" name="email">
+                          <div *ngIf="frm.controls['email'].hasError('required') && isSubmited"
+                            class="error-div help-block requiredClass">
+                            Email is required.
+                          </div>
+                          <div *ngIf="frm.controls['email'].hasError('pattern')  && frm.controls['email'].value != ''"
+                            class="error-div help-block requiredClass">
+                            {{"Invalid Email"}}
+                          </div>
+                          <div class="error" *ngIf="emailChk">
+                            {{"Email already exist"}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6" *ngIf="!isEditable">
+                        <div class="form-group">
+                          <label class="pro-lbl-one" for="form-control-2">Password<em>*</em></label>
+                          <input type="password" placeholder="Password" class="form-control pro-input-des" required
+                            minlength="6" maxlength="20" #password formControlName="password" name="password" />
+                          <div *ngIf="frm.controls['password'].hasError('required') && isSubmited"
+                            class="error-div help-block requiredClass">
+                            Password is required.
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="row">
+
+                         
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="pro-lbl-one" for="form-control-2">Choose Country Code<em>*</em></label>
+    
+                              <select class="form-control pro-input-des" id="state" formControlName="std_code">
+                                <option [value]="code.isdcode" *ngFor="let code of countryCodeList">{{code.name}}
+                                  ({{code.isdcode}})</option>
+                              </select>
+                              <div *ngIf="frm.controls['std_code'].hasError('required') && isSubmited"
+                                class="error-div help-block requiredClass">
+                                Country Code is required.
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="pro-lbl-one" for="form-control-2">Phone<em>*</em></label>
+                              <input class="form-control pro-input-des" placeholder="Enter Mobile Number"
+                                formControlName="phone" #mobileNumber  name="mobile" maxlength="10" required
+                                type="text">
+                              <div *ngIf="frm.controls['phone'].hasError('required') && isSubmited"
+                                class="error-div help-block requiredClass">
+                                Phone is required.
+                              </div>
+                   <div *ngIf="frm.controls['phone'].hasError('minlength')"
+                                class="error-div help-block requiredClass">
+                                Minimum 10 numbers required.
+                              </div>
+                  <div *ngIf="frm.controls['phone'].hasError('maxlength')"
+                                class="error-div help-block requiredClass">
+                                Maximum 10 numbers required.
+                              </div>
+                             <div *ngIf="frm.controls['phone'].hasError('pattern')"
+                                class="error-div help-block requiredClass">
+                                Enter only Numbers.
+                              </div>
+                            
+                            </div>
+                          </div>
+                        </div>
+                        
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label class="pro-lbl-one" for="form-control-1">Role<em>*</em></label>
+                          <div class="selectbox">
+                            <select formControlName="subRole" class="form-control pro-input-des" required>
+                              <option value="">Select Role</option>
+                              <option *ngFor="let rData of rolesData" [value]="rData._id">
+                                {{rData.name}}</option>
+                            </select>
+                          </div>
+                          <div *ngIf="frm.controls['subRole'].hasError('required') && isSubmited"
+                            class="error-div help-block requiredClass">
+                            Role is required.
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                    <div class="row">
+                      
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label class="pro-lbl-one" for="form-control-2">Select Permissions<em>*</em></label>
+                          <div class="custom-check-row">
+                            <div class="form-check form-check-inline" *ngFor="let categories of itemTypeList; let i = index">
+                              <input class="form-check-input" type="checkbox" name="category" [checked]="categories.flag"
+                                (change)="selectItemType(categories._id,$event.target.checked)">
+                              <label class="form-check-label" for=""> {{categories.name}}</label>
+                            </div>
+                            <div class="error-div help-block requiredClass" *ngIf="
+                                itemTypeChk 
+                                ">
+                              {{ "Please select" }}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+
+                    <div class="row text-right two-btn-group mt-4">
+                      <div class="col-md-12">
+                        <button class="project-btn-1 project-btn-secondary-color"
+                          routerLink="/admin/sub-admin">Cancel</button>
+                        <button class="project-btn-1">Submit</button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

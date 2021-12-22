@@ -1,0 +1,89 @@
+@import '../../../assets/scss/custom-variables.scss';
+
+
+
+.fa-sort {padding-left: 3px;color: darkgray;}
+
+
+
+
+
+.action-links {  float: left;}
+
+.del-button {color: #20a8d8 !important;text-decoration: none !important;background-color: transparent;cursor: pointer;}
+
+.del-button:hover {color: #167495 !important;text-decoration: underline !important;}
+
+.custom-search-form {position: relative;
+  .input-group-btn{position: absolute;right: 0;top: 0;}
+  .form-control {padding-right: 45px;}
+}
+
+.lead-dt-header{
+.lead-dt-header-name{position: relative;padding-left:65px;
+    figure{position: absolute;left: 0;top: 0;@include HW(50px);@include border-radius(50%);overflow: hidden;}
+    h4{font-size: $font-size-level-1;}
+    p{color:$body-secondary-font-color}
+}
+    .lead-dt-header-act{text-align: right;}
+}
+
+.lead-dt-header-second {
+    ul{display: inline-block;width: 100%;}
+    li {float: left;width: 33%; padding: 5px;}
+    h5{font-size: $font-size-level-1 - 2px;}
+    p{color:$body-secondary-font-color}
+}
+
+
+.deals-dt-mid-hdd{background: whitesmoke;padding: 10px;
+    h3, h4{font-size: $font-size-level-1 - 2px;}
+}
+
+.three-col-list{display: inline-block;width: 100%;
+    li{padding: 5px;float: left;width: 33%; }
+    h5{font-size: $font-size-level-1 - 4px;}
+    p{color:$body-secondary-font-color}
+}
+.single-col-list{display: inline-block;width: 100%;
+    li{padding: 5px;float: left;width: 100%; }
+    h5{font-size: $font-size-level-1 - 4px;}
+    p{color:$body-secondary-font-color}
+}
+
+.deals-dt-line-rw{margin-bottom: 20px;}
+
+.custom-table-outer {
+    table {
+      thead {
+        background: #301152;
+        th {
+          color: #ffffff;
+        }
+      }
+      tbody {
+        td {
+          img {
+            height: 50px;
+            width: 50px;
+            border-radius: 15px;
+          }
+        }
+      }
+    } 
+  }  
+
+
+.modal-header {
+  h2 {
+      font-size: 24px;
+      color: #D6006D;
+      font-weight: 600;
+      padding: 5px 20px;
+  }
+}
+
+.delete-content{ padding:20px}
+@media(max-width:767px){
+  .delete-content{ padding:20px}
+}

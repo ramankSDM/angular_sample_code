@@ -1,0 +1,127 @@
+@import '../../../../assets/scss/custom-variables.scss';
+
+.login-page-main-box {min-height: 100vh;width: $full-width;background:url(../../../../assets/img/login-bg.jpg) no-repeat;background-size: cover;
+    .login-page-wrap{display: flex;min-height: 100vh;justify-content: center;align-items: center;padding:20px;}
+    .login-page-inside {
+        max-width: 70%;
+        margin: 0 auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        background: #ffffff;
+        padding: 0px;
+        border-radius: 20px;
+        box-shadow: 1px 5px 24px 0 rgba(0, 0, 0, 0.12);
+        min-height: 550px;
+        .login-left {
+            flex: 1;
+            padding: 50px;
+            h3 {
+                font-size: 30px;
+                color: #D6006D;
+                font-weight: 400;
+                text-transform: uppercase;
+                margin-bottom: 25px;
+            }
+            .form-group {
+                position: relative;
+                label {
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #C1C0AF;
+                }
+                input {
+                    width: 100%;
+                    height: 50px;
+                    background: #f5f5f5;
+                    border-radius: 5px;
+                    border: 0;
+                    padding: 0 30px 0 40px;
+                    font-size: 14px;
+                    color: #555555;
+                }
+                span.auth-ini {
+                    position: absolute;
+                    left: 15px;
+                    top: 37px;
+                    img {
+                        height: 18px;
+                    }
+                }
+            }
+            button {
+                width: 100%;
+                height: 50px;
+                margin-top: 30px;
+                background: #1c00b9;
+                background: linear-gradient(97deg, #1c00b9 0%, #b90070 100%);
+                border-radius: 30px;
+                border: 0;
+                font-size: 16px;
+                color: #ffffff;
+                text-transform: uppercase;
+            }
+        }
+        .login-right {
+            flex: 1;
+            background: url('../../../../assets/img/auth-right.svg');
+            background-repeat: no-repeat;
+            background-size: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 550px;
+            .login-right-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                text-align: center;
+                height: 100%;
+            }
+        }
+    }
+    .login-page-white-box{box-shadow: 1px 5px 24px 0 rgba(0, 0, 0, 0.12);@include border-radius(4px); background: #fff;padding: 30px;}
+
+    .login-page-logo{text-align: center;margin-bottom:20px;
+        img{max-height: 65px;}
+    }
+    .login-page-hdd{margin-bottom: 25px;
+        h3{font-size: $font-size-level-2;}
+        p{color: $body-secondary-font-color;}
+    }
+
+    .forgot-psw-txt{text-align: right;
+        outline: none;
+        p{cursor: pointer;
+            &:hover{color: $theme-color;}
+        }
+    }
+
+    .or-devider-sinup{text-align: center;position: relative;margin:25px 0;
+        span{position: relative;@include HW(36px); background: #fff;border:1px solid $border-color;@include border-radius(50%); display: inline-block;z-index: 2;padding: 7px 0;text-align: center;font-size: $font-size-body;}
+        &::after{position: absolute;width: $full-width;height: 1px;background: $border-color; content: "";left: 0;top: 50%;margin-top: -0.5px;}
+    }
+
+    .dont-have-account{color:$body-secondary-font-color;}
+
+@include breakpoint(mobilemini){
+    .login-page-white-box{padding: 20px;}
+    .forgot-psw-txt{text-align: left;margin-top: 10px;}
+}    
+
+}
+
+@media(max-width:991px){
+    .login-page-main-box .login-page-inside .login-left{ padding: 30px;}
+}
+
+@media(max-width:767px){
+    .login-right{ display: none !important;}
+    .login-page-main-box .login-page-inside{ max-width: 100%;}
+    .login-page-main-box .login-page-inside .login-left h3{ font-size: 18px; margin-bottom: 10px;}
+    .login-page-main-box .login-page-inside .login-left .form-group input{ height:40px}
+    .login-page-main-box .login-page-inside .login-left .form-group span.auth-ini{ top:35px}
+    .login-page-main-box .login-page-inside .login-left button{ height: 46px; font-size: 14px;}
+    .login-page-main-box .login-page-inside{ min-height: auto;}
+}

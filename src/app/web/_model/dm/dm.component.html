@@ -1,0 +1,171 @@
+<div class="modal-outer">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <img src="../../../assets/img/modal-close.svg">
+    </button>
+    <div class="modal-body">
+        <div class="service-modal-head align-item-start">
+            <div class="service-modal-left flex-shrink-0">
+                <div class="celeb-head-img">
+                    <img [src]="dataList.image">
+                </div>
+                <div class="celeb-mask">
+                    <img src="../../../../assets/img/celeb-profile/celeb-mask.png">
+                </div>
+            </div>
+            <div class="zoom-content">
+                <h1>{{"request.dm_text" | translate}} </h1>
+                <h2>{{"model_dmText.dm_header" | translate}} <span>{{ dataList.name }}</span> </h2>
+
+                <h3 class="col-md-2">
+                    <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                            <path
+                                d="m456 80h-400c-30.878 0-56 25.122-56 56v240c0 30.878 25.122 56 56 56h400c30.878 0 56-25.122 56-56v-240c0-30.878-25.122-56-56-56zm-400 32h400c13.233 0 24 10.767 24 24v32h-448v-32c0-13.233 10.767-24 24-24zm400 288h-400c-13.233 0-24-10.767-24-24v-176h448v176c0 13.233-10.767 24-24 24z" />
+                            <path
+                                d="m112 352h-16c-8.836 0-16-7.164-16-16v-16c0-8.836 7.164-16 16-16h16c8.836 0 16 7.164 16 16v16c0 8.836-7.164 16-16 16z" />
+                        </g>
+                    </svg>
+                    ${{ dataList.price }} USD
+                </h3>
+
+            </div>
+        </div>
+
+        <div class="service-modal-content">
+            <form [formGroup]="frm" class="form-horizontal">
+                <div class="serv-row">
+                    <div class="w-100">
+                        <div class="form-group">
+                            <label class="main-lbl">{{"headerMenu.message" | translate}}</label>
+                            <textarea placeholder="{{dmData}}" formControlName="dm_text"></textarea>
+                            <div *ngIf="frm.controls['dm_text'].hasError('required') && isSubmited"
+                                class="error-div help-block requiredClass">
+                                {{"contact_admin.req_msg" | translate}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="serv-row serv-row-adj">
+                    <div class="form-item custom-padd">
+                        <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox" formControlName="terms">
+                        <label for="styled-checkbox-2">{{"model_zoom.terms_agreement" | translate}} <a
+                                routerLink="/terms-condition"
+                                target="_blank">{{"common_model.termOfService" | translate}}</a>
+                        </label>
+                        <div *ngIf="frm.controls['terms'].hasError('required') && isSubmited"
+                            class="error-div help-block requiredClass">
+                            {{"common_model.this_errorReq" | translate}}
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="promo-trigger" (click)="showCoupon()">{{"common_model.promo_code" | translate}}</a>
+                <div *ngIf="applyCouponDiv == 'true'">
+                    <div class="couponList row">
+                        <h4 class="col-md-12">{{"common_model.available_coupon" | translate}} </h4>
+                        <div class="coupons" *ngIf="applyCodeButton == 'false'">
+                            <span *ngFor="let item of couponList; let i = index">
+                                <!--(click)="applyCode(item.promocodes[0].code)"-->
+                                <a class="apply-coupon">
+                                    {{ item.promocodes[0].code }} </a>
+                            </span>
+                            <input type="text" name="couponcode" class="form-control" style="margin: 0 2px 0 1rem;"
+                                formControlName="promoCode">
+                            <button (click)="applyCode(frm.controls.promoCode.value)"
+                                class="button btn btn-primary">{{"buttons.apply" | translate}}</button>
+                        </div>
+
+                        <div class="coupons" *ngIf="applyCodeButton == 'true'">
+                            <span *ngFor="let item of couponList; let i = index">
+                                <span *ngIf="item.promocodes[0].code == appliedCode" class="applied-coupon">
+                                    {{ item.promocodes[0].code }} </span>
+                                <span *ngIf="item.promocodes[0].code != appliedCode" class="disabled-code">
+                                    {{ item.promocodes[0].code }} </span>
+                                <button *ngIf="item.promocodes[0].code == appliedCode" type="button"
+                                    (click)="removeCode(item.promocodes[0].code)" class="remove-coupon">
+                                    <img src="../../../assets/img/remove.png">
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pay-info">
+                    <h2> {{"payment.heading" | translate}} </h2>
+                    <p> {{"payment.description" | translate}} <span> <img src="../../../../assets/img/info.svg"> </span>
+                    </p>
+
+                    <div class="serv-row">
+                        <div class="form-item">
+                            <label class="main-lbl">To<span>
+                                    <img src="../../../../assets/img/info.svg"></span></label>
+                            <div *ngIf="(fanDetail)">
+                                <div
+                                    *ngIf="(fanDetail.available_wallet_points) && fanDetail.available_wallet_points > 0">
+                                    <div class="serv-row serv-row-adj points-row">
+                                        <div class="form-item">
+                                            <label>{{"common_model.available_point" | translate}} $
+                                                {{ fanDetail.available_wallet_points }} </label>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" formControlName="available_wallet_points">
+                                    <div class="serv-row serv-row-adj points-row-div">
+                                        <div class="form-item">
+                                            <input class="styled-checkbox" id="styled-checkbox-3" type="checkbox"
+                                                (change)="walletChecked()" formControlName="use_points">
+                                            <label for="styled-checkbox-3">{{"common_model.use_wallet_msg" | translate}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="showCardDetail && cardCharges > 0">
+                        <label for="pendingBalance"><span>Pending Balance: </span> $ {{ cardCharges }} </label>
+                        <div *ngFor="let item of cardDetail; let i = index;">
+                            <div class="form-item input-item-list">
+                                <label class="item-row">
+                                    <span class="radio-cell d-inline-flex position-relative">
+                                        <input type="radio" (click)="existingCardClick()" formControlName="card"
+                                            id="radio{{i}}" [value]=item.id class="position-absolute">
+                                        <span
+                                            class="icon d-inline-flex align-items-center justify-content-center rounded-circle">
+                                            <span class="rounded-circle"></span>
+                                        </span>
+                                    </span>
+                                    <span> {{ "**** **** "+ item.last4 || '?'}} </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-item input-item-list" *ngIf="cardDetail.length > 0">
+                            <label class="item-row">
+                                <span class="radio-cell d-inline-flex position-relative">
+                                    <input type="radio" (click)="newCardClick()" formControlName="newCard"
+                                        class="position-absolute" for="new-card">
+                                    <span
+                                        class="icon d-inline-flex align-items-center justify-content-center rounded-circle">
+                                        <span class="rounded-circle"></span>
+                                    </span>
+                                </span>
+                                <span class="main-lbl mb-0" id="new-card">New Card</span>
+                            </label>
+                        </div>
+                        <div *ngIf="newCard" class="payment-card-blc">
+                            <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions">
+                            </ngx-stripe-card>
+                        </div>
+                    </div>
+                </div>
+                <div class="pay-action">
+                    <button type="submit" (click)="save()">{{"buttons.submit" | translate}}</button>
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,39 @@
+@import "../my-booking.component.scss";
+
+.brek-text{
+    word-break: break-all;
+}
+.custom-table-outer table {
+    .table-act-btn {
+        cursor: pointer;
+        padding: 2px;
+        background: none;
+        border: 0;
+        text-align: center;
+        color: #545454;
+        width: 37px;
+        height: 35px;
+        display: inline-block;
+        border-radius: 0px;
+        -webkit-border-radius: 2px;
+        svg {
+            height: 30px;
+            width: 30px;
+            fill: #301152;
+        }
+    }
+    .view {
+      svg {fill: #D6006D;}
+      }   
+    .blockedFan {
+        svg {fill: #D6006D;}
+    }
+    .flaggedFan {
+        svg {fill: #1C00B9;}
+    }
+    .reject {
+        svg {fill: #545454;}
+    }
+  }
+
+  .rating-col{ width:122px !important; margin: auto;}

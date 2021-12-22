@@ -1,0 +1,61 @@
+<div class="" id="page-wrapper">
+    <div class="">
+      <div class="row row-stat">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading panel-heading-divider">
+              <div class="db-hdd-1">
+                <h2> {{ isEditable ? "Update" : 'Add' }} Category</h2>
+              </div>
+            </div>
+            <div class="panel-body p-a-15 bx-shadow-white">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form [formGroup]="frm" (submit)="save()" class="form-horizontal">  
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-1">Category name in English<em>*</em></label>
+                            <input class="form-control pro-input-des" id="fname" placeholder="Enter Category Name"
+                            formControlName="category_name_en" maxlength="100" name="fname" required
+                              type="text">
+                            <div *ngIf="frm.controls['category_name_en'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Category Name is required.
+                              </div>
+                              <div *ngIf="frm.controls['category_name_en'].hasError('pattern')" class="error-div help-block requiredClass">
+                                Enter text only
+                              </div>
+                              
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Category name in Arabic<em>*</em></label>
+                            <input class="form-control pro-input-des" id="category_name_ar" placeholder="Enter Category Name"
+                            formControlName="category_name_ar" #LastName maxlength="100" name="category_name_ar" type="text">
+                            <div *ngIf="frm.controls['category_name_ar'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Category Name is required.
+                              </div>
+                              <div *ngIf="frm.controls['category_name_ar'].hasError('pattern')" class="error-div help-block requiredClass">
+                                Enter text only
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row text-right two-btn-group mt-4">
+                        <div class="col-md-12">
+                          <button class="project-btn-1 project-btn-secondary-color"
+                            routerLink="/admin/categories">Cancel</button>
+                          <button [disabled]="!frm.valid" class="project-btn-1">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

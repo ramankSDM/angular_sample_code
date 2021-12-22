@@ -1,0 +1,88 @@
+<div class="login-page-main-box">
+    <div class="login-page-wrap">
+        <div class="login-page-inside">
+            <div class="login-left">
+                <div class="login-page-logo"><a href=""><img src="assets/img/logo.png" alt="" /></a></div>
+                <h3>LOGIN</h3>
+                <form #loginForm="ngForm">
+                    <div class="form-group">
+                                <label class="pro-lbl-one">Email</label>
+                                <span class="auth-ini"><img src="../../../../assets/img/user.svg"></span>
+                                <input type="email" placeholder="Email Address" class="form-control pro-input-des" required
+                                    maxlength="50" #Email="ngModel" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$"
+                                    [(ngModel)]="admin.email" name="email" />
+    
+                                <div *ngIf="Email.errors" class="error-div">
+                                    <div *ngIf="Email.errors.required && Email.touched" class="help-block requiredClass">
+                                        Email is required.
+                                    </div>
+                                    <div *ngIf="Email.errors.pattern" class="help-block requiredClass">
+                                        Please enter a valid email id.
+                                    </div>
+                                </div>
+    
+                            </div>
+                            <div class="form-group">
+                                <label class="pro-lbl-one">Password</label>
+                                <span class="auth-ini"><img src="../../../../assets/img/lock.svg"></span>
+                                <input type="password" placeholder="Password" class="form-control pro-input-des" required
+                                    minlength="8" maxlength="20" #Password="ngModel" [(ngModel)]="admin.password"
+                                    name="password" />
+    
+                                <div *ngIf="Password.errors" class="error-div">
+                                    <div *ngIf="Password.errors.required && Password.touched"
+                                        class="help-block requiredClass">
+                                        Passsword is required.
+                                    </div>
+                                    <div *ngIf="Password.errors?.minlength" class="help-block requiredClass">
+                                        Password should contain at least 8 characters.
+                                    </div>
+                                </div>
+    
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="project-checkbox">
+                                            <label><input type="checkbox" /><span></span>Remember Me</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 forgot-psw-txt">
+                                        <p routerLink="/admin/forgot-password">Forgot Password</p>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            
+                                <button type="button"
+                                    [disabled]="loginForm.invalid" (click)="login(loginForm)">Login</button>
+                           
+                </form>
+            </div>
+            <div class="login-right">
+                <div class="login-right-content">
+                    <img src="../../../assets/img/main-logo.svg">
+                </div>
+            </div>
+            
+            <!-- <div class="login-page-white-box">
+                <div class="login-page-hdd text-center">
+                    
+                    <p>Enter your Username and Password</p>
+                </div>
+                <div class="login-page-body">
+                    
+
+                    <div class="or-devider-sinup">
+                        <span>OR</span>
+                    </div>
+
+                    <div class="dont-have-account text-center">
+                        <p>If you don't have account! <button class="project-btn-1">Signup</button></p>
+                    </div>
+
+                </div>
+            </div> -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+
+
+.fa-sort {padding-left: 3px;color: darkgray;}
+
+
+
+
+
+.action-links {  float: left;}
+
+.del-button {color: #20a8d8 !important;text-decoration: none !important;background-color: transparent;cursor: pointer;}
+
+.del-button:hover {color: #167495 !important;text-decoration: underline !important;}
+
+.custom-search-form {position: relative;
+  .input-group-btn{position: absolute;right: 0;top: 0;}
+  .form-control {padding-right: 45px;}
+}
+.project-btn-1 {
+  border-radius: 30px;
+  background: #1c00b9;
+  background: linear-gradient(97deg, #1c00b9 0%, #b90070 100%);
+}
+
+@media(max-width:767px){
+  .db-hdd-1 h2, .db-hdd-1 h3{ font-size: 1.5rem !important;}
+}

@@ -1,0 +1,125 @@
+<div class="" id="page-wrapper">
+    <div class="">
+      <div class="row row-stat">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading panel-heading-divider">
+              <div class="db-hdd-1">
+                <h2> {{ isEditable ? "Update" : 'Add' }} Promotion</h2>
+              </div>
+            </div>
+            <div class="panel-body p-a-15 bx-shadow-white">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form [formGroup]="frm" (submit)="save()" class="form-horizontal">  
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-1">Title name in English<em>*</em></label>
+                            <input class="form-control pro-input-des" id="title_en" placeholder="Enter Title"
+                            formControlName="title_en" maxlength="100" name="title_en" required
+                              type="text">
+                            <div *ngIf="frm.controls['title_en'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Title is required.
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Title name in Arabic<em>*</em></label>
+                            <input class="form-control pro-input-des" id="title_ar" placeholder="Enter Title"
+                            formControlName="title_ar" #LastName maxlength="100" name="title_ar" type="text">
+                            <div *ngIf="frm.controls['title_ar'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Title is required.
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-1">Description in English<em>*</em></label>
+                            <input class="form-control pro-input-des" id="description_en" placeholder="Enter description"
+                            formControlName="description_en" maxlength="100" name="description_en" required
+                              type="text">
+                            <div *ngIf="frm.controls['description_en'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Description is required.
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Description in Arabic<em>*</em></label>
+                            <input class="form-control pro-input-des" id="description_ar" placeholder="Enter description"
+                            formControlName="description_ar" #LastName maxlength="100" name="description_ar" type="text">
+                            <div *ngIf="frm.controls['description_ar'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Description is required.
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group exp_dt">
+                            <label class="pro-lbl-one" for="form-control-1">Expire Date<em>*</em></label>
+                              <p-calendar  class="form-control pro-input-des" formControlName="expiryDate" placeholder="Select expire date"
+                              [minDate]="now" [showIcon]="true"></p-calendar>
+                            <div *ngIf="frm.controls['expiryDate'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                               Expiry Date is required
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Discount Type<em>*</em></label>
+                            <div class="selectbox">
+                              <select formControlName="discountType" class="form-control pro-input-des" required>
+                                  <option value="">Select Discount Type</option>
+                                  <option value="Fixed">Fixed</option>
+                                  <option value="Percentage">Percentage</option>
+                              </select>
+                          </div>
+                            <div *ngIf="frm.controls['discountType'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                              Discount type is required.
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                              <label class="pro-lbl-one" for="form-control-2">Discount <em>*</em></label>
+                              <input class="form-control pro-input-des" id="discount" placeholder="Enter code Name"
+                              formControlName="discount" #LastName maxlength="100" name="discount" type="text">
+                              <div *ngIf="frm.controls['discount'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Discount is required.
+                                </div>
+                            </div>
+                          </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Promo Code<em>*</em></label>
+                            <input class="form-control pro-input-des" id="category_name_ar" placeholder="Enter code Name"
+                            formControlName="code" #LastName maxlength="100" name="category_name_ar" type="text">
+                            <div *ngIf="frm.controls['code'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Promo Code is required.
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row text-right two-btn-group mt-4">
+                        <div class="col-md-12">
+                            
+                          <button class="project-btn-1 project-btn-secondary-color"
+                            routerLink="/admin/promotions">Cancel</button>
+                          <button [disabled]="!frm.valid" class="project-btn-1">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

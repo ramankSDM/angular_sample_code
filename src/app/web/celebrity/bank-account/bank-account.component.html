@@ -1,0 +1,191 @@
+<div class="user-inner-main">
+    <div class="inner-head">
+        <h2>{{"headerMenu.bank-account" | translate}}</h2>
+        <div class="inner-head-rt"></div>
+    </div>
+    <div class="inner-body">
+
+        <form [formGroup]="userForm" enctype="multipart/form-data" class="edit-section">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'Account Holder Name'}}<em>*</em></label>
+                                <input type="text" class="form-control input-underline input-lg"
+                                    placeholder="{{ 'Account Holder Name' }}" appInputRestriction="noSpecialChars"
+                                    formControlName="account_holder_name" required>
+                                <p class="error"
+                                    *ngIf="userForm.controls['account_holder_name'].hasError('required') && isSubmited">{{'Account Holde Name
+                is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'Account Number'}}<em>*</em></label>
+                                <input type="text" class="form-control input-underline input-lg"
+                                    placeholder="{{ 'Account Number' }}" appInputRestriction="integerOnly"
+                                    formControlName="account_number" required maxlength="20">
+                                <p class="error"
+                                    *ngIf="userForm.controls['account_number'].hasError('required') && isSubmited">{{'Account Number
+                is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'Routing Number'}}<em>*</em></label>
+                                <input type="text" class="form-control input-underline input-lg"
+                                    placeholder="{{ 'Routing Number' }}" appInputRestriction="integerOnly"
+                                    formControlName="routing_number" required maxlength="10">
+                                <p class="error"
+                                    *ngIf="userForm.controls['routing_number'].hasError('required') && isSubmited">{{'Routing Number
+                is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'First Name'}}<em>*</em></label>
+                                <input type="text" class="form-control input-underline input-lg"
+                                    placeholder="{{ 'FirstName ' }}" appInputRestriction="noSpecialChars"
+                                    formControlName="firstName" required>
+                                <p class="error"
+                                    *ngIf="userForm.controls['firstName'].hasError('required') && isSubmited">{{'First Name
+                    is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'Last Name'}}<em>*</em></label>
+                                <input type="text" class="form-control input-underline input-lg"
+                                    placeholder="{{ 'Last Name ' }}" appInputRestriction="noSpecialChars"
+                                    formControlName="lastName" required>
+                                <p class="error"
+                                    *ngIf="userForm.controls['lastName'].hasError('required') && isSubmited">{{'Last Name
+                    is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'Phone Number'}}<em>*</em></label>
+                                <input type="text" class="form-control  input-lg" placeholder="{{ 'Phone Number ' }}"
+                                    formControlName="phoneNumber" appInputRestriction="integerOnly" required
+                                    maxlength="15">
+                                <p class="error"
+                                    *ngIf="userForm.controls['phoneNumber'].hasError('required') && isSubmited">{{'Company Name
+                    is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'DOB'}}<em>*</em></label><br>
+                                <p-calendar inputStyleClass="dateInput" class="form-control" formControlName="dob"
+                                    placeholder="{{ 'Select expire date' }}" [maxDate]="now" [monthNavigator]="true"
+                                    [yearNavigator]="true" yearRange="1950:2010"></p-calendar>
+                                <p class="error" *ngIf="userForm.controls['dob'].hasError('required') && isSubmited">{{'DOB
+                      is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'Address'}}<em>*</em> </label>
+                                <input type="text" class="form-control input-underline input-lg"
+                                    placeholder="{{ 'FirstName ' }}" appInputRestriction="noSpecialChars"
+                                    formControlName="line1" required>
+                                <p class="error" *ngIf="userForm.controls['line1'].hasError('required') && isSubmited">{{'Address
+                  is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'City'}}<em>*</em></label>
+                                <input type="text" class="form-control input-underline input-lg"
+                                    placeholder="{{ 'City Name ' }}" appInputRestriction="noSpecialChars"
+                                    formControlName="city" required>
+                                <p class="error" *ngIf="userForm.controls['city'].hasError('required') && isSubmited">{{'City Name
+                  is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'Postal code'}}<em>*</em></label>
+                                <input type="text" class="form-control input-underline input-lg"
+                                    placeholder="{{ 'Postal code' }}" appInputRestriction="noSpecialChars"
+                                    formControlName="postal" required>
+                                <p class="error" *ngIf="userForm.controls['postal'].hasError('required') && isSubmited">{{'Postal code
+                  is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'State'}}<em>*</em></label>
+                                <input type="text" class="form-control input-underline input-lg"
+                                    placeholder="{{ 'State' }}" appInputRestriction="noSpecialChars"
+                                    formControlName="state" required>
+                                <p class="error" *ngIf="userForm.controls['state'].hasError('required') && isSubmited">{{'State
+                    is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                    <div class="col-lg-6" *ngIf="!isEditAble">
+                        <fieldset class="form-group">
+                            <div class="form-group">
+                                <label for="disabledSelect">{{'Verification document'}}<em>*</em></label><br>
+                                <input type="file" name="profile" (change)="onFileSelect($event)" />
+                                <p class="error" *ngIf="verificationDoc">{{'Verification document
+                      is required'}}</p>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" *ngIf="!isEditAble">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <button mat-stroked-button type="button" class="btn theme-save mr-2"
+                                (click)="save()">{{"Update"}}</button>
+                            <button type="button" class="btn theme-cancel"
+                                [routerLink]="['/vendors/profile']">{{"Back"}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

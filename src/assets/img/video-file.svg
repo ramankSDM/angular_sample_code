@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="84" height="84" viewBox="0 0 84 84">
+  <g id="video-file" transform="translate(0 0.176)">
+    <circle id="Ellipse_25" data-name="Ellipse 25" cx="42" cy="42" r="42" transform="translate(0 -0.176)" fill="#d6006d"/>
+    <path id="Path_203" data-name="Path 203" d="M186.165,161.989,166.176,142l-43.509,43.754,16.254,16.254a41.788,41.788,0,0,0,47.244-40.02Z" transform="translate(-102.653 -118.545)" fill="#b90070"/>
+    <path id="Path_204" data-name="Path 204" d="M153.4,63.667H122.667V120.2h43.509V76.448Z" transform="translate(-102.653 -52.993)" fill="#fff"/>
+    <path id="Path_205" data-name="Path 205" d="M277.4,76.448,264.615,63.667h-9.044V120.2H277.4Z" transform="translate(-213.872 -52.993)" fill="#f2f6fc"/>
+    <path id="Path_206" data-name="Path 206" d="M311,76.448h12.781L311,63.667Z" transform="translate(-260.258 -52.993)" fill="#dce1eb"/>
+    <path id="Path_207" data-name="Path 207" d="M184.813,212.636l-7.548,4.933v-5.993H150.982v20.7h26.283v-5.993l7.548,4.933Z" transform="translate(-126.348 -176.769)" fill="#4a7aff"/>
+    <path id="Path_208" data-name="Path 208" d="M264.79,217.569v-5.993h-9.219v20.7h9.219v-5.993l7.548,4.933V212.636Z" transform="translate(-213.872 -176.769)" fill="#2864f0"/>
+    <g id="Group_136" data-name="Group 136" transform="translate(27.247 36.854)">
+      <ellipse id="Ellipse_26" data-name="Ellipse 26" cx="2.087" cy="2.087" rx="2.087" ry="2.087" fill="#87c7ff"/>
+      <ellipse id="Ellipse_27" data-name="Ellipse 27" cx="2.087" cy="2.087" rx="2.087" ry="2.087" transform="translate(5.833)" fill="#87c7ff"/>
+    </g>
+  </g>
+</svg>

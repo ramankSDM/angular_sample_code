@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="43.631" height="43.631" viewBox="0 0 43.631 43.631">
+  <defs>
+    <filter id="Path_1223" x="18.099" y="8.8" width="25.532" height="25.529" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_1224" x="0" y="5.807" width="24.007" height="32.015" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_1225" x="7.509" y="0" width="27.011" height="43.631" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="mute_1_" data-name="mute (1)" transform="translate(9 9)">
+    <g id="Group_8831" data-name="Group 8831" transform="translate(18.099 8.8)">
+      <g id="Group_8830" data-name="Group 8830">
+        <g transform="matrix(1, 0, 0, 1, -27.1, -17.8)" filter="url(#Path_1223)">
+          <path id="Path_1223-2" data-name="Path 1223" d="M368.841,182.03l-2.473-2.473,2.473-2.473a.751.751,0,0,0-1.062-1.062l-2.473,2.473-2.473-2.473a.751.751,0,0,0-1.062,1.062l2.473,2.473-2.473,2.473a.751.751,0,0,0,1.062,1.062l2.473-2.473,2.473,2.473A.751.751,0,0,0,368.841,182.03Z" transform="translate(-334.44 -157.99)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+    <g id="Group_8833" data-name="Group 8833" transform="translate(0 5.807)">
+      <g id="Group_8832" data-name="Group 8832">
+        <g transform="matrix(1, 0, 0, 1, -9, -14.81)" filter="url(#Path_1224)">
+          <path id="Path_1224-2" data-name="Path 1224" d="M2.253,116A2.255,2.255,0,0,0,0,118.257v9.51a2.255,2.255,0,0,0,2.253,2.253H6.007V116Z" transform="translate(9 -101.2)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+    <g id="Group_8835" data-name="Group 8835" transform="translate(7.509 0)">
+      <g id="Group_8834" data-name="Group 8834">
+        <g transform="matrix(1, 0, 0, 1, -16.51, -9)" filter="url(#Path_1225)">
+          <path id="Path_1225-2" data-name="Path 1225" d="M157.714.216a2.237,2.237,0,0,0-2.4.309L150,4.954V20.675l5.316,4.43a2.253,2.253,0,0,0,3.694-1.731V2.256A2.232,2.232,0,0,0,157.714.216Z" transform="translate(-133.49 9)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

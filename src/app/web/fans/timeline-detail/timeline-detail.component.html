@@ -1,0 +1,100 @@
+<div class="user-inner-main">
+  <div class="inner-head">
+      <h2 *ngIf="bookingData.requestType == 1"><img src="../../../assets/img/celeb-profile/shoutout-service.svg"> Shout-Out Bookings</h2>
+      <h2 *ngIf=" bookingData.requestType == 2 && bookingData.status == 5"><img src="../../../assets/img/celeb-profile/igt-service.svg"> I-Got-Talent Bookings</h2>
+      <div class="inner-head-rt"></div>
+  </div>
+  <div class="inner-body" *ngIf="bookingData != ''">
+      <div class="form-detail">
+        <div class="t-detail-row row">
+          <div class="t-detail-sec col-md-4 col-sm-6" *ngIf="bookingData && bookingData.requestType && bookingData.requestType == 2">
+              <div class="req-row" *ngIf="bookingData && bookingData.requestType && bookingData.requestType == 2">
+                  <!-- <h2>Fan Data</h2> -->
+                  
+                  <h2 *ngIf="bookingData.requestType == 1"><img src="../../../assets/img/celeb-profile/shoutout-service.svg"></h2>
+                  <h2 *ngIf=" bookingData.requestType == 2 && bookingData.status == 5"><img src="../../../assets/img/celeb-profile/igt-service.svg"></h2>
+
+
+                      <div class="req-item req-item-width" *ngIf="bookingData.talentType && bookingData.talentType == 'video'">
+                        <label>Talent Video</label>
+                        <video allow="autoplay" id="celeb-video" class="video-js vjs-default-skin" width="100%" height="100%"
+                          controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                          data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                          <source src="{{bookingData.talentVideo}}" type='video/mp4' />
+                          <source src="{{bookingData.talentVideo}}" type='video/webm' />
+                        </video>
+                      </div>
+            
+                      <div class="req-item req-item-width" *ngIf="bookingData.talentType && bookingData.talentType == 'mp3'">
+                        <label>Audio File</label>
+                        <div>
+                          <ngx-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle" [autoPlay]="false"
+                            muted="muted" (trackEnded)="onEnded($event)" [displayVolumeControls]="msaapDisplayVolumeControls"
+                            [disablePositionSlider]="msaapDisablePositionSlider" [expanded]="true"></ngx-audio-player>
+            
+                        </div>
+                      </div>
+            
+                      <div class="req-item req-item-width" *ngIf="bookingData.talentType && bookingData.talentType == 'img'">
+                        <label>Images</label>
+                        <owl-carousel-o [options]="customOptions">
+                          <ng-container *ngFor="let slide of bookingData.talentImages">
+                            <ng-template carouselSlide>
+                              <img [src]="slide" [alt]="slide" [title]="slide">
+                            </ng-template>
+                          </ng-container>
+                        </owl-carousel-o>
+                      </div>
+                    </div>
+                    <div class="t-detail-lower">
+                        <h5 *ngIf="bookingData.requestType == 2">Celebrity Rating & Feedback</h5>
+                        <div class="req-row" *ngIf="bookingData.requestType == 2">
+                          <div class="req-item" *ngIf="bookingData.rating > 0">
+                            <label>Rating</label>
+                            <star-rating value="{{bookingData.rating}}" totalstars="5" checkedcolor="#1C00B9" uncheckedcolor="#ccc"
+                              size="24px" readonly="true"></star-rating>
+                          </div>
+                          <div class="req-item comments" *ngIf="bookingData.comment && bookingData.comment != ''">
+                            <label>Comments</label><br>
+                            <span>{{bookingData.comment}}</span>
+                          </div>
+                        </div>
+                    </div>
+                    
+          </div>
+          <div class="t-detail-sec col-md-4 col-sm-6">
+              <div class="req-row" *ngIf="(bookingData.requestType == 1 || bookingData.requestType == 2) && bookingData.status == 5">
+                  <!-- <h2>Celebrity Data</h2> -->
+                  <h2 *ngIf="bookingData.requestType == 1"><img src="../../../assets/img/celeb-profile/shoutout-service.svg"></h2>
+      <h2 *ngIf=" bookingData.requestType == 2 && bookingData.status == 5"><img src="../../../assets/img/celeb-profile/igt-service.svg"></h2>
+                    <div class="req-item req-item-width">
+                      <label>Celebrity Video</label>
+                      <video allow="autoplay" id="celeb-video" class="video-js vjs-default-skin" width="100%" height="100%"
+                        controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                        data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                        <source src="{{bookingData.videoUrl}}" type='video/mp4' />
+                        <source src="{{bookingData.videoUrl}}" type='video/webm' />
+                      </video>
+                    </div>
+                  </div>
+                  <div class="t-detail-lower">
+                      <h5>Fan Rating & Feedback</h5>
+                      <div class="req-row" >
+                        <div class="req-item" *ngIf="bookingData.fanRating > 0">
+                          <label>Rating</label>
+                          <star-rating value="{{bookingData.fanRating}}" totalstars="5" checkedcolor="#1C00B9" uncheckedcolor="#ccc"
+                            size="24px" readonly="true"></star-rating>
+                        </div>
+                        <div class="req-item comments" *ngIf="bookingData.fanComment && bookingData.fanComment != ''">
+                          <label>Comments</label><br/>
+                          <span>{{bookingData.fanComment}}</span>
+                        </div>
+                      </div>
+                  </div>
+                  
+          </div>
+        </div>
+                    
+      </div>
+  </div>
+</div>

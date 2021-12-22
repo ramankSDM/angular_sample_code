@@ -1,0 +1,36 @@
+@import '../../../../assets/scss/custom-variables.scss';
+
+.db-sidebar{position: fixed;left: 0;top: 65px;background: #192270;width: 260px; height: calc(100% - 65px);color: #fff;overflow-y: auto;@include transition(0.3s);z-index: 55;
+
+/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#47a1da+0,406eb5+100 */
+background: #301152; /* Old browsers */
+
+
+
+    .db-sidebar-user-dp{padding: 20px;
+        figure{@include HW(80px);@include border-radius(50%); overflow: hidden;border: 1px solid $border-color; display: inline-block;}
+        img{height: $full-width; min-width: $full-width;}
+        h3{font-size: $font-size-level-1 - 2px; margin-top: 5px;}
+    }
+
+    .navbar {padding: 0;margin: 0;display: inline-block;width: $full-width;
+        > div{display: inline-block !important;width: $full-width;}
+        .navbar-nav{display: inline-block !important;width: $full-width;}
+        li{width: $full-width;outline:none;
+            .fa-angle-down{margin-left: 8px;}
+        }
+        a{color: #fff;padding:12px; font-size: $font-size-body + 1px;
+            &::after{display: none;}
+            svg{height: 22px;width: 22px;margin-right: 8px;
+            path{fill:#fff;}
+            }
+        }
+        li a:hover, .active, .active a{background: #D6006D; }
+        .dropdown-menu{position: static;@include border-radius(0); box-shadow: none;border:none; @extend .m-p-0; background: none;
+            ul{padding-left: 40px;}
+        }
+
+    }
+
+
+}

@@ -1,0 +1,618 @@
+<div class="user-inner-main">
+    <div class="inner-head">
+      <h2>{{"request.my_request" | translate}}</h2>
+      <div class="inner-head-rt">
+        <div class="custom-search-form">
+          <input class="form-control pro-input-des" placeholder="{{'fan_wallet.search_placeholder' | translate}}" type="text" [(ngModel)]="searchKey">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" (click)="getSchedules()">
+              <img src="../../../../assets/img/main-search.svg">
+            </button>
+          </span>
+        </div>
+        <div class="custom-filter">
+          <label class="pro-lbl-one">{{"filter_by.filter" | translate}}</label>
+          <div class="selectbox">
+            <select class="form-control pro-input-des album-drop-down" [(ngModel)]="filterStatus"
+              (change)="filterRecords()">
+              <option value="" selected>{{"filter_by.all" | translate}}</option>
+              <option value="In process">{{"filter_by.in_process" | translate}}</option>
+              <option value="Canceled">{{"filter_by.canceled" | translate}}</option>
+              <option value="Completed">{{"filter_by.completed" | translate}}</option>
+              <option value="Rejected">{{"filter_by.rejected" | translate}}</option>
+              <option value="Rescheduled">{{"filter_by.reschedule" | translate}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="inner-body">
+      <div class="prof-tabs">
+        <ul>
+          <li>
+           <img src="" class="">&nbsp;
+              <a
+                [routerLink]="['/celebrity/my-booking']"
+                routerLinkActive="router-link-active"
+               
+                >{{"request.all" | translate}}</a
+              >
+            </li>
+            <li>
+              <img src="../../../assets/img/celeb-profile/shoutout-service.svg" class="bookingServiceIcon">&nbsp;
+                    <a
+                      [routerLink]="['/celebrity/my-booking/shoutout']"
+                      routerLinkActive="router-link-active"
+                     
+                      >{{"request.shoutout" | translate}}</a
+                    >
+                  </li>
+                  <li>
+                    <img src="../../../assets/img/celeb-profile/igt-service.svg" class="bookingServiceIcon">&nbsp;
+                    <a
+                      [routerLink]="['/celebrity/my-booking/i-got-talent']"
+                      routerLinkActive="router-link-active"
+                      >{{"request.igot" | translate}}</a
+                    >
+                  </li>
+                  <li>
+                    <img src="../../../assets/img/celeb-profile/webinar-service.svg" class="bookingServiceIcon">&nbsp;
+                    <a
+                      [routerLink]="['/celebrity/my-booking/webinar']"
+                      routerLinkActive="router-link-active"
+                      >{{"request.webinar" | translate}}</a
+                    >
+                  </li>
+          
+                  <li class="active">
+                    <img src="../../../assets/img/celeb-profile/zoom-service.svg" class="bookingServiceIcon">&nbsp;
+                    <a
+                      [routerLink]="['/celebrity/my-booking/zoom-call']"
+                      routerLinkActive="router-link-active"
+                      > {{"request.zoom_call" | translate}}</a
+                    >
+                  </li>
+                  <li >
+                    <img src="../../../assets/img/celeb-profile/chat-service.svg" class="bookingServiceIcon">&nbsp;
+                    <a
+                      [routerLink]="['/celebrity/my-booking/dm']"
+                      routerLinkActive="router-link-active"
+                      > {{"request.dm_text" | translate}}</a
+                    >
+                  </li>
+    </ul>
+        <div class="tabs-content-parent">
+          <div id="all" class="tab-data2" style="display: block">
+            <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="bookingList && bookingList.length == 0">
+              <p>{{"msg_notfound" | translate}}</p>
+          </div>          
+          <div class="bx-shadow-body" *ngIf="bookingList && bookingList.length != 0">
+              <div class="custom-table-outer">
+                  <table class="table" [svData]="bookingList" #sv="svDataTable" [svRowsOnPage]="10">
+                      <thead>
+                        <tr>                                                              
+                          <th class="text-center">
+                            <sv-default-sorter by="user.fname_en" (click)="sortBy('user.fname_en')">
+                              {{"request_header.fans" | translate}}<i class="fa fa-sort" aria-hidden="true"
+                                *ngIf="sortKey !== 'user.fname_en'"></i>
+                            </sv-default-sorter>
+                          </th>                          
+                          <th class="text-center">
+                            <sv-default-sorter by="fromName" (click)="sortBy('fromName')">
+                              {{"request_header.from_name" | translate}}<i class="fa fa-sort" aria-hidden="true"
+                                *ngIf="sortKey !== 'fromName'"></i>
+                            </sv-default-sorter>
+                          </th>
+                          <th class="text-center">
+                            <sv-default-sorter by="occasion" (click)="sortBy('occasion')">
+                              {{"request_header.occasion" | translate}}<i class="fa fa-sort" aria-hidden="true"
+                                *ngIf="sortKey !== 'occasion'"></i>
+                            </sv-default-sorter>
+                          </th>
+                          <th class="text-center">
+                            <sv-default-sorter by="bookingDateTime" (click)="sortBy('bookingDateTime')">
+                              {{"request_header.booking_red_date" | translate}}
+                              <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'bookingDateTime'"></i></sv-default-sorter>
+                          </th> 
+                          <th class="text-center">
+                            <sv-default-sorter by="zoom_date" (click)="sortBy('zoom_date')">
+                              {{"request_header.zoom_meeting_date" | translate}}
+                              <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'zoom_date'"></i></sv-default-sorter>
+                          </th> 
+                          <th class="text-center">
+                            
+                            <sv-default-sorter by="zoom_time_slot" (click)="sortBy('zoom_time_slot')">
+                              {{"request_header.zoom_time_slot" | translate}}
+                              <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'zoom_time_slot'"></i></sv-default-sorter>
+                          </th>                        
+                          <th class="text-center">
+                            <sv-default-sorter by="filterStatus" (click)="sortBy('filterStatus')">
+                              {{"request_header.status" | translate}}<i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'filterStatus'"></i>
+                            </sv-default-sorter>
+                          </th>
+                          <th class="text-center">{{"request_header.action" | translate}}</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tableBody">
+                        <tr *ngFor="let item of sv.data; let i = index">                          
+                          <td class="text-center">
+                            <span *ngIf="selectedLang =='en'">{{ item.user.fname_en }}</span>
+                             <span *ngIf="selectedLang =='ar'">
+                               {{item.user.fname_ar ? item.user.fname_ar:item.user.fname_en}}
+                              </span>
+                          </td>                          
+                          <td class="text-center">
+                            <span *ngIf="selectedLang =='en'">{{item.user.fname_en ? item.user.fname_en+' '+item.user.lname_en : '--'}}</span>
+                            <span *ngIf="selectedLang =='ar'">
+                                {{item.user.fname_ar ? item.user.fname_ar+' '+item.user.lname_ar : '--'}}
+                            </span>
+                            
+
+                          </td>                         
+                          <td class="text-center">
+                            {{ (item.zoom_occasion != '') ? item.zoom_occasion : '--' }}
+                          </td>                          
+                          <td class="text-center">
+                            {{ item.bookingDateTime  | date: 'MMM d, y' }}
+                          </td>
+                          <td class="text-center">
+                            {{ item.zoom_date  | date: 'MMM d, y' }}
+                          </td>
+                          <td class="text-center">
+                            {{ item.zoom_time_slot }}
+                          </td>
+                          <td class="text-center">
+                            <div class="d-flex align-items-center justify-content-center">
+                            <span class="dot mr-2" [ngStyle]="{'background-color': item.colorCode}"></span>
+                            <span *ngIf="item.status == 1">{{"dashboard.pending" | translate}}</span>
+                            <span *ngIf="item.status == 2">{{"filter_by.in_process" | translate}}</span>
+                            <span *ngIf="item.status == 3">{{"filter_by.rejected" | translate}}</span>
+                            <span *ngIf="item.status == 4">{{"filter_by.canceled" | translate}}</span>
+                            <span *ngIf="item.status == 5">{{"filter_by.completed" | translate}}</span>
+                            <span *ngIf="item.status == 6">{{"filter_by.postpone" | translate}}</span>
+                            <span *ngIf="item.status == 7">{{"filter_by.read" | translate}}</span>
+                            </div>
+                          </td>
+                          <td class="text-center">
+                            <div class="cust-table-act-btns d-flex align-items-center justify-content-center">   
+                              <span *ngIf="(item.pendingHours < 0.15) && item.pendingHours != 0"  class="table-act-btn launch-btn" tooltip="Launch Meeting, This will be enable before 15minutes of meeting" (click)="openModal2(launchMeetingModal,item)">
+                                <svg id="Capa_1" enable-background="new 0 0 512.008 512.008" height="512" viewBox="0 0 512.008 512.008" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m256 226.004c27.57 0 50-22.43 50-50s-22.43-50-50-50-50 22.43-50 50 22.43 50 50 50zm0-80c16.542 0 30 13.458 30 30s-13.458 30-30 30-30-13.458-30-30 13.458-30 30-30z"/><path d="m182.728 450.77c-4.896-21.242-23.363-37.354-45.743-38.678-13.053-26.98-43.549-43.825-75.092-39.37-32.971 4.654-61.893 37.028-61.893 69.282 0 36.229 31.564 70 72 70h139c5.522 0 10-4.477 10-10s-4.478-10-10-10h-139c-27.701 0-52-23.364-52-50 0-22.191 21.718-46.236 44.688-49.478 20.31-2.87 40.589 6.634 51.233 22.875-6.432 2.497-12.338 6.31-17.278 11.258-3.902 3.908-3.897 10.24.011 14.143 1.952 1.949 4.509 2.923 7.065 2.923 2.562 0 5.123-.979 7.076-2.934 5.044-5.052 11.637-8.449 21.204-8.786 16.542 0 30 13.458 30 30 0 5.523 4.478 10 10 10 28.187 0 52-22.897 52-50v-36h60v36c0 27.103 23.813 50 52 50 5.522 0 10-4.477 10-10 0-16.542 13.458-30 29.981-30 9.018.28 15.9 3.455 21.223 8.786 3.886 3.892 10.216 3.929 14.142.011 3.908-3.902 3.913-10.234.011-14.143-4.94-4.948-10.846-8.761-17.279-11.258 10.642-16.239 30.917-25.742 51.236-22.875 23.402 3.3 45.119 27.738 44.688 50.284-.519 26.666-24.332 49.194-52.002 49.194h-138.999c-5.522 0-10 4.477-10 10s4.478 10 10 10h139c38.303 0 71.273-31.509 71.998-68.809.627-32.804-28.294-65.735-61.89-70.473-31.558-4.454-62.044 12.399-75.093 39.37-22.38 1.323-40.847 17.436-45.743 38.678-13.114-3.757-23.272-15.595-23.272-28.766v-36h10c5.013 0 9.25-3.711 9.912-8.679l4.177-31.321h44.011c17.59 0 31.9-14.31 31.9-31.9 0-7.605-2.726-14.976-7.677-20.758l-52.972-61.799 5.15-38.623c10.179-76.399-26.992-154.065-89.355-191.494-3.168-1.901-7.125-1.901-10.293 0-62.377 37.437-99.531 115.111-89.355 191.497l5.15 38.621-52.974 61.802c-4.948 5.779-7.674 13.149-7.674 20.754 0 17.59 14.311 31.9 31.9 31.9h44.011l4.177 31.321c.662 4.968 4.899 8.679 9.912 8.679h10v36c0 13.171-10.158 25.009-23.272 28.766zm200.407-144.411c1.848 2.158 2.865 4.908 2.865 7.746 0 6.562-5.339 11.9-11.9 11.9h-41.344l9.049-67.862zm-127.135-284.546c15.233 10.013 28.895 22.989 40.288 38.191h-80.576c11.392-15.202 25.055-28.178 40.288-38.191zm-53.232 58.191h106.465c18.827 33.842 26.44 72.779 21.445 110.278l-18.102 135.722h-113.154l-18.099-135.72c-4.996-37.5 2.617-76.436 21.445-110.28zm-64.868 246c-6.562 0-11.9-5.338-11.9-11.9 0-2.837 1.018-5.588 2.862-7.742l41.333-48.219 9.049 67.861zm64.189 20h107.821l-2.665 20h-102.489z"/><circle cx="256" cy="502.004" r="10"/></g></svg>
+                              </span>
+                              <span *ngIf="(item.pendingHours > 0.15) && item.pendingHours != 0"  class="table-act-btn disable-launch-btn" tooltip="Launch Meeting">
+                                <svg id="Capa_1" enable-background="new 0 0 512.008 512.008" height="512" viewBox="0 0 512.008 512.008" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m256 226.004c27.57 0 50-22.43 50-50s-22.43-50-50-50-50 22.43-50 50 22.43 50 50 50zm0-80c16.542 0 30 13.458 30 30s-13.458 30-30 30-30-13.458-30-30 13.458-30 30-30z"/><path d="m182.728 450.77c-4.896-21.242-23.363-37.354-45.743-38.678-13.053-26.98-43.549-43.825-75.092-39.37-32.971 4.654-61.893 37.028-61.893 69.282 0 36.229 31.564 70 72 70h139c5.522 0 10-4.477 10-10s-4.478-10-10-10h-139c-27.701 0-52-23.364-52-50 0-22.191 21.718-46.236 44.688-49.478 20.31-2.87 40.589 6.634 51.233 22.875-6.432 2.497-12.338 6.31-17.278 11.258-3.902 3.908-3.897 10.24.011 14.143 1.952 1.949 4.509 2.923 7.065 2.923 2.562 0 5.123-.979 7.076-2.934 5.044-5.052 11.637-8.449 21.204-8.786 16.542 0 30 13.458 30 30 0 5.523 4.478 10 10 10 28.187 0 52-22.897 52-50v-36h60v36c0 27.103 23.813 50 52 50 5.522 0 10-4.477 10-10 0-16.542 13.458-30 29.981-30 9.018.28 15.9 3.455 21.223 8.786 3.886 3.892 10.216 3.929 14.142.011 3.908-3.902 3.913-10.234.011-14.143-4.94-4.948-10.846-8.761-17.279-11.258 10.642-16.239 30.917-25.742 51.236-22.875 23.402 3.3 45.119 27.738 44.688 50.284-.519 26.666-24.332 49.194-52.002 49.194h-138.999c-5.522 0-10 4.477-10 10s4.478 10 10 10h139c38.303 0 71.273-31.509 71.998-68.809.627-32.804-28.294-65.735-61.89-70.473-31.558-4.454-62.044 12.399-75.093 39.37-22.38 1.323-40.847 17.436-45.743 38.678-13.114-3.757-23.272-15.595-23.272-28.766v-36h10c5.013 0 9.25-3.711 9.912-8.679l4.177-31.321h44.011c17.59 0 31.9-14.31 31.9-31.9 0-7.605-2.726-14.976-7.677-20.758l-52.972-61.799 5.15-38.623c10.179-76.399-26.992-154.065-89.355-191.494-3.168-1.901-7.125-1.901-10.293 0-62.377 37.437-99.531 115.111-89.355 191.497l5.15 38.621-52.974 61.802c-4.948 5.779-7.674 13.149-7.674 20.754 0 17.59 14.311 31.9 31.9 31.9h44.011l4.177 31.321c.662 4.968 4.899 8.679 9.912 8.679h10v36c0 13.171-10.158 25.009-23.272 28.766zm200.407-144.411c1.848 2.158 2.865 4.908 2.865 7.746 0 6.562-5.339 11.9-11.9 11.9h-41.344l9.049-67.862zm-127.135-284.546c15.233 10.013 28.895 22.989 40.288 38.191h-80.576c11.392-15.202 25.055-28.178 40.288-38.191zm-53.232 58.191h106.465c18.827 33.842 26.44 72.779 21.445 110.278l-18.102 135.722h-113.154l-18.099-135.72c-4.996-37.5 2.617-76.436 21.445-110.28zm-64.868 246c-6.562 0-11.9-5.338-11.9-11.9 0-2.837 1.018-5.588 2.862-7.742l41.333-48.219 9.049 67.861zm64.189 20h107.821l-2.665 20h-102.489z"/><circle cx="256" cy="502.004" r="10"/></g></svg>
+                              </span>                         
+                              <span class="table-act-btn view" tooltip="View Booking" (click)="openModal2(viewModal,item)">
+                                <svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512"
+                                  width="512" xmlns="http://www.w3.org/2000/svg">
+                                  <g>
+                                    <path
+                                      d="m15 91c8.284 0 15-6.716 15-15v-46h46c8.284 0 15-6.716 15-15s-6.716-15-15-15h-61c-8.284 0-15 6.716-15 15v61c0 8.284 6.716 15 15 15z" />
+                                    <path
+                                      d="m15 512h61c8.284 0 15-6.716 15-15s-6.716-15-15-15h-46v-46c0-8.284-6.716-15-15-15s-15 6.716-15 15v61c0 8.284 6.716 15 15 15z" />
+                                    <path
+                                      d="m497 91c8.284 0 15-6.716 15-15v-61c0-8.284-6.716-15-15-15h-61c-8.284 0-15 6.716-15 15s6.716 15 15 15h46v46c0 8.284 6.716 15 15 15z" />
+                                    <path
+                                      d="m497 421c-8.284 0-15 6.716-15 15v46h-46c-8.284 0-15 6.716-15 15s6.716 15 15 15h61c8.284 0 15-6.716 15-15v-61c0-8.284-6.716-15-15-15z" />
+                                    <path
+                                      d="m256 361c57.897 0 105-47.103 105-105s-47.103-105-105-105-105 47.103-105 105 47.103 105 105 105zm0-180c41.355 0 75 33.645 75 75s-33.645 75-75 75-75-33.645-75-75 33.645-75 75-75z" />
+                                    <path
+                                      d="m256 301c24.813 0 45-20.187 45-45s-20.187-45-45-45-45 20.187-45 45 20.187 45 45 45zm0-60c8.271 0 15 6.729 15 15s-6.729 15-15 15-15-6.729-15-15 6.729-15 15-15z" />
+                                    <path
+                                      d="m76.023 342.381c50.592 43.433 113.077 78.619 179.977 78.619 66.903 0 129.389-35.19 179.977-78.619 44.516-38.216 72.029-76.003 73.179-77.593 3.793-5.246 3.793-12.332 0-17.577-1.149-1.59-28.663-39.377-73.179-77.593-50.592-43.432-113.077-78.618-179.977-78.618-66.903 0-129.389 35.19-179.977 78.619-44.516 38.216-72.029 76.003-73.179 77.593-3.793 5.246-3.793 12.332 0 17.577 1.15 1.589 28.664 39.377 73.179 77.592zm179.977-221.381c63.673 0 122.116 38.583 159.933 70.951 29.612 25.345 51.609 51.001 62.093 64.044-10.341 12.847-31.897 37.957-61.025 63.071-41.709 35.962-98.941 71.934-161.001 71.934-63.673 0-122.116-38.583-159.933-70.951-29.614-25.347-51.612-51.004-62.093-64.044 10.341-12.847 31.898-37.956 61.026-63.071 41.708-35.962 98.94-71.934 161-71.934z" />
+                                  </g>
+                                </svg>
+                              </span>
+                              <span *ngIf="item.status == 1 || item.status == 7" class="table-act-btn reject" tooltip="Reject"
+                              (click)="openModal(template,item,3)">
+                              <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                                style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                <g>
+                                  <g>
+                                    <path
+                                      d="M493.297,159.693c-12.477-30.878-31.231-59.828-56.199-84.792c-24.965-24.969-53.917-43.723-84.795-56.2
+                                          C321.421,6.22,288.611,0,255.816,0c-32.747,0-65.495,6.249-96.311,18.744c-30.813,12.491-59.693,31.244-84.603,56.158
+                                          c-24.915,24.911-43.668,53.792-56.158,84.607C6.249,190.324,0,223.072,0,255.822c0,32.794,6.222,65.602,18.701,96.485
+                                          c12.477,30.877,31.231,59.828,56.2,84.792c24.964,24.967,53.914,43.722,84.792,56.199c30.882,12.48,63.69,18.701,96.484,18.703
+                                          c32.748,0,65.497-6.249,96.315-18.743c30.814-12.49,59.695-31.242,84.607-56.158c24.915-24.912,43.668-53.793,56.158-84.608
+                                          c12.494-30.817,18.743-63.565,18.744-96.315C512,223.383,505.778,190.575,493.297,159.693z M461.611,339.66
+                                          c-10.821,26.683-27.018,51.648-48.659,73.292c-21.643,21.64-46.608,37.837-73.291,48.659
+                                          c-26.679,10.818-55.078,16.241-83.484,16.241c-28.477,0-56.947-5.406-83.688-16.214c-26.744-10.813-51.76-27.008-73.441-48.685
+                                          C77.37,391.27,61.174,366.255,50.363,339.51c-10.808-26.741-16.214-55.212-16.213-83.689c-0.001-28.405,5.423-56.802,16.24-83.482
+                                          c10.821-26.683,27.018-51.648,48.659-73.291c21.643-21.64,46.607-37.837,73.289-48.659c26.678-10.818,55.075-16.242,83.48-16.242
+                                          c28.478,0,56.95,5.405,83.691,16.213c26.745,10.811,51.762,27.007,73.445,48.686c21.678,21.682,37.873,46.697,48.685,73.441
+                                          c10.808,26.741,16.214,55.211,16.214,83.688C477.852,284.582,472.429,312.98,461.611,339.66z" />
+                                  </g>
+                                </g>
+                                <g>
+                                  <g>
+                                    <path
+                                      d="M279.627,256.001l82.693-82.693c6.525-6.525,6.525-17.102,0-23.627c-6.524-6.524-17.102-6.524-23.627,0L256,232.375
+                                          l-82.693-82.693c-6.525-6.524-17.102-6.524-23.627,0c-6.524,6.524-6.524,17.102,0,23.627l82.693,82.693l-82.693,82.693
+                                          c-6.524,6.523-6.524,17.102,0,23.627c6.525,6.524,17.102,6.524,23.627,0L256,279.628l82.693,82.693
+                                          c6.525,6.524,17.102,6.524,23.627,0c6.525-6.524,6.525-17.102,0-23.627L279.627,256.001z" />
+                                  </g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                              </svg>
+                              </span>
+                              <span *ngIf="item.status == 2" class="table-act-btn" tooltip="Completed"
+                          (click)="openModal(completetemplate,item,5)">
+                          <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M159.693 18.703C128.815 31.18 99.865 49.934 74.901 74.902C49.932 99.867 31.178 128.819 18.701 159.697C6.22 190.579 0 223.389 0 256.184C0 288.931 6.249 321.679 18.744 352.495C31.235 383.308 49.988 412.188 74.902 437.098C99.813 462.013 128.694 480.766 159.509 493.256C190.324 505.751 223.072 512 255.822 512C288.616 512 321.424 505.778 352.307 493.299C383.184 480.822 412.135 462.068 437.099 437.099C462.066 412.135 480.821 383.185 493.298 352.307C505.778 321.425 511.999 288.617 512.001 255.823C512.001 223.075 505.752 190.326 493.258 159.508C480.768 128.694 462.016 99.813 437.1 74.901C412.188 49.986 383.307 31.233 352.492 18.743C321.675 6.24901 288.927 2.34375e-05 256.177 -0.000976562C223.383 2.34375e-05 190.575 6.222 159.693 18.703ZM339.66 50.389C366.343 61.21 391.308 77.407 412.952 99.048C434.592 120.691 450.789 145.656 461.611 172.339C472.429 199.018 477.852 227.417 477.852 255.823C477.852 284.3 472.446 312.77 461.638 339.511C450.825 366.255 434.63 391.271 412.953 412.952C391.27 434.63 366.255 450.826 339.51 461.637C312.769 472.445 284.298 477.851 255.821 477.85C227.416 477.851 199.019 472.427 172.339 461.61C145.656 450.789 120.691 434.592 99.048 412.951C77.408 391.308 61.211 366.344 50.389 339.662C39.571 312.984 34.147 284.587 34.147 256.182C34.147 227.704 39.552 199.232 50.36 172.491C61.171 145.746 77.367 120.729 99.046 99.046C120.728 77.368 145.743 61.173 172.487 50.361C199.228 39.553 227.698 34.147 256.175 34.147C284.582 34.148 312.98 39.571 339.66 50.389Z" fill="#545454"/>
+                            <path d="M399.333 154.333C405.776 160.776 405.776 171.224 399.333 177.667L209.828 367.172C203.384 373.616 192.937 373.616 186.494 367.172C185.893 366.571 185.348 365.935 184.859 365.271C184.195 364.782 183.559 364.237 182.958 363.636L112.954 293.633C106.511 287.189 106.511 276.742 112.954 270.298C119.398 263.855 129.845 263.855 136.289 270.298L198.161 332.17L375.998 154.333C382.442 147.889 392.889 147.889 399.333 154.333Z" fill="#545454"/>
+                            </svg>
+                            
+                        </span>
+                              <!-- <span *ngIf="item.status == 1" class="table-act-btn" tooltip="Reject"><i class="fas fa-trash"></i></span>
+                              <span *ngIf="item.status == 2" class="table-act-btn" tooltip="Cancelled"><i class="fas fa-minus-circle"></i></span>
+                              <span *ngIf="item.status == 1" class="table-act-btn" tooltip="Postpone"><i class="fas fa-calendar"></i></span> -->
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                      
+                    </table>
+              </div>
+              <div class="custom-pagination-outer">
+                <pagination [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+              </div>
+            </div>
+          
+         </div>
+
+      </div>
+  
+    </div>
+  </div>
+  
+  <ng-template #launchMeetingModal>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"star_webinar.meeting_details"|translate}}</h2>      
+        <button type="button" class="close" aria-label="Close" (click)="closeModal2()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"fan_coupon.name" | translate}}</label>
+              <span>{{viewData.name}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"signup.email" | translate}}</label>
+              <span>{{viewData.email}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.occasion" | translate}}</label>
+              <span>{{viewData.zoom_occasion}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.icebreakers" | translate}}</label>
+              <span>{{viewData.zoom_icebreakers}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name1" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[0]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email1" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[1]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name2" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[1]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email2" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[1]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name3" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[2]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email3" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[2]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name4" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[3]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email4" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[3]['email'] }}</span>
+            </div>
+          </div> 
+  
+          <button type="button" class="project-btn-1 project-btn-2 project-btn-secondary-color" (click)="launchMeeting(viewData)">{{"buttons.launch"| translate}}</button>
+  
+        </div>
+  
+      </div>
+    </div>
+  
+  </ng-template>
+  <ng-template #template>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"filter_by.reject_request" | translate}}</h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="w-100">
+              <label>{{"star_webinar.del_confirm_msg" | translate}}</label>
+              <span>{{"common_model.reject_request" | translate}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="w-100">
+              <textarea [(ngModel)]="reject_reason" required></textarea>
+              <p *ngIf="reasornError == true">{{"common_model.reject_reason" | translate}}</p>
+            </div>
+          </div>
+          <div class="two-btn-group mt-3 text-right">
+            
+            <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">{{"buttons.cancel" | translate}}</button>
+            <button type="button" class="project-btn-1  " (click)="reject()">{{"buttons.ok" | translate}}</button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  
+  <ng-template #viewModal>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"request_popup.request_details" | translate}}</h2>
+        <button *ngIf="viewData.status == 1 || viewData.status == 7" type="button"
+          class="project-btn-1 project-btn-2 project-btn-secondary-color"
+          (click)="updateStatus(viewData,2)">{{"buttons.accept" | translate}}</button>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal2()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.receipt_id" | translate}}</label>
+              <span>{{viewData.receiptId}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.booking_time" | translate}}</label>
+              <span>{{viewData.bookingDateTime | date:'yyyy-M-d h:mm a'}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.zoom_req_date" | translate}}</label>
+              <span>{{viewData.zoom_date | date:'yyyy-M-d'}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.time_slot" | translate}}</label>
+              <span>{{viewData.zoom_time_slot}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"fan_coupon.name" | translate}}</label>
+              <span>{{viewData.name}}</span>
+              
+            </div>
+            <div class="req-item">
+              <label>{{"signup.email" | translate}}</label>
+              <span>{{viewData.email}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.occasion" | translate}}</label>
+              <span>{{viewData.zoom_occasion}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.icebreakers" | translate}}</label>
+              <span class="icebreakers">{{viewData.zoom_icebreakers}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name1" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[0]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email1" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[1]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name2" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[1]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email2" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[1]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name3" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[2]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email3" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[2]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name4" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[3]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email4" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[3]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row" *ngIf="viewData.status == 3">
+            <div class="req-item">
+              <label>{{"request_popup.reject_reason" | translate}}</label>
+              <span>{{viewData.rejectReason}}</span>
+            </div>
+            <div class="req-item">
+              <label></label>
+              <span></span>
+            </div>
+          </div>              
+  
+          <h5>{{"common_model.sender_detail" | translate}}</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"fan_coupon.name" | translate}}</label>
+              <span>
+                <!-- {{viewData.user.fname_en}} {{viewData.user.lname_en}} -->
+
+                <span *ngIf="selectedLang =='en'">{{viewData.user.fname_en}} {{viewData.user.lname_en}}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{viewData.user.fname_ar ? viewData.user.fname_ar:viewData.user.fname_en}}
+                    {{viewData.user.lname_ar ? viewData.user.lname_ar:viewData.user.lname_ar}}
+                </span>
+
+              </span>
+            </div>        
+          </div>
+  
+          <!-- <h5>Payment Details</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>Service Fee</label>
+              <span>${{viewData.serviceFee}}</span>
+            </div>
+            <div class="req-item">
+              <label>Admin Fee</label>
+              <span>${{viewData.adminFee}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>Discount Fee</label>
+              <span>${{viewData.discountAmount}}</span>
+            </div>
+            <div class="req-item">
+              <label>Sub-Total Fee</label>
+              <span>${{viewData.subTotalAmount}}</span>
+            </div>
+          </div> 
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label></label>
+              <span></span>
+            </div>
+            <div class="req-item">
+              <label>Total Paid Amount</label>
+              <span>${{viewData.totalAmount}}</span>
+            </div>
+          </div>-->
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_header.rating" | translate}} </label>
+              <star-rating value="{{completeRequest.rating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </ng-template>
+  
+  <ng-template #completetemplate>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"common_model.complete_req" | translate}}</h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="w-100">
+              <label>{{"request_popup.comments" | translate}}</label>
+              <textarea [(ngModel)]="completeRequest.comment" required></textarea>            
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="w-100">
+              <label>{{"request_header.rating" | translate}}</label>
+              <star-rating value="{{completeRequest.rating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+            </div>
+          </div>
+          <div class="two-btn-group mt-3 text-right">
+            
+            <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">{{"buttons.cancel" | translate}}</button>
+            <button type="button" class="project-btn-1  " (click)="complete()">{{"buttons.ok" | translate}}</button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </ng-template>

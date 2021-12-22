@@ -1,0 +1,707 @@
+<div class="user-inner-main">
+    <div class="inner-head">
+        <h2>{{"profile.my_profile" | translate}}</h2>
+        <div class="inner-head-rt"></div>
+    </div>
+    <div class="inner-body">
+        <form class="form-horizontal">
+            <div class="text-center" *ngIf="profileMsg == false">
+                <h2>
+                    <p style="color:red"><b>{{"profile.profile_complete_note" | translate}}</b></p>
+                </h2>
+            </div>
+            <div class="img-crop" *ngIf="imageChangedEvent != ''">
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true"
+                    [aspectRatio]="4 / 4" format="png" [resizeToWidth]="256" (imageCropped)="imageCropped($event)">
+                </image-cropper>
+                <button (click)="onUploadImage()">{{"buttons.upload" | translate}}!</button>
+                
+
+            </div>
+
+            <div class="prof-pic">
+                <div class="celeb-head-img">
+                    <figure *ngIf="croppedImage == '' && (image == undefined || image =='')"><img
+                            src="../../../../assets/img/dummyimg.png" alt="" /></figure>
+                    <figure *ngIf="croppedImage == '' && image !=''"><img [src]="image" alt="" /></figure>
+                    <figure *ngIf="croppedImage && croppedImage!=''"><img [src]="croppedImage" /></figure>
+                </div>
+                <div class="celeb-mask">
+                    <img src="../../../assets/img/celeb-profile/celeb-mask.png">
+                </div>
+                <div class="profile-dp-uploader">
+                    <img class="up-pencil-icon" src="assets/img/edit-pencile-icon.svg" alt="" />
+                    <!-- <input type="file" name="file" (change)="onUpload($event)" /> -->
+                    <input type="file" (change)="fileChangeEvent($event)" accept="image/*" />
+                </div>
+
+            </div>
+        </form>
+        <div class="prof-tabs">
+            <ul>
+                <li (click)="activeTab($event, 'media', 'tab-data2', 'prof-tabs')" class="active">{{"profile.my_media" |
+                    translate}}</li>
+                <li (click)="activeTab($event, 'basic-detail', 'tab-data2', 'prof-tabs')">{{"profile.profile_detail" |
+                    translate}}</li>
+                <li (click)="activeTab($event, 'personal-detail', 'tab-data2', 'prof-tabs')">{{"profile.personal_detail"
+                    | translate}}</li>
+                <li (click)="activeTab($event, 'social-detail', 'tab-data2', 'prof-tabs')">{{"profile.social_info" |
+                    translate}}</li>
+            </ul>
+            <div class="tabs-content-parent">
+                <div id="media" class="tab-data2" style="display: block">
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-4 col-lg-4 col-xl-3 media-intro " *ngIf="introVideo">
+                        
+                            <h2>{{"profile.introduction_video" | translate}}</h2>
+                            <div class="media-item">
+                                <video width="300" height="240" controls autoplay class="video-js vjs-default-skin">
+                                    <source [src]="introVideo">
+                                </video>
+                            </div>
+                        </div>
+                       
+                        </div>
+                        
+                        <div class="media-tab">
+                            <div class="media-head">
+                                <h2 class="m-0">{{"profile.media_file" | translate}}</h2>
+                                <div class="media-act">
+                                    <!-- <button class="project-btn-1" (click)="onVideoUpload(video)">{{"buttons.save" |
+                                        translate}}</button> -->
+                                    <div class="upload-media">
+                                        <input type="file" name="file" (change)="onVideoUpload($event)"
+                                            accept="video/*" />
+                                        <input type="file" id="fileUpload" name="fileUpload" style="display: none" />
+                                        {{"buttons.upload" | translate}}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 col-lg-4 col-xl-3 media-item">
+                                <app-video-records (getRecordedVideo)="setVideo($event)"></app-video-records>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="common-action">
+                            <button class="project-btn-1">{{"buttons.update" | translate}}</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="basic-detail" class="tab-data2">
+                    <form [formGroup]="frm" (submit)="update()" class="form-horizontal">
+                        <div class="form-detail">
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.first_name" | translate}}<em>*</em></label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="First Name"
+                                        formControlName="fname_en" name="fname_en" #fname maxlength="100" required>
+                                    <div *ngIf="frm.controls['fname_en'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        {{"validations.first_name_require" | translate}}
+                                    </div>
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.first_name_arabic" |
+                                        translate}}</label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="First Name"
+                                        formControlName="fname_ar" name="fname_ar" #fnamear maxlength="100" >
+                                    <div *ngIf="frm.controls['fname_ar'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        {{"validations.first_name_arabic_require" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.last_name" | translate}}<em>*</em></label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Last Name"
+                                        formControlName="lname_en" name="lname_en" #lname maxlength="100" required>
+                                    <div *ngIf="frm.controls['lname_en'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        {{"validations.last_name_require" | translate}}
+                                    </div>
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.last_name_arabic" |
+                                        translate}}</label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Last Name"
+                                        formControlName="lname_ar" name="lname_ar" #lnamear maxlength="100" >
+                                    <div *ngIf="frm.controls['lname_ar'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        {{"validations.last_name_arabic_require" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.display_name" | translate}}<em>*</em></label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Display Name"
+                                        formControlName="displayName_en" name="displayName_en" #displayName_en
+                                        maxlength="100" required>
+                                    <div *ngIf="frm.controls['displayName_en'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        {{"validations.display_name_require" | translate}}
+                                    </div>
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.display_name_arabic" |
+                                        translate}}<em>*</em></label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Display Name"
+                                        formControlName="displayName_ar" name="displayName_ar" #displayName_ar
+                                        maxlength="100" required>
+                                    <div *ngIf="frm.controls['displayName_ar'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        {{"validations.display_name_arabic_require" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="w-100">
+                                    <label class="pro-lbl-one" for="form-control-2">{{"profile.select_categories" |
+                                        translate}}</label>
+                                    <div class="custom-check-row flex-wrap mb-md-0 mb-3">
+                                        <div class="form-item custom-padd"
+                                            *ngFor="let categories of itemTypeList; let i = index">
+                                            <input class="styled-checkbox" type="checkbox" name="category"
+                                                [checked]="categories.flag"
+                                                (change)="selectItemType(categories._id,$event.target.checked)">
+                                            <label for="" *ngIf="selectedLang == 'en'">
+                                                {{categories.category_name_en}}</label>
+                                            <label for="" *ngIf="selectedLang == 'ar'">
+                                                {{categories.category_name_ar}}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="error-div help-block requiredClass" *ngIf=" itemTypeChk">
+                                        {{"validations.select_categories" | translate}}
+                                    </div>
+                                    <div class="error-div help-block requiredClass" *ngIf="itemTypeChklength">
+                                        {{"validations.max_cat_select" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.address" | translate}}<em>*</em></label>
+                                    <input type="text" class="form-control pro-input-des" name="address_en"
+                                        placeholder="Enter complete address" formControlName="address_en"
+                                        maxlength="250" ngx-google-places-autocomplete #placesRef="ngx-places"
+                                        (onAddressChange)="handleAddressChange($event)" required />
+                                    <div *ngIf="frm.controls['address_en'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        {{"validations.address_require" | translate}}
+                                    </div>
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.city" | translate}}<em>*</em></label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Enter City"
+                                        formControlName="city" name="city" maxlength="50" readonly />
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.state" | translate}}</label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Ent  er State"
+                                        formControlName="state" maxlength="50" readonly />
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.zipcode" | translate}}<em>*</em></label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Enter Zip Code"
+                                        formControlName="zipcode" name="zip" maxlength="7" />
+                                        <div *ngIf="frm.controls['zipcode'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        <!-- {{"validations.city_require" | translate}} -->
+                                        Zipcode is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.country" | translate}}<em>*</em></label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Enter Country"
+                                        formControlName="country" name="country" maxlength="50" readonly />
+                                    <div *ngIf="frm.controls['country'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        {{"validations.country_require" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.profession" | translate}}</label>
+                                    <textarea type="text" class="form-control pro-input-des"
+                                        placeholder="Ex. I am a professional in the respective field"
+                                        formControlName="short_description_en" name="short_description_en"
+                                        maxlength="50"></textarea>
+
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.profession_arabic" | translate}}</label>
+                                    <textarea type="text" class="form-control pro-input-des"
+                                        placeholder="أنا محترف في المجال المعني" formControlName="short_description_ar"
+                                        name="short_description_ar" maxlength="50"></textarea>
+
+
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.bio_en" | translate}}</label>
+                                    <textarea type="text" class="form-control pro-input-des" placeholder="Enter Bio"
+                                        formControlName="description_en" name="description_en"></textarea>
+
+
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.bio_ar" | translate}}</label>
+                                    <textarea type="text" class="form-control pro-input-des" placeholder="Enter Bio"
+                                        formControlName="description_ar" name="description_ar"></textarea>
+
+
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item norm_checkbox">
+                                    <label class="pro-lbl-one">{{"profile.shoutout" | translate}}</label>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 mr-3"><input class="style_check" type="checkbox"
+                                                name="dedicatedcheck" formControlName="dedicated"></div>
+                                        <div class="flex-grow-1"><input type="text" class=" pro-input-des"
+                                                placeholder="Enter Shout-out price" formControlName="dedicated_price"
+                                                name="dedicated_price" required="dedicated == true"></div>
+                                    </div>
+
+
+                                    <div *ngIf="frm.controls['dedicated_price'].hasError('required') &&  isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        Dedicated price is required
+                                    </div>
+                                    <!-- <div *ngIf="frm.controls['dedicated'].hasError('required') &&  isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        Shout-out is required
+                                    </div> -->
+                                    <div *ngIf="dedicateError &&  isSubmited" class="requiredClass">
+                                        Dedicated price should be greater than 0
+                                    </div>
+
+                                </div>
+                                <div class="req-item norm_checkbox">
+                                    <label class="pro-lbl-one">{{"profile.igot" | translate}}</label>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 mr-3"><input class="style_check" type="checkbox"
+                                                name="igotcheck" formControlName="i_got_talent"></div>
+                                        <div class="flex-grow-1"><input type="text" class=" pro-input-des"
+                                                placeholder="Enter i-Got Talent price"
+                                                formControlName="i_got_talent_price" name="i_got_talent_price"
+                                                required="i_got_talent == true"></div>
+                                    </div>
+
+
+                                    <div *ngIf="frm.controls['i_got_talent_price'].hasError('required') &&  isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        I-got Talent price is required
+                                    </div>
+                                    <div *ngIf="igotError &&  isSubmited" class="requiredClass">
+                                        Igot price should be greater than 0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item norm_checkbox">
+                                    <label class="pro-lbl-one">{{"profile.webinar" | translate}}</label>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 mr-3"> <input class="style_check" type="checkbox"
+                                                name="webinarcheck" formControlName="webinar"></div>
+                                        <div class="flex-grow-1"><input type="text" class=" pro-input-des"
+                                                placeholder="Enter Webinar price" formControlName="webinar_price"
+                                                name="webinar_price" required="webinar == true"></div>
+                                    </div>
+
+
+                                    <div *ngIf="frm.controls['webinar_price'].hasError('required') &&  isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        Webinar price is required
+                                    </div>
+                                    <div *ngIf="webinarError &&  isSubmited" class="requiredClass">
+                                        Webinar price should be greater than 0
+                                    </div>
+                                </div>
+                                <div class="req-item norm_checkbox">
+                                    <label class="pro-lbl-one">{{"profile.connect_zoom" | translate}}</label>
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 mr-3"><input class="style_check" type="checkbox"
+                                                name="zoomcheck" formControlName="connect_on_zoom"></div>
+                                        <div class="flex-grow-1">
+                                            <input type="text" class=" pro-input-des"
+                                                placeholder="Enter Connect on Zoom price"
+                                                formControlName="connect_on_zoom_price" name="connect_on_zoom_price"
+                                                required="connect_on_zoom == true">
+                                        </div>
+                                    </div>
+
+
+                                    <div *ngIf="frm.controls['connect_on_zoom_price'].hasError('required') &&  isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        Connect on zoom price is required
+                                    </div>
+                                    <div *ngIf="zoomError &&  isSubmited" class="requiredClass">
+                                        Connect on zoom price should be greater than 0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item norm_checkbox">
+                                    <label class="pro-lbl-one">{{"profile.dm_text" | translate}}</label>
+
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-shrink-0 mr-3"> <input class="style_check" type="checkbox"
+                                                name="textcheck" formControlName="dm_text"></div>
+                                        <div class="flex-grow-1">
+                                            <input type="text" class="pro-input-des" placeholder="Enter DM Text price"
+                                                formControlName="dm_text_price" name="dm_text_price"
+                                                required="dm_text == true">
+                                        </div>
+                                    </div>
+
+
+                                    <div *ngIf="frm.controls['dm_text_price'].hasError('required') &&  isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        DM-Text price is required
+                                    </div>
+                                    <div *ngIf="dmtextError &&  isSubmited" class="requiredClass">
+                                        DM-Text price should be greater than 0
+                                    </div>
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.chat_pref" | translate}}<em>*</em></label>
+                                    <div class="selectbox">
+                                        <select formControlName="chatPreference" class="form-control pro-input-des"
+                                            required>
+                                            <option value="">{{"profile.select_gender" | translate}}</option>
+                                            <option value="Male">{{"profile.male" | translate}}</option>
+                                            <option value="Female">{{"profile.female" | translate}}</option>
+                                            <option value="Both">{{"profile.both" | translate}}</option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="frm.controls['chatPreference'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        Please select chat preference
+                                    </div>
+
+                                </div>
+                                <!-- <div class="req-item">
+                                    <label class="pro-lbl-one">DM Video</label>
+                                    <input type="text" class="form-control pro-input-des"
+                                        placeholder="Enter DM Video price" formControlName="dm_video_price"
+                                        name="dm_video_price">
+                                </div> -->
+                            </div>
+                            <div class="req-row">
+
+                                <div class="req-item timezone timezone-custom">
+                                    <label class="pro-lbl-one">{{"profile.choose_timezone" | translate}}</label>
+                                    <ng-moment-timezone-picker [formControlName]="'timezoneobject'"
+                                        [(ngModel)]="selectedZone" customPlaceholderText="Choose your timezone">
+                                    </ng-moment-timezone-picker>
+
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.Lang_pref" | translate}}<em>*</em></label>
+                                    <div class="selectbox">
+                                        <select formControlName="lang" class="form-control pro-input-des" required>
+                                            <option value="">{{"profile.select_lang" | translate}}</option>
+                                            <option value="en">{{"profile.English" | translate}}</option>
+                                            <option value="ar">{{"profile.Arabic" | translate}}</option>
+                                            <option value="both">{{"profile.both" | translate}}</option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="frm.controls['lang'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        Please select language
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.vacation" | translate}} </label>
+                                    <div class="onVacationDiv">
+                                        <ui-switch class="project-cust-switch" color="#4be250" defaultBgColor="#f16565"
+                                            checkedLabel="" formControlName="vacation" size="small" uncheckedLabel=""
+                                            [tooltip]="vacation ? 'Yes' : 'No'">
+                                        </ui-switch>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="req-row" *ngIf="frm.controls.vacation.value == true">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.vac_start" | translate}}<em>*</em></label>
+                                    <p-calendar class="form-control pro-input-des dob-new"
+                                        formControlName="vaccStartDate" placeholder="Vacation Start Date"
+                                        [showIcon]="true" [required]="frm.controls.vacation.value == true"></p-calendar>
+                                    <div *ngIf="frm.controls['vaccStartDate'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        Vacation Start Date is required
+                                    </div>
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.vac_end" | translate}}<em>*</em></label>
+                                    <p-calendar class="form-control pro-input-des dob-new" formControlName="vaccEndDate"
+                                        placeholder="Vacation End Date" [showIcon]="true"
+                                        [required]="frm.controls.vacation.value == true"></p-calendar>
+                                    <div *ngIf="frm.controls['vaccEndDate'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        Vacation End Date is required
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="common-action">
+                            <button class="project-btn-1">{{"buttons.update" | translate}}</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="personal-detail" class="tab-data2">
+                    <form [formGroup]="frm2" (submit)="update2()" class="form-horizontal">
+                        <div class="form-detail">
+                            <div class="req-row">
+                                <h2>{{"profile.personal_info_note" | translate}}</h2>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.email" | translate}}<em>*</em></label>
+                                    <input type="email" class="form-control pro-input-des" placeholder="Email"
+                                        formControlName="email" name="email" required />
+                                    <div *ngIf="frm2.controls['email'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        {{"validations.email_require" | translate}}
+                                    </div>
+                                </div>
+                                <div class="req-item req-adj">
+                                    <div class="count-code flex-shrink-0">
+                                        <label class="pro-lbl-one" for="form-control-2">{{"profile.country_code" |
+                                            translate}}<em>*</em></label>
+                                        <div class="selectbox">
+                                            <select class="form-control pro-input-des" formControlName="std_code"
+                                                required>
+                                                <option *ngFor="let code of countryCodeList" [value]="code.isdcode">
+                                                    {{code.name}} ({{code.isdcode}})</option>
+                                            </select>
+                                            <div *ngIf="frm2.controls['std_code'].hasError('required') && isSubmited"
+                                                class="error-div help-block requiredClass">
+                                                {{"validations.std_code_require" | translate}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="phone flex-grow-1">
+                                        <label class="pro-lbl-one">{{"profile.phone" | translate}}</label>
+                                        <input class="form-control" placeholder="Enter Mobile Number"
+                                            formControlName="phone" #mobileNumber minlength="10" maxlength="10"
+                                            name="mobile" type="number">
+                                        <div *ngIf="frm2.controls['phone'].hasError('required') && isSubmited"
+                                            class="error-div help-block requiredClass">
+                                            {{"validations.phone_require" | translate}}
+                                        </div>
+                                        <div *ngIf="frm2.controls['phone'].hasError('pattern')"
+                                            class="error-div help-block requiredClass">
+                                            Minimum 10 digits required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="req-row">
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.gender" | translate}}<em>*</em></label>
+                                    <div class="selectbox">
+                                        <select formControlName="gender_en" class="form-control pro-input-des" required>
+                                            <option value="">{{"profile.select_gender" | translate}}</option>
+                                            <option value="Male">{{"profile.male" | translate}}</option>
+                                            <option value="Female">{{"profile.female" | translate}}</option>
+                                        </select>
+                                    </div>
+                                    <div *ngIf="frm2.controls['gender_en'].hasError('required') && isSubmited"
+                                            class="error-div help-block requiredClass">
+                                            {{"validations.gender_require" | translate}}
+                                        </div>
+                                </div>
+                                <div class="req-item">
+                                    <label class="pro-lbl-one">{{"profile.dob" | translate}}<em>*</em></label>
+                                    <p-calendar class="form-control pro-input-des dob-new" formControlName="dob"
+                                        placeholder="Select dob" [yearNavigator]="true" [showIcon]="true"
+                                        yearRange="{{selectRange}}" [readonlyInput]="true" inputId="monthpicker">
+                                    </p-calendar>
+                                    <div *ngIf="frm2.controls['dob'].hasError('required') && isSubmited"
+                                        class="error-div help-block requiredClass">
+                                        {{"validations.dob_require" | translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="common-action">
+                            <button class="project-btn-1">{{"buttons.update" | translate}}</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="social-detail" class="tab-data2">
+                    <form [formGroup]="frm3" (submit)="update3()" class="form-horizontal">
+                        <div class="form-detail">
+                            <div class="req-row">
+                                <div class="req-item serviceIconDIv">
+                                    <div class="d-flex align-items-center servicerow">
+                                        <div class="serviceIcon">
+                                            <img src="../../../../assets/img/social_Media_icons/instagram.png" >
+                                        </div>
+                                        <label class="pro-lbl-one">{{"profile.insta_link" | translate}}</label>
+                                    </div>
+                                    <input class="form-control" placeholder="Enter Instagram Link"
+                                        formControlName="insta_link" #mobileNumber name="insta_link" type="text">
+                                        <div *ngIf="frm3.controls['insta_link'].hasError('pattern')"
+                                            class="error-div help-block requiredClass">
+                                               {{"validations.invalid_url" | translate}}
+
+                                            </div>
+                                </div>
+                                <div class="req-item serviceIconDIv">
+                                    <div class="d-flex align-items-center servicerow">
+                                        <div class="serviceIcon">
+                                            <img src="../../../../assets/img/social_Media_icons/facebook.png" >
+                                        </div>
+                                        <label class="pro-lbl-one">{{"profile.fb_link" | translate}}</label>
+                                    </div>
+                                
+                                <input class="form-control" placeholder="Enter Facebook Link" formControlName="fb_link"
+                                    #mobileNumber name="fb_link" type="text">
+
+                                    <!-- <div *ngIf="frm3.controls['fb_link'].hasError('required') && isSubmited"
+                                    class="error-div help-block requiredClass">
+                                    {{"validations.facebook_required" | translate}}
+
+                                </div> -->
+                                <div *ngIf="frm3.controls['fb_link'].hasError('pattern')"
+                                    class="error-div help-block requiredClass">
+                                    {{"validations.invalid_url" | translate}}
+
+                                </div>
+                                </div>
+                                
+                            </div>
+
+                        </div>
+                        <div class="req-row">
+                            <div class="req-item serviceIconDIv">
+                                <div class="d-flex align-items-center servicerow">
+                                    <div class="serviceIcon">
+                                        <img src="../../../../assets/img/social_Media_icons/youtube.png" >
+                                    </div>
+                                    <label class="pro-lbl-one">{{"profile.youtube_link" | translate}}</label>
+                                </div>
+                                <input class="form-control" placeholder="Enter Youtube Link"
+                                    formControlName="youtube_link" #youtube_link name="youtube_link" type="text">
+
+                                    <div *ngIf="frm3.controls['youtube_link'].hasError('pattern')"
+                                    class="error-div help-block requiredClass">
+                                    {{"validations.invalid_url" | translate}}
+
+                                </div>
+                            </div>
+                            <div class="req-item serviceIconDIv">
+                                <div class="d-flex align-items-center servicerow">
+                                    <div class="serviceIcon">
+                                        <img src="../../../../assets/img/social_Media_icons/twitter.png" >
+                                    </div>
+                                    <label class="pro-lbl-one">{{"profile.tw_link" | translate}}</label>
+                                </div>
+                                <input class="form-control" placeholder="Enter Twitter Link" formControlName="tw_link"
+                                    #mobileNumber name="tw_link" type="text">
+
+                                    <div *ngIf="frm3.controls['tw_link'].hasError('pattern')"
+                                    class="error-div help-block requiredClass">
+                                    {{"validations.invalid_url" | translate}}
+
+                                </div>
+                                    
+                            </div>
+                        </div>
+                        <div class="req-row">
+                            <div class="req-item serviceIconDIv">
+                                <div class="d-flex align-items-center servicerow">
+                                    <div class="serviceIcon">
+                                        <img src="../../../../assets/img/social_Media_icons/tiktok-square.png" >
+                                    </div>
+                                    <label class="pro-lbl-one">{{"profile.tiktok_link" | translate}}</label>
+                                </div>
+                                <input class="form-control" placeholder="Enter Tiktok Link"
+                                    formControlName="tiktok_link" #tiktok_link name="tiktok_link" type="text">
+                                    <div *ngIf="frm3.controls['tiktok_link'].hasError('pattern')"
+                                    class="error-div help-block requiredClass">
+                                    {{"validations.invalid_url" | translate}}
+
+                                </div>
+                            </div>
+                            <div class="req-item serviceIconDIv">
+                                <div class="d-flex align-items-center servicerow">
+                                    <div class="serviceIcon">
+                                        <img src="../../../../assets/img/social_Media_icons/snapchat.png" >
+                                    </div>
+                                    <label class="pro-lbl-one">{{"profile.snap_link" | translate}}</label>
+                                </div>
+                                <input class="form-control" placeholder="Enter Snapchat Link"
+                                    formControlName="snap_link" #snap_link name="snap_link" type="text">
+                                    <div *ngIf="frm3.controls['snap_link'].hasError('pattern')"
+                                    class="error-div help-block requiredClass">
+                                    {{"validations.invalid_url" | translate}}
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="req-row">
+                            <div class="req-item serviceIconDIv">
+                                <div class="d-flex align-items-center servicerow">
+                                    <div class="serviceIcon">
+                                        <img src="../../../../assets/img/social_Media_icons/linkedin.png" >
+                                    </div>
+                                    <label class="pro-lbl-one">{{"profile.ln_link" | translate}}</label>
+                                </div>
+                                <input class="form-control" placeholder="Enter Linkedin Link"
+                                    formControlName="linkin_link" #linkin_link name="linkin_link" type="text">
+
+                                    <div *ngIf="frm3.controls['linkin_link'].hasError('pattern')"
+                                    class="error-div help-block requiredClass">
+                                    {{"validations.invalid_url" | translate}}
+
+                                </div>
+                            </div>
+                            <div class="req-item serviceIconDIv">
+                                <div class="d-flex align-items-center servicerow">
+                                    <div class="serviceIcon">
+                                        <img src="../../../../assets/img/social_Media_icons/globe.png" >
+                                    </div>
+                                    <label class="pro-lbl-one">{{"profile.web_link" | translate}}</label>
+                                </div>
+                                <input class="form-control" placeholder="Enter Website Link" formControlName="web_link"
+                                    #web_link name="web_link" type="text">
+
+                                    <div *ngIf="frm3.controls['web_link'].hasError('pattern')"
+                                    class="error-div help-block requiredClass">
+                                    {{"validations.invalid_url" | translate}}
+                                </div>
+                            </div>
+                        </div>
+               
+                <div class="common-action">
+                    <button class="project-btn-1">{{"buttons.update" | translate}}</button>
+                </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>

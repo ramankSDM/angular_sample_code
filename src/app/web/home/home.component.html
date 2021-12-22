@@ -1,0 +1,337 @@
+<section class="web_homePage" (scroll)="onWindowScroll($event);">
+    <div class="join-as-talent">
+      <a (click)="signUp()"><img src="../../../assets/img/join-as-talent.svg"></a>
+    </div>
+  
+    <section class="home-main">
+      <div class="main-video-bg">
+        <img src="../../../assets/img/header-bg-video.svg">
+      </div>
+      <div class="main-video-mask">
+        <img src="../../../assets/img/video-mask.svg">
+      </div>
+      <owl-carousel-o [options]="headerOptions">
+        <ng-container>
+          <ng-template class="slide" id="maincarousel" carouselSlide>
+            <div class="header-content">
+              <div class="header-left">
+                <h1>
+                  <span>{{"home.slider_text" | translate }}</span>
+                  {{"home.slider_text_bold"  | translate}}
+                  <button routerLink="/categories/allCategories">{{ "home.browse_cat" | translate }}</button>
+                </h1>
+              </div>
+              <div class="header-right">
+                <img src="../../../assets/img/header-img.svg" alt="" title="">
+              </div>
+            </div>
+          </ng-template>
+          <ng-template class="slide" id="maincarousel" carouselSlide>
+            <div class="header-content">
+              <div class="header-left">
+                <h1>
+                 
+                  <span>{{"home.slider_text" | translate }}</span>
+                  {{"home.slider_text_bold"  | translate}}
+                  <button routerLink="/categories/allCategories">{{ "home.browse_cat" | translate }}</button>
+                </h1>
+              </div>
+              <div class="header-right">
+                <img src="../../../assets/img/header-img.svg" alt="" title="">
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </section>
+    <div class="hiw">
+      <div class="box" [class.opened]="show" >
+        <div class="box-head">
+          <h2>{{"home.how_it_work" | translate}}</h2>
+          <div class="box-opener" (mouseover)="show = !show">
+            <img src="../../../assets/img/hiw-ico.svg">
+          </div>
+        </div>
+        <div class="content">
+          <div class="content-item">
+            <!-- <img src="../../../assets/img/select-celebrity.svg"> -->
+            <img src="../../../assets/img/select-celeb.svg">
+            <span>{{"home.select" | translate}}<br>{{"home.celebrity" | translate}}</span>
+          </div>
+          <div class="content-item">
+            <!-- <img src="../../../assets/img/book&pay.svg"> -->
+            <img src="../../../assets/img/book-online.svg">
+            <span>{{"home.book_service" | translate}}</span>
+          </div>
+          <div class="content-item">
+            <!-- <img src="../../../assets/img/video-file.svg"> -->
+            <img src="../../../assets/img/receive-payment.svg">
+            <span>{{"home.receive_request" | translate}}</span>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+    <section class="category-listing" *ngFor="let hd of homeData;  let j = index">
+      <div class="container">
+      <div class="category-main" *ngIf="hd && hd.tagData &&  hd.tagData.length>0">
+        <h2 *ngIf="selectedLang =='en'">{{hd.title_en}}</h2>
+        <h2 *ngIf="selectedLang =='ar'">{{hd.title_ar}}</h2>
+        <div class="celeb-listing">
+          <ngx-slick-carousel class="carousel" 
+          #slickModal="slick-carousel" 
+          [config]="slideConfig" 
+          (init)="slickInit($event)"
+          responsive="breakpoints"
+          >
+           
+              <div ngxSlickItem  class="slide" *ngFor="let tgD of hd.tagData; let i = index">
+                <div class="celeb-img" (mouseenter)="playVideo(tgD,i)" (mouseleave)="removeVideo(tgD,i)">
+                  <a [routerLink]="['/celebrities',tgD.userData[0].slug]" routerLinkActive="router-link-active">
+                    <img src="{{tgD.userData[0].image}}" alt="{{tgD.userData[0].fname_en}}"
+                      title="{{tgD.userData[0].fname_en}}" id="{{tgD.userData[0]._id}}{{tgD._id}}{{i}}">
+                  
+                  <video style="display:none;" allow="autoplay" mute="muted" id="{{i}}{{tgD._id}}{{tgD.userData[0]._id}}" 
+                    class="video-js vjs-default-skin" width="100%" height="100%" controls preload="none"
+                    data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                    <source [src]="tgD.userData[0].intro_video" type='video/mp4' />
+                    <source [src]="tgD.userData[0].intro_video" type='video/webm' />
+                  </video></a>
+  <!-- 
+                  <video loop muted autoplay oncanplay="this.play()" onloadedmetadata="this.muted = true">
+                    <source [src]="tgD.userData[0].intro_video" type="video/mp4">
+                </video> -->
+                  
+  
+                  <div class="celeb-actions">
+                    <a href="" class="list-igt" [routerLink]="['/celebrities',tgD.userData[0].slug]" >
+                      <img src="../../../assets/img/list-igt.svg">
+                      ${{tgD.userData[0].dedicated_price}}
+                    </a>
+                    <a href="" class="list-shoutout" [routerLink]="['/celebrities',tgD.userData[0].slug]" >
+                      <img src="../../../assets/img/list-shoutout.svg">
+                      ${{tgD.userData[0].i_got_talent_price}}
+                    </a>
+                  </div>
+                </div>
+                <div class="celeb-details">
+                  <div class="celeb-name" *ngIf="selectedLang =='en'" >
+                    <span class="router-link" [routerLink]="['/celebrities',tgD.userData[0].slug]" routerLinkActive="router-link-active">
+                    {{tgD.userData[0].displayName_en}}</span>
+                    
+                    <!-- <span>Actor</span> -->
+                  </div>
+                  <div class="celeb-name" *ngIf="selectedLang =='ar'">
+                    <span class="router-link" [routerLink]="['/celebrities',tgD.userData[0].slug]" routerLinkActive="router-link-active">
+                      {{tgD.userData[0].displayName_ar ? tgD.userData[0].displayName_ar:tgD.userData[0].displayName_en}}
+                    </span>
+                    
+                    <!-- <span>Actor</span> -->
+                  </div>
+                  <div *ngIf="tgD.userData[0].isLogin == true" class="celeb-status">Online</div>
+                </div>
+              </div>
+          </ngx-slick-carousel>
+          
+        </div>
+      </div>
+      </div>
+    </section>
+  
+    <!--<section class="category-listing">
+      <div class="category-main">
+          <h2>Actors</h2>
+          <div class="celeb-listing">
+            <owl-carousel-o [options]="customOptions">
+              <ng-container>
+                <ng-template class="slide" id="featured" carouselSlide>
+                  <div class="celeb-img" (mouseenter)="playVideo()" (mouseleave)="removeVideo()">
+                      <img src="../../../assets/img/celebrities/Deema-Bayyaa.JPG" id="videoImg" alt="Deema Bayyaa" title="Deema Bayyaa">
+                      <video style="display: none;" allow="autoplay" id="my_video_1" class="video-js vjs-default-skin" width="100%" height="100%" controls preload="none"
+                        poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                        data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                        <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
+                        <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
+                      </video>
+                      <div class="celeb-actions">
+                        <a href="" class="list-igt">
+                          <img src="../../../assets/img/list-igt.svg">
+                          $200
+                        </a>
+                        <a href="" class="list-shoutout">
+                          <img src="../../../assets/img/list-shoutout.svg">
+                          $200
+                        </a>
+                      </div>
+                  </div>
+                  <div class="celeb-details">
+                    <div class="celeb-name">
+                      Deema Bayya
+                      <span>Actor</span>
+                    </div>
+                    <div class="celeb-status">Online</div>
+                  </div>
+                </ng-template>
+                <ng-template class="slide" id="featured" carouselSlide>
+                    <div class="celeb-img">
+                        <img src="../../../assets/img/celebrities/abadi-aljohar.jpeg" alt="Abadi Al Johar" title="Abadi Al Johar">
+                        <div class="celeb-actions">
+                          <a href="" class="list-igt">
+                            <img src="../../../assets/img/list-igt.svg">
+                            $200
+                          </a>
+                          <a href="" class="list-shoutout">
+                            <img src="../../../assets/img/list-shoutout.svg">
+                            $200
+                          </a>
+                        </div>
+                    </div>
+                    <div class="celeb-details">
+                      <div class="celeb-name">
+                          Abadi Al-Johar
+                        <span>Musician</span>
+                      </div>
+                      <div class="celeb-status">Online</div>
+                    </div>
+                  </ng-template>
+                  <ng-template class="slide" id="featured" carouselSlide>
+                      <div class="celeb-img">
+                          <img src="../../../assets/img/celebrities/bassel-khayat.JPG" alt="Bassel Khayat" title="Bassel Khayat">
+                          <div class="celeb-actions">
+                            <a href="" class="list-igt">
+                              <img src="../../../assets/img/list-igt.svg">
+                              $200
+                            </a>
+                            <a href="" class="list-shoutout">
+                              <img src="../../../assets/img/list-shoutout.svg">
+                              $200
+                            </a>
+                          </div>
+                      </div>
+                      <div class="celeb-details">
+                        <div class="celeb-name">
+                            Bassel Khayat
+                          <span>Musician</span>
+                        </div>
+                        <div class="celeb-status">Online</div>
+                      </div>
+                    </ng-template>
+                    <ng-template class="slide" id="featured" carouselSlide>
+                        <div class="celeb-img">
+                            <img src="../../../assets/img/celebrities/Khadija-Alwaal.JPG" alt="Khadija-Alwaal" title="Khadija-Alwaal">
+                            <div class="celeb-actions">
+                              <a href="" class="list-igt">
+                                <img src="../../../assets/img/list-igt.svg">
+                                $200
+                              </a>
+                              <a href="" class="list-shoutout">
+                                <img src="../../../assets/img/list-shoutout.svg">
+                                $200
+                              </a>
+                            </div>
+                        </div>
+                        <div class="celeb-details">
+                          <div class="celeb-name">
+                              Khadija Alwaal
+                            <span>Musician</span>
+                          </div>
+                          <div class="celeb-status">Online</div>
+                        </div>
+                      </ng-template>
+                      <ng-template class="slide" id="featured" carouselSlide>
+                          <div class="celeb-img">
+                              <img src="../../../assets/img/celebrities/layla-eskandar.JPG" alt="Layla Eskandar" title="Layla Eskandar">
+                              <div class="celeb-actions">
+                                <a href="" class="list-igt">
+                                  <img src="../../../assets/img/list-igt.svg">
+                                  $200
+                                </a>
+                                <a href="" class="list-shoutout">
+                                  <img src="../../../assets/img/list-shoutout.svg">
+                                  $200
+                                </a>
+                              </div>
+                          </div>
+                          <div class="celeb-details">
+                            <div class="celeb-name">
+                                Layla Eskandar
+                              <span>Musician</span>
+                            </div>
+                            <div class="celeb-status">Online</div>
+                          </div>
+                        </ng-template>
+              </ng-container>
+            </owl-carousel-o> 
+          </div>
+      </div>
+  </section> -->
+  
+    <!--  -->
+    <section class="how-it-works">
+      <h2>
+        <span>{{"home.services_on_home" | translate}}</span>
+        {{"home.personalize_expr" | translate}}
+      </h2>
+      <div class="hiw-content">
+        <div class="hiw-item">
+          <img src="../../../assets/img/how-it-works-1.png">
+          <a href="" data-toggle="modal" data-target="#myModal">
+            <img src="../../../assets/img/play-arrow.svg">
+          </a>
+        </div>
+
+        <div class="hiw-item">
+          <img src="../../../assets/img/how-it-works-3.png">
+          <a href="" data-toggle="modal" data-target="#myModal">
+            <img src="../../../assets/img/play-arrow.svg">
+          </a>
+        </div>
+
+        <div class="hiw-item">
+          <img src="../../../assets/img/how-it-works-6.png">
+          <a href="" data-toggle="modal" data-target="#myModal">
+            <img src="../../../assets/img/play-arrow.svg">
+          </a>
+        </div>
+      </div>
+      <div class="hiw-content">
+        <div class="hiw-item">
+          <img src="../../../assets/img/how-it-works-2.png">
+          <a href="" data-toggle="modal" data-target="#myModal">
+            <img src="../../../assets/img/play-arrow.svg">
+          </a>
+        </div>
+        <div class="hiw-item">
+          <img src="../../../assets/img/how-it-works-4.png">
+          <a href="" data-toggle="modal" data-target="#myModal">
+            <img src="../../../assets/img/play-arrow.svg">
+          </a>
+        </div>
+        <div class="hiw-item">
+          <img src="../../../assets/img/how-it-works-5.png">
+          <a href="" data-toggle="modal" data-target="#myModal">
+            <img src="../../../assets/img/play-arrow.svg">
+          </a>
+        </div>
+        
+      </div>
+    </section>
+    <!-- <div id="myModal" class="modal fade modal-holder" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-outer">
+          <button type="button" class="close" data-dismiss="modal">
+            <img src="../../../assets/img/modal-close.svg">
+          </button>
+        </div> -->
+        <!-- Modal content-->
+        <!-- <div class="modal-content">
+  
+          <div class="modal-body">
+            <p style="padding:50px;">Video for this service will come here.</p>
+          </div>
+        </div>
+  
+      </div>
+    </div> -->
+  
+  </section>

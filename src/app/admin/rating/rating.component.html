@@ -1,0 +1,113 @@
+<div class="db-hdd-1">
+  <h2> Rating</h2>
+</div>
+<div class="row">
+  <div class="col-md-3 col-lg-3">
+    <label class="pro-lbl-one">Filter By Request Type:</label>
+    <select class="form-control pro-input-des album-drop-down" [(ngModel)]="requestType" (change)="getAll()">
+      <option value="" selected>All</option>
+      <option value="1">Dedicated</option>
+      <option value="2">i-Got Talent</option>
+      <option value="3">Webnier</option>
+      <option value="4">Video Call</option>
+      <option value="5">Dm Text</option>
+      <option value="6">Dm Video</option>
+    </select>
+  </div>
+</div>
+
+<div class="bx-shadow-white mt-4 mt-md-5">
+  <div class="bx-shadow-hdd p-a-15">
+    <h3>Listing <span style="float:right" >Average Rating : {{avgRating}}
+     </span
+      ></h3> 
+  </div>
+  <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+    <p>No Record Found</p>
+  </div>
+  
+  <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+    <div class="custom-table-outer">
+      <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="rowsOnPage">
+        
+        <thead>
+          <tr>
+            <th class="text-center">
+              <sv-default-sorter by="celebrity[0].fname_en" (click)="sortBy('celebrity[0].fname_en')">Celebrity Name<i class="fa fa-sort"
+                  aria-hidden="true" *ngIf="sortKey !== 'celebrity[0].fname_en'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="fan[0].fname_en" (click)="sortBy('fan[0].fname_en')">Fan Name <i class="fa fa-sort"
+                  aria-hidden="true" *ngIf="sortKey !== 'fan[0].fname_en'"></i></sv-default-sorter>
+            </th>
+           
+            <th class="text-center">
+              <sv-default-sorter by="rating" (click)="sortBy('rating')">Rating <i class="fa fa-sort" aria-hidden="true"
+                  *ngIf="sortKey !== 'rating'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="comment" (click)="sortBy('comment')">Comment <i class="fa fa-sort" aria-hidden="true"
+                  *ngIf="sortKey !== 'comment'"></i></sv-default-sorter>
+            </th>
+
+            <th class="text-center">
+              <sv-default-sorter by="requestType" (click)="sortBy('requestType')">Service <i class="fa fa-sort" aria-hidden="true"
+                  *ngIf="sortKey !== 'requestType'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="requestType" >Date/Time</sv-default-sorter>
+            </th>
+          </tr>
+        </thead>
+        
+        <tbody id="tableBody">
+          <tr *ngFor="let item of sv.data; let i = index">
+
+            <td class="text-center" >
+              <a
+              [routerLink]="['/celebrities/'+ item.celebrity[0].slug]"             
+              target="_blank">{{ item.celebrity[0].fname_en | titlecase}}  {{item.celebrity[0].lname_en}}</a>
+            </td>
+            <td class="text-center">
+             {{ item.fan[0].fname_en | titlecase}}  {{ item.fan[0].lname_en}}
+            </td>
+            <td class="text-center">
+              {{ item.rating }}
+            </td>
+            <td class="text-center">
+              {{ item.comment }}
+            </td>
+            <td class="text-center">
+              <span *ngIf="item.requestType==1">
+                Dedicated
+              </span>
+              <span *ngIf="item.requestType==2">
+                i-Got Talent
+              </span>
+              <span *ngIf="item.requestType==3">
+                Webnier
+              </span>
+              <span *ngIf="item.requestType==4">
+                Video Call
+              </span>
+              <span *ngIf="item.requestType==5">
+                Dm Text
+              </span>
+              <span *ngIf="item.requestType==6">
+                Dm Video
+              </span>               
+            </td>
+            <td class="text-center">
+              {{ item.createdAt | date: 'EEEE, MMMM d, y, h:mm:ss a' }}
+            </td>  
+          </tr>
+        </tbody>
+       
+      </table>
+    </div>
+    <div class="custom-pagination-outer pb-md-5 pb-4">
+      <pagination [totalItems]="totalRecords" [itemsPerPage]="rowsOnPage" (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+<aside class="db-sidebar">
+	<div class="db-sidebar-user-dp text-center">
+		<figure>
+			<img *ngIf="loggedInAdmin.image == undefined || loggedInAdmin.image == ''" src="assets/img/dummyimg.png"
+				alt="" />
+			<img *ngIf="loggedInAdmin.image != ''" [src]="loggedInAdmin.image" alt="" />
+		</figure>
+		<h3>{{ loggedInAdmin.fname }} {{ loggedInAdmin.lname }}</h3>
+	</div>
+	<div class="db-sidebar-menu">
+		<nav class="navbar navbar-expand">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav">
+					<li *ngIf="isDashbaordTab" class="nav-item" routerLink="/admin/dashboard">
+						<a class="nav-link" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Dashboard <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isCategoriesTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/categories" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Categories <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isTagsTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/tags" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Tags <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isSubAdminTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/sub-admin" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Manage SubAdmin <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isCelebritiesTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/celebrities" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Celebrities <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isFansTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/fans" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Fans <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isBlockedFanTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/blocked-fans" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Blocked Fans <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isBookingTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/bookings" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Bookings <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isRefundTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/refund-requests" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Refund Requests <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isPromotionTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/promotions" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Promotions <span class="sr-only">(current)</span></a>
+					</li>
+
+					<li *ngIf="isRatingTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/rating" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Rating <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isPageTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/pages" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Manage Pages <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isFaqTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/faq" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Manage Faq <span class="sr-only">(current)</span></a>
+					</li>
+					<li *ngIf="isTicketTab" class="nav-item">
+						<a class="nav-link" routerLink="/admin/support-ticket" routerLinkActive="active">
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Support Tickets <span class="sr-only">(current)</span></a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</aside>

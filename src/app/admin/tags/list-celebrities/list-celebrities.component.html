@@ -1,0 +1,81 @@
+<div class="db-hdd-1">
+    <h2>Celebrities</h2>
+  </div>
+  
+  <div class="search-and-btn-top">
+    <div class="row custom-rw-btn-search-bottom ">
+      <div class="col-md-4 col-lg-5">
+        <label class="pro-lbl-one">Search By :</label>
+        <div class="custom-search-form tag_search">
+          <input class="form-control pro-input-des" placeholder="Search..." type="text" [(ngModel)]="searchKey">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" (click)="getAll()">
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
+        </div>  
+      </div>     
+    </div>
+  
+  </div>
+  
+  <div class="bx-shadow-white mt-4 mt-md-5">
+    <div class="bx-shadow-hdd p-a-15">
+      <h3>Listing</h3>
+    </div>
+    <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+      <p>No Record Found</p>
+    </div>
+  
+    <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+      <div class="custom-table-outer">
+        <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="20">
+          <thead>
+            <tr>
+                <th class="text-center">
+                    Rank
+                  </th>
+              <th class="text-center">
+                Name English
+              </th>
+              <th class="text-center">
+                Name Arabic 
+              </th>
+              <th class="text-center">
+                Email
+              </th>
+              <th class="text-center">
+                Phone
+              </th>            
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr *ngFor="let item of dataList; let i = index" >               
+              <td class="text-center" *ngIf="item && item.celebrity">
+                {{ item.order}}
+                <i *ngIf="i+1!==sv.data.length" class="fa fa-arrow-down" aria-hidden="true" (click)="updateRank(item._id,item.order+1)"></i>  
+                <i *ngIf="i!==0" class="fa fa-arrow-up" aria-hidden="true" (click)="updateRank(item._id,item.order-1)"></i>
+              </td>        
+              <td class="text-center" *ngIf="item && item.celebrity">
+                {{ item.celebrity.fname_en }} {{ item.celebrity[0].lname_en }}
+              </td>
+              <td class="text-center" *ngIf="item && item.celebrity">
+                {{ item.celebrity.fname_ar }} {{ item.celebrity[0].lname_ar}}
+              </td>
+              <td class="text-center" *ngIf="item && item.celebrity">
+                {{ item.celebrity[0].email }}
+              </td>
+              <td class="text-center" *ngIf="item && item.celebrity">
+                {{ item.celebrity[0].std_code }} {{ item.celebrity[0].phone }}
+              </td>            
+             
+            </tr>
+          </tbody>
+         
+        </table>
+      </div>
+      <div class="custom-pagination-outer pb-md-5 pb-4">
+        <pagination [totalItems]="totalRecords" [itemsPerPage]="20" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
+    </div>
+  </div>

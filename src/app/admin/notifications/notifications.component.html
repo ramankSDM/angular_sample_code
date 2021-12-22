@@ -1,0 +1,76 @@
+<div class="db-hdd-1">
+  <h2>Notifications</h2>
+</div>
+
+<div class="search-and-btn-top">
+  <div class="row custom-rw-btn-search-bottom ">
+    <div class="col-md-3 col-lg-3">
+      <label class="pro-lbl-one">Search By :</label>
+      <div class="custom-search-form">
+       <input class="form-control pro-input-des" placeholder="Search..." (change)="searchByName()" type="text" [(ngModel)]="searchKey">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="getNotifications()">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bx-shadow-white mt-4 mt-md-5">
+  <div class="bx-shadow-hdd p-a-15">
+    <div class="d-flex justify-content-between flex-column flex-sm-row">
+      <div class="flex-grow-1 mr-3">
+        <h3>Listing</h3>        
+      </div>
+    </div>
+  </div>
+  <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="notificationData && notificationData.length == 0">
+    <p>No Record Found</p>
+  </div>
+  
+  <div class="bx-shadow-body" *ngIf="notificationData && notificationData.length != 0">
+    <div class="custom-table-outer table-responsive">
+      <table class="table" [svData]="notificationData" #sv="svDataTable" [svRowsOnPage]="rowsOnPage">
+        <thead>
+          <tr>
+            <!-- <th class="text-center">
+              <input type="checkbox" [(ngModel)]="masterSelected" name="list_name" value="m1"
+                (change)="checkUncheckAll()" />
+            </th> -->
+             <th class="text-center">
+             Title
+            </th>
+            <th class="text-center">
+             Message
+            </th>
+            <th class="text-center">
+              SendBy
+            </th>
+            <!-- <th class="text-center">Actions</th> -->
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr *ngFor="let item of notificationData; let i = index">
+            <td class="text-center">
+              {{ item.title }}
+            </td>
+            <td class="text-center">
+              {{ item.message }}
+            </td>
+            <td class="text-center">
+              {{ item.senderData.fname_en }}  {{ item.senderData.lname_en }}
+            </td>
+            <!-- <td class="text-center"></td> -->
+          </tr>
+        </tbody>
+        
+      </table>
+    </div>
+    <div class="custom-pagination-outer pb-md-5 pb-4">
+      <pagination [totalItems]="totalRecords" [itemsPerPage]="rowsOnPage" (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,335 @@
+<div class="celeb-header">
+    <div class="celeb-head-left">
+        <div class="celeb-head-img">
+            <img src="{{ fan.image }}">
+        </div>
+        <div class="celeb-mask">
+            <img src="../../../assets/img/celeb-profile/celeb-mask.png">
+        </div>
+        <h1>
+            <!-- <div>{{ fan.fname_en }} {{ fan.lname_en }}</div> -->
+            <div *ngIf="selectedLang =='en'">{{fan.fname_en}} {{fan.lname_en}}</div>
+                <div *ngIf="selectedLang =='ar'">
+                    {{fan.fname_ar ? fan.fname_ar:fan.fname_en}}
+                    {{fan.lname_ar ? fan.lname_ar:fan.lname_ar}}
+                </div>
+            <span>{{ fan.city }}, {{ fan.state }}</span>           
+        </h1>
+        <!-- <div class="celeb-head-top">
+            <button type="submit">{{"favourite" | translate}}</button>
+        </div> -->
+    </div>
+    <div class="celeb-head-right">
+        <div class="custom-tabs-parent">
+            <ul>
+                <li (click)="activeTab($event, 'tab1', 'tab-data', 'custom-tabs-parent')" class="s-tab active">
+                    <span>{{ dedicatedServicesList.length }}</span>
+                </li>
+                <li (click)="activeTab($event, 'tab2', 'tab-data', 'custom-tabs-parent')" class="i-tab">
+                    <span>{{ talentServicesList.length }}</span>
+                </li>
+                <li (click)="activeTab($event, 'tab3', 'tab-data', 'custom-tabs-parent')" class="w-tab">
+                    <span>123</span>
+                </li>
+            </ul>
+            <div class="tabs-content-parent">
+                <div id="tab1" class="tab-data" style="display: block">
+                    <div class="tab-shoutout row">
+                        <div class="custom-item col-lg-4 col-md-6" *ngFor="let ds of dedicatedServicesList;  let i = index">
+                            <div class="celeb-img" (mouseenter)="playVideo(ds,i)" (mouseleave)="removeVideo(ds,i)"
+                                (click)="timelineDetail(ds)">
+                                <div class="celeb-videoImg" id="videoImg{{i}}{{ds._id}}">
+                                    <img *ngIf="ds.thumbImage && ds.thumbImage != ''" src="{{ds.thumbImage}}" alt=""
+                                        title="">
+                                    <img *ngIf="!ds.thumbImage || ds.thumbImage == ''"
+                                        src="../../../assets/img/celeb-profile/abadialjohar/1.jpg" alt="" title="">
+                                    <div class="shoutout-tag">#{{ ds.occasion }}</div>
+                                </div>
+                                <div class="video-layer" style="display: none;" id="my_video{{i}}{{ds._id}}">
+                                    <video allow="autoplay" id="{{i}}{{ds._id}}" class="video-js vjs-default-skin"
+                                        width="100%" height="100%" controls preload="none"
+                                        poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                                        data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                                        <source src="{{ ds.videoUrl }}" type='video/mp4' />
+                                        <source src="{{ ds.videoUrl }}" type='video/webm' />
+                                    </video>
+                                    <span class="custom-unmute" (click)="toggleVideoMute(ds,i)"
+                                        [ngClass]="muted === true ? 'muted' : ''"
+                                        [innerHTML]="muted === true ? '' : ''"></span>
+                                    <div class="celeb-vid-actions">
+                                        <button class="like-main">
+                                            <div class="s-like" *ngIf="ds.likeCount > 0">
+                                                <img src=".././../../assets/img/heart-like.png" alt=""
+                                                    [title]="ds.likeCount">
+                                            </div>
+                                            <div class="s-unlike" *ngIf="ds.likeCount == 0">
+                                                <img src=".././../../assets/img/heart-unlike.png" alt=""
+                                                    [title]="ds.likeCount">
+                                            </div>
+                                        </button>
+                                        <div class="right-act">
+                                            <div class="download-vid" (click)="downloadFile(ds.videoUrl)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16.918" height="24.741"
+                                                    viewBox="0 0 16.918 24.741">
+                                                    <path id="Path_1221" data-name="Path 1221"
+                                                        d="M173.365,150.777l7.178-7.178a1.274,1.274,0,1,0-1.8-1.8l-5,5V127.681a1.281,1.281,0,1,0-2.563,0v19.105l-5-5a1.274,1.274,0,1,0-1.8,1.8l7.178,7.178a1.3,1.3,0,0,0,1.813.01Z"
+                                                        transform="translate(-164 -126.4)" fill="#d6006d" />
+                                                </svg>
+                                            </div>
+                                            <div class="share-vid" (click)="copyText(ds.videoUrl)">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24.741" height="24.741"
+                                                    viewBox="0 0 24.741 24.741">
+                                                    <path id="share_2_" data-name="share (2)"
+                                                        d="M19.439,14.138a5.284,5.284,0,0,0-4.265,2.182L10.35,13.906A5.23,5.23,0,0,0,10.6,12.37a5.23,5.23,0,0,0-.254-1.536l4.825-2.413A5.28,5.28,0,1,0,14.138,5.3a5.229,5.229,0,0,0,.254,1.536L9.566,9.25a5.3,5.3,0,1,0,0,6.24L14.391,17.9a5.229,5.229,0,0,0-.254,1.536,5.3,5.3,0,1,0,5.3-5.3Zm0-12.37A3.534,3.534,0,1,1,15.9,5.3,3.538,3.538,0,0,1,19.439,1.767ZM5.3,15.9a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,5.3,15.9Zm14.138,7.069a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,19.439,22.974Z"
+                                                        transform="translate(0)" fill="#d6006d" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab2" class="tab-data">
+                    <div class="tab-shoutout">
+                        <div class="igt-item row">
+                            <div class="custom-item col-lg-4 col-md-6 " *ngFor="let ts of talentServicesList;  let j = index">
+                                <div class="celeb-img" (mouseenter)="playVideo(ts,j)" (mouseleave)="removeVideo(ts,j)"
+                                    (click)="timelineDetail(ts)">
+                                    <div class="celeb-videoImg" id="videoImg{{j}}{{ts._id}}">
+                                        <img *ngIf="ts.thumbImage && ts.thumbImage !=''" src="{{ts.thumbImage}}" alt=""
+                                            title="">
+                                        <img *ngIf="!ts.thumbImage || ts.thumbImage ==''"
+                                            src="../../../assets/img/celeb-profile/abadialjohar/1.jpg" alt="" title="">
+                                        <div class="celeb-vid-actions">
+                                            <button class="like-main">
+                                                <div class="s-like" *ngIf="ts.likeCount > 0">
+                                                    <img src=".././../../assets/img/heart-like.png" alt=""
+                                                        [title]="ts.likeCount">
+                                                </div>
+                                                <div class="s-unlike" *ngIf="ts.likeCount == 0">
+                                                    <img src=".././../../assets/img/heart-unlike.png" alt=""
+                                                        [title]="ts.likeCount">
+                                                </div>
+                                            </button>
+                                            <div class="right-act">                                                
+                                                <div class="download-vid" (click)="downloadFile(ts.videoUrl)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16.918"
+                                                        height="24.741" viewBox="0 0 16.918 24.741">
+                                                        <path id="Path_1221" data-name="Path 1221"
+                                                            d="M173.365,150.777l7.178-7.178a1.274,1.274,0,1,0-1.8-1.8l-5,5V127.681a1.281,1.281,0,1,0-2.563,0v19.105l-5-5a1.274,1.274,0,1,0-1.8,1.8l7.178,7.178a1.3,1.3,0,0,0,1.813.01Z"
+                                                            transform="translate(-164 -126.4)" fill="#d6006d" />
+                                                    </svg>
+                                                </div>
+                                                <div class="share-vid" (click)="copyText(ts.videoUrl)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24.741"
+                                                        height="24.741" viewBox="0 0 24.741 24.741">
+                                                        <path id="share_2_" data-name="share (2)"
+                                                            d="M19.439,14.138a5.284,5.284,0,0,0-4.265,2.182L10.35,13.906A5.23,5.23,0,0,0,10.6,12.37a5.23,5.23,0,0,0-.254-1.536l4.825-2.413A5.28,5.28,0,1,0,14.138,5.3a5.229,5.229,0,0,0,.254,1.536L9.566,9.25a5.3,5.3,0,1,0,0,6.24L14.391,17.9a5.229,5.229,0,0,0-.254,1.536,5.3,5.3,0,1,0,5.3-5.3Zm0-12.37A3.534,3.534,0,1,1,15.9,5.3,3.538,3.538,0,0,1,19.439,1.767ZM5.3,15.9a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,5.3,15.9Zm14.138,7.069a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,19.439,22.974Z"
+                                                            transform="translate(0)" fill="#d6006d" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="video-layer" style="display: none;" id="my_video{{j}}{{ts._id}}">
+                                        <video allow="autoplay" id="{{j}}{{ts._id}}" class="video-js vjs-default-skin"
+                                            width="100%" height="100%" controls preload="none"
+                                            poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                                            data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                                            <source src="{{ts.videoUrl}}" type='video/mp4' />
+                                            <source src="{{ts.videoUrl}}" type='video/webm' />
+                                        </video>
+                                        <span class="custom-unmute" (click)="toggleVideoMute(ts,j)"
+                                            [ngClass]="muted === true ? 'muted' : ''"
+                                            [innerHTML]="muted === true ? '' : ''"></span>
+                                        <div class="celeb-vid-actions">
+                                            <button class="like-main">
+                                                    <div class="s-like" *ngIf="ts.likeCount > 0">
+                                                            <img src=".././../../assets/img/heart-like.png" alt=""
+                                                                [title]="ts.likeCount">
+                                                        </div>
+                                                        <div class="s-unlike" *ngIf="ts.likeCount == 0">
+                                                            <img src=".././../../assets/img/heart-unlike.png" alt=""
+                                                                [title]="ts.likeCount">
+                                                        </div>
+                                            </button>
+                                            <div class="right-act">                                                
+                                                <div class="download-vid" (click)="downloadFile(ts.videoUrl)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16.918"
+                                                        height="24.741" viewBox="0 0 16.918 24.741">
+                                                        <path id="Path_1221" data-name="Path 1221"
+                                                            d="M173.365,150.777l7.178-7.178a1.274,1.274,0,1,0-1.8-1.8l-5,5V127.681a1.281,1.281,0,1,0-2.563,0v19.105l-5-5a1.274,1.274,0,1,0-1.8,1.8l7.178,7.178a1.3,1.3,0,0,0,1.813.01Z"
+                                                            transform="translate(-164 -126.4)" fill="#d6006d" />
+                                                    </svg>
+                                                </div>
+                                                <div class="share-vid" (click)="copyText(ts.videoUrl)">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24.741"
+                                                        height="24.741" viewBox="0 0 24.741 24.741">
+                                                        <path id="share_2_" data-name="share (2)"
+                                                            d="M19.439,14.138a5.284,5.284,0,0,0-4.265,2.182L10.35,13.906A5.23,5.23,0,0,0,10.6,12.37a5.23,5.23,0,0,0-.254-1.536l4.825-2.413A5.28,5.28,0,1,0,14.138,5.3a5.229,5.229,0,0,0,.254,1.536L9.566,9.25a5.3,5.3,0,1,0,0,6.24L14.391,17.9a5.229,5.229,0,0,0-.254,1.536,5.3,5.3,0,1,0,5.3-5.3Zm0-12.37A3.534,3.534,0,1,1,15.9,5.3,3.538,3.538,0,0,1,19.439,1.767ZM5.3,15.9a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,5.3,15.9Zm14.138,7.069a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,19.439,22.974Z"
+                                                            transform="translate(0)" fill="#d6006d" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="tab3" class="tab-data">
+                    <div class="tab-shoutout row">
+                        <div class="custom-item col-lg-4 col-md-6">
+                            <div class="celeb-img" (mouseenter)="playTestVideo()" (mouseleave)="removeTestVideo()">
+                                <div class="celeb-videoImg" id="videoImg">
+                                    <img src="../../../assets/img/celebrities/Deema-Bayyaa.JPG" alt="Abadi Al-Johar"
+                                        title="Abadi Al-Johar">
+                                    <div class="shoutout-tag">#Birthday</div>
+                                </div>
+                                <div class="video-layer" style="display: none;" id="my_video_1">
+                                    <video allow="autoplay" id="celeb-video" class="video-js vjs-default-skin"
+                                        width="100%" height="100%" controls preload="none"
+                                        poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                                        data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                                        <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
+                                        <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
+                                    </video>
+                                    <span class="custom-unmute" (click)="toggleTestVideoMute()"
+                                        [ngClass]="muted === true ? 'muted' : ''"
+                                        [innerHTML]="muted === true ? '' : ''"></span>
+                                    <div class="celeb-vid-actions">
+                                        <div class="like">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="59.162" height="58"
+                                                viewBox="0 0 59.162 58">
+                                                <defs>
+                                                    <filter id="Path_1095" x="0" y="0" width="59.162" height="58"
+                                                        filterUnits="userSpaceOnUse">
+                                                        <feOffset dy="3" input="SourceAlpha" />
+                                                        <feGaussianBlur stdDeviation="3" result="blur" />
+                                                        <feFlood flood-opacity="0.161" />
+                                                        <feComposite operator="in" in2="blur" />
+                                                        <feComposite in="SourceGraphic" />
+                                                    </filter>
+                                                </defs>
+                                                <g id="hearts" transform="translate(-247 -277.452)">
+                                                    <g id="Group_8743" data-name="Group 8743"
+                                                        transform="translate(256 283.452)">
+                                                        <g id="Group_8742" data-name="Group 8742">
+                                                            <g transform="matrix(1, 0, 0, 1, -9, -6)"
+                                                                filter="url(#Path_1095)">
+                                                                <path id="Path_1095-2" data-name="Path 1095"
+                                                                    d="M293.86,0a11.277,11.277,0,0,0-9.279,4.844A11.3,11.3,0,0,0,264,11.3c0,4.873,2.2,10.134,6.542,15.638a80.462,80.462,0,0,0,13.268,12.791,1.245,1.245,0,0,0,1.543,0A80.462,80.462,0,0,0,298.62,26.942c4.341-5.5,6.542-10.765,6.542-15.638A11.316,11.316,0,0,0,293.86,0Zm-9.279,8.663Z"
+                                                                    transform="translate(-255 6)" fill="#d6006d" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="right-act">
+                                            <div class="download-vid" >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16.918" height="24.741"
+                                                    viewBox="0 0 16.918 24.741">
+                                                    <path id="Path_1221" data-name="Path 1221"
+                                                        d="M173.365,150.777l7.178-7.178a1.274,1.274,0,1,0-1.8-1.8l-5,5V127.681a1.281,1.281,0,1,0-2.563,0v19.105l-5-5a1.274,1.274,0,1,0-1.8,1.8l7.178,7.178a1.3,1.3,0,0,0,1.813.01Z"
+                                                        transform="translate(-164 -126.4)" fill="#d6006d" />
+                                                </svg>
+                                            </div>
+                                            <div class="share-vid">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24.741" height="24.741"
+                                                    viewBox="0 0 24.741 24.741">
+                                                    <path id="share_2_" data-name="share (2)"
+                                                        d="M19.439,14.138a5.284,5.284,0,0,0-4.265,2.182L10.35,13.906A5.23,5.23,0,0,0,10.6,12.37a5.23,5.23,0,0,0-.254-1.536l4.825-2.413A5.28,5.28,0,1,0,14.138,5.3a5.229,5.229,0,0,0,.254,1.536L9.566,9.25a5.3,5.3,0,1,0,0,6.24L14.391,17.9a5.229,5.229,0,0,0-.254,1.536,5.3,5.3,0,1,0,5.3-5.3Zm0-12.37A3.534,3.534,0,1,1,15.9,5.3,3.538,3.538,0,0,1,19.439,1.767ZM5.3,15.9a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,5.3,15.9Zm14.138,7.069a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,19.439,22.974Z"
+                                                        transform="translate(0)" fill="#d6006d" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="custom-item col-lg-4 col-md-6">
+                            <div class="celeb-img" (mouseenter)="playTestVideo()" (mouseleave)="removeTestVideo()">
+                                <div class="celeb-videoImg" id="videoImg">
+                                    <img src="../../../assets/img/celebrities/Deema-Bayyaa.JPG" alt="Abadi Al-Johar"
+                                        title="Abadi Al-Johar">
+                                    <div class="shoutout-tag">#Birthday</div>
+                                </div>
+                                <div class="video-layer" style="display: none;" id="my_video_1">
+                                    <video allow="autoplay" id="celeb-video" class="video-js vjs-default-skin"
+                                        width="100%" height="100%" controls preload="none"
+                                        poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                                        data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                                        <source src="https://vjs.zencdn.net/v/oceans.mp4" type='video/mp4' />
+                                        <source src="https://vjs.zencdn.net/v/oceans.webm" type='video/webm' />
+                                    </video>
+                                    <span class="custom-unmute" (click)="toggleTestVideoMute()"
+                                        [ngClass]="muted === true ? 'muted' : ''"
+                                        [innerHTML]="muted === true ? '' : ''"></span>
+                                    <div class="celeb-vid-actions">
+                                        <div class="like">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" width="59.162" height="58"
+                                                viewBox="0 0 59.162 58">
+                                                <defs>
+                                                    <filter id="Path_1095" x="0" y="0" width="59.162" height="58"
+                                                        filterUnits="userSpaceOnUse">
+                                                        <feOffset dy="3" input="SourceAlpha" />
+                                                        <feGaussianBlur stdDeviation="3" result="blur" />
+                                                        <feFlood flood-opacity="0.161" />
+                                                        <feComposite operator="in" in2="blur" />
+                                                        <feComposite in="SourceGraphic" />
+                                                    </filter>
+                                                </defs>
+                                                <g id="hearts" transform="translate(-247 -277.452)">
+                                                    <g id="Group_8743" data-name="Group 8743"
+                                                        transform="translate(256 283.452)">
+                                                        <g id="Group_8742" data-name="Group 8742">
+                                                            <g transform="matrix(1, 0, 0, 1, -9, -6)"
+                                                                filter="url(#Path_1095)">
+                                                                <path id="Path_1095-2" data-name="Path 1095"
+                                                                    d="M293.86,0a11.277,11.277,0,0,0-9.279,4.844A11.3,11.3,0,0,0,264,11.3c0,4.873,2.2,10.134,6.542,15.638a80.462,80.462,0,0,0,13.268,12.791,1.245,1.245,0,0,0,1.543,0A80.462,80.462,0,0,0,298.62,26.942c4.341-5.5,6.542-10.765,6.542-15.638A11.316,11.316,0,0,0,293.86,0Zm-9.279,8.663Z"
+                                                                    transform="translate(-255 6)" fill="#d6006d" />
+                                                            </g>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="right-act">
+                                            <div class="download-vid">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16.918" height="24.741"
+                                                    viewBox="0 0 16.918 24.741">
+                                                    <path id="Path_1221" data-name="Path 1221"
+                                                        d="M173.365,150.777l7.178-7.178a1.274,1.274,0,1,0-1.8-1.8l-5,5V127.681a1.281,1.281,0,1,0-2.563,0v19.105l-5-5a1.274,1.274,0,1,0-1.8,1.8l7.178,7.178a1.3,1.3,0,0,0,1.813.01Z"
+                                                        transform="translate(-164 -126.4)" fill="#d6006d" />
+                                                </svg>
+                                            </div>
+                                            <div class="share-vid">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24.741" height="24.741"
+                                                    viewBox="0 0 24.741 24.741">
+                                                    <path id="share_2_" data-name="share (2)"
+                                                        d="M19.439,14.138a5.284,5.284,0,0,0-4.265,2.182L10.35,13.906A5.23,5.23,0,0,0,10.6,12.37a5.23,5.23,0,0,0-.254-1.536l4.825-2.413A5.28,5.28,0,1,0,14.138,5.3a5.229,5.229,0,0,0,.254,1.536L9.566,9.25a5.3,5.3,0,1,0,0,6.24L14.391,17.9a5.229,5.229,0,0,0-.254,1.536,5.3,5.3,0,1,0,5.3-5.3Zm0-12.37A3.534,3.534,0,1,1,15.9,5.3,3.538,3.538,0,0,1,19.439,1.767ZM5.3,15.9a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,5.3,15.9Zm14.138,7.069a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,19.439,22.974Z"
+                                                        transform="translate(0)" fill="#d6006d" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

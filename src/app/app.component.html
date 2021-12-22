@@ -1,0 +1,36 @@
+<router-outlet></router-outlet>
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-pulse-rise" [fullScreen]="true">
+    <p style="color: white"> Loading... </p>
+</ngx-spinner> -->
+<!-- <p-toast position="bottom-right"></p-toast> -->
+<p-toast
+  [style]="{ marginTop: '50px' }"
+  styleClass="custom-toast"
+  key="custom"
+  position="top-right"
+></p-toast>
+
+<ngx-spinner
+  bdOpacity="0"
+  bdColor="rgba(51,51,51,0)"
+  size="medium"
+  color="#261143"
+  zIndex=99999
+  type="ball-clip-rotate"
+  [fullScreen]="true"
+  *ngIf="!showLoader"
+>
+  <p style="color: white;"></p>
+</ngx-spinner>
+<ngx-spinner
+  bdOpacity="0"
+  bdColor="rgba(51,51,51,0)"
+  size="medium"
+  zIndex=99999
+  color="#ffffff"
+  type="ball-clip-rotate"
+  [fullScreen]="true"
+  *ngIf="showLoader"
+>
+  <p style="color: white;"></p>
+</ngx-spinner>

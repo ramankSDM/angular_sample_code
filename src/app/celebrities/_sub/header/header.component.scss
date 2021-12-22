@@ -1,0 +1,59 @@
+@import '../../../../assets/scss/custom-variables.scss';
+.db-header{background: #fff;position: fixed;left: 0;top: 0;width: 100%;z-index: 99;min-height: 65px; box-shadow: 0 0 6px rgba(0,0,0,.13);padding:9px 15px;
+    .navbar-brand {@extend .m-p-0;
+        img{height: 40px;}
+    }
+    .mobile-logo-icon{display: none;}
+
+    .sidebar-btn{position: absolute;color: $theme-color;border:1px solid $theme-color;padding: 0 9px;@include border-radius(2px); left: 206px;font-size:$font-size-level-1 + 1px;cursor: pointer;}
+
+    .navbar {@extend .m-p-0;}
+
+    .hdr-top-menu{padding-top: 5px;
+        .navbar-nav > li+li{margin-left: 20px;}
+        .dropdown-toggle::after{display: none;}
+        .hdr-user-drop{
+            a{max-width: 140px; position: relative;padding:5px 20px 5px 40px; @extend .text-ellips;color:$body-font-color;font-size:$font-size-body;min-height:35px;
+            figure{@include HW(35px);@include border-radius(50%);border:1px solid $border-color; position: absolute;left: 0;top: 0;overflow: hidden;
+                img{min-width: 100%;height:35px;width: 35px;border-radius: 50%;}
+            }
+            .fa-angle-down{position: absolute;right: 10px;top: 8px;}
+            }
+            .dropdown-menu{right: 0;left: inherit;top: 48px;
+            li a{padding: 5px 10px; width: $full-width;max-width: $full-width;}
+            }
+        }
+
+        .hdr-noti-drop{
+            .fa-bell{color: $project-red-color; font-size: $font-size-level-1;}
+            .dropdown-menu{right: 0;left: inherit;top: 48px;width: 360px;max-height: 270px;overflow-y: auto;@extend .m-p-0;
+                a{padding: 6px;}
+                h5{font-size: $font-size-body;}
+                p{font-size: $font-size-body - 1px;}
+                span{color: $body-secondary-font-color;font-size: $font-size-body - 1px;}
+                li{border-top: 1px solid $border-color;}
+                h3 {font-size: 15px;padding: 10px 60px 10px 5px;position: relative;min-height:32px;
+                    .project-btn-1{font-size: 13px;padding: 4px 7px;min-width: 54px;position: absolute;right: 5px;top:6px;}
+                }
+            }
+        }
+
+    }
+
+@include breakpoint(mobile){padding-left: 10px; padding-right: 10px;
+    &::before{width: 100px;}
+    .sidebar-btn{left: 78px;}
+    .desktop-logo{display: none;}
+    .mobile-logo-icon{display: block;}
+}   
+
+@include breakpoint(mobilemini){
+    .hdr-top-menu .hdr-noti-drop .dropdown-menu{right: -120px;width: 310px;}
+    .hdr-top-menu .navbar-nav > li+li{margin-left: 5px;}
+    .hdr-user-drop a{max-width: 140px;}
+}
+
+@include breakpoint(mobilemicro){
+    .hdr-top-menu .hdr-noti-drop .dropdown-menu{right: -145px;width: 300px;}
+}
+}

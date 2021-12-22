@@ -1,0 +1,28 @@
+@import "../my-bookings.component.scss";
+.brek-text{
+    word-break: break-all;
+}
+.rounded-circle{ object-fit: cover;}
+.req-row label {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(48, 17, 82, 0.5);
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.req-row span {
+    font-family: "Myriad Pro Regular";
+    font-size: 16px;
+    color: #D6006D;
+}
+
+.decor{
+    background: linear-gradient(
+97deg, #a50054 0%, #ff1a91 100%) !important;
+cursor: pointer !important;
+text-decoration: none !important;
+font-size: 14px !important;
+border-radius: 20px !important;
+
+}

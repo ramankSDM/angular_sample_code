@@ -1,0 +1,33 @@
+<div class="modal-outer">
+    <button type="button" class="close" aria-label="Close">
+        <img src="../../../assets/img/modal-close.svg">
+    </button>
+    <div class="modal-body">
+
+        <div class="service-modal-head">
+            <h2>{{"role.selectRole"|translate}}</h2>
+        </div>
+         <div class="service-modal-content">
+            <form  [formGroup]="frm" class="form-horizontal">
+                <div class="serv-row">
+                    <div class="form-item">
+                        <div class="serv-modal-radio">
+                            <div class="form-group">
+                                <input type="radio" value="2" id="roleId1" formControlName="roleId" checked>
+                                <label for="roleId1"><span>{{"role.fan" | translate}}</span></label>
+                            </div>
+                            <div class="form-group">
+                                <input type="radio" value="3" id="roleId2" formControlName="roleId">
+                                <label for="roleId2"><span>{{"role.celebrity" | translate}}</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pay-action">
+                    <button type="submit" (click)="save()" >{{"buttons.make_payment" | translate}}</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

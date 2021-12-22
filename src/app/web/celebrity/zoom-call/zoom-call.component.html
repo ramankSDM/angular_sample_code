@@ -1,0 +1,119 @@
+<div class="user-inner-main">  
+    <div class="inner-head">
+        <h2>{{"manage_schedule.manage_avail" | translate}}</h2>
+    </div>
+    <div class="inner-body">
+        <div class="zoom-main">
+            <div class="zoom-left">
+                <h4>{{"manage_schedule.date_time" | translate}}</h4>
+                <div class="availability-details">
+                    <div class="timezone">
+                        {{"manage_schedule.select_timezone" | translate}}:
+                        <span> {{ timezone }}</span>
+                    </div>                    
+
+                    <div class="days_and_intervals">
+                      <div *ngFor="let item of daysAndintrevals; let i = index">
+                        <div class="timezone">
+                            {{"manage_schedule.day" | translate}}:
+                          <span> {{ item.day }}</span>
+                      </div>
+                        
+                        <h5>{{"manage_schedule.selected_time" | translate}}:</h5>
+                        <div class="time">
+                          <div class="time-item" *ngFor="let interval of item.intervals; let i = index">{{ interval }}</div>                         
+                        </div>
+                      </div>
+                    </div>                   
+                </div>
+            </div>  
+            <div class="zoom-right">
+                <h4>{{"manage_schedule.edit_avail" | translate}}</h4>               
+
+                <form [formGroup]="frm" (submit)="save()" class="form-horizontal">                 
+                  <div class="form-item">
+                    <div class="form-group custom-grp" style="margin-bottom: 0;">                        
+                        <label class="upper-lbl">{{"manage_schedule.day" | translate}}</label>   
+                        <label class="upper-lbl">{{"manage_schedule.start_time" | translate}}</label>
+                        <label class="upper-lbl">{{"manage_schedule.end_time" | translate}}</label>                       
+                    </div>
+                  </div>   
+                  
+                  <div *ngFor="let item of days; let i = index">
+                    <div class="form-item">
+                        <div class="form-group custom-grp" style="justify-content: flex-start; margin-top: 20px;">
+                            <div *ngIf="i==0" class="custom-chk">
+                              <input class="styled-checkbox" id="styled-checkbox-{{i}}" type="checkbox" formControlName="{{ item.label }}"  (change)="checkUncheckAll($event)">
+                                <label class="mb-0" for="styled-checkbox-{{ i }}"></label>
+                            </div>
+                            <div *ngIf="i>0" class="custom-chk">
+                              <input class="styled-checkbox" id="styled-checkbox-{{i}}" type="checkbox" formControlName="{{ item.label }}"  (change)="selectUnselectAll($event)">
+                                <label class="mb-0" for="styled-checkbox-{{ i }}"></label>
+                            </div>
+                            <span class="upper-lbl selected-day">{{ item.day }}</span>
+                            <span class="upper-lbl upper-lbl-time"></span>
+                            <span class="upper-lbl upper-lbl-time"></span>
+                        </div> 
+                    </div> 
+
+                    <div class="form-item form-days" *ngFor="let interval of item.intervals">                            
+                        <span class="upper-lbl selected-day">{{ interval.label }}</span>                        
+                        <span class="upper-lbl upper-lbl-time">
+                          <input placeholder="{{'time'|translate}}" formControlName="{{ interval.start_time}}" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" (dateTimeInput)="startTimePickerClosed(item.label,interval.label,$event)">
+                          <owl-date-time [pickerType]="'timer'" hour12Timer=true #dt1></owl-date-time> 
+                        </span>
+                        <span class="upper-lbl  upper-lbl-time">
+                          <input placeholder="{{'time'|translate}}" formControlName="{{ interval.end_time}}" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" (dateTimeInput)="endTimePickerClosed(item.label,interval.label,$event)">
+                          <owl-date-time [pickerType]="'timer'" hour12Timer=true #dt2></owl-date-time>     
+                        </span>
+                    </div>
+                </div>
+
+                  <div class="form-item">
+                      <div class="form-group">
+                          <label class="main-lbl">{{"manage_schedule.choose_undates" | translate}}: </label>
+                          <input type="text" placeholder='{{"manage_schedule.choose_undates" | translate}}' [matMenuTriggerFor]="appMenu">
+                          <mat-menu #appMenu="matMenu" class="drop-calendar zoom-cal">
+                              <div (click)="$event.stopPropagation()">
+                                  <mat-calendar #calendar (selectedChange)="select($event,calendar)" [dateClass]="isSelected"></mat-calendar>
+                              </div>
+                          </mat-menu>                           
+                      </div>
+                  </div>
+
+                  <div class="form-item" *ngIf="daysSelected.length > 0">
+                      <div class="form-group">
+                          <label class="main-lbl">{{"manage_schedule.selected_undates" | translate}}:</label>
+                          <span *ngFor="let day of daysSelected">{{day}} <i class="fa fa-times" aria-hidden="true" (click)="removeDays()"></i></span>
+                          
+                      </div>
+                  </div>
+                                  
+                  <input type="hidden" formControlName="interval">
+                  <!-- <div class="form-item">
+                      <div class="form-group">
+                          <label class="main-lbl">Select Interval:</label>
+                          <div class="selectbox">
+                              <select class="form-control pro-input-des album-drop-down" formControlName="interval">
+                                  <option value="" selected>Select Interval</option>
+                                  <option value="15">15 Minutes</option>
+                                  <option value="30">30 Minutes</option>
+                                  <option value="45">45 Minutes</option>
+                                  <option value="60">1 Hour</option>
+                                </select>
+                          </div>
+                          <div *ngIf="frm.controls['interval'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                              Interval is required.
+                          </div> 
+                      </div>
+                  </div> -->
+
+                  <div class="pay-action">
+                      <button type="submit">{{"buttons.submit" | translate}}</button>                        
+                  </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

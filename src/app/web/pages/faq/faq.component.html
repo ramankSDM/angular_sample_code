@@ -1,0 +1,15 @@
+<div class="user-inner-main">
+        <div class="inner-head">
+            <h2>{{"footer.faq_text" | translate}}</h2>
+            <div class="inner-head-rt"></div>
+        </div>
+    </div>
+    <div class="faq-main">
+        <div class="faq-sec" *ngFor="let item of data;let i = index;">
+            <button class="accordion" (click)="toggleAccordian($event, i)"> {{item.parentName}} </button>
+            <div class="panel" *ngFor="let child of item.childProperties" hide="!item.isActive">
+            <p> {{child.propertyName}} </p>
+            </div>
+        </div>
+    </div>
+    

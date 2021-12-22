@@ -1,0 +1,140 @@
+<div class="user-inner-main">
+  <div class="inner-head">
+    <h2>{{"fan_coupon.promo_coupon" | translate}}</h2>
+    <div class="inner-head-rt">
+      <div class="custom-search-form flex-grow-1 flex-shrink-1">
+        <input class="form-control pro-input-des" placeholder="{{'fan_wallet.search_placeholder' | translate}}" type="text" [(ngModel)]="searchKey">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="getAll()">
+            <img src="../../../../assets/img/main-search.svg">
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="inner-body">
+    <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+      <p>{{"msg_notfound" | translate}}</p>
+    </div>
+    <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+      <div class="custom-table-outer">
+        <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="10">
+          <thead>
+            <tr>
+                <th class="text-center">
+                <sv-default-sorter by="fname_en" (click)="sortBy('fname_en')">{{"fan_coupon.name" | translate}}<i class="fa fa-sort"
+                    aria-hidden="true" *ngIf="sortKey !== 'title_en'"></i></sv-default-sorter>
+              </th>
+              <th class="text-center">
+                <sv-default-sorter by="title_en" (click)="sortBy('title_en')">{{"fan_coupon.title" | translate}}<i class="fa fa-sort"
+                    aria-hidden="true" *ngIf="sortKey !== 'title_en'"></i></sv-default-sorter>
+              </th>
+              
+              <th class="text-center">
+                <sv-default-sorter by="description_en" (click)="sortBy('description_en')">{{"fan_coupon.description_en" | translate}}<i
+                    class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'description_en'"></i></sv-default-sorter>
+              </th>
+              <th class="text-center">
+                <sv-default-sorter by="description_en" (click)="sortBy('description_ar')">{{"fan_coupon.description_en" | translate}}<i
+                    class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'description_en'"></i></sv-default-sorter>
+              </th>
+              <th class="text-center">
+                {{"fan_coupon.discount" | translate}}
+              </th>
+              <th class="text-center">
+                {{"fan_coupon.expiry_date" | translate}}
+              </th>
+              <th class="text-center">
+                {{"fan_coupon.code" | translate}}
+              </th>
+             
+
+
+              
+          
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr *ngFor="let item of sv.data; let i = index">
+            <td class="text-center">
+                <!-- {{ item.users[0].fname_en }} {{ item.users[0].lname_en }}
+                {{ item.users[0].fname_ar }} -->
+
+                <span *ngIf="selectedLang =='en'">{{ item.users[0].fname_en }} {{ item.users[0].lname_en }}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{item.users[0].fname_ar ? item.users[0].fname_ar:item.users[0].fname_en}}
+                    {{item.users[0].lname_ar ? item.users[0].lname_ar:item.users[0].lname_ar}}
+                </span>
+              </td>
+              <td class="text-center" >
+               
+                <span *ngIf="item.users[0].lang =='en' || item.users[0].lang =='both'">
+                  {{ item.promocodes[0].title_en }}
+                </span>
+                <span *ngIf="item.users[0].lang =='ar'">
+                  {{ item.promocodes[0].title_ar }}
+                </span>
+              </td>
+              <!-- <td class="text-center" *ngIf="item.users[0].lang =='ar'">
+                {{ item.promocodes[0].title_ar }}
+              </td> -->
+
+              <td class="text-center">
+                <span >
+                  {{ item.promocodes[0].description_en }}
+                </span>
+              </td>
+              <td class="text-center">
+                {{ item.promocodes[0].description_ar }}
+              </td>
+              
+              <!-- <td class="text-center">
+                {{ item.promocodes[0].description_ar}}
+              </td> -->
+              <td class="text-center">
+                {{ item.promocodes[0].discount }}%
+              </td>
+              <td class="text-center">
+                {{ item.promocodes[0].expiryDate | date :'d-M-yyyy' }}
+              </td>
+              <td class="text-center">
+                {{ item.promocodes[0].code }}
+              </td>
+
+              <!-- <td class="text-center">
+                <div class="cust-table-act-btns">               
+                  
+                  <span class="table-act-btn" tooltip="Delete" (click)="openModal(template, item.promocodes[0],'delete')"><i
+                      class="fas fa-trash"></i></span>
+                  
+                </div>
+              </td> -->
+             
+            </tr>
+          </tbody>
+         
+        </table>
+      </div>
+      <div class="custom-pagination-outer">
+        <pagination [totalItems]="totalRecords" [itemsPerPage]="10" (pageChanged)="pageChanged($event)">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #template>
+  <div class="modal-body text-center del-popup" style="display: block">
+    <div class="cross-icon-center text-center">
+      <span aria-hidden="true">&times;</span>
+    </div>
+    <h5>Are you sure?</h5>
+    <p>Do you really want to delete this record? </p>
+    <div class="two-btn-group mt-3">
+      <button type="button" class="project-btn-1 project-btn-secondary-color">Ok</button>
+      <button type="button" class="project-btn-1" (click)="closeModal()">Cancel</button>
+    </div>
+
+  </div>
+</ng-template>

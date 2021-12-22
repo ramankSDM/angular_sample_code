@@ -1,0 +1,117 @@
+<div class="user-inner-main">
+  <div class="inner-head">
+    <h2>{{"tags.mytag" | translate}}</h2>
+    <div class="inner-head-rt">
+      <div class="custom-search-form">
+        <input class="form-control pro-input-des" placeholder="{{'fan_wallet.search_placeholder' | translate}}" type="text" [(ngModel)]="searchKey">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="getCelebrityTags()">
+            <img src="../../../../assets/img/main-search.svg">
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="inner-body">
+      <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="tagList && tagList.length == 0">
+          <p>{{"msg_notfound" | translate}}</p>
+        </div>
+
+        <div class="bx-shadow-body" *ngIf="tagList && tagList.length != 0">
+            <div class="custom-table-outer">
+                <table class="table" [svData]="tagList" #sv="svDataTable" [svRowsOnPage]="10">
+                    <thead>
+                      <tr>                                                              
+                        <th class="text-center">
+                          {{"tags.tag_status" | translate}}
+                        </th>                               
+                        <th>{{"tags.tag_name_en" | translate}}</th>
+                        <th>{{"tags.tag_name_ar" | translate}}</th>
+                        <th class="text-center">{{"tags.action" | translate}}</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                      <tr *ngFor="let item of sv.data; let i = index">                               
+                        <td class="text-center">
+                          <ui-switch class="project-cust-switch" (valueChange)="changeStatus(
+                            item, $event)" color="#4be250" defaultBgColor="#f16565" checkedLabel="{{'tags.activated' | translate}}"
+                            [checked]="item.status" size="small" uncheckedLabel="{{'tags.deactivated' | translate}}"
+                            [tooltip]="item.status ? 'Deactivate' : 'Activate'">
+                          </ui-switch>
+                        </td>
+                        <td>
+                          {{ item.tags[0].title_en }}
+                        </td>
+                        <td>
+                          {{ item.tags[0].title_ar }}
+                        </td>                                                                
+                        <td class="text-center">
+                          <div class="cust-table-act-btns">
+                            <span class="table-act-btn" tooltip="Delete" (click)="deleteTag(item._id)">
+                                <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><g><path d="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z"/><path d="m256 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z"/><path d="m336 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z"/><path d="m176 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z"/></g></svg>
+                            </span>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                   
+                  </table>
+            </div>
+            <div class="custom-pagination-outer">
+              <pagination [totalItems]="totalRecords" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+            </div>
+          </div>
+          <div class="tags-form">            
+            <div class="tags-row">
+              <div class="form-group">
+                <label>{{"tags.tag_header" | translate }}</label>
+                <p-multiSelect [options]="dataList" [(ngModel)]="selectedTags" optionLabel="title_en"></p-multiSelect>
+              </div>
+              
+              <div class="form-group">
+                <label>{{"tags.custom_tags" | translate }}</label>
+                <!-- <p-chips [(ngModel)]="values1" ></p-chips> -->
+                <mat-form-field class="demo-chip-list">
+                  <mat-chip-list #chipList>
+                    <mat-chip
+                      *ngFor="let tag of customTags"
+                      [selectable]="selectable"
+                      [removable]="removable"
+                      (removed)="remove(tag)">
+                      {{tag}}
+                      
+                      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                    </mat-chip>
+                    <input                      
+                      #tagInput
+                      [formControl]="tagCtrl"
+                      [matAutocomplete]="auto"
+                      [matChipInputFor]="chipList"
+                      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                      [matChipInputAddOnBlur]="addOnBlur"
+                      (matChipInputTokenEnd)="add($event)"
+                    />
+                  </mat-chip-list>
+                  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                      {{ tag }}
+                    </mat-option>
+                  </mat-autocomplete>
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <div class="tags-row">
+              <div class="form-group">
+                <label>{{"tags.selected_tags" | translate }}</label>
+                <div class="selected-tags">
+                    <p *ngFor="let selectedItem of selectedTags; let i = index">
+                        {{ selectedItem.name }}
+                    </p>  
+                </div>
+              </div>
+              <a class="table-act-btn" title="Add" (click)="saveTag()">Save</a>
+            </div>
+          </div>      
+  </div>
+</div>

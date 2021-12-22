@@ -1,0 +1,708 @@
+{
+  "have":"لديك",
+  "booked":"حجز",
+  "book_now" :"احجز الآن",
+  "English": "الإنجليزية",
+  "Arabic": "عربى",
+  "testimonials": "الشهادات - التوصيات",
+  "msg_notfound": "لا يوجد سجلات!",
+  "follow": "يتبع",
+  "on": "على",
+  "star_details" : "تفاصيل النجمة",
+  "celebrity_name" : "اسم النجم",
+  "tax" : "ضريبة",
+  "name" :"اسم",
+  "email" : "بريد إلكتروني",
+  "request1": "طلب",
+  "pending" :"قيد الانتظار",
+  "private" : "خاص",
+  "public": "عام",
+  "image_size": "الصورة (يجب ألا يزيد الحجم عن 25 ميغا بايت)",
+  "video_size" : "فيديو (يجب ألا يزيد الحجم عن 25 ميغا بايت)",
+  "vat" :"ضريبة القيمة المضافة",
+  
+
+ 
+
+  "welcome_text": "أهلا بك",
+
+  "filter_by" : {
+    "filter" : "مصنف بواسطة :",
+    "all" :"الجميع",
+    "in_process":"تحت المعالجة",
+    "canceled" : "ألغيت",
+    "completed" : "مكتمل",
+    "rejected" : "تم رفضها",
+    "reschedule" : "إعادة الجدولة",
+    "refund_approved" : "تمت الموافقة على رد الأموال",
+    "refund_rejected" : "تم رفض رد الأموال",
+    "req_for_refund" : "طلب استرداد",
+    "reject_request" :"رفض الطلب",
+    "postpone": "يؤجل",
+    "read" : "يقرأ",
+    "accepted" : "قبلت",
+    "refund_req" : "طلب ارجاع"
+
+  },
+
+  "header": {
+    "all_categories": "جميع الفئات",
+    "login": "تسجيل الدخول",
+    "signup": "اشتراك",
+    "latest_video": "أحدث مقاطع الفيديو",
+    "all_webinar": "جميع الندوات عبر الإنترنت",
+    "Notifications": "إشعارات"
+  },
+  "footer": {
+    "subscribe_mail": "اشترك في قائمتنا البريدية",
+    "subscribe_tagline": "ابق على اطلاع لأخر المستجدات في ستارز إن",
+    "faq_link": "أسئلة وأجوبة شائعة",
+    "terms_link": "شروط الخدمة",
+    "privacy_link": "سياسة الخصوصية",
+    "contact_link": "اتصل بنا",
+    "about_us": "من نحن",
+    "lbl_copyright": "حقوق الطباعة والنشر 2021. جميع الحقوق محفوظة",
+    "follow_icon": "تابعنا",
+    "news_link": "أخبار",
+    "career_link": "وظائف",
+    "support_link": "الدعم",
+    "email": "عنوان البريد الإلكتروني",
+    "meeting_link": "رابط الاجتماع",
+    "faq_text" : "التعليمات"
+  },
+  "home": {
+    "slider_text": "احصل على رسائل فيديو شخصية",
+    "slider_text_bold": "من نجومك المفضلين",
+    "browse_cat": "تصفح قائمة النجوم",
+    "star_signup": "انضم إلي نجوم ستارزان",
+    "services_on_home": "تعرف اكثر عن خدماتنا المميزة",
+    "personalize_expr": "لتجربة شخصية",
+    "how_it_work": "خطوات الخدمات",
+    "select": "يختار",
+    "celebrity": "نجم",
+    "book_service": "خدمة الكتاب والدفع",
+    
+    "receive_request": "تلقي طلبك",
+    "request": "طلبك"
+  },
+  "headerMenu": {
+    "profile": "ملفي الشخصي",
+    "wallet": "محفظتي",
+    "my_request": "طلباتي",
+    "my_coupons": "كوبوناتي الخاصة",
+    "timeline": "فيديوهاتي",
+    "my_star": "نجومي المفضلين",
+    "scheduled_meeting": "اجتماعاتي المجدولة",
+    "contact_admin": "تواصل مع الأدمن",
+    "change_pass": "تغيير كلمة المرور",
+    "logout": "تسجيل خروج",
+    "dashboard": "لوحة المعلومات",
+    "tags": "الوصلات",
+    "fans": "المتابعون",
+    
+    "zoom_call_schedule":"جدول مكالمات الفيديو",
+    "my_webinar": "ندواتي على الويب",
+    "message": "الرسائل",
+    "Calender": "تقويم",
+    "current_pass": "كلمة السر الحالية",
+    "new_pass": "كلمة السر الجديدة",
+    "confirm_pass": "تأكيد كلمة المرور الجديدة",
+    "current_pass_holder": "أدخل كلمة المرور القديمة",
+     "new_pass_holder": "أدخل كلمة مرور جديدة",
+     "statistics" : "إحصائيات"
+  },
+  "signup": {
+    "star_signup": "Stars Signup",
+    "signup": "تسجيل",
+    "first_name": "الاسم الأول",
+    "last_name": "اسم العائلة",
+    "email": "البريد إلكتروني",
+    "country_code": "اختر رمز هاتف الدولة",
+    "mobile_no": "رقم الهاتف المحمول",
+    "password": "كلمة المرور",
+    "aggrement": "By signing up, you agree to StarsIn",
+    "and": "and",
+    "signup_note": "التسجيل لن يضمن القبول التلقائي في ستارز إن. بمجرد القبول ، ستتلقى رسالة تأكيد بالبريد الإلكتروني. قد يتواصل معك/معكي ممثل النجوم من طرفنا لوضع اللمسات الأخيرة على متطلبات القبول.",
+    "signin": "تسجيل الدخول",
+    "already_account": "إذا كان لديك حساب بالفعل.",
+    "popup_text": "خصم 10٪ على أول عملية شراء لك مع تلقي تحديثات عن المشاهير!",
+    "or": "أو",
+    "facebook": "موقع التواصل الاجتماعي الفيسبوك",
+    "google": "جوجل",
+    "number_sharing_msg": "(لن يتم مشاركة هاتفك أبدًا)"
+  },
+  "validations": {
+    "first_name_require": "الإسم الأول مطلوب",
+    "first_name_limit": "لا يمكن أن يكون الاسم الأول أكبر من 20 حرفًا",
+    "last_name_require": "إسم العائلة مطلوب",
+    "last_name_limit": "لا يمكن أن يكون اسم العائلة أكبر من 20 حرفًا",
+    "email_require": "البريد الالكتروني مطلوب",
+    "email_limit": "لا يمكن أن يكون البريد الإلكتروني أكبر من 50 حرفًا",
+    "email_invalid": "بريد إلكتروني خاطئ",
+    "mobile_require": "رقم الهاتف المحمول مطلوب",
+    "mobile_limit": "يجب أن يتكون رقم الهاتف المحمول من 10 أرقام على الأقل",
+    "password_require": "كلمة المرور مطلوبة",
+    "password_limit": "كلمة المرور على الأقل 8 أحرف مع أحرف صغيرة وكبيرة ورقم وحرف خاص ",
+    "address_require":"العنوان مطلوب",
+        "country_require":"الدولة مطلوبة",
+        "city_require":"المدينة مطلوبة",
+        "timezone_require":"المنطقة الزمنية مطلوبة",
+        "std_code_require":"مطلوب رمز الأمراض المنقولة جنسيا.",
+        "phone_require":"رقم الهاتف مطلوب",
+        "dob_require":"تاريخ الميلاد مطلوب",
+        "gender_require":"الجنس مطلوب",
+        "display_name_require":"اسم العرض مطلوب",
+        "display_name_arabic_require":"مطلوب اسم العرض العربية",
+        "select_categories":"الرجاء تحديد الفئات",
+        "max_cat_select":"الرجاء تحديد 3 فئات كحد أقصى",
+        "facebook_required" : "مطلوب الفيسبوك.",
+        "invalid_url": "الرجاء إدخال عنوان URL صالح",
+        "bio_required": "السيرة الذاتية مطلوبة",
+        "bio_requiredAr": "مطلوب السيرة الذاتية (عربي)",
+        "profession_required": "المهنة مطلوبة",
+        "profession_requiredAR": "مطلوب مهنة (عربي)"
+  },
+  "login":{
+    "signin":"تسجيل الدخول",
+    "email":"بريد إلكتروني",
+    "password":"كلمه السر",
+    "remember_me":"تذكرنى",
+    "login":"تسجيل الدخول",
+    "signup_fan":"سجل كمروحة",
+    "signup_cel":"سجل كمشاهير",
+    "forgot_pass":"نسيت رقمك السري؟"
+  },
+
+  "forgotPassword":{
+    "forgot_pass":"هل نسيت كلمة السر",
+    "submit":"إرسال"
+  },
+
+  "cart":{
+    "card_number":"رقم البطاقة",
+    "expiry_date":"تاريخ انتهاء الصلاحية"
+  },
+
+  "tips":{
+    "tip_text" : "نصائح للحصول على أفضل النتائج",
+    "shout-out" :"خدمة الإهداء",
+    "igot-talent": "خدمة المواهب",
+    "webinar": "نقاش عبر الويب",
+    
+    "zoomConnect": "الاتصال عبر مكالمة فيديو",
+    "dmText": "خدمة الرسائل النصية المباشرة"
+  },
+  "celebrity": {
+    "avg_rating": "متوسط التقييمات",
+    "responseTime": "وقت الاستجابة",
+    "days": "أيام",
+    "all-review": "انظر جميع المراجعات",
+    "online": "متصل",
+    "becomeFan": "كن من المعجبين",
+    "sendRequest": "ارسل طلب",
+    "connectNow": "تواصل الآن",
+    "chatNow": "الدردشة الآن",
+    "joinNow": "نضم الان",
+    "latest_review": "أحدث مراجعة"
+  },
+  "buttons": {
+    "save_upload": "حفظ تحميل",
+    "update": "تحديث",
+    "submit": "إرسال",
+    "upload": "تحميل",
+    "save": "حفظ",
+    "cancel": "يلغي",
+    "go": "اذهب",
+    "ok": "نعم",
+    "apply": " تطبيق",
+    "back": "عودة",
+    "make_payment": "قم بالدفع",
+    "confirm": "يتأكد",
+    "schedule_event": "جدولة الحدث",
+    "launch": "إطلاق",
+    "accept" : "قبول"
+  },
+  "profile": {
+    "referral":"إرسال المرجع",
+    "referralCode":"كود الإحالة",
+    "my_profile": "الملف الشخصي",
+    "my_media": "فيديوهاتي",
+    "profile_detail": "تفاصيل الملف الشخصي",
+    "personal_detail": "تفاصيل شخصية",
+    "social_info": "حساباتي للتواصل الاجتماعي",
+    "introduction_video": "فيديو تعريفي",
+    "media_file": "فيديوهاتي",
+    "profile_complete_note": "لتفعيل حسابك والوصول إلى الميزات الكاملة ، يرجى إكمال ملف التعريف الخاص بك عن طريق ملء هذه الحقول الاسم الأول (الإنجليزية والعربية) ، واسم العائلة (الإنجليزية والعربية) ، واسم العرض ، وصورة الملف الشخصي ، ومقدمة الفيديو ، والبريد الإلكتروني ، ورقم الهاتف ، واحد على الأقل سيتم إرسال الخدمة للتحقق من المشرف.",
+    "first_name": "الاسم الأول",
+    "first_name_arabic": "First Name Arabic",
+    "last_name": "اسم العائلة",
+    "last_name_arabic": "Last Name Arabic",
+    "display_name": "اسم العرض (انجليزي)",
+    "display_name_arabic": "اسم العرض (عربي)",
+    "select_categories": "حدد الفئات",
+    "address": "العنوان (حدد العنوان من الإكمال التلقائي)",
+    "city": "المدينة",
+    "state": "المنطقة",
+    "zipcode": "الرمز البريدي",
+    "country": "الدولة",
+    "profession": "مهنة",
+    "profession_arabic": "المهنة عربي",
+    "description": "وصف",
+    "description_arabic": "ديسكريبتيو عربي",
+    "shoutout": "خدمة الإهداء",
+    "igot": "خدمة المواهب",
+    "webinar": "خدمة اللقاءات الجماعية الافتراضية",
+    
+    "connect_zoom":"الاتصال عبر مكالمة فيديو",
+    "dm_text": "خدمة الرسائل النصية المباشرة",
+    "chat_pref": "تفضيلات الدردشة",
+    "select_gender": "حدد نوع الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "both": "Both",
+    "choose_timezone": "حدد منطقتك الزمنية المحلية",
+    "Lang_pref": "اللغة المفضلة",
+    "select_lang": "اختر اللغة",
+    "vacation": "في عطلة",
+    "vac_start": "العطلة تبدأ من تاريخ",
+    "vac_end": "العطلة تنتهي في تاريخ",
+    "super_star": "اختر نجمك السوبر ستار",
+    "select_star": "اختر نجمك المحبب",
+    "personal_info_note": "لن تظهر معلوماتك الشخصية للعامة",
+    "gender": "الجنس",
+    "email": "البريد إلكتروني",
+    "country_code": "اختر رمز هاتف الدولة",
+    "phone": "هاتف",
+    "dob": "تاريخ الميلاد",
+    "insta_link": "رابط حسابك على الانستقرام",
+    "fb_link": "رابط حسابك على فيسبوك",
+    "youtube_link": "رابط حسابك على يوتيوب",
+    "tw_link": "رابط حسابك على تويتر",
+    "tiktok_link": "رابط حسابك على تيك توك",
+    "snap_link": "رابط حسابك على سناب تشات",
+    "ln_link": "رابط حسابك على لينكد إن",
+    "web_link": "رابط موقعك على شبكة الانترنت",
+    "my_fans": "معجبي",
+    "count_req": "طلب العد",
+    "bio_en": "السيرة الذاتية",
+    "bio_ar": "السيرة الذاتية العربية"
+  },
+  "Profile_placeholder": {
+    "insta_link": "أدخل رابط الانستغرام",
+    "fb_link": "أدخل رابط الفيسبوك",
+    "youtube_link": "أدخل رابط يوتيوب",
+    "tw_link": "أدخل رابط تويتر",
+    "tiktok_link": "أدخل رابط تيكتوك",
+    "snap_link": "أدخل رابط سناب شات",
+    "ln_link": "أدخل رابط لينكد إن",
+    "web_link": "أدخل رابط الموقع"
+  },
+  "role":{
+    "fan": "معجب",
+    "celebrity": "نجاح كبير"
+  },
+  "fan_wallet": {
+    "refund_request": "طلبات استرداد الأموال الخاصة بي",
+    "wallet_point": "إجمالي نقاط المحفظة",
+    "fan": "معجب",
+    "celebrity": "نجاح كبير",
+    "occasion": "مناسبات",
+    "total_refunded_amount": "إجمالي المبلغ المسترد",
+    "requested_date": "التاريخ المطلوب",
+    "booking_status": "وضع الحجز",
+    "refund_status": "حالة رد الأموال",
+    "action": "أجراءات",
+    "search_placeholder": "...بحث",
+    "my_wallet": "محفظتى"
+  },
+  "request_popup": {
+    "request_details": "تفاصيل الطلب",
+    "receipt_id": "معرف الاستلام",
+    "booking_time": "تاريخ الطلب",
+    "to": "الى",
+    "from": "من",
+    "occasion": "المناسبة",
+    "refund_reason": "سبب طلب الاسترداد",
+    "rating": "التقييم",
+    "comments": "التعليقات",
+    "payment_details": "تفاصيل الدفع",
+    "service_fee": "رسوم الخدمة",
+    "tax": "الضريبة",
+    "discount": "خصومات",
+    "sub_total_fee": "اجمالي الرسوم",
+    "admin_fee": "رسوم إدارية",
+    "total_paid_amount": "إجمالي المبلغ المدفوع",
+    "reject_reason" : "رفض السبب",
+    
+    "zoom_req_date" : "تاريخ طلب مكالمة الفيديو",
+    "time_slot" : "فسحة زمنية",
+    "icebreakers" : "كاسحات الجليد",
+    "receiver_details" : "تفاصيل المتلقي",
+    "language" : "لغة",
+    "net_serviceFee": "صافي رسوم الخدمة",
+        "vat" :"ضريبة القيمة المضافة",
+        "cancel_request" : "إلغاء الطلب",
+        "subTotal_fee" : "رسوم المجموع الفرعي",
+        "postpone_request" : "طلب تأجيل",
+        "postpone_msg": "هل تريد حقا تأجيل هذا الطلب؟"
+
+  },
+
+  "model_webnar" : {
+
+    "on_webinar": "في ندوة عبر الإنترنت",
+    "webinar" : "نقاش عبر الويب",
+    "attend": "حضور برنامج تعليمي على الويب",
+    "recorded_video" : "فيديو مسجل",
+    "about_yourself": "عن نفسك"
+
+  },
+
+  
+  "request":  {
+    "schedule_meeting" :"اللقاءات والمحادثات المجدولة",
+    "my_request": "طلباتي",
+    "shoutout":"خدمة الإهداء",
+    "igot":"خدمة المواهب",
+    "webinar":"نقاش عبر الويب",
+   
+    "zoom_call": "مكالمة فيديو",
+    "dm_text":"خدمة الرسائل النصية المباشرة",
+    "all" :"الجميع",
+    "req_shoutout" :"طلبات صيحاتي",
+    "req_IGT" : "طلبات المواهب الخاصة بي",
+    "req_webinar":"طلبات ندوات الويب الخاصة بي"
+
+  },
+  "request_header":
+      {
+        "request_to" :"طلب إلى",
+        "from_name": "من الاسم",
+        "video_to" : "فيديو",
+        "occasion" :"مناسبة",
+        "video_privacy" : "خصوصية الفيديو",
+        "booking_date" : "تاريخ الحجز",
+        "status": "مركز",
+        "action": "أجراءات",
+        "requested_date":"التاريخ المطلوب",
+        "topic" : "عنوان",
+        "webinar_D&T" : "تاريخ ووقت الندوة عبر الويب",
+        "join_url" : "انضم",
+        "passcode" : "رمز عبور",
+        "booking_red_date" :"تاريخ طلب الحجز",
+        "zoom_meeting_date" : "تاريخ اجتماع مكالمة الفيديو",
+        "zoom_time_slot": "فتحة الوقت لمكالمات الفيديو",
+        "timezone" : "وحدة زمنية",
+        "dm_text":"خدمة الرسائل النصية المباشرة",
+        "fan_req_from" : "معجب (طلب من)",
+        "to_name" : "إلى الاسم",
+        "video_for": "فيديو لـ",
+        "rating": "التقييم",
+        "req_from" : "طلب من",
+        "talent_cat" : "فئة المواهب",
+        "title": "لقب",
+        "fans": "المتابعون",
+        "date&time" : "التاريخ والوقت",
+        "webinar_details" : "تفاصيل البرنامج التعليمي على الويب",
+        "webinar_type" : "نوع البرنامج التعليمي على الويب",
+        "noOfDays" :"عدد الأيام",
+        "duration" : "مدة",
+        "datetime" : "التاريخ والوقت",
+        "reschedule_booking" : "إعادة جدولة الحجز",
+        "talent_req": "الموهبة مطلوبة"
+
+
+      },
+  
+
+      "tags":{
+        "tag_status": "مركز",
+        "tag_name_en" : "اسم العلامة الإنجليزية",
+        "tag_name_ar" : "اسم الوسم عربي",
+        "action": "أجراءات",
+        "mytag": "علاماتي",
+        "activated" : "مفعلة",
+        "deactivated": "معطل",
+        "tag_header": "حدد العلامات من علامات المسؤول",
+        "selected_tags" : "العلامات المختارة",
+        "custom_tags" : "العلامات المخصصة"
+        
+    
+      },
+
+      "fan_coupon":{
+        "promo_coupon": "القسائم الترويجية",
+        "name" : "اسم", 
+        "title": "لقب",
+        "description_en" : "وصف مفصل (انجليزي)",
+        "description_arabic":"ديسكريبتيو عربي",
+        "discount": "خصومات",
+        "code" : "شفرة",
+        "expiry_date" : "تاريخ انتهاء الصلاحية",
+        "title_ar": "العنوان عربي"
+      },
+      "favourite" : "المفضل لدي",
+      "my_star": "نجمي",
+
+      "contact_admin": {
+        "ct_admin" : "اتصل بالمسؤول",
+        "subject": "موضوع",
+        "select_subject": "حدد الموضوع",
+        "accn_&_finc" : "الحسابات والتمويل",
+        "tect_support" : "دعم فني",
+        "other" : "آخر",
+        "message": "رسالة",
+        "msg_placeholder": "الرجاء إدخال رسالة للمسؤول",
+        "req_msg" : "الرسالة مطلوبة.",
+        "req_sub": "الموضوع مطلوب."
+        
+      },
+      "manage_schedule"  : {
+        "manage_avail" : "إدارة التوفر",
+        "date_time" : "المواعيد والوقت المتاح",
+        "day": "يوم",
+        "select_timezone" : "المنطقة الزمنية المحددة",
+        "selected_time" : "الوقت المحدد",
+        "edit_avail" : "تحرير التوفر",
+        "start_time" : "وقت البدء",
+        "end_time" : "وقت النهاية",
+        "choose_undates": "اختر التواريخ غير المتوفرة",
+        "selected_undates" : "التواريخ المحددة غير المتوفرة"
+
+
+      },
+      "time" : "زمن",
+      "select_date" : "حدد تاريخ",
+      "add_new" :" اضف جديد",
+
+      "star_webinar":{
+        "noOfParticipant" : "عدد المشاركين",
+        "webinar_booked_price" : "سعر حجز ندوة عبر الإنترنت",
+        "webinar_recorded_price" : "السعر المسجل للندوة عبر الويب",
+        "instruction" : "تعليمات خاصة",
+        "web_loginDetails" : "تفاصيل تسجيل الدخول إلى ندوة الويب",
+        "meeting_id" : "معرف الاجتماع",
+        "fan_list_details" : "قائمة المعجبين الذين دفعوا مقابل الانضمام إلى ندوة عبر الإنترنت",
+        "promocode" : "رمز ترويجي",
+        "rating_feedback" : "تقييم المعجبين وردود الفعل",
+        "delete_webinar" : "حذف البرنامج التعليمي على الويب",
+        "del_confirm_msg" : "هل أنت واثق؟",
+        "del_confirm_msg2" : "هل تريد حقًا حذف هذا السجل؟",
+        "webinar_&_zoom" : "ندواتي عبر الويب ومكالمات الفيديو",
+        "multiple_webinar" : "عدة ندوات عبر الإنترنت",
+        "single_webinar" :"ندوة واحدة على الويب",
+        "daysNumber" :"لا أيام",
+        "req_daysNumber" : "مطلوب عدد الأيام.",
+        "title_required" : "العنوان مطلوب.",
+        "desc_required" : "الوصف مطلوب",
+        "topic_required" : "الموضوع مطلوب.",
+        "duration_required" : "المدة مطلوبة.",
+        "choose_date" : "اختر موعدا",
+        "date_required" : "التاريخ مطلوب.",
+        "start_time" : "وقت البدء",
+        "time_required" :"الوقت مطلوب.",
+        "choose_timezone" : "اختر المنطقة الزمنية",
+        "partic_required" : "مطلوب عدد من المشاركين.",
+        "bookedPrice_required" : "السعر المحجوز مطلوب.",
+        "recordPrice_required" : "السعر المسجل مطلوب.",
+        "meeting_details": "تفاصيل الاجتماع"
+        
+      },
+
+      "celebrity_detail":
+      {
+        "star_detail": "تفاصيل المشاهير",
+        "name" : "اسم", 
+        "fans_msg" : "رسائل المعجبين بي"
+      },
+      "payment_detail" :
+      {
+        "pay_detail" : "بيانات الدفع",
+        "service_fee" : "رسوم الخدمة",
+        "tax" : "ضريبة"
+      },
+      "guest":
+      {
+        "name1" : "اسم الضيف 1",
+        "name2" : "2 اسم الضيف",
+        "name3" : "3 اسم الضيف",
+        "name4" : "4 اسم الضيف",
+        "email1" :"1 البريد الإلكتروني للضيف ",
+        "email2" :"2 البريد الإلكتروني للضيف ",
+        "email3" :"3 البريد الإلكتروني للضيف ",
+        "email4" :"4 البريد الإلكتروني للضيف ",
+        "same_mailError" : "لا يمكن أن تكون رسائل البريد الإلكتروني الخاصة بالضيف هي نفسها ، لذا يُرجى تقديم رسائل بريد إلكتروني فريدة."
+      },
+      "model_shoutout":{
+        "shoutout_req":"طلب صيحة من",
+        "someone_else" :"شخص اخر",
+        "me" : "أنا",
+        "shout_lang" :"لغة الصيحة",
+        "name_required" : "إلى الاسم مطلوب.",
+        "from" : "من عند",
+        "from_name_required" : "من الاسم مطلوب.",
+        "choose_occasion" : "اختر المناسبة",
+        "relationship": "صلة",
+        "max_word" : "(300 كحد أقصى)",
+        "error_msg3" : "الرجاء إدخال 300 حرف كحد أقصى.",
+        "video_private": "اجعل هذا الفيديو خاصًا",
+        "send_video_directly": "إرسال الفيديو مباشرة إلى البريد الإلكتروني الخاص بصديقي. (اختياري)",
+        "friend_email_add" : "عنوان البريد الإلكتروني للصديق",
+        "to" : "ل",
+        "friend_email" : "عنوان البريد الإلكتروني للصديق"
+
+
+      },
+      
+      "common_model":{
+      "ssl_msg" : "الدفع مضمون بتشفير SSL",
+      "occasion_date" :"تاريخ المناسبة",
+      "required_error" : "تاريخ المناسبة مطلوب.",
+      "msg_instruction": "إرشادات الرسائل لـ",
+      "speak_only" :"يتحدث فقط",
+      "write_inst": "في مقاطع الفيديو الخاصة بهم. يرجى كتابة التعليمات الخاصة بك في",
+      "inst_required" : " التعليمات مطلوبة.",
+      "error_msg2": "الرجاء إدخال 25 حرفًا كحد أدنى.",
+      "error_emailreq" : "البريد الالكتروني مطلوب.",
+      "your_email" : "عنوان بريدك الإلكتروني",
+      "private_video" :"اجعل هذا الفيديو عامًا",
+      "promo_code" : "+ أضف الرمز الترويجي",
+      "available_coupon" : "القسائم المتوفرة:",
+      "available_point" : "النقاط المتاحة:",
+      "what_heppenes_msg" : "ماذا يحدث بعد الدفع؟",
+      "term_condition" : "بإرسال هذا الطلب للصياح ، فإنك توافق على",
+      "termOfService" : "شروط الخدمة",
+      "termOfServie2" : "مجموعة النجوم في.",
+      "use_wallet_msg" : "استخدم نقاط المحفظة المتاحة في الحجز.",
+      "aggrement_msg" :"| ابق على اطلاع بالعروض والخصومات الحصرية في النجوم",
+      "email_invalid" : "البريد الإلكتروني غير صالح.",
+      "occasion_req": "المناسبة مطلوبة.",
+      "this_errorReq" : "هذا مطلوب.",
+      "name_suggestion" : "إذا كنت قد أدخلت بريدًا إلكترونيًا ، فيرجى إدخال الاسم أيضًا.",
+      "email_suggestion" : "إذا كنت قد أدخلت الاسم ، فيرجى إدخال البريد الإلكتروني أيضًا.",
+      "reject_request" : "هل تريد حقًا رفض هذا الطلب؟",
+      "reject_reason" :"الرجاء إدخال سبب الرفض",
+      "complete_req" : "طلب كامل",
+      "sender_detail" : "بيانات المرسل",
+      "confirm_msg" : "هل تريد حقا",
+       "confirm_msg2" : "هذا الطلب؟",
+       "del_msg" : "هل تريد حقًا إلغاء هذا الطلب؟",
+       "relation_req": "العلاقة مطلوبة"
+
+
+       
+
+
+
+
+
+
+
+      },
+      "payment":{
+        "heading":"معلومات الدفع",
+        "description": "سنقوم بتعليق مؤقت على بطاقتك لمدة 7 أيام. لن يتم تحصيل الرسوم من بطاقتك الائتمانية حتى يكتمل الفيديو."
+      },
+
+      "model_igt":{
+        "igt_req" :"حصلت على طلب المواهب من",
+        "igt_type" : "نوع IGT",
+        "video" :"فيديو",
+        "mp3" :"MP3",
+        "image" :"الصور",
+        "upload_video" : "رفع فيديو",
+        "video_select" : "حدد ملفك هنا",
+        "upload_mp3" : "تحميل MP3",
+        "select&Drop" : "حدد ملفك أو أسقطه هنا",
+        "upload_image" : "تحميل الصور",
+        "talent_category" : "اختر فئة الموهبة",
+        "igt_lang" : "لغة IGT",
+        "sentToFriend" :"أرسل إلى صديق",
+        "daysPostpone": "أيام التأجيل",
+        "till_postpone" : "تأجيل حتى",
+        "coupon": "رمز الكوبون",
+        "talent_video" : "فيديو موهبة",
+        "audio_file" : "ملف صوتي",
+        "video_instruction" : "تعليمات خاصة للفيديو",
+        "rating_feedback" : "تقييم المشاهير وردود الفعل",
+        "video_url" : "رابط الفيديو",
+        "refunding_msg" : "هل تريد حقًا استرداد هذا الطلب؟",
+        "refund_msg" : "الرجاء إدخال سبب الاسترداد"
+
+
+
+       
+        
+      },
+
+      
+      "model_zoom":
+      {
+        "book_zoom" : "حجز مكالمة فيديو",
+        "go_live" : "ابدأ العيش مع",
+        "onZoom_call":"في مكالمة فيديو",
+        "zoom_detailsInfo" : "يتم توفير تفاصيل مكالمة الفيديو عند التأكيد",
+        "join":"أنضم إليك من أجل لقاء افتراضي وتحية",
+        "schedule_timeText" :"حدد موعدًا لك وما يصل",
+        "schedule_timeText2":"الأصدقاء أو العائلة أو الزملاء لإجراء مكالمة فيديو مباشرة مع المشاهير المفضلين لديك.",
+        "choose_interval" : "اختر الفاصل الزمني",
+        "available_time": "لا يوجد وقت متاح.",
+        "zoom_meetingDate" : "تاريخ اجتماع مكالمة الفيديو",
+        "choose_date" : "اختر موعدا",
+        "time_interval" : "الفاصل الزمني",
+        "total_amount" : "المبلغ الإجمالي",
+        "choose_otherTimezone": "اختر منطقة زمنية أخرى",
+        "icebreaker_text" :"مشاركة بعض كاسحات الجليد مع",
+        "icebreaker_text2": "لبدء المحادثة! من أين أنت؟ كيف تعرفون بعضكم البعض؟ (أصدقاء الكلية ، دوري كرة القدم الخيالي ، العائلة!) هل تريد مشاركة أي شيء آخر؟",
+        "minichar_error": "الرجاء إدخال 50 حرفًا كحد أدنى.",
+        "maxchar_error" :"الرجاء إدخال 500 حرف كحد أقصى.",
+        "terms_agreement": "عن طريق الحجز ، فإنك توافق على STARSIN's",
+        "confirm_link_text" : "بعد قيامك بالحجز ، ستتلقى رسالة بريد إلكتروني تحتوي على رابط للتأكيد",
+        "select_date_time" : "التاريخ والوقت الذي اخترته",
+        "purchase_reciept" : "إيصال الشراء",
+        "videoLink_text" : "رابط لمكالمة الفيديو سيكون ساريًا حتى الوقت المحدد (يرجى تنزيل التكبير مسبقًا)",
+        "imp_note_header": "ملاحظات هامة:",
+        "imp_note_text": "إذا اخترت عدم الحضور للاجتماع ، لأي سبب من الأسباب ، فلن يحضر الاجتماع ولن تتم إعادة جدولته لأي ظرف من الظروف. وبالمثل ، إذا حضرت متأخرًا إلى الاجتماع ، فلن يتم تمديد موعد الاجتماع. سوف تذهب كما هو مقرر",
+        "confirm_msg" :"هل تريد حقا",
+        "confirm_msg2" :"هذا الطلب؟",
+        "enter_msg" :"الرجاء إدخال",
+      "reason" : "السبب",
+      "call_details" : "تكبير تفاصيل المكالمة"
+
+
+        
+      },
+
+      "site_review":
+      {
+        "review_header" :"من فضلك أخبرنا كيف كانت تجربة الحجز الخاصة بك حتى نتمكن من تحسينها دائمًا",
+        "write_comment" :"اكتب تعليق"
+
+      },
+
+      "model_dmText":
+      {
+        "dm_header" :"أرسل رسالة نصية إلى",
+        "payment_info" : "معلومات الدفع",
+        "card_name" : "الاسم على البطاقة",
+        "card_detail": "معلومات البطاقة",
+        "card_required" : "رقم البطاقة مطلوب.",
+        "exp_required": "مطلوب انتهاء الصلاحية.",
+        "cvv_required" : "مطلوب CVV.",
+        "name_required" : "مطلوب اسم."
+
+      },
+
+      "dashboard":{
+        "total_fan": "إجمالي المعجبين",
+        "all_request" : "كل الطلبات",
+        "pending": "قيد الانتظار",
+        "total_revenu" : "إجمالي الإيرادات",
+        "total_amount" : "المبلغ الإجمالي",
+        "dm" : "دم",
+        "zoom_call" : "مكالمة فيديو"
+
+
+      }
+
+}

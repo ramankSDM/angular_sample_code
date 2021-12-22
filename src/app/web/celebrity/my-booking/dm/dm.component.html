@@ -1,0 +1,151 @@
+<div class="user-inner-main">
+    <div class="inner-head">
+      <h2>{{"request.schedule_meeting" | translate}}</h2>
+      <div class="inner-head-rt">
+        <div class="custom-search-form">
+          <input class="form-control pro-input-des" placeholder="{{'fan_wallet.search_placeholder' | translate}}" type="text" [(ngModel)]="searchKey">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" (click)="getAll()">
+              <img src="../../../../assets/img/main-search.svg">
+            </button>
+          </span>
+        </div>            
+      </div>
+      
+    </div>
+    <div class="inner-body"> 
+      <div class="prof-tabs">
+            <ul>
+                  <li>
+                   <img src="" class="">&nbsp;
+                      <a
+                        [routerLink]="['/celebrity/my-booking']"
+                        routerLinkActive="router-link-active"
+                       
+                        >{{"request.all" | translate}}</a
+                      >
+                    </li>
+                    <li>
+                      <img src="../../../assets/img/celeb-profile/shoutout-service.svg" class="bookingServiceIcon">&nbsp;
+                            <a
+                              [routerLink]="['/celebrity/my-booking/shoutout']"
+                              routerLinkActive="router-link-active"
+                             
+                              >{{"request.shoutout" | translate}}</a
+                            >
+                          </li>
+                          <li>
+                            <img src="../../../assets/img/celeb-profile/igt-service.svg" class="bookingServiceIcon">&nbsp;
+                            <a
+                              [routerLink]="['/celebrity/my-booking/i-got-talent']"
+                              routerLinkActive="router-link-active"
+                              >{{"request.igot" | translate}}</a
+                            >
+                          </li>
+                          <li>
+                            <img src="../../../assets/img/celeb-profile/webinar-service.svg" class="bookingServiceIcon">&nbsp;
+                            <a
+                              [routerLink]="['/celebrity/my-booking/webinar']"
+                              routerLinkActive="router-link-active"
+                              >{{"request.webinar" | translate}}</a
+                            >
+                          </li>
+                  
+                          <li>
+                            <img src="../../../assets/img/celeb-profile/zoom-service.svg" class="bookingServiceIcon">&nbsp;
+                            <a
+                              [routerLink]="['/celebrity/my-booking/zoom-call']"
+                              routerLinkActive="router-link-active"
+                              > {{"request.zoom_call" | translate}}</a
+                            >
+                          </li>
+                          <li class="active">
+                            <img src="../../../assets/img/celeb-profile/chat-service.svg" class="bookingServiceIcon">&nbsp;
+                            <a
+                              [routerLink]="['/celebrity/my-booking/dm']"
+                              routerLinkActive="router-link-active"
+                              > {{"request.dm_text" | translate}}</a
+                            >
+                          </li>
+            </ul>
+        <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="bookingList && bookingList.length == 0">
+            <p>{{"msg_notfound" | translate}}</p>
+          </div>
+  
+          <div class="bx-shadow-body" *ngIf="bookingList && bookingList.length != 0">
+              <div class="custom-table-outer">
+                  <table class="table" [svData]="bookingList" #sv="svDataTable" [svRowsOnPage]="10">
+                      <thead>
+                        <tr>  
+                           
+                            <th class="text-center">
+                              <sv-default-sorter by="senderData.fname_en" (click)="sortBy('senderData.fname_en')">
+                                {{"request_header.fan_req_from" | translate}}<i class="fa fa-sort" aria-hidden="true"
+                                  *ngIf="sortKey !== 'senderData.fname_en'"></i>
+                              </sv-default-sorter>
+                            </th> 
+                            <th class="text-center">
+                                <sv-default-sorter by="dm_text" (click)="sortBy('dm_text')">
+                                {{"request_header.dm_text" | translate}}<i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'dm_text'"></i>
+                                </sv-default-sorter>
+                            </th>
+                            <th class="text-center">
+                                <sv-default-sorter by="bookingDateTime" (click)="sortBy('bookingDateTime')">
+                                {{"request_header.booking_red_date" | translate}}
+                                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'bookingDateTime'"></i></sv-default-sorter>
+                            </th>                                              
+                            <th class="text-center">
+                              <sv-default-sorter by="isPublic" (click)="sortBy('isPublic')">
+                                {{"request_header.status" | translate}}<i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'isPublic'"></i>
+                              </sv-default-sorter>
+                            </th>
+                            <th class="text-center">{{"request_header.action" | translate}}</th>                          
+                        </tr>
+                      </thead>
+                      <tbody id="tableBody">
+                        <tr *ngFor="let item of sv.data; let i = index">
+                          <td class="text-center">
+                            <span *ngIf="selectedLang =='en'">{{ item.senderData && item.senderData.fname_en?item.senderData.fname_en:'-'}}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{item.senderData && item.senderData.fname_ar ? item.senderData.fname_ar:'-'}}  
+                </span>
+
+                          </td>                                                
+                          <td class="text-center brek-text">
+                              {{ item.dm_text }}
+                          </td>                          
+                          <td class="text-center">
+                              {{ item.bookingDateTime  | date: 'MMM d, y' }}
+                          </td>                         
+                          <td class="text-center">
+                              <!-- <span *ngIf="item.isPublic == null">{{"pending"|translate}}</span>
+                               <span *ngIf="item.isPublic == false">{{"public"|translate}}</span>
+                               <span *ngIf="item.isPublic == true">{{"private"|translate}}</span> -->
+                               {{ (item.isPublic == false) ? 'Public' : 'Private' }}
+                          </td> 
+                          <td class="text-center">
+                            <div class="cust-table-act-btns d-flex align-items-center justify-content-center">
+                              <span class="table-act-btn " *ngIf="item.isPublic == false" tooltip="Make it Private"
+                              (click)="publishMessage(item._id,true, 1)">
+                              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g data-name="Layer 14" id="Layer_14"><path d="M56,64H8a1,1,0,0,1-1-1V28a1,1,0,0,1,1-1H56a1,1,0,0,1,1,1V63A1,1,0,0,1,56,64ZM9,62H55V29H9Z"/><path d="M13,28H11V21a21,21,0,0,1,42,0H51a19,19,0,0,0-38,0Z"/><rect height="12" width="2" x="31" y="41"/></g></svg>
+    
+                            </span>
+                            <span class="table-act-btn blockedFan" *ngIf="item.isPublic == true" tooltip="Make it Public"
+                              (click)="publishMessage(item._id,false, 1)">
+                              <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g data-name="Layer 13" id="Layer_13"><path d="M56,64H8a1,1,0,0,1-1-1V28a1,1,0,0,1,1-1H56a1,1,0,0,1,1,1V63A1,1,0,0,1,56,64ZM9,62H55V29H9Z"/><path d="M53,28H51V21a19,19,0,0,0-38,0v7H11V21a21,21,0,0,1,42,0Z"/><rect height="12" width="2" x="31" y="41"/></g></svg>
+                              
+                            </span>
+                          </div>
+                          </td>                        
+                        </tr>
+                      </tbody>
+                      
+                    </table>
+              </div>
+              <div class="custom-pagination-outer">
+                <pagination [totalItems]="totalRecords" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+              </div>
+            </div>   
+      </div>
+    </div>
+</div>

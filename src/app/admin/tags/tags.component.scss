@@ -1,0 +1,38 @@
+.fa-sort {padding-left: 3px;color: darkgray;}
+.action-links {  float: left;}
+.del-button {color: #20a8d8 !important;text-decoration: none !important;background-color: transparent;cursor: pointer;}
+.del-button:hover {color: #167495 !important;text-decoration: underline !important;}
+.custom-search-form {position: relative;
+  .input-group-btn{position: absolute;right: 0;top: 0;}
+  .form-control {padding-right: 45px;}
+}
+.modal-header {
+  h2 {
+      font-size: 24px;
+      color: #D6006D;
+      font-weight: 600;
+      padding: 5px 20px;
+  }
+}
+
+.custom-table-outer {
+  table {
+    thead {
+      background: #301152;
+      th {
+        color: #ffffff;
+      }
+    }
+    tbody {
+      td {
+        img {
+          height: 50px;
+          width: 50px;
+          border-radius: 15px;
+        }
+      }
+    }
+  } 
+}  
+
+.request-content{ padding: 20px;}

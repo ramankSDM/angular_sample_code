@@ -1,0 +1,148 @@
+<div class="user-inner-main">
+    <div class="inner-head">
+      <h2> {{ isEditable ? "Update" : 'Add' }} Webinar</h2>
+      <div class="inner-head-rt"></div>
+    </div>
+    <div class="inner-body">
+        <form [formGroup]="frm" (submit)="save()" class="form-horizontal">
+
+            <div class="req-row">
+                <div class="form-item req-item">
+                    <label class="pro-lbl-one">{{"request_header.webinar_type" | translate}}*</label> 
+                    <div class="serv-modal-radio">
+                        <div class="form-group d-flex justify-content-between serv-radio-wrap">
+                            <div><input id="type" type="radio" value="single" formControlName="webinar_type" checked (change)="changeType($event.target.value)">
+                                <label for="type"><span>{{"star_webinar.single_webinar" | translate}}</span></label></div>
+                                <div><input id="type1" type="radio" value="multiple" formControlName="webinar_type" (change)="changeType($event.target.value)">
+                                    <label for="type1"><span>{{"star_webinar.multiple_webinar" | translate}}</span></label></div>                                                                            
+                        </div>
+                    </div>
+                </div>
+                <div class="req-item">
+                    <div *ngIf="noOfDays == true">
+                        <label class="pro-lbl-one">{{"star_webinar.daysNumber" | translate}}</label> 
+                        <input class="form-control" formControlName="no_of_days" placeholder="Enter Number of days" type="number" >
+                        <div *ngIf="noOfDaysError == true" class="error-div help-block requiredClass">
+                            {{"star_webinar.req_daysNumber" | translate}}
+                        </div> 
+                    </div>
+                </div>                  
+            </div>
+
+            <div class="req-row">
+                <div class="req-item">
+                        <label class="pro-lbl-one">{{"request_header.title" | translate}}*</label>
+                        <input class="form-control" formControlName="title" placeholder="Enter Title" >
+                        <div *ngIf="frm.controls['title'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                            {{"star_webinar.title_required" | translate}}
+                        </div> 
+                </div>
+                <div class="req-item">
+                    <label class="pro-lbl-one">{{"profile.description"| translate}}*</label>
+                    <textarea class="form-control" formControlName="description" placeholder="Enter Description" ></textarea>
+                    <div *ngIf="frm.controls['description'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                        {{"star_webinar.desc_required" | translate}}
+                    </div> 
+                </div>                  
+            </div>
+
+            <div class="req-row">
+                <div class="req-item">
+                        <label class="pro-lbl-one">{{"request_header.topic" | translate}}*</label>
+                        <select class="form-control pro-input-des album-drop-down" formControlName="topic">
+                            <option value="" disabled selected hidden>Select Topic</option>
+                            <option [value]="topic.topic"  *ngFor="let topic of topic_list">{{topic.topic}}</option>
+                            
+                        </select>
+                        <div *ngIf="frm.controls['topic'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                            {{"star_webinar.topic_required" | translate}}
+                        </div> 
+                </div>
+                <div class="req-item">
+                    <label class="pro-lbl-one">{{"request_header.duration" | translate}}*</label>
+                    <select class="form-control pro-input-des album-drop-down" id="timing" formControlName="duration">
+                        <option value="" disabled selected hidden>Select Duration</option>
+                        <option [value]="time.istime" *ngFor="let time of timeData">{{time.istime}} Minutes</option>                            
+                        
+                    </select>
+                    <div *ngIf="frm.controls['duration'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                        {{"star_webinar.duration_required" | translate}}
+                    </div> 
+                </div>                  
+            </div>
+
+            <div class="req-row">
+                <div class="req-item">
+                        <label class="pro-lbl-one">{{"star_webinar.choose_date" | translate}}*</label>                         
+                        <p-calendar class="form-control pro-input-des dob-new" formControlName="webinar_date"
+                                    placeholder="Select date" [showIcon]="true" [minDate]="minDate" dateFormat="dd/mm/yy" (onSelect)="onSelect($event)"></p-calendar>
+                        <div *ngIf="frm.controls['webinar_date'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                            {{"star_webinar.date_required" | translate}}
+                        </div> 
+                </div>
+                <div class="req-item">
+                        <label class="pro-lbl-one">{{"star_webinar.start_time" | translate}}*</label>                           
+                        <input placeholder="Time" formControlName="start_time" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1">
+                          <owl-date-time [pickerType]="'timer'" hour12Timer=true #dt1></owl-date-time> 
+                        <div *ngIf="frm.controls['start_time'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                            {{"star_webinar.time_required" | translate}}
+                        </div> 
+                </div>                                
+            </div>
+
+            <div class="req-row">
+                <div class="req-item">
+                        <label class="pro-lbl-one">{{"star_webinar.choose_timezone" | translate}}*</label>                           
+                        <ng-moment-timezone-picker [formControlName]="'timezoneobject'" [(ngModel)]="selectedZone" customPlaceholderText="Choose your timezone"> </ng-moment-timezone-picker> 
+                        <div *ngIf="frm.controls['timezoneobject'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                            {{"validations.timezone_require" | translate}}
+                        </div> 
+                </div> 
+                <div class="req-item">
+                    <label class="pro-lbl-one">{{"star_webinar.noOfParticipant" | translate}}*</label>
+                    <input class="form-control" formControlName="number_of_participants" placeholder="Enter No of Participants" type="text" maxlength="10">                        
+                    <div *ngIf="frm.controls['number_of_participants'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                        {{"star_webinar.partic_required" | translate}}
+                    </div> 
+                    <div *ngIf="frm.controls['number_of_participants'].hasError('maxlength') && isSubmited" class="error-div help-block requiredClass">
+                        Enter Max 6 digits
+                    </div> 
+                    <div *ngIf="frm.controls['number_of_participants'].hasError('pattern')" class="error-div help-block requiredClass">
+                       Enter Number Only
+                    </div> 
+                </div>                                  
+            </div>
+
+            <div class="req-row">
+                <div class="req-item">
+                    <label class="pro-lbl-one">{{"star_webinar.webinar_booked_price" | translate}}*</label>
+                    <input class="form-control" formControlName="booked_price" placeholder="Enter Booked Price" >
+                    <div *ngIf="frm.controls['booked_price'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                        {{"star_webinar.bookedPrice_required" | translate}}
+                    </div> 
+                </div>
+                <div class="req-item">
+                    <label class="pro-lbl-one">{{"star_webinar.webinar_recorded_price" | translate}}*</label>
+                    <input class="form-control" formControlName="recorded_price" placeholder="Enter Recorded Price" >
+                    <div *ngIf="frm.controls['recorded_price'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                        {{"star_webinar.recordPrice_required" | translate}}
+                    </div> 
+                </div>                  
+            </div>
+
+            <div class="req-row">
+                <div class="req-item">
+                    <label class="pro-lbl-one">{{"star_webinar.instruction" | translate}}</label>
+                    <textarea class="form-control" formControlName="special_instructions" placeholder="Enter Special Instructions" ></textarea>                   
+                </div>
+                <div class="req-item"></div>                  
+            </div>
+                
+                
+            <div class="pay-action d-flex">
+                <button class="project-btn-1 cancel" routerLink="{{ cancelURL }}">{{"buttons.cancel" | translate}}</button>
+                <button type="submit">{{"buttons.submit" | translate}}</button>                        
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="modal-outer">
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <img src="../../../assets/img/modal-close.svg">
+  </button>
+  <div class="modal-body">
+    <div class="service-modal-head">
+      <div class="service-modal-left">
+      </div>
+      <h1>{{"site_review.review_header" | translate}}
+      </h1>
+    </div>
+    <div class="service-modal-content">
+      <div class="form-horizontal">
+        <div class="serv-row row">
+          <div class=" col-sm-12">
+            <label class="main-lbl">{{"site_review.write_comment" | translate}}</label>
+           
+              <div class="form-group">
+                <textarea maxlength="300" class="form-control minheight" [(ngModel)]="completeRequest.comment" required></textarea>
+              </div>
+            
+          </div>
+          <div class=" col-sm-12 mt-2">
+            <label class="main-lbl">{{"request_header.rating" | translate}}<span><img src="../../../../assets/img/info.svg"></span></label>
+            <div class="serv-modal-radio">
+              <div class="form-group">
+
+                <star-rating value="{{completeRequest.rating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                  size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pay-info">
+          <div class="pay-action">
+            <button type="button" class="project-btn-1 project-btn-secondary-color " (click)="fanRating()">{{"buttons.submit" | translate}}</button>
+            <button type="button" class="project-btn-1" (click)="closeModal()">{{"buttons.cancel" | translate}}</button>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

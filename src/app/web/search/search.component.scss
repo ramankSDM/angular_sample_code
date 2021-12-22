@@ -1,0 +1,207 @@
+.search-result-main {
+    width: 90%;
+    margin: 0 auto;
+    padding: 100px 0 80px 0;
+    h2 {
+        color: #301152;
+        font-size: 30px;
+        font-weight: bold;
+        span {
+            color: #D6006D;
+        }
+    }
+    .search-top {
+        display: flex;
+        padding-top: 50px;
+        h3 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #D6006D;
+        }
+        .search-top-l {
+            flex: 1;
+            min-width: 360px;
+            max-width: 360px;
+            .top-result {
+                .celeb-name {
+                    color: #301152;
+                    font-weight: 600;
+                    font-size: 20px;
+                    margin-top: 20px;
+                    span {
+                        display: block;
+                        font-size: 16px;
+                        font-weight: 400;
+                        color: rgba(48, 17, 82, 0.6);
+                    }
+                }
+                .result-img {
+                    position: relative;
+                    overflow: hidden;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                    .celeb-img {
+                        width: 320px;
+                        overflow: hidden;
+                        img {border-radius: 20px;}
+                    }
+                    .celeb-mask {
+                        position: absolute;
+                        top: 0;
+                        height: 100%;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        .search-top-r {
+            flex: 1;
+            .related-result {
+                display: flex;
+                flex-wrap: wrap;
+                .related-item {
+                    flex: 1;
+                    max-width: 33%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    min-width: 33%;
+                    margin-bottom: 20px;
+                    .related-name {
+                        color: #301152;
+                        font-weight: 600;
+                        font-size: 20px;
+                        margin-left: 10px;
+                        span {
+                            display: block;
+                            font-size: 16px;
+                            font-weight: 400;
+                            color: rgba(48, 17, 82, 0.6);
+                        }
+                    }
+                    .related-img {
+                        position: relative;
+                        overflow: hidden;
+                        width: 90px;
+                        height: 90px;
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                        .celeb-mask {
+                            position: absolute;
+                            top: 0;
+                            height: 100%;
+                            width: 100%;
+                        }
+                    }                    
+                }
+            }
+        }
+    }
+}
+.related-result-main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.related-tags {
+    display: flex;
+    margin-top: 50px;
+    a {
+        color: #301152;
+        margin-right: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 7px 15px;
+        background: #E6E3E9;
+        text-decoration: none;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+}
+.search-result-bottom {
+    width: 90%;
+    margin: 0 auto;
+    padding: 20px 0 80px 0;
+    h3 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #301152;
+        span {color: #D6006D;}
+    }
+    .related-tags {margin-top: 20px; margin-bottom: 30px;}
+    .search-listing {
+        display: flex;
+        flex-wrap: wrap;
+        .search-listing-item {
+            margin-bottom: 20px;
+            .celeb-img {
+                position: relative;
+                margin: 0 15px 10px 0;
+                margin-left: 0;
+                img {
+                    border-radius: 20px;
+                    object-fit: cover;
+                    min-height: 320px;
+                    max-height: 320px;
+                }
+                .celeb-actions {
+                    position: absolute;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    width: 100%;
+                    padding: 15px;
+                    left: 0;
+                    bottom: 0;
+                    a.list-shoutout {background: #D6006D;}
+                    a.list-igt {background: #301152;}
+                    a {
+                        width: 100px;
+                        height: 50px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-decoration: none;
+                        border-radius: 10px;
+                        font-size: 20px;
+                        color: #ffffff;
+                        font-weight: 600;
+                        img {
+                            object-fit: unset;
+                            height: 25px;
+                            margin-right: 10px;
+                            width: 30px;
+                        }
+                    }
+                }
+            }
+            .celeb-details {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding-right: 15px;
+                .celeb-name {
+                    color: #301152;
+                    font-weight: 600;
+                    font-size: 20px;
+                    span {
+                        display: block;
+                        font-size: 16px;
+                        font-weight: 400;
+                        color: rgba(48, 17, 82, 0.6);
+                    }
+                }
+            }
+        }
+    }
+}

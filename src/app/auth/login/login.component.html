@@ -1,0 +1,99 @@
+<div class="modal-outer">
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <img src="../../../assets/img/modal-close.svg">
+  </button>
+  <div class="modal-body">
+    <div class="modal-left">
+      <h2>{{"login.signin"|translate}}</h2>
+      <form [formGroup]="loginForm" (submit)="onLoggedin()">
+        <!-- <label class="main-lbl">Please select a role</label>
+        <div class="login-select">
+          <div class="form-group">
+            <input id="role" type="radio" value="2" name="role" formControlName="role" required>
+            <label for="role"><span>Fan</span></label>
+          </div>
+          <div class="form-group" *ngIf="isService == undefined || isService == ''">
+            <input id="role1" type="radio" value="3" name="role" formControlName="role" required>
+            <label for="role1"><span>Celebrity</span></label>
+          </div>
+
+          <div *ngIf="f.role.touched && f.role.invalid" class="alert alert-danger">
+            <div *ngIf="f.role.errors.required">Please select role.</div>
+          </div>
+        </div> -->
+        <div class="form-group">
+          <label>{{"login.email"|translate}}</label>
+          <span class="auth-ini"><img src="../../../assets/img/user.svg"></span>
+          <input type="email" placeholder="Email" name="email" formControlName="email" required maxlength="50"
+            [ngClass]="{ 'is-invalid': isSubmited && f.email.errors }" />
+          <div *ngIf="isSubmited && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">{{"validations.email_require"|translate}}</div>
+            <!-- <div *ngIf="f.email.errors.email">{{"validations.email_invalid"|translate}}</div> -->
+            <div *ngIf="f.email.errors.maxlength">{{"validations.email_limit"|translate}}</div>
+            <div *ngIf="f.email.errors.pattern">{{"validations.email_invalid"|translate}}</div>
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>{{"login.password"|translate}}</label>
+          <span class="auth-ini"><img src="../../../assets/img/lock.svg"></span>
+          <input [type]="isTextFieldType ? 'password' : 'text'" placeholder="" formControlName="password" required maxlength="15"
+            [ngClass]="{ 'is-invalid': isSubmited && f.password.errors }">
+          <span class="auth-eye" (click)="togglePasswordFieldType()"><img src="../../../assets/img/eye.svg"></span>
+          <div *ngIf="isSubmited && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">{{"validations.password_require"|translate}}</div>
+          </div>
+        </div>
+        <ul class="stay_logged">
+          <li>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck1" formControlName="rememberMe">
+              <label class="form-check-label" for="exampleCheck1">{{"login.remember_me"|translate}}</label>
+            </div>
+          </li>
+          <!-- <li>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="exampleCheck2">
+              <label class="form-check-label" for="exampleCheck2"> Stay logged in</label>
+            </div>
+          </li> -->
+        </ul>
+
+        <button type="submit">{{"login.login"|translate}}</button>
+        <div class="auth-form-link text-center">
+          <a (click)="signupAsFan()">{{"login.signup_fan"|translate}}</a> &nbsp;&nbsp; || &nbsp;&nbsp;
+          <a *ngIf="isService == undefined || isService == ''" (click)="signupAsCel()">{{"login.signup_cel"|translate}}</a>
+        </div>
+        <div class="auth-form-link text-center">
+          <a (click)="forgot()">{{"login.forgot_pass"|translate}}</a>
+        </div>
+
+      </form>
+      <div class="auth-or">{{"signup.or"|translate}}</div>
+      <div class="social-login">
+        <button type="button" (click)="initiateSocialLogin('facebook')" class="facebook">
+          <img src="../../../assets/img/facebook.svg">{{"signup.facebook"|translate}}
+        </button>
+        <button type="button" (click)="initiateSocialLogin('google')" class="google">
+          <img src="../../../assets/img/google.svg">{{"signup.google"|translate}}
+        </button>
+      </div>
+      <!-- <div class="auth-form-link">
+        By signing up, you agree to StarsIn <a href="">Terms of Service</a> and <a href="">Privacy Policy</a>
+      </div> -->
+    </div>
+    <div class="modal-right">
+      <div class="modal-right-content">
+        <img src="../../../assets/img/main-logo.svg">
+        <p>{{"signup.popup_text"|translate}}</p>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- <div class="modal-footer">
+    <a href="">Sign Up</a>, if you are not having an account.
+  </div> -->
+</div>

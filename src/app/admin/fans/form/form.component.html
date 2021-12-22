@@ -1,0 +1,107 @@
+<div class="" id="page-wrapper">
+    <div class="">
+      <div class="row row-stat">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading panel-heading-divider">
+              <div class="db-hdd-1">
+                <h2> {{ isEditable ? "Update" : 'Add' }} Fans</h2>
+              </div>
+            </div>
+            <div class="panel-body p-a-15 bx-shadow-white">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form [formGroup]="frm" (submit)="save()" class="form-horizontal">  
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-1">First Name<em>*</em></label>
+                            <input class="form-control pro-input-des" id="fname_en" placeholder="Enter First Name"
+                            formControlName="fname_en" maxlength="100" name="fname_en" required
+                              type="text">
+                            <div *ngIf="frm.controls['fname_en'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                First Name is required.
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Last Name</label>
+                            <input class="form-control pro-input-des" id="lname_en" placeholder="Enter Last Name"
+                            formControlName="lname_en" #LastName maxlength="100" name="lname_en" type="text">
+                          </div>
+                        </div>
+                      </div>
+  
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Email<em>*</em></label>
+                            <input class="form-control pro-input-des" id="email" placeholder="Enter Email"
+                            formControlName="email" maxlength="50" #Email
+                              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$" required type="text" name="email">
+                              <div *ngIf="frm.controls['email'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Email is required.
+                              </div>
+                              <div *ngIf="frm.controls['email'].hasError('email')  && frm.controls['email'].value != ''" class="error-div help-block requiredClass">
+                                {{"Invalid Email"}}
+                              </div>
+                                <div class="error" *ngIf="emailChk" >
+                                    {{"Email already exist"}}
+                                </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6" *ngIf="!isEditable" >
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Password<em>*</em></label>
+                            <input type="password" placeholder="Password" class="form-control pro-input-des" required
+                              minlength="6" maxlength="20" #password formControlName="password"
+                              name="password" />
+                              <div *ngIf="frm.controls['password'].hasError('required')" class="error-div help-block requiredClass">
+                                Password is required.
+                              </div>                             
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">  
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Choose Country Code<em>*</em></label>
+
+                            <select class="form-control pro-input-des" id="state" formControlName="std_code">
+                            <option [value]="code.isdcode" *ngFor="let code of countryCodeList">{{code.name}} ({{code.isdcode}})</option>
+                          </select>
+                              <div *ngIf="frm.controls['std_code'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                               Country Code is required.
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Phone<em>*</em></label>
+                            <input class="form-control pro-input-des" placeholder="Enter Mobile Number"
+                            formControlName="phone" #mobileNumber minlength="10" maxlength="14" name="mobile" required
+                              type="text">
+                              <div *ngIf="frm.controls['phone'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                               Phone is required.
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row text-right two-btn-group mt-4">
+                        <div class="col-md-12">
+                          <button class="project-btn-1 project-btn-secondary-color"
+                            routerLink="/admin/fans">Cancel</button>
+                          <button [disabled]="!frm.valid" class="project-btn-1">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

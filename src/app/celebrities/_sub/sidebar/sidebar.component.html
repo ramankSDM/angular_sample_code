@@ -1,0 +1,78 @@
+<aside class="db-sidebar">
+	<div class="db-sidebar-user-dp text-center">
+		<figure><img [src]="loggedInAdmin.image" alt="" /></figure>
+		<h3>{{ loggedInAdmin.fname }} {{ loggedInAdmin.lname }}</h3>
+	</div>
+	<div class="db-sidebar-menu">
+		<nav class="navbar navbar-expand">
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav">
+					<li class="nav-item" routerLink="/admin/dashboard" routerLinkActive="active">
+						<a class="nav-link"> 
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+
+
+							Dashboard <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" routerLink="/admin/categories">
+
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+
+
+							Categories <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" routerLink="/admin/celebrities">
+
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+
+
+							Celebrities <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" routerLink="/admin/fans">
+
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+
+
+							Fans <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" routerLink="/admin/promotions">
+
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+
+
+							Promotions <span class="sr-only">(current)</span></a>
+					</li>
+					<!-- <li class="nav-item">
+						<a class="nav-link">
+
+
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+
+
+							CRM <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+							<i class="fa fa-fw fa-dashboard"></i>&nbsp;
+							Deals
+							<i class="fas fa-angle-down"></i>
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<ul>
+								<li><a class="dropdown-item" href="#">List</a></li>
+								<li> <a class="dropdown-item" href="#">Add Deal</a></li>
+							</ul>
+						</div>
+					</li> -->
+
+				</ul>
+			</div>
+		</nav>
+	</div>
+</aside>

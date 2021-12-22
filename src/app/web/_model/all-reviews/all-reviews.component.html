@@ -1,0 +1,40 @@
+<div class="modal-outer" backdrop="static" keyboard="false">
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <img src="../../../assets/img/modal-close.svg">
+    </button>
+
+    <div class="modal-body">
+        <div class="review-main">
+            <h2>{{"celebrity.latest_review"|translate}}</h2>
+
+            <div class="color" *ngIf="reviewList && reviewList.length == 0">
+                {{"msg_notfound" | translate}}
+            </div>
+
+            <div class="review-item" *ngFor="let revData of reviewList">
+                <div class="review-row">
+                    <div class="reviewer">
+                        By: <span>{{revData.user[0].fname_en}} {{revData.user[0].lname_en}}</span>
+                    </div>
+                    <div class="review-date">{{revData.updatedAt | date:'yyyy-MM-dd'}}</div>
+                </div>
+
+                <div class="review-rating">
+                    <star-rating value="{{revData.fanRating}}" totalstars="5" checkedcolor="#FFC400"
+                        uncheckedcolor="white" size="24px" readonly="true"></star-rating>
+                </div>
+
+                <div class="review-content">
+                    {{revData.fanComment}}
+                </div>
+                <div class="review-footer">
+                    <img src="../../../../assets/img/main-logo.svg">
+                    {{(revData.isPublic == false) ? 'Public':'Private'}} Video
+                </div>
+            </div>
+            <div class="text-center"><button *ngIf="total > 10" class="pink-bg" (click)="loadMore()">Load More</button>
+            </div>
+        </div>
+
+    </div>
+</div>

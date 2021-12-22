@@ -1,0 +1,334 @@
+<div class="db-hdd-1">
+    <h2>Refund Requests</h2>
+  </div>
+  
+  <div class="search-and-btn-top">
+    <div class="row custom-rw-btn-search-bottom ">
+      <div class="col-md-4 col-lg-4">
+        <label class="pro-lbl-one">Search By :</label>
+        <div class="custom-search-form">
+          <input class="form-control pro-input-des" placeholder="Search..." type="text" [(ngModel)]="searchKey">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" (click)="getAll()">
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
+        </div>
+  
+      </div>
+      <div class="col-md-4 col-lg-4 mt-md-0 mt-2">
+        <label class="pro-lbl-one">Filter By Request Status:</label>
+        <select class="form-control pro-input-des album-drop-down" [(ngModel)]="filterStatus" (change)="filterRecords()">
+          <option value="" selected>All</option>
+          <option value="In process">In process</option>
+          <option value="Canceled">Canceled</option>
+          <option value="Completed">Completed</option>
+        </select>
+      </div>
+      <div class="col-md-4 col-lg-4 mt-md-0 mt-2">
+        <label class="pro-lbl-one">Filter By Request Type:</label>
+        <select class="form-control pro-input-des album-drop-down" [(ngModel)]="requestType" (change)="filterRecords()">
+          <option value="" selected>All</option>
+          <option value="1">Dedicated</option>
+          <option value="2">i-Got Talent</option>
+          <option value="3">Webnier</option>
+          <option value="4">Video Call</option>
+          <option value="5">Dm Text</option>
+          <option value="6">Dm Video</option>
+        </select>
+      </div>
+    </div>
+  
+  </div>
+  
+  <div class="bx-shadow-white mt-4 mt-md-5">
+    <div class="bx-shadow-hdd p-a-15">
+      <h3>Listing</h3> 
+    </div>
+
+    <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+      <p>No Record Found</p>
+    </div>
+
+    <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+      <div class="custom-table-outer">
+        <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="rowsOnPage">
+          <thead>
+            <tr>              
+              <th class="text-center">
+                Fan
+              </th>
+              <th class="text-center">
+                Celebrity
+              </th>             
+              <th class="text-center">
+                Occasion
+              </th> 
+              <th class="text-center">
+                Total Amount
+              </th>             
+              <th class="text-center">
+                <sv-default-sorter by="bookingDateTime" (click)="sortBy('bookingDateTime')">
+                  Requested date
+                  <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'bookingDateTime'"></i></sv-default-sorter>
+              </th> 
+              <th class="text-center">Booking Status</th>
+              <th class="text-center">Refund Status</th>
+              <th class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr *ngFor="let item of sv.data; let i = index">              
+              <td class="text-center">
+                {{ item.fan.fname_en }}
+              </td>
+              <td class="text-center">
+                {{ item.celebrity.fname_en }}
+              </td>             
+              <td class="text-center">                
+                {{ item.occasion != ''?item.occasion:item.zoom_occasion != null?item.zoom_occasion:'--' }}
+              </td> 
+              <td class="text-center">
+                ${{ item.totalAmount }}
+              </td>            
+              <td class="text-center">
+                {{ item.updatedAt  | date: 'MMM d, y' }}
+              </td>  
+              <td class="text-center">
+                <div class="d-flex justify-content-center align-items-center">
+                <span class="dot mr-2" [ngStyle]="{'background-color': item.colorCode}"></span>
+                <span *ngIf="item.status == 1 || item.status == 2 || item.status == 7 || item.status == 6">In process</span>
+                <span *ngIf="item.status == 3 || item.status == 4">Cancelled</span>
+                <span *ngIf="item.status == 5">Completed</span>
+              </div>
+              </td>
+              <td class="text-center">
+                <span *ngIf="!(item.refundStatus) || item.refundStatus == 0">Pending</span>
+                <span *ngIf="item.refundStatus == 1">Accepted</span>
+                <span *ngIf="item.refundStatus == 2">Rejected</span>
+                <!-- <span *ngIf="item.refundStatus == 3">Request to Celebrity</span>
+                <span *ngIf="item.refundStatus == 4">Rejected by Celebrity</span> -->
+              </td>
+              <td class="text-center">
+                <div class="cust-table-act-btns">
+                  <span class="table-act-btn" tooltip="View Booking" (click)="openModal2(viewModal,item)"><i
+                    class="fas fa-eye"></i></span>
+                  <span *ngIf="!(item.refundStatus) || item.refundStatus == 0" class="table-act-btn" tooltip="Accept Refund Request" (click)="openModal2(acceptRefundTemplate,item)"><i class="fas fa-check"></i></span>
+                  <span *ngIf="!(item.refundStatus) || item.refundStatus == 0" class="table-act-btn" tooltip="Reject Refund Request" (click)="openModal(rejectTemplate,item,3)"><i class="fas fa-trash"></i></span>  
+                  <!-- <span class="table-act-btn" tooltip="Send Request to Celebrity" (click)="openModal2(sendRequestTocelebrity,item)"><i class="fas fa-share-square"></i></span> -->
+
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+      <div class="custom-pagination-outer pb-md-5 pb-4">
+        <pagination [totalItems]="totalRecords" [itemsPerPage]="rowsOnPage" (pageChanged)="pageChanged($event)">
+        </pagination>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #viewModal>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">Request Details</h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal2()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+  
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="req-item">
+              <label>Receipt Id</label>
+              <span>{{viewData.receiptId}}</span>
+            </div>
+            <div class="req-item">
+              <label>Booking Time</label>
+              <span>{{viewData.bookingDateTime | date:'yyyy-M-d h:mm a'}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>To</label>             
+              <span>{{viewData.celebrity.fname_en}}</span>
+            </div>
+            <div class="req-item">
+              <label>From</label>             
+              <span>{{viewData.fan.fname_en}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>Occasion</label>
+              <span>{{ viewData.occasion != ''?viewData.occasion:viewData.zoom_occasion != null?viewData.zoom_occasion:'--' }}</span>
+            </div>            
+          </div>
+
+          <div class="req-row">
+            <div class="req-item">
+              <label>Refund Reason</label>
+              <span>{{viewData.refundReason}}</span>
+            </div>
+            <div class="req-item">
+              <label></label>
+              <span></span>
+            </div>
+          </div> 
+ 
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>Rating</label>
+              <star-rating value="{{viewData.rating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                size="24px" readonly="true"></star-rating>
+            </div>
+            <div class="req-item">
+              <label>Comments</label>
+              <span>{{viewData.comment}}</span>
+            </div>
+          </div> 
+
+          <h5>Payment Details</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>Service Fee</label>
+              <span>${{viewData.serviceFee}}</span>
+            </div>
+            <div class="req-item">
+              <label>Tax</label>
+              <span>$0</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>Discount</label>
+              <span>${{viewData.discountAmount}}</span>
+            </div>
+            <div class="req-item">
+              <label>Sub-Total Fee</label>
+              <span>${{viewData.subTotalAmount}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>Admin Fee</label>
+              <span>${{viewData.adminFee}}</span>
+            </div>
+            <div class="req-item">
+              <label>Total Paid Amount</label>
+              <span>${{viewData.totalAmount}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #acceptRefundTemplate>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">Accept Refund Request</h2>       
+        <button type="button" class="close" aria-label="Close" (click)="closeModal2()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+  
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">          
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>To</label>             
+              <span>{{viewData.celebrity.fname_en}}</span>
+            </div>
+            <div class="req-item">
+              <label>From</label>             
+              <span>{{viewData.fan.fname_en}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>Total Amount</label>
+              <span>${{viewData.totalAmount }}</span>
+            </div>         
+          </div>
+
+          <div class="two-btn-group mt-3 text-right">
+            
+            <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal2()">Cancel</button>
+            <button type="button" class="project-btn-1 " (click)="acceptRefundRequest(viewData)">Accept</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #rejectTemplate>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">Reject Request</h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="w-100">
+              <label>Are you sure?</label>
+              <span>Do you really want to reject this request?</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="w-100">
+              <textarea [(ngModel)]="reject_reason" required></textarea>
+              <p *ngIf="reasornError == true">Please enter the reject reason</p>
+            </div>
+          </div>
+          <div class="two-btn-group mt-3 text-right">
+            
+            <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">Cancel</button>
+            <button type="button" class="project-btn-1  " (click)="rejectRefundRequest(itemValue)">Ok</button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  
+  <ng-template #sendRequestTocelebrity>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="closeModal2()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="req-item">
+              <label>Are you sure?</label>
+              <span>Do you really want to send request to celebrity?</span>
+            </div>
+          </div> 
+          
+          <div class="two-btn-group mt-3">
+            <button type="button" class="project-btn-1 project-btn-secondary-color " (click)="requestToCelebrity(viewData)">Ok</button>
+            <button type="button" class="project-btn-1" (click)="closeModal2()">Cancel</button>
+          </div>
+  
+        </div>
+      </div>
+    </div>   
+  </ng-template>

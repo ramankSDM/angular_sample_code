@@ -1,0 +1,201 @@
+<div class="db-hdd-1">
+  <h2>Promotions</h2>
+</div>
+
+<div class="search-and-btn-top">
+  <div class="row custom-rw-btn-search-bottom ">
+    <div class="col-md-4 col-lg-4">
+      <label class="pro-lbl-one">Search By :</label>
+      <div class="custom-search-form">
+        <input class="form-control pro-input-des" placeholder="Search..." type="text" [(ngModel)]="searchKey">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="getAll()">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+
+    </div>
+    <div class="col-md-4 col-lg-4 mt-md-0 mt-2">
+      <label class="pro-lbl-one">Filter By :</label>
+      <select class="form-control pro-input-des album-drop-down" [(ngModel)]="filterStatus" (change)="filterRecords()">
+        <option value="" selected>All</option>
+        <option value="activated">Activated</option>
+        <option value="deactivated">Deactivated</option>
+      </select>
+    </div>
+    <div class="col-md-4 col-lg-4 mt-md-0 mt-3 text-right text-md-left">
+      <button routerLink="add" class="project-btn-1">Add New</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="bx-shadow-white mt-4 mt-md-5">
+  <div class="bx-shadow-hdd p-a-15">
+    <h3>Listing</h3>
+  </div>
+  <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+    <p>No Record Found</p>
+  </div>
+
+  <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+    <div class="custom-table-outer">
+      <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="rowsOnPage">
+        <thead>
+          <tr>
+            <th class="text-center">
+              Status
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="title_en" (click)="sortBy('title_en')">Title EN<i class="fa fa-sort"
+                  aria-hidden="true" *ngIf="sortKey !== 'title_en'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="title_ar" (click)="sortBy('title_ar')">Title Arabic <i class="fa fa-sort"
+                  aria-hidden="true" *ngIf="sortKey !== 'title_ar'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="description_en" (click)="sortBy('description_en')">Description En <i
+                  class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'description_en'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="description_ar" (click)="sortBy('description_ar')">Description Arabic <i
+                  class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'description_ar'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              Discount Type
+            </th>
+            <th class="text-center">
+              Discount
+            </th>
+            <th class="text-center">
+              Code
+            </th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr *ngFor="let item of sv.data; let i = index">
+            <td class="text-center">
+              <ui-switch class="project-cust-switch" (valueChange)="changeStatus(
+                  item, $event)" color="#4be250" defaultBgColor="#f16565" checkedLabel="Activated"
+                [checked]="item.status" size="small" uncheckedLabel="Deactivated"
+                [tooltip]="item.status ? 'Deactivate' : 'Activate'">
+              </ui-switch>
+            </td>
+            <td class="text-center">
+              {{ item.title_en }}
+            </td>
+            <td class="text-center">
+              {{ item.title_ar }}
+            </td>
+            <td class="text-center">
+              {{ item.description_en }}
+            </td>
+            <td class="text-center">
+              {{ item.description_ar}}
+            </td>
+            <td class="text-center">
+              {{ item.discountType}}
+            </td>
+            <td class="text-center">
+              {{ item.discount }} {{(item.discountType == 'Fixed') ? 'UAE' : '%'}}
+            </td>
+            <td class="text-center">
+              {{ item.code }}
+            </td>
+            <td class="text-center">
+              <div class="cust-table-act-btns">               
+                <span class="table-act-btn" tooltip="Edit"><i class="fas fa-edit"
+                    [routerLink]="['update/'+item._id]"></i></span>
+                <span class="table-act-btn" tooltip="Delete" (click)="openModal(template, item,'delete')"><i
+                    class="fas fa-trash"></i></span>
+                <span class="table-act-btn" tooltip="Share" (click)="openModal(template1, item,'share')"><i
+                    class="fas fa-share"></i></span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+       
+      </table>
+    </div>
+    <div class="custom-pagination-outer pb-md-5 pb-4">
+      <pagination [totalItems]="totalRecords" [itemsPerPage]="rowsOnPage" (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Delete Record</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+  <div class="modal-body text-center del-popup" style="display: block">
+   <div class="delete-content">
+    <h5>Are you sure?</h5>
+    <p>Do you really want to delete this record? </p>
+    <div class="two-btn-group mt-3">
+      
+      <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">Cancel</button>
+      <button type="button" class="project-btn-1  " (click)="delete()">Ok</button>
+    </div>
+  </div>
+  </div>
+  </div>
+</ng-template>
+
+<ng-template #template1>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Send Request</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+  <div class="modal-body text-center del-popup"  data-backdrop="static" data-keyboard="false">
+    
+    <div class="request-content">
+    <p>Send request to fans for promocode</p>
+    <div class="two-btn-group mt-3 select-fan"  >
+      <p-multiSelect
+          [options]="unassignedList"
+          [showToggleAll]="true"
+          [panelStyle]="{ minWidth: '20em' }"
+          [virtualScroll]="true"
+          [itemSize]="34"
+          [filter]="true"
+          [(ngModel)]="tempArr"
+          defaultLabel="Select Fan"
+          maxSelectedLabels="1"
+          
+          class="multiselect-full"
+        ></p-multiSelect> 
+       <div style="word-wrap: break-word; margin-top:50px">
+        <p *ngIf="unassignedList && unassignedList.length != 0" style="font-weight: bold; text-align: center;">Fan Who has not assigned the promo code</p>
+        <div *ngIf="unassignedList && unassignedList.length == 0" style="font-weight: bold; text-align: center;">
+          <p>This coupon has been assigned to every fan</p>
+
+        </div>
+        <div>
+          <span *ngFor="let item of unassignedList">
+            {{item.label}},
+          </span>
+        </div>
+
+      </div>
+      
+    </div>
+    <div class="two-btn-group mt-3">
+      
+      <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">Cancel</button>
+      <button type="button" class="project-btn-1  " (click)="assignPromo()">Ok</button>
+    </div>
+  </div>
+</div>
+</div>
+</ng-template>

@@ -1,0 +1,36 @@
+@import "../my-bookings.component.scss";
+.brek-text{
+    word-break: break-all;
+}
+
+.button_style{
+    right: 0;
+    bottom: 0;
+    border: 0;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #D6006D;
+    color: white;
+    font-weight: bolder;
+    margin-left: auto;
+}
+
+.rounded-circle{ object-fit: cover;}
+.blockedFan{
+    fill:#D6006D
+}
+.req-row label {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(48, 17, 82, 0.5);
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.req-row span {
+    font-family: "Myriad Pro Regular";
+    font-size: 16px;
+    color: #D6006D;
+}

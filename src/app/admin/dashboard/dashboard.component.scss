@@ -1,0 +1,186 @@
+@import '../../../assets/scss/custom-variables.scss';
+.pointer{
+    cursor: pointer;
+}
+.db-top-4box{color: #fff;margin-bottom: 10px;
+    h4{font-size:$font-size-level-1 - 2px;font-weight: 400; margin: 7px 0 7px 0;}
+    h2{font-size:$font-size-level-2;}
+    i{font-size: 18px; 
+    span{ padding-left: 5px;font-family: 'Myriad Pro Regular';}
+    }
+    .bx-shadow-white{position: relative;z-index: 3;
+    &::after {background: #fff;width: 120px;height: 120px;content: "";border-radius: 50%;position: absolute;bottom: 50px;right: -30px;opacity: 0.1;z-index: 1;}
+}
+.db-top-color-bx-1{/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#c692f6+0,a051ff+100 */
+    background: #D6006D; /* Old browsers */
+    background: -moz-linear-gradient(left,  #D6006D 0%, #a051ff 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #D6006D 0%,#a051ff 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #D6006D 0%,#a051ff 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#c692f6', endColorstr='#a051ff',GradientType=1 ); /* IE6-9 */}
+.db-top-color-bx-2{/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#6aa4e3+0,5a5aec+100 */
+    background: #6aa4e3; /* Old browsers */
+    background: -moz-linear-gradient(left,  #1C00B9 0%, #5a5aec 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #1C00B9 0%,#5a5aec 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #1C00B9 0%,#5a5aec 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6aa4e3', endColorstr='#5a5aec',GradientType=1 ); /* IE6-9 */}
+.db-top-color-bx-3{/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffb584+0,ff8a99+100 */
+    background: #ffb584; /* Old browsers */
+    background: -moz-linear-gradient(left,  #301152 0%, #923abc 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #301152 0%,#923abc 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  #301152 0%,#923abc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb584', endColorstr='#ff8a99',GradientType=1 ); /* IE6-9 */}
+.db-top-color-bx-4{/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffb584+0,ff8a99+100 */
+    background: #ffb584; /* Old browsers */
+    background: -moz-linear-gradient(left,  #28a745 0%, #9E9D24 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  #28a745 0%, #9E9D24 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, #28a745 0%, #9E9D24 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb584', endColorstr='#ff8a99',GradientType=1 ); /* IE6-9 */}
+.db-top-color-bx-5{/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffb584+0,ff8a99+100 */
+    background: #ffb584; /* Old browsers */
+    background: -moz-linear-gradient(to right, #00838F 0%, #26C6DA 100%);
+    background: -webkit-linear-gradient(to right, #00838F 0%, #26C6DA 100%);
+    background: linear-gradient(to right, #00838F 0%, #26C6DA 100%);
+}
+.db-top-color-bx-6{/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffb584+0,ff8a99+100 */
+    background: #ffb584; /* Old browsers */
+    background: -moz-linear-gradient(to right, #D84315 0%, #FF5722 100%);
+    background: -webkit-linear-gradient(to right, #D84315 0%, #FF5722 100%);
+    background: linear-gradient(to right, #D84315 0%, #FF5722 100%);
+    }
+    .db-top-color-bx-7{/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffb584+0,ff8a99+100 */
+        background: #ffb584; /* Old browsers */
+        background: -moz-linear-gradient(to right, #009688 0%, #26A69A 100%);
+        background: -webkit-linear-gradient(to right, #009688 0%, #26A69A 100%);
+        background: linear-gradient(to right, #009688 0%, #26A69A 100%);
+    }
+    .db-top-color-bx-8{/* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffb584+0,ff8a99+100 */
+        background: #ffb584; /* Old browsers */
+        background: -moz-linear-gradient(to right, #37474F 0%, #546e7a 100%);
+        background: -webkit-linear-gradient(to right, #37474F 0%, #546e7a 100%);
+        background: linear-gradient(to right, #37474F 0%, #546e7a 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb584', endColorstr='#ff8a99',GradientType=1 ); /* IE6-9 */}
+                   
+    
+    
+    @include breakpoint(mobile){
+        .bx-shadow-white{margin-bottom: 15px;}
+    }
+}
+
+
+.user-img-hdd-list{
+    li{position: relative;padding: 15px 15px 15px 65px;
+        h4{font-size: $font-size-level-1 - 5px;}
+        &+li{border-top: 1px solid $border-color;}
+    }
+    figure{@include HW(35px);overflow: hidden;@include border-radius(50%);left: 15px;top:15px; position: absolute;
+        img{min-width: 100%;height: 100%;}
+    }
+}
+.stats-row {
+    display: flex;
+    padding: 20px 0 10px 0;
+    justify-content: space-between;
+    .stats-box {
+        flex: 1;
+        background: #f2f2f3;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 20px 20px 0 0;
+        position: relative;
+        min-height: 120px;
+        &::after {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 5px;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            bottom: 0;
+            background: #301152;
+        }
+        .stats-ico {
+            height: 100%;
+            width: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: #d7d0de;
+            border-radius: 20px 0 0 0;
+            svg {
+                height: 60px;
+                width: 60px;
+            }
+            span {
+                display: block;
+                color: #301152;
+                font-size: 14px;
+                margin-top: 5px;
+                font-weight: 600;
+            }
+        }
+        .stats-num {
+            flex: 1;
+            display: flex;
+            padding-left: 20px;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+            white-space: nowrap;
+            .num-box {
+                flex: 1;
+                color: #1C00B9;
+                font-size: 24px;
+                font-weight: bold;
+                padding: 0 15px;
+                span {
+                    display: block;
+                    color: #301152;
+                    font-size: 14px;
+                    margin-top: 0px;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+}
+.bookingLink{
+    cursor: pointer;
+}
+.goBtn{
+    margin-top: 25px;
+}
+.count-bookings{font-size: 1rem ;}
+.row-chart{ margin-top: 2rem;}
+
+@media(max-width:1400px){
+    .db-top-4box i{font-size: 1rem ;} 
+    .db-top-4box h4{ font-size: 1rem;}
+    .db-top-4box h2{ font-size: 1.2rem;}
+}
+
+@media(max-width:1280px){
+    .stats-row .stats-box .stats-ico{width: 130px;padding: 10px;}
+    .stats-row .stats-box .stats-ico svg, .stats-row .stats-box .stats-ico img{ width:40px; height: 40px;}
+    .stats-row .stats-box .stats-num .num-box{font-size: 18px;}
+    .stats-row .stats-box .stats-num .num-box span{ font-size: 13px;}
+    
+}
+@media(max-width:1199px){
+    .stats-row .stats-box {overflow: hidden; min-height: 60px;}
+    .stats-row .stats-box .stats-ico{width: 100px;padding: 10px;}
+    .stats-row .stats-box .stats-ico svg, .stats-row .stats-box .stats-ico img{ width:25px; height: 25px;}
+    .stats-row .stats-box .stats-num{ overflow-x: scroll;}
+    .stats-row .stats-box .stats-num .num-box{font-size: 16px;}
+    .stats-row .stats-box .stats-num .num-box span{ font-size: 12px;}
+   
+}
+@media(max-width:767px){
+    .db-top-4box i{font-size: 0.785rem ;  } 
+    .db-top-4box h4{ font-size:  1rem;}
+    .db-top-4box h2{ font-size: 1rem;}
+    .db-hdd-1 h2, .db-hdd-1 h3, .row-chart h2{ font-size: 1.5rem;}
+}

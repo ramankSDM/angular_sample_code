@@ -1,0 +1,138 @@
+<div class="db-hdd-1">
+    <h2>Blocked Fans</h2>
+  </div>
+  
+  <div class="search-and-btn-top">
+    <div class="row custom-rw-btn-search-bottom ">
+      <div class="col-md-4 col-lg-5">
+        <label class="pro-lbl-one">Search By :</label>
+        <div class="custom-search-form">
+          <input class="form-control pro-input-des" placeholder="Search..." type="text" [(ngModel)]="searchKey">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" (click)="getAll()">
+              <i class="fa fa-search"></i>
+            </button>
+          </span>
+        </div>  
+      </div>    
+    </div>
+  
+  </div>
+  
+  <div class="bx-shadow-white mt-4 mt-md-5">
+    <div class="bx-shadow-hdd p-a-15">
+      <h3>Listing</h3>
+    </div>
+    <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dealersList && dealersList.length == 0">
+      <p>No Record Found</p>
+    </div>
+  
+    <div class="bx-shadow-body" *ngIf="dealersList && dealersList.length != 0">
+      <div class="custom-table-outer">
+        <table class="table" [svData]="dealersList" #sv="svDataTable" [svRowsOnPage]="rowsOnPage">
+          <thead>
+            <tr>
+              <th class="text-center">
+                Status
+              </th>
+              <th class="text-center">
+                Fan Image
+              </th>
+              <th class="text-center">
+                <sv-default-sorter by="fname_en" (click)="sortBy('fname_en')">First Name<i class="fa fa-sort" aria-hidden="true"
+                    *ngIf="sortKey !== 'fname'"></i></sv-default-sorter>
+              </th>
+              <th class="text-center">
+                <sv-default-sorter by="lname_en" (click)="sortBy('lname_en')">Last Name <i class="fa fa-sort" aria-hidden="true"
+                    *ngIf="sortKey !== 'lname_en'"></i></sv-default-sorter>
+              </th>
+              <th class="text-center">
+                <sv-default-sorter by="level" (click)="sortBy('email')">Email <i class="fa fa-sort" aria-hidden="true"
+                    *ngIf="sortKey !== 'email'"></i></sv-default-sorter>
+              </th>
+              <th class="text-center">
+                Flagged Status
+              </th>
+              <th class="text-center">
+                Blocked Reason
+              </th>
+              <th class="text-center">
+                Blocked By
+              </th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr *ngFor="let item of sv.data; let i = index">
+              <td class="text-center">
+                <ui-switch class="project-cust-switch" (valueChange)="changeStatus(
+                  item, $event)" color="#4be250" defaultBgColor="#f16565" checkedLabel="Activated"
+                  [checked]="item.fans.status" size="small" uncheckedLabel="Deactivated"
+                  [tooltip]="item.fans.status ? 'Deactivate' : 'Activate'">
+                </ui-switch>
+              </td>
+              <td>
+                <figure>
+                    <img *ngIf="item.fans.image == undefined || item.fans.image == ''" src="assets/img/dummyimg.png" alt=""  class="rounded-circle"/>
+                    <img *ngIf="item.fans.image != ''" [src]="item.fans.image" alt="" class="rounded-circle" />
+                  </figure>
+            </td>
+              <td class="text-center" (click)="openModal(viewModal,item.fans._id)  ">
+                
+                {{ item.fans.fname_en }} 
+              </td>
+              <td class="text-center">
+                {{ item.fans.lname_en }}
+              </td>
+              <td class="text-center">
+                {{ item.fans.email }}
+              </td>
+              <td>
+                {{ item.flag }}
+              </td>
+              <td class="text-center">
+                {{ item.block_reason}}
+              </td>  
+              <td class="text-center">
+                <div class="cust-table-act-btns">
+                  <span class="table-act-btn" tooltip="View" (click)="openModal(viewModal,item.fans._id)"><i
+                      class="fas fa-eye"></i></span>
+
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+      <div class="custom-pagination-outer pb-md-5 pb-4">
+        <pagination [totalItems]="totalRecords" [itemsPerPage]="rowsOnPage" (pageChanged)="pageChanged($event)"></pagination>
+      </div>
+    </div>
+  </div>
+  <ng-template #viewModal>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">Fan Blocked By Celebrity</h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+  
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">         
+  
+          <div class="req-row"  *ngFor="let dealers of itemValue; let i = index">
+            <div class="req-item">
+              <label>Celebrity Name</label>
+              <span>{{dealers.celebrity_id.fname_en}} {{dealers.celebrity_id.lname_en}}</span>
+            </div>
+            <div class="req-item">
+              <label>Reason</label>
+              <span>{{dealers.block_reason}}</span>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>

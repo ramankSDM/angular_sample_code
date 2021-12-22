@@ -1,0 +1,29 @@
+<div class="edit-profile-page-outer">
+    <div class="">
+        <div class="db-hdd-2">
+            <h2>Services</h2>
+        </div>      
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="pro-lbl-one" for="form-control-2">Select Services</label>
+                <div  *ngIf ="formLoad">
+                    <form [formGroup]="questionForm" (ngSubmit)="submit(questionForm)">
+            
+                        <div formArrayName="questions">
+                            <div *ngFor="let question of questionForm.get('questions')['controls']; let i = index;"
+                                [formGroupName]="i">                               
+                                {{questions[questionForm.get('questions.' + i + '.questionNumber').value - 1]['name']}}
+                                <input type="checkbox" formControlName="question" (ngModelChange)="changeValidator($event, i)"/>
+                                <input type="text" formControlName="answer" appInputRestriction="integerOnly" maxlength="10"/>
+                                <input type="hidden" formControlName="_id" />
+                            </div>
+                        </div>
+                    
+                        <button type="submit" [disabled]="questionForm.invalid">Submit</button>
+                    
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,484 @@
+<ngx-spinner bdOpacity="0" bdColor="rgba(51,51,51,0)" size="medium" color="#261143" zIndex=99999 type="ball-clip-rotate"
+    [fullScreen]="true">
+    <p style="color: white;"></p>
+</ngx-spinner>
+
+<div class="modal-outer">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <img src="../../../assets/img/modal-close.svg">
+    </button>
+    <div class="modal-body">
+        <div class="service-modal-head">
+            <div class="service-modal-left">
+                <div class="celeb-head-img flex-shrink-0">
+                    <img [src]="dataList.image">
+                </div>
+                <div class="celeb-mask">
+                    <img src="../../../../assets/img/celeb-profile/celeb-mask.png">
+                </div>
+            </div>
+            <h1>{{"model_igt.igt_req" | translate}}<span *ngIf="selectedLang =='en'">{{dataList.fname_en}}
+                    {{dataList.lname_en}}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{dataList.fname_ar ? dataList.fname_ar:dataList.fname_en}}
+                    {{dataList.lname_ar ? dataList.lname_ar:dataList.lname_ar}}
+                </span>
+            </h1>
+            <img src="../../../../assets/img/service-type-i.svg" class="serv-type">
+        </div>
+
+        <div class="service-modal-content " *ngIf="isShowForm == true && isShowReview == false">
+            <form [formGroup]="frm" class="form-horizontal">
+                <div class="form-item">
+                    <label class="main-lbl">{{"model_igt.igt_type" | translate}}<span><img
+                                src="../../../../assets/img/info.svg"></span></label>
+                    <div class="serv-modal-radio form-row">
+                        <div class="form-group col-4">
+                            <input id="talentType3" type="radio" value="video" formControlName="talentType" checked
+                                (change)="changeIotType($event.target.value)">
+                            <label for="talentType3"><span>{{"model_igt.video" | translate}}</span></label>
+                        </div>
+                        <div class="form-group col-4">
+                            <input id="talentType4" type="radio" value="mp3" formControlName="talentType"
+                                (change)="changeIotType($event.target.value)">
+                            <label for="talentType4"><span>{{"model_igt.mp3" | translate}}</span></label>
+                        </div>
+                        <div class="form-group col-4">
+                            <input id="talentType5" type="radio" value="img" formControlName="talentType"
+                                (change)="changeIotType($event.target.value)">
+                            <label for="talentType5"><span>{{"model_igt.image" | translate}}</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="serv-row" *ngIf="iotType =='video'">
+                    <div class="form-item custom-form-item">
+                        <div class="upload-btn-wrapper">
+                            <div class="u-border"></div>
+                            <button class="u-btn">
+                                <img src="../../../../assets/img/video_image.png">
+                                {{"model_igt.upload_video" | translate}}
+                                <span>{{"model_igt.video_select" | translate}}</span>
+                            </button>
+                            <input type="file" name="file" (change)="onVideoUpload($event)" accept="video/*" />
+                        </div>
+                    </div>
+                </div>
+                <div class="serv-row" *ngIf="iotType =='mp3'">
+                    <div class="form-item custom-form-item">
+                        <div class="upload-btn-wrapper">
+                            <div class="u-border"></div>
+                            <button class="u-btn">
+                                <img src="../../../../assets/img/audio_imge.png">
+                                {{"model_igt.upload_mp3" | translate}}
+                                <span>{{"model_igt.select&Drop" | translate}}</span>
+                            </button>
+                            <input type="file" name="file" (change)="onVideoUpload($event)" accept="video/*" />
+                        </div>
+                    </div>
+                </div>
+                <div class="serv-row" *ngIf="iotType =='img'">
+                    <div class="form-item custom-form-item">
+                        <div class="upload-btn-wrapper">
+                            <div class="u-border"></div>
+                            <button class="u-btn">
+                                <img src="../../../../assets/img/upload_image.png">
+                                {{"model_igt.upload_image" | translate}}
+                                <span>{{"model_igt.select&Drop" | translate}}</span>
+                            </button>
+                            <input type="file" multiple name="file" (change)="onUpload($event)" accept="image/*" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="serv-row">
+                    <div class="form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">{{"model_igt.talent_category" | translate}}<span><img
+                                        src="../../../../assets/img/info.svg"></span></label>
+                            <div class="selectbox">
+                                <select formControlName="talentCategory">
+                                    <option value="" disabled selected hidden>Select Talent</option>
+                                    <option [value]="data.talent" *ngFor="let data of igtData">{{data.talent}}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                        <div *ngIf="frm.controls['talentCategory'].hasError('required') && isSubmited"
+                            class="error-div help-block requiredClass">
+                            {{"request_header.talent_req" | translate}}
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <label class="main-lbl">{{"model_igt.igt_lang" | translate}}<span><img
+                                    src="../../../../assets/img/info.svg"></span></label>
+                        <div class="serv-modal-radio" *ngIf="dataList.lang != 'both'; else both">
+                            <div class="form-group" *ngIf="dataList.lang == 'en'">
+                                <input id="role3" type="radio" value="en" formControlName="language"
+                                    [attr.disabled]="language ? 'ar':null">
+                                <label for="role3"><span>{{"English" | translate}}</span></label>
+                            </div>
+                            <div class="form-group" *ngIf="dataList.lang == 'ar'">
+                                <input id="role4" type="radio" value="ar" formControlName="language"
+                                    [attr.disabled]="language ? 'en':null">
+                                <label for="role4"><span>{{"Arabic" |translate}}</span></label>
+                            </div>
+                        </div>
+                        <ng-template #both>
+                            <div class="serv-modal-radio">
+                                <div class="form-group">
+                                    <input id="role4" type="radio" value="ar" formControlName="language">
+                                    <label for="role4"><span>{{"Arabic" |translate}}</span></label>
+                                </div>
+                                <div class="form-group">
+                                    <input id="role3" type="radio" value="en" formControlName="language">
+                                    <label for="role3"><span>{{"English" | translate}}</span></label>
+                                </div>
+                            </div>
+                        </ng-template>
+                        <div *ngIf="frm.controls['language'].hasError('required') && isSubmited"
+                            class="error-div help-block requiredClass">
+                            {{"Please select Language" | translate }}
+                        </div>
+                    </div>
+                </div>
+                <div class="serv-row">
+                    <div class="form-item">
+                        <!-- <div class="form-group">
+                                <label>{{"common_model.occasion_date" | translate}} </label>
+                                <p-calendar class="form-control pro-input-des dob-new-cal" formControlName="occasionDate"
+                                    placeholder="Select expire date" [minDate]="minDate" [maxDate]="maxDate"
+                                    [showIcon]="true" >
+                                </p-calendar>
+                                <div *ngIf="frm.controls['occasionDate'].hasError('required') && isSubmited"
+                                    class="error-div help-block requiredClass">
+                                    {{"common_model.required_error" | translate}}
+                                </div>
+                            </div> -->
+                    </div>
+                    <div class="form-item t-switch">
+                        <label class="main-lbl">{{extensionMsg.msg}}<span><img
+                                    src="../../../../assets/img/info.svg"></span></label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="switch1" formControlName="isExtended" /><label
+                                for="switch1">Toggle</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="serv-row">
+                    <div class="form-item custom-form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">{{"common_model.msg_instruction" | translate}}<span
+                                    *ngIf="selectedLang =='en'">{{dataList.fname_en}} {{dataList.lname_en}}</span>
+                                <span *ngIf="selectedLang =='ar'">
+                                    {{dataList.fname_ar ? dataList.fname_ar:dataList.fname_en}}
+                                    {{dataList.lname_ar ? dataList.lname_ar:dataList.lname_ar}}
+                                </span>
+                                <span><img src="../../../../assets/img/info.svg"></span></label>
+                            <textarea placeholder="{{instructionMsg.instmg | translate}}" formControlName="instruction"
+                                maxlength="1000"></textarea>
+                            <span class="txtarea-span">
+                                <!-- <span *ngIf="selectedLang =='en'">{{dataList.fname_en}} {{dataList.lname_en}}</span>
+                                    <span *ngIf="selectedLang =='ar'">
+                                        {{dataList.fname_ar ? dataList.fname_ar:dataList.fname_en}}   
+                                        {{dataList.lname_ar ? dataList.lname_ar:dataList.lname_ar}}
+                                    </span>  -->
+                                <span *ngIf="selectedLang =='en'">{{dataList.fname_en}} {{dataList.lname_en}}</span>
+                                <span *ngIf="selectedLang =='ar'">
+                                    {{dataList.fname_ar ? dataList.fname_ar:dataList.fname_en}}
+                                    {{dataList.lname_ar ? dataList.lname_ar:dataList.lname_ar}}
+                                </span> {{"common_model.speak_only" | translate}} <span
+                                    *ngIf="dataList.lang == 'ar'">arabic</span> <span
+                                    *ngIf="dataList.lang == 'en'">english</span>
+                                {{"common_model.write_inst" | translate}} <span
+                                    *ngIf="dataList.lang == 'ar'">arabic</span> <span
+                                    *ngIf="dataList.lang == 'en'">english</span></span>
+                            <div *ngIf="frm.controls['instruction'].hasError('required') && isSubmited"
+                                class="error-div help-block requiredClass">
+                                {{"common_model.inst_required" | translate}}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="serv-row">
+                    <div class="form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">{{"common_model.your_email" | translate}}<span><img
+                                        src="../../../../assets/img/info.svg"></span></label>
+                            <input type="text" placeholder="" formControlName="email" maxlength="150"
+                                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,5}$">
+                            <div *ngIf="frm.controls['email'].hasError('required') && isSubmited"
+                                class="error-div help-block requiredClass">
+                                {{"common_model.error_emailreq" | translate}}
+                            </div>
+                            <div *ngIf="frm.controls['email'].hasError('email')  && frm.controls['email'].value != ''"
+                                class="error-div help-block requiredClass">
+                                {{"Invalid Email"}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-item t-switch">
+                        <label class="main-lbl">{{"common_model.private_video" | translate}}<span><img
+                                    src="../../../../assets/img/info.svg"></span></label>
+                        <div class="toggle-switch">
+                            <input type="checkbox" id="switch" formControlName="isPublic" /><label
+                                for="switch">Toggle</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pay-info">
+                    <a href="#" class="promo-trigger"
+                        (click)="showCoupon()">{{"common_model.promo_code" | translate}}</a>
+                    <div *ngIf="applyCouponDiv == 'true'">
+                        <div class="couponList row">
+                            <h4 class="col-md-12">{{"common_model.available_coupon" | translate}} </h4>
+                            <div class="coupons" *ngIf="applyCodeButton == 'false'">
+                                <span *ngFor="let item of couponList; let i = index">
+                                    <!--(click)="applyCode(item.promocodes[0].code)"-->
+                                    <a class="apply-coupon">
+                                        {{ item.promocodes[0].code }} </a>
+                                </span>
+                                <input type="text" name="couponcode" class="form-control" style="margin: 0 2px 0 1rem;"
+                                    formControlName="promoCode">
+                                <button (click)="applyCode(frm.controls.promoCode.value)"
+                                    class="button btn btn-primary">{{"buttons.apply" | translate}}</button>
+                            </div>
+
+                            <div class="coupons" *ngIf="applyCodeButton == 'true'">
+                                <span *ngFor="let item of couponList; let i = index">
+                                    <span *ngIf="item.promocodes[0].code == appliedCode" class="applied-coupon">
+                                        {{ item.promocodes[0].code }} </span>
+                                    <span *ngIf="item.promocodes[0].code != appliedCode" class="disabled-code">
+                                        {{ item.promocodes[0].code }} </span>
+                                    <button *ngIf="item.promocodes[0].code == appliedCode" type="button"
+                                        (click)="removeCode(item.promocodes[0].code)" class="remove-coupon">
+                                        <img src="../../../assets/img/remove.png">
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>{{"common_model.what_heppenes_msg" | translate}}<span><img
+                                src="../../../../assets/img/info.svg"></span></p>
+                    <p>
+                        {{"common_model.term_condition" | translate}} <a
+                            href="">{{"common_model.termOfService" | translate}}</a> and
+                        <a href="">{{"footer.privacy_link" | translate}}</a>
+                        {{"common_model.termOfServie2" | translate}}
+                    </p>
+                    <div class="serv-row">
+                        <div class="form-item custom-padd">
+                            <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox"
+                                formControlName="stayUpdated">
+                            <label for="styled-checkbox-2">{{"common_model.aggrement_msg" | translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="pay-action">
+                        <button (click)="showReview()" type="submit">{{"buttons.confirm" | translate}}</button>
+                        <span>
+                            <img src="../../../../assets/img/secure-payment.svg">
+                            {{"common_model.ssl_msg" | translate}}
+                        </span>
+                    </div>
+                    <!-- <div class="serv-modal-offer">
+                        GIFT FREE STARSIN POINTS TO A FRIEND!
+                        <span><img src="../../../../assets/img/info.svg"></span>
+                    </div>
+                    <div class="serv-modal-tips">
+                        <h4>Tips for Best Results</h4>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        </p>
+                    </div> -->
+                </div>
+
+            </form>
+        </div>
+
+        <div class="service-modal-content reviewForm" *ngIf="isShowReview == true">
+            <form [formGroup]="frm" class="form-horizontal">
+                <div class="form-item">
+                    <label class="main-lbl">{{"model_igt.igt_type" | translate}}<span><img
+                                src="../../../../assets/img/info.svg"></span></label>
+                    {{ reviewData.talentType }}
+                </div>
+
+                <div class="serv-row">
+                    <div class="form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">{{"model_igt.talent_category" | translate}}<span><img
+                                        src="../../../../assets/img/info.svg"></span></label>
+                            {{ reviewData.talentCategory }}
+
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="main-lbl">{{"model_igt.igt_lang" | translate}}<span><img
+                                    src="../../../../assets/img/info.svg"></span></label>
+                        <!-- {{ reviewData.language }}      -->
+                        <span *ngIf="reviewData.language == 'ar'">Arabic</span>
+                        <span *ngIf="reviewData.language == 'en'">English</span>
+                    </div>
+                </div>
+                <div class="serv-row">
+                    <div class="form-item">
+                        <!-- <div class="form-group">
+                                <label class="main-lbl">{{"common_model.occasion_date" | translate}} </label>
+                                {{ reviewData.occasionDate | date }}                                
+                            </div> -->
+                    </div>
+                    <div class="form-item">
+                        <label class="main-lbl">{{extensionMsg.msg}}<span><img
+                                    src="../../../../assets/img/info.svg"></span></label>
+                        {{ reviewData.isExtended | yesNo }}
+                    </div>
+                </div>
+                <!-- this is the row for the payment summary -->
+                <div class="serv-row">
+                    <div class="form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">Sub Total Amount</label>
+                            ${{reviewData.subTotalAmount }} USD
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">Discount Amount</label>
+                            ${{reviewData.discountAmount }} USD
+                        </div>
+
+                    </div>
+                </div>
+                <div class="serv-row">
+                    <div class="form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">Total Amount To Pay</label>
+                            ${{reviewData.totalAmount }} USD
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">Service Fee</label>
+                            ${{reviewData.serviceFee }} USD
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- this is the end of the payment sunmmary -->
+                <div class="serv-row">
+                    <div class="form-item custom-form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">
+                                {{"common_model.msg_instruction" | translate}}<span
+                                    *ngIf="selectedLang =='en'">{{dataList.fname_en}} {{dataList.lname_en}}</span>
+                                <span *ngIf="selectedLang =='ar'">
+                                    {{dataList.fname_ar ? dataList.fname_ar:dataList.fname_en}}
+                                    {{dataList.lname_ar ? dataList.lname_ar:dataList.lname_ar}}
+                                </span>
+                                <span><img src="../../../../assets/img/info.svg"></span></label>
+                            {{ reviewData.instruction }}
+                        </div>
+                    </div>
+                </div>
+                <div class="serv-row">
+                    <div class="form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">{{"common_model.your_email" | translate}}<span><img
+                                        src="../../../../assets/img/info.svg"></span></label>
+                            {{ reviewData.email }}
+                        </div>
+                    </div>
+                    <div class="form-item">
+                        <label class="main-lbl">{{"common_model.private_video" | translate}}<span><img
+                                    src="../../../../assets/img/info.svg"></span></label>
+                        {{ reviewData.isPublic | yesNo }}
+                    </div>
+                </div>
+
+                <div class="pay-info">
+                    <h2> {{"payment.heading" | translate}} </h2>
+                    <p> {{"payment.description" | translate}} <span> <img src="../../../../assets/img/info.svg"> </span>
+                    </p>
+
+
+                    <div class="serv-row">
+                        <div class="form-item">
+                            <label class="main-lbl">To <span><img src="../../../../assets/img/info.svg"></span></label>
+                            <div *ngIf="(fanDetail)">
+                                <div
+                                    *ngIf="(fanDetail.available_wallet_points) && fanDetail.available_wallet_points > 0">
+                                    <div class="serv-row serv-row-adj points-row">
+                                        <div class="form-item">
+                                            <label>{{"common_model.available_point" | translate}} $
+                                                {{ fanDetail.available_wallet_points }} </label>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" formControlName="available_wallet_points">
+                                    <div class="serv-row serv-row-adj points-row-div">
+                                        <div class="serv-row serv-row-adj points-row-div">
+                                            <input class="styled-checkbox" id="styled-checkbox-3" type="checkbox"
+                                                (change)="walletChecked()" formControlName="use_points">
+                                            <label for="styled-checkbox-3">{{"common_model.use_wallet_msg" | translate}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="showCardDetail && cardCharges > 0">
+                        <label for="pendingBalance"><span>Pending Balance: </span> $ {{ cardCharges }} </label>
+                        <div *ngFor="let item of cardDetail; let i = index;">
+                            <div class="form-item input-item-list">
+                                <label class="item-row">
+                                    <span class="radio-cell d-inline-flex position-relative">
+                                        <input type="radio" (click)="existingCardClick()" formControlName="card"
+                                            id="radio{{i}}" [value]=item.id class="position-absolute">
+                                        <span
+                                            class="icon d-inline-flex align-items-center justify-content-center rounded-circle">
+                                            <span class="rounded-circle"></span>
+                                        </span>
+                                    </span>
+                                    <span> {{ "**** **** "+ item.last4 || '?'}} </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-item input-item-list" *ngIf="cardDetail.length > 0">
+                            <label class="item-row">
+                                <span class="radio-cell d-inline-flex position-relative">
+                                    <input type="radio" (click)="newCardClick()" formControlName="newCard"
+                                        class="position-absolute" for="new-card">
+                                    <span
+                                        class="icon d-inline-flex align-items-center justify-content-center rounded-circle">
+                                        <span class="rounded-circle"></span>
+                                    </span>
+                                </span>
+                                <span class="main-lbl mb-0" id="new-card">New Card</span>
+                            </label>
+                        </div>
+                        <div *ngIf="newCard" class="payment-card-blc">
+                            <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions">
+                            </ngx-stripe-card>
+                        </div>
+                    </div>
+
+                    <div class="pay-action">
+                        <button type="button" (click)="back()">{{"buttons.back" | translate}}</button>&nbsp;
+                        <button type="submit" (click)="save()">{{"buttons.make_payment" | translate}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>

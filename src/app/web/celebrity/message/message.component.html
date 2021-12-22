@@ -1,0 +1,155 @@
+<div class="user-inner-main">
+    <div class="inner-head">
+        <h2>{{"celebrity_detail.fans_msg" | translate}}</h2>
+        <div class="inner-head-rt">            
+        </div>
+    </div>
+    <div class="inner-body">
+        <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+            <p>{{"msg_notfound" | translate}}</p>
+        </div>
+        <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+            <div class="custom-table-outer">
+                <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="10">
+                    <thead>
+                        <tr>
+                            <th class="text-center">
+                              {{"profile.first_name" | translate}}
+                            </th>
+                            <th class="text-center">
+                                {{"profile.last_name" | translate}}
+                            </th>
+                            <th class="text-center">
+                                {{"contact_admin.message" | translate}}
+
+                            </th>                           
+                            <th class="text-center">{{"request_header.action" | translate}}</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr *ngFor="let item of sv.data; let i = index">
+                            <td class="text-center">
+                                <!-- {{ item.fans[0].fname_en }} -->
+                <span *ngIf="selectedLang =='en'">{{ item.fans[0].fname_en }}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{item.fans[0].fname_ar  ? item.fans[0].fname_ar :item.fans[0].fname_en }}
+                </span>
+                               
+                            </td>
+                            <td class="text-center">
+                                <!-- {{ item.fans[0].lname_en }} -->
+
+                 <span *ngIf="selectedLang =='en'">{{ item.fans[0].lname_en }}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{item.fans[0].lname_ar ? item.fans[0].lname_ar : item.fans[0].lname_ar}}
+                </span>
+
+                            </td>
+                            <td class="text-center">
+                                {{ item.message }}
+                            </td>
+                            <td class="text-center">
+                                <div class="cust-table-act-btns">
+                                    <span class="table-act-btn" *ngIf="item.isPublish == false"
+                                        tooltip="Publish Message" (click)="publishMessage(item._id,true)">
+                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                            viewBox="0 0 185 185" style="enable-background:new 0 0 185 185;"
+                                            xml:space="preserve">
+                                            <path
+                                                d="M0,92.5C0,143.505,41.495,185,92.5,185S185,143.505,185,92.5S143.505,0,92.5,0S0,41.495,0,92.5z M170,92.5
+      c0,42.733-34.767,77.5-77.5,77.5c-18.671,0-35.821-6.639-49.215-17.678L152.322,43.284C163.361,56.679,170,73.828,170,92.5z
+       M92.5,15c18.671,0,35.821,6.639,49.215,17.678L32.678,141.716C21.639,128.321,15,111.172,15,92.5C15,49.767,49.767,15,92.5,15z" />
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                    <span class="table-act-btn blockedFan" *ngIf="item.isPublish == true"
+                                        tooltip="Un-Publish Message" (click)="publishMessage(item._id,false)">
+                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                            viewBox="0 0 185 185" style="enable-background:new 0 0 185 185;"
+                                            xml:space="preserve">
+                                            <path
+                                                d="M0,92.5C0,143.505,41.495,185,92.5,185S185,143.505,185,92.5S143.505,0,92.5,0S0,41.495,0,92.5z M170,92.5
+      c0,42.733-34.767,77.5-77.5,77.5c-18.671,0-35.821-6.639-49.215-17.678L152.322,43.284C163.361,56.679,170,73.828,170,92.5z
+       M92.5,15c18.671,0,35.821,6.639,49.215,17.678L32.678,141.716C21.639,128.321,15,111.172,15,92.5C15,49.767,49.767,15,92.5,15z" />
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                  
+                </table>
+                
+            </div>
+            <div class="d-flex w-100 justify-content-center">
+                <div class="custom-pagination-outer">
+                    <pagination [totalItems]="totalRecords" [itemsPerPage]="10"
+                        (pageChanged)="pageChanged($event)">
+                    </pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

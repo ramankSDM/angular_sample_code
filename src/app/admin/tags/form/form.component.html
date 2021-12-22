@@ -1,0 +1,60 @@
+<div class="" id="page-wrapper">
+    <div class="">
+      <div class="row row-stat">
+        <div class="col-sm-12">
+          <div class="panel panel-default">
+            <div class="panel-heading panel-heading-divider">
+              <div class="db-hdd-1">
+                <h2> {{ isEditable ? "Update" : 'Add' }} Tag</h2> 
+              </div>
+            </div>
+            <div class="panel-body p-a-15 bx-shadow-white">
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form [formGroup]="frm" (submit)="save()" class="form-horizontal">  
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-1">Tag name in English*</label>
+                            <input class="form-control pro-input-des" id="fname" placeholder="Enter Tag Name"
+                            formControlName="title_en" maxlength="100" name="fname" required
+                              type="text">
+                            <div *ngIf="frm.controls['title_en'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Tag Name is required.
+                              </div>
+                              <div *ngIf="frm.controls['title_en'].hasError('pattern')" class="error-div help-block requiredClass">
+                                Enter text only
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="pro-lbl-one" for="form-control-2">Tag name in Arabic*</label>
+                            <input class="form-control pro-input-des" id="title_ar" placeholder="Enter Tag Name"
+                            formControlName="title_ar" #LastName maxlength="100" name="title_ar" type="text">
+                            <div *ngIf="frm.controls['title_ar'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+                                Tag Name is required.
+                              </div>
+                              <div *ngIf="frm.controls['title_ar'].hasError('pattern')" class="error-div help-block requiredClass">
+                                Enter text only
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row text-right two-btn-group mt-4">
+                        <div class="col-md-12">
+                          <button class="project-btn-1 project-btn-secondary-color"
+                            routerLink="/admin/tags">Cancel</button>
+                          <button [disabled]="!frm.valid" class="project-btn-1">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -1,0 +1,742 @@
+<div class="user-inner-main">
+    <div class="inner-head">
+      <h2>{{"request.req_IGT" | translate}}</h2>
+      <div class="inner-head-rt">
+        <div class="custom-search-form">
+          <input class="form-control pro-input-des" placeholder="{{'fan_wallet.search_placeholder' | translate}}" type="text" [(ngModel)]="searchKey">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button" (click)="getAll()">
+              <img src="../../../../assets/img/main-search.svg">
+            </button>
+          </span>
+        </div>
+        <div class="custom-filter">
+          <label class="pro-lbl-one">{{"filter_by.filter" | translate}}</label>
+          <div class="selectbox">
+            <select class="form-control pro-input-des album-drop-down" [(ngModel)]="filterStatus"
+              (change)="filterRecords()">
+              <option value="" selected>{{"filter_by.all" | translate}}</option>
+              <option value="In process">{{"filter_by.in_process" | translate}}</option>
+              <option value="Canceled">{{"filter_by.canceled" | translate}}</option>
+              <option value="Completed">{{"filter_by.completed" | translate}}</option>
+              <option value="Rejected">{{"filter_by.rejected" | translate}}</option>
+              <option value="Rescheduled">{{"filter_by.reschedule" | translate}}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="inner-body">
+      <div class="prof-tabs">
+        <ul>
+          <li>
+           <img src="" class="">&nbsp;
+              <a
+                [routerLink]="['/celebrity/my-booking']"
+                routerLinkActive="router-link-active"
+               
+                >{{"request.all" | translate}}</a
+              >
+            </li>
+            <li>
+              <img src="../../../assets/img/celeb-profile/shoutout-service.svg" class="bookingServiceIcon">&nbsp;
+                    <a
+                      [routerLink]="['/celebrity/my-booking/shoutout']"
+                      routerLinkActive="router-link-active"
+                     
+                      >{{"request.shoutout" | translate}}</a
+                    >
+                  </li>
+                  <li class="active">
+                    <img src="../../../assets/img/celeb-profile/igt-service.svg" class="bookingServiceIcon">&nbsp;
+                    <a
+                      [routerLink]="['/celebrity/my-booking/i-got-talent']"
+                      routerLinkActive="router-link-active"
+                      >{{"request.igot" | translate}}</a
+                    >
+                  </li>
+                  <li>
+                    <img src="../../../assets/img/celeb-profile/webinar-service.svg" class="bookingServiceIcon">&nbsp;
+                    <a
+                      [routerLink]="['/celebrity/my-booking/webinar']"
+                      routerLinkActive="router-link-active"
+                      >{{"request.webinar" | translate}}</a
+                    >
+                  </li>
+          
+                  <li>
+                    <img src="../../../assets/img/celeb-profile/zoom-service.svg" class="bookingServiceIcon">&nbsp;
+                    <a
+                      [routerLink]="['/celebrity/my-booking/zoom-call']"
+                      routerLinkActive="router-link-active"
+                      > {{"request.zoom_call" | translate}}</a
+                    >
+                  </li>
+                  <li >
+                    <img src="../../../assets/img/celeb-profile/chat-service.svg" class="bookingServiceIcon">&nbsp;
+                    <a
+                      [routerLink]="['/celebrity/my-booking/dm']"
+                      routerLinkActive="router-link-active"
+                      > {{"request.dm_text" | translate}}</a
+                    >
+                  </li>
+    </ul>
+        <div class="tabs-content-parent">
+          <div>
+            <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+              <p>{{"msg_notfound" | translate}}</p>
+            </div>
+  
+            <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+              <div class="custom-table-outer">
+                <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="rowsOnPage">
+                  <thead>
+                    <tr>
+                      <th class="text-center">
+                        
+                        <sv-default-sorter by="senderData.fname_en" (click)="sortBy('senderData.fname_en')">
+                          {{"request_header.req_from" | translate}}<i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'senderData.fname_en'"></i>
+                            
+                        </sv-default-sorter>
+                      </th>
+                      <!-- <th class="text-center">
+                        To Name
+                      </th> -->
+                      <!-- <th class="text-center">
+                        From Name
+                      </th> -->
+                      <th class="text-center">
+                        
+                        <sv-default-sorter by="talentCategory" (click)="sortBy('talentCategory')">
+                          {{"request_header.talent_cat" | translate}}<i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'talentCategory'"></i>
+                            
+                        </sv-default-sorter>
+                      </th>
+                      <th class="text-center">
+                        <sv-default-sorter by="isPublic" (click)="sortBy('isPublic')">
+                          {{"request_header.video_privacy" | translate}}<i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'isPublic'"></i>
+                        </sv-default-sorter>
+                      </th>
+                      <th class="text-center">
+                        <sv-default-sorter by="bookingDateTime" (click)="sortBy('bookingDateTime')">
+                          {{"request_header.booking_date" | translate}}<i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'bookingDateTime'"></i>
+                        </sv-default-sorter>
+                      </th>
+                      <th class="text-center">
+                        <sv-default-sorter by="status" (click)="sortBy('status')">
+                          {{"request_header.status" | translate}}<i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'status'"></i>
+                        </sv-default-sorter>
+                      </th>
+                      <th class="text-center">
+                        <sv-default-sorter by="fanRating" (click)="sortBy('fanRating')">
+                          {{"request_header.rating" | translate}}<i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'fanRating'"></i>
+                        </sv-default-sorter>
+                      </th>
+                      <th class="text-center">{{"request_header.action" | translate}}</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tableBody">
+                    <tr *ngFor="let item of sv.data; let i = index">
+                      <td class="text-center">
+                        <!-- {{ item.senderData.fname_en }} -->
+
+                        <span *ngIf="selectedLang =='en'">{{ item.senderData.fname_en }}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{item.senderData.fname_ar ? item.senderData.fname_ar:item.senderData.fname_en}}
+                    
+                </span>
+                        
+                      </td>
+                      <!-- <td class="text-center">
+                        {{(item.toName) ? item.toName : '--'}}
+                      </td>
+                      <td class="text-center">
+                        {{item.fromName ? item.fromName : '--'}}
+                      </td> -->
+                      <td class="text-center">
+                        {{item.talentCategory ? item.talentCategory : '--'}}
+                      </td>
+                      <td class="text-center">
+                        
+                        {{ (item.isPublic == false) ? 'Public' : 'Private' }}
+                      </td>
+                      <td class="text-center">
+                        {{ item.bookingDateTime | date:'yyyy-M-d' }}
+                      </td>
+                      <td class="text-center ">
+                        <div class="d-flex align-items-center justify-content-center">
+                        <span class="dot mr-2" [ngStyle]="{'background-color': item.colorCode}"></span>
+                        <span *ngIf="item.status == 1 || item.status == 2 || item.status == 6 || item.status == 7">
+                          {{"filter_by.in_process" | translate}}</span>
+                        <!-- <span *ngIf="item.status == 2">In process</span>
+                        <span *ngIf="item.status == 3">Rejected</span> -->
+                        <span *ngIf="item.status == 3 || item.status == 4">{{"filter_by.canceled" | translate}}</span>
+                        <span *ngIf="item.status == 5">{{"filter_by.completed" | translate}}</span>
+                        <!-- <span *ngIf="item.status == 6">Postpone</span>
+                        <span *ngIf="item.status == 7">Read</span> -->
+                      </div>
+                      </td>
+                      <td class="text-center "> 
+                        <div class="rating-col" *ngIf="item.fanRating > 0">
+                          
+                            <div class="" *ngIf="item.fanRating > 0">
+                              <star-rating value="{{item.fanRating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                                size="24px" readonly="true"></star-rating>
+                            </div>
+                           
+                        </div> 
+                      </td>
+                      <td class="text-center">
+                        <div class="cust-table-act-btns d-flex align-items-center justify-content-center">
+                          <span class="table-act-btn view" tooltip="View Booking" (click)="openModal2(viewModal,item)">
+                            <svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512"
+                              width="512" xmlns="http://www.w3.org/2000/svg">
+                              <g>
+                                <path
+                                  d="m15 91c8.284 0 15-6.716 15-15v-46h46c8.284 0 15-6.716 15-15s-6.716-15-15-15h-61c-8.284 0-15 6.716-15 15v61c0 8.284 6.716 15 15 15z" />
+                                <path
+                                  d="m15 512h61c8.284 0 15-6.716 15-15s-6.716-15-15-15h-46v-46c0-8.284-6.716-15-15-15s-15 6.716-15 15v61c0 8.284 6.716 15 15 15z" />
+                                <path
+                                  d="m497 91c8.284 0 15-6.716 15-15v-61c0-8.284-6.716-15-15-15h-61c-8.284 0-15 6.716-15 15s6.716 15 15 15h46v46c0 8.284 6.716 15 15 15z" />
+                                <path
+                                  d="m497 421c-8.284 0-15 6.716-15 15v46h-46c-8.284 0-15 6.716-15 15s6.716 15 15 15h61c8.284 0 15-6.716 15-15v-61c0-8.284-6.716-15-15-15z" />
+                                <path
+                                  d="m256 361c57.897 0 105-47.103 105-105s-47.103-105-105-105-105 47.103-105 105 47.103 105 105 105zm0-180c41.355 0 75 33.645 75 75s-33.645 75-75 75-75-33.645-75-75 33.645-75 75-75z" />
+                                <path
+                                  d="m256 301c24.813 0 45-20.187 45-45s-20.187-45-45-45-45 20.187-45 45 20.187 45 45 45zm0-60c8.271 0 15 6.729 15 15s-6.729 15-15 15-15-6.729-15-15 6.729-15 15-15z" />
+                                <path
+                                  d="m76.023 342.381c50.592 43.433 113.077 78.619 179.977 78.619 66.903 0 129.389-35.19 179.977-78.619 44.516-38.216 72.029-76.003 73.179-77.593 3.793-5.246 3.793-12.332 0-17.577-1.149-1.59-28.663-39.377-73.179-77.593-50.592-43.432-113.077-78.618-179.977-78.618-66.903 0-129.389 35.19-179.977 78.619-44.516 38.216-72.029 76.003-73.179 77.593-3.793 5.246-3.793 12.332 0 17.577 1.15 1.589 28.664 39.377 73.179 77.592zm179.977-221.381c63.673 0 122.116 38.583 159.933 70.951 29.612 25.345 51.609 51.001 62.093 64.044-10.341 12.847-31.897 37.957-61.025 63.071-41.709 35.962-98.941 71.934-161.001 71.934-63.673 0-122.116-38.583-159.933-70.951-29.614-25.347-51.612-51.004-62.093-64.044 10.341-12.847 31.898-37.956 61.026-63.071 41.708-35.962 98.94-71.934 161-71.934z" />
+                              </g>
+                            </svg>
+                          </span>
+  
+                          <span *ngIf="item.status == 1 || item.status == 7" class="table-act-btn reject" tooltip="Reject"
+                            (click)="openModal(template,item,3)">
+                            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                              style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                              <g>
+                                <g>
+                                  <path
+                                    d="M493.297,159.693c-12.477-30.878-31.231-59.828-56.199-84.792c-24.965-24.969-53.917-43.723-84.795-56.2
+                                        C321.421,6.22,288.611,0,255.816,0c-32.747,0-65.495,6.249-96.311,18.744c-30.813,12.491-59.693,31.244-84.603,56.158
+                                        c-24.915,24.911-43.668,53.792-56.158,84.607C6.249,190.324,0,223.072,0,255.822c0,32.794,6.222,65.602,18.701,96.485
+                                        c12.477,30.877,31.231,59.828,56.2,84.792c24.964,24.967,53.914,43.722,84.792,56.199c30.882,12.48,63.69,18.701,96.484,18.703
+                                        c32.748,0,65.497-6.249,96.315-18.743c30.814-12.49,59.695-31.242,84.607-56.158c24.915-24.912,43.668-53.793,56.158-84.608
+                                        c12.494-30.817,18.743-63.565,18.744-96.315C512,223.383,505.778,190.575,493.297,159.693z M461.611,339.66
+                                        c-10.821,26.683-27.018,51.648-48.659,73.292c-21.643,21.64-46.608,37.837-73.291,48.659
+                                        c-26.679,10.818-55.078,16.241-83.484,16.241c-28.477,0-56.947-5.406-83.688-16.214c-26.744-10.813-51.76-27.008-73.441-48.685
+                                        C77.37,391.27,61.174,366.255,50.363,339.51c-10.808-26.741-16.214-55.212-16.213-83.689c-0.001-28.405,5.423-56.802,16.24-83.482
+                                        c10.821-26.683,27.018-51.648,48.659-73.291c21.643-21.64,46.607-37.837,73.289-48.659c26.678-10.818,55.075-16.242,83.48-16.242
+                                        c28.478,0,56.95,5.405,83.691,16.213c26.745,10.811,51.762,27.007,73.445,48.686c21.678,21.682,37.873,46.697,48.685,73.441
+                                        c10.808,26.741,16.214,55.211,16.214,83.688C477.852,284.582,472.429,312.98,461.611,339.66z" />
+                                </g>
+                              </g>
+                              <g>
+                                <g>
+                                  <path
+                                    d="M279.627,256.001l82.693-82.693c6.525-6.525,6.525-17.102,0-23.627c-6.524-6.524-17.102-6.524-23.627,0L256,232.375
+                                        l-82.693-82.693c-6.525-6.524-17.102-6.524-23.627,0c-6.524,6.524-6.524,17.102,0,23.627l82.693,82.693l-82.693,82.693
+                                        c-6.524,6.523-6.524,17.102,0,23.627c6.525,6.524,17.102,6.524,23.627,0L256,279.628l82.693,82.693
+                                        c6.525,6.524,17.102,6.524,23.627,0c6.525-6.524,6.525-17.102,0-23.627L279.627,256.001z" />
+                                </g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                              <g>
+                              </g>
+                            </svg>
+                          </span>
+                          <!-- this tab made for making video private and public -->
+                          <span class="table-act-btn " *ngIf="item.isPublic == false" tooltip="Make it Private"
+                          (click)="publishMessage(item._id,true, 1)">
+                          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g data-name="Layer 14" id="Layer_14"><path d="M56,64H8a1,1,0,0,1-1-1V28a1,1,0,0,1,1-1H56a1,1,0,0,1,1,1V63A1,1,0,0,1,56,64ZM9,62H55V29H9Z"/><path d="M13,28H11V21a21,21,0,0,1,42,0H51a19,19,0,0,0-38,0Z"/><rect height="12" width="2" x="31" y="41"/></g></svg>
+
+                        </span>
+                        <span class="table-act-btn blockedFan" *ngIf="item.isPublic == true" tooltip="Make it Public"
+                          (click)="publishMessage(item._id,false, 1)">
+                          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g data-name="Layer 13" id="Layer_13"><path d="M56,64H8a1,1,0,0,1-1-1V28a1,1,0,0,1,1-1H56a1,1,0,0,1,1,1V63A1,1,0,0,1,56,64ZM9,62H55V29H9Z"/><path d="M53,28H51V21a19,19,0,0,0-38,0v7H11V21a21,21,0,0,1,42,0Z"/><rect height="12" width="2" x="31" y="41"/></g></svg>
+                          
+                        </span>
+
+                          <!-- ending of the code -->
+                          
+                          <span *ngIf="item.isExtended == true && (item.status == 1 || item.status == 7)"
+                            (click)="openModal3(postpone,item)" class="table-act-btn" tooltip="Postpone"><i
+                              class="fas fa-calendar"></i></span>
+                          <span *ngIf="item.status == 2" (click)="openModal(canceltemplate,item,4)" class="table-act-btn"
+                            tooltip="Cancelled"><svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M493.297 159.693C480.82 128.815 462.066 99.865 437.098 74.901C412.133 49.932 383.181 31.178 352.303 18.701C321.421 6.22 288.611 0 255.816 0C223.069 0 190.321 6.249 159.505 18.744C128.692 31.235 99.812 49.988 74.902 74.902C49.987 99.813 31.234 128.694 18.744 159.509C6.249 190.324 0 223.072 0 255.822C0 288.616 6.222 321.424 18.701 352.307C31.178 383.184 49.932 412.135 74.901 437.099C99.865 462.066 128.815 480.821 159.693 493.298C190.575 505.778 223.383 511.999 256.177 512.001C288.925 512.001 321.674 505.752 352.492 493.258C383.306 480.768 412.187 462.016 437.099 437.1C462.014 412.188 480.767 383.307 493.257 352.492C505.751 321.675 512 288.927 512.001 256.177C512 223.383 505.778 190.575 493.297 159.693ZM461.611 339.66C450.79 366.343 434.593 391.308 412.952 412.952C391.309 434.592 366.344 450.789 339.661 461.611C312.982 472.429 284.583 477.852 256.177 477.852C227.7 477.852 199.23 472.446 172.489 461.638C145.745 450.825 120.729 434.63 99.048 412.953C77.37 391.27 61.174 366.255 50.363 339.51C39.555 312.769 34.149 284.298 34.15 255.821C34.149 227.416 39.573 199.019 50.39 172.339C61.211 145.656 77.408 120.691 99.049 99.048C120.692 77.408 145.656 61.211 172.338 50.389C199.016 39.571 227.413 34.147 255.818 34.147C284.296 34.147 312.768 39.552 339.509 50.36C366.254 61.171 391.271 77.367 412.954 99.046C434.632 120.728 450.827 145.743 461.639 172.487C472.447 199.228 477.853 227.698 477.853 256.175C477.852 284.582 472.429 312.98 461.611 339.66Z" fill="#545454"/>
+                              <path d="M105 256.441C105 247.361 112.361 240 121.441 240H389.784C398.865 240 406.226 247.361 406.226 256.441C406.226 265.521 398.865 272.882 389.784 272.882H121.441C112.361 272.882 105 265.521 105 256.441Z" fill="#545454"/>
+                              </svg></span>
+                          <span *ngIf="item.status == 2" class="table-act-btn" tooltip="Completed"
+                            (click)="openModal(completetemplate,item,5)">
+                            <svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M159.693 18.703C128.815 31.18 99.865 49.934 74.901 74.902C49.932 99.867 31.178 128.819 18.701 159.697C6.22 190.579 0 223.389 0 256.184C0 288.931 6.249 321.679 18.744 352.495C31.235 383.308 49.988 412.188 74.902 437.098C99.813 462.013 128.694 480.766 159.509 493.256C190.324 505.751 223.072 512 255.822 512C288.616 512 321.424 505.778 352.307 493.299C383.184 480.822 412.135 462.068 437.099 437.099C462.066 412.135 480.821 383.185 493.298 352.307C505.778 321.425 511.999 288.617 512.001 255.823C512.001 223.075 505.752 190.326 493.258 159.508C480.768 128.694 462.016 99.813 437.1 74.901C412.188 49.986 383.307 31.233 352.492 18.743C321.675 6.24901 288.927 2.34375e-05 256.177 -0.000976562C223.383 2.34375e-05 190.575 6.222 159.693 18.703ZM339.66 50.389C366.343 61.21 391.308 77.407 412.952 99.048C434.592 120.691 450.789 145.656 461.611 172.339C472.429 199.018 477.852 227.417 477.852 255.823C477.852 284.3 472.446 312.77 461.638 339.511C450.825 366.255 434.63 391.271 412.953 412.952C391.27 434.63 366.255 450.826 339.51 461.637C312.769 472.445 284.298 477.851 255.821 477.85C227.416 477.851 199.019 472.427 172.339 461.61C145.656 450.789 120.691 434.592 99.048 412.951C77.408 391.308 61.211 366.344 50.389 339.662C39.571 312.984 34.147 284.587 34.147 256.182C34.147 227.704 39.552 199.232 50.36 172.491C61.171 145.746 77.367 120.729 99.046 99.046C120.728 77.368 145.743 61.173 172.487 50.361C199.228 39.553 227.698 34.147 256.175 34.147C284.582 34.148 312.98 39.571 339.66 50.389Z" fill="#545454"/>
+                              <path d="M399.333 154.333C405.776 160.776 405.776 171.224 399.333 177.667L209.828 367.172C203.384 373.616 192.937 373.616 186.494 367.172C185.893 366.571 185.348 365.935 184.859 365.271C184.195 364.782 183.559 364.237 182.958 363.636L112.954 293.633C106.511 287.189 106.511 276.742 112.954 270.298C119.398 263.855 129.845 263.855 136.289 270.298L198.161 332.17L375.998 154.333C382.442 147.889 392.889 147.889 399.333 154.333Z" fill="#545454"/>
+                              </svg>
+                          </span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                  
+                </table>
+              </div>
+              <div class="custom-pagination-outer">
+                <pagination [totalItems]="totalRecords" [itemsPerPage]="rowsOnPage"
+                  (pageChanged)="pageChanged($event)">
+                </pagination>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
+  <ng-template #canceltemplate>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"request_popup.cancel_request"| translate}}</h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"star_webinar.del_confirm_msg" | translate}}</label>
+              <span>{{"common_model.del_msg" | translate}}</span>
+            </div>
+          </div>
+          <div class="two-btn-group mt-3">
+            
+            <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">{{"buttons.cancel" | translate}}</button>
+            <button type="button" class="project-btn-1  "
+              (click)="cancelRequest(itemValue)">{{"buttons.ok" | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  
+  <ng-template #template>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"filter_by.reject_request" | translate}}t</h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"star_webinar.del_confirm_msg" | translate}}</label>
+            <span>{{"common_model.reject_request" | translate}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <textarea [(ngModel)]="reject_reason" required></textarea>
+              <p *ngIf="reasornError == true">{{"common_model.reject_reason" | translate}}</p>
+            </div>
+          </div>
+          <div class="two-btn-group mt-3 text-right">
+            
+            <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">{{"buttons.cancel" | translate}}</button>
+            <button type="button" class="project-btn-1  " (click)="reject()">{{"buttons.ok" | translate}}</button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  
+  <ng-template #viewModal>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"request_popup.request_details" | translate}}</h2>
+        <button *ngIf="viewData.status == 1 || viewData.status == 7" type="button"
+          class="project-btn-1 project-btn-2 project-btn-secondary-color"
+          (click)="updateStatus(viewData,2)">{{"buttons.accept"| translate}}</button>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal2()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.receipt_id" | translate}}</label>
+              <span>{{viewData.receiptId}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.booking_time" | translate}}</label>
+              <span>{{viewData.bookingDateTime | date:'yyyy-M-d h:mm a'}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.to" | translate}}</label>
+              <span *ngIf="viewData.requestType == 1">{{viewData.toName}}</span>
+              <span *ngIf="viewData.requestType == 2">
+                <!-- {{viewData.receiverData.fname_en}} -->
+
+                <span *ngIf="selectedLang =='en'">{{viewData.receiverData.fname_en}}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{viewData.receiverData.fname_ar ? viewData.receiverData.fname_ar:viewData.receiverData.fname_en}}
+                </span>
+              </span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.from" | translate}}</label>
+              <span *ngIf="viewData.requestType == 1">{{viewData.fromName}}</span>
+              <span *ngIf="viewData.requestType == 2">
+                <!-- {{viewData.senderData.fname_en}} -->
+                <span *ngIf="selectedLang =='en'">{{viewData.senderData.fname_en}}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{viewData.senderData.fname_ar ? viewData.senderData.fname_ar:viewData.senderData.fname_en}}                
+                </span>
+              </span>
+            </div>
+          </div>
+          <div class="req-row" *ngIf="viewData.requestType==1">
+            <div class="req-item">
+              <label>{{"request_popup.occasion" | translate}}</label>
+              <span>{{viewData.occasion}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"model_shoutout.relationship" | translate}}</label>
+              <span>{{viewData.relationShip}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.language" | translate}}</label>
+              <span>{{(viewData.language == 'en') ? 'English' : 'Arabic'}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_header.video_privacy" | translate}}</label>
+              <span>{{(viewData.isPublic == false) ? 'Public' : 'Private'}}</span>
+
+            </div>
+          </div>
+          <div class="req-row" *ngIf="viewData.requestType == 1">
+            <div class="req-item">
+              <label>{{"model_igt.sentToFriend" | translate}}</label>
+              <span>{{(viewData.sendToFriend == true) ? 'Yes' : 'No'}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"signup.email" | translate}}</label>
+              <span>{{viewData.email}}</span>
+            </div>
+          </div>
+          <div class="req-row" *ngIf="viewData.status == 6">
+            <div class="req-item">
+              <label>{{"model_igt.daysPostpone" | translate}}</label>
+              <span>{{viewData.postponeDays}} Days</span>
+            </div>
+            <div class="req-item">
+              <label>{{"model_igt.till_postpone" | translate}}</label>
+              <span>{{viewData.postponeDate | date:'yyyy-M-d'}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row" *ngIf="viewData.status == 3">
+            <div class="req-item">
+              <label>{{"request_popup.reject_reason" | translate}}</label>
+              <span>{{viewData.rejectReason}}</span>
+            </div>
+            <div class="req-item">
+              <label></label>
+              <span></span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item" *ngIf="viewData.requestType == 1">
+              <label>{{"request_header.video_for" | translate}}</label>
+              <span>{{viewData.videoFor}}</span>
+            </div>
+            <div class="req-item" *ngIf="viewData.requestType == 2">
+              <label>{{"request_header.talent_cat" | translate}}</label>
+              <span>{{viewData.talentCategory}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"model_igt.coupon" | translate}}</label>
+              <span>{{(viewData.promoCode != '') ? viewData.promoCode : '--' }}</span>
+            </div>
+          </div>
+  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"model_igt.video_instruction" | translate}}</label>
+              <span class="brek-text">{{viewData.instruction}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row" *ngIf="viewData.requestType == 2">
+            <div class="req-item req-item-width" *ngIf="viewData.talentType == 'video'">
+              <!-- <label>{{"model_igt.talent_video" | translate}}</label> -->
+            <label>{{"model_igt.talent_video" | translate}} &nbsp; <button *ngIf="viewData.talentVideo"  class="button_style" (click)="copyUrl(viewData.talentVideo)">Copy URL</button></label>
+
+              <video allow="autoplay" id="celeb-video" class="video-js vjs-default-skin" width="100%" height="100%"
+                controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                <source src="{{viewData.talentVideo}}" type='video/mp4' />
+                <source src="{{viewData.talentVideo}}" type='video/webm' />
+              </video>
+            </div>
+  
+            <div class="req-item req-item-width" *ngIf="viewData.talentType == 'mp3'">
+              <label>{{"model_igt.audio_file" | translate}}</label>
+              <div>
+                <ngx-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle" [autoPlay]="false"
+                  muted="muted" (trackEnded)="onEnded($event)" [displayVolumeControls]="msaapDisplayVolumeControls"
+                  [disablePositionSlider]="msaapDisablePositionSlider" [expanded]="true"></ngx-audio-player>
+  
+              </div>
+              <!-- <span>{{viewData.talentMp3}}</span> -->
+            </div>
+  
+            <div class="req-item req-item-width" *ngIf="viewData.talentType == 'img'">
+              <label>{{"model_igt.image" | translate}}</label>
+              <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let slide of viewData.talentImages">
+                  <ng-template carouselSlide>
+                    <img [src]="slide" [alt]="slide" [title]="slide">
+                  </ng-template>
+                </ng-container>
+              </owl-carousel-o>
+              <!-- <span>{{viewData.talentVideo}}</span> -->
+            </div>
+          </div>
+          <h5 *ngIf="viewData.requestType == 2">{{"model_igt.rating_feedback" | translate}}</h5>
+          <div class="req-row" *ngIf="viewData.requestType == 2">
+            <div class="req-item" *ngIf="viewData.rating > 0">
+              <label>{{"request_popup.rating" | translate}}</label>
+              <star-rating value="{{viewData.rating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                size="24px" readonly="true"></star-rating>
+            </div>
+            <div class="req-item" *ngIf="viewData.comment && viewData.comment != ''">
+              <label>{{"request_popup.comments" | translate}}</label>
+              <span class="brek-text">{{viewData.comment}}</span>
+            </div>
+          </div>
+  
+  
+          <div class="req-row" *ngIf="(viewData.requestType == 1 || viewData.requestType == 2) && viewData.status == 5">
+            <div class="req-item req-item-width">
+              <!-- <label>{{"model_igt.video_url" | translate}}</label> -->
+            <label>{{"model_igt.video_url" | translate}} &nbsp; <button *ngIf="viewData.videoUrl"  class="button_style" (click)="copyUrl(viewData.videoUrl)">Copy URL</button></label>
+
+              <video allow="autoplay" id="celeb-video" class="video-js vjs-default-skin" width="100%" height="100%"
+                controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                <source src="{{viewData.videoUrl}}" type='video/mp4' />
+                <source src="{{viewData.videoUrl}}" type='video/webm' />
+              </video>
+            </div>
+          </div>
+          <h5>{{"star_webinar.rating_feedback" | translate}}</h5>
+          <div class="req-row">
+            <div class="req-item" *ngIf="viewData.fanRating > 0">
+              <label>{{"request_popup.rating" | translate}}</label>
+              <star-rating value="{{viewData.fanRating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                size="24px" readonly="true"></star-rating>
+            </div>
+            <div class="req-item" *ngIf="viewData.fanComment && viewData.fanComment != ''">
+              <label>{{"request_popup.comments" | translate}}</label>
+              <span>{{viewData.fanComment}}</span>
+            </div>
+          </div>
+  
+  
+          <h5>{{"common_model.sender_detail" | translate}}</h5>
+          <div class="req-row">
+            <div class="req-item d-flex align-items-center ">
+              
+              <div class="image-wrap mr-2">
+                <div class="celeb-head-img"> <img src="{{ viewData.senderData.image }}" ></div>
+                <div class="celeb-mask"><img  src="../../../assets/img/celeb-profile/celeb-mask.png"></div>
+              </div>
+              <span>
+                <!-- <label>{{"name"|translate}}</label> -->
+                <span *ngIf="selectedLang =='en'">{{viewData.senderData.fname_en}} {{viewData.senderData.lname_en}}</span>
+                  <span *ngIf="selectedLang =='ar'">
+                      {{viewData.senderData.fname_ar ? viewData.senderData.fname_ar:viewData.senderData.fname_en}}
+                      {{viewData.senderData.lname_ar ? viewData.senderData.lname_ar:viewData.senderData.lname_ar}}
+                  </span>
+  
+              </span>
+            </div>
+            <!-- <div class="req-item">
+              <label>Email</label>
+              <span>{{viewData.senderData.email}}</span>
+            </div> -->
+          </div>
+  
+          <h5>{{"request_popup.payment_details" | translate}}</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.service_fee" | translate}}</label>
+              <span>${{viewData.serviceFee}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"vat" | translate}}</label>
+              <span>$0</span>
+            </div>
+            <!-- <div class="req-item">
+              <label>Admin Fee</label>
+              <span>${{viewData.adminFee}}</span>
+            </div> -->
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.discount" | translate}}</label>
+              <span>${{viewData.discountAmount}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.sub_total_fee" | translate}}</label>
+              <span>${{viewData.subTotalAmount}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label></label>
+              <span></span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.total_paid_amount" | translate}}</label>
+              <span>${{viewData.totalAmount}}</span>
+            </div>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </ng-template>
+  
+  
+  <ng-template #postpone>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"request_popup.postpone_request" | translate}}</h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal3()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="w-100">
+              <label>{{"star_webinar.del_confirm_msg" | translate}}</label>
+            <span>{{"request_popup.postpone_msg" | translate}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="w-100">
+              <select class="form-control pro-input-des album-drop-down" [(ngModel)]="postponeDays">
+                <option [value]="dayData.days" selected *ngFor="let dayData of dayList">{{dayData.days}}</option>
+                
+              </select>
+              <p *ngIf="postponeError == true" style="display: block">Please select the postpone days</p>
+            </div>
+          </div>
+          <div class="two-btn-group mt-3 text-right">
+            
+            <button type="button" class="project-btn-1 project-btn-secondary-color " (click)="closeModal3()">{{"buttons.cancel"| translate}}</button>
+            <button type="button" class="project-btn-1 "
+              (click)="postponeSubmit()">{{"buttons.ok"| translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  
+  
+  
+  
+  <ng-template #completetemplate>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"common_model.complete_req"| translate}}</h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+  
+  
+          <div class="req-row" *ngIf="itemValue.requestType == 1">
+            <div class="req-item">
+              <label>{{"model_igt.image" | translate}}</label>
+              <input type="file" name="imagefile" (change)="onUpload($event)" accept="image/*" />
+            </div>
+          </div>
+          <div class="req-row" *ngIf="itemValue.requestType == 1">
+            <div class="req-item">
+              <label>{{"model_igt.video"|translate}}</label>
+              <input type="file" name="file" (change)="onVideoUpload($event)" accept="video/*" />
+            </div>
+          </div>
+  
+  
+          <div class="req-row" *ngIf="itemValue.requestType == 2 || itemValue.requestType == 3">
+            <div class="req-item">
+              <label>{{"request_popup.comments" | translate}}</label>
+              <textarea [(ngModel)]="completeRequest.comment" required></textarea>
+              <!-- <p *ngIf="reasornError == true">Please enter the reject reason</p> -->
+            </div>
+          </div>
+          <div class="req-row" *ngIf="itemValue.requestType == 2 || itemValue.requestType == 3">
+            <div class="req-item">
+              <label>{{"request_popup.rating" | translate}}</label>
+              <star-rating value="{{completeRequest.rating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                size="24px" readonly="false" (rate)="onRate($event)"></star-rating>
+            </div>
+          </div>
+          <div class="two-btn-group mt-3 text-right">
+            
+            <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">{{"buttons.cancel"|translate}}</button>
+            <button type="button" class="project-btn-1  " (click)="complete()">{{"buttons.ok"|translate}}</button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </ng-template>

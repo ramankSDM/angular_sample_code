@@ -1,0 +1,15 @@
+<div class="user-inner-main">
+    <div class="inner-head">
+        <!-- <h2>{{pageData.title_en}}</h2> -->
+        
+<h2 *ngIf="selectedLang =='en'">{{pageData.title_en}}</h2>
+<h2 *ngIf="selectedLang =='ar'">
+    {{pageData.title_ar ? pageData.title_ar:pageData.title_en}}
+</h2>
+        <div class="inner-head-rt"></div>
+    </div>
+    <div class="inner-body">
+        <p [innerHtml]="pageData.description_en"></p>
+       
+    </div>
+</div>

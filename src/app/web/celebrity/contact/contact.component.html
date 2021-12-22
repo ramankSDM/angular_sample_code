@@ -1,0 +1,60 @@
+<div class="edit-profile-page-outer">
+    <div class="">
+        <div class="db-hdd-2">
+            <h3>Contact</h3>
+        </div>
+
+        
+
+            <div class="w-100 contactDiv">
+
+                <div class="db-hdd-1">
+                    <h2>{{"contact_admin.ct_admin" | translate}}</h2>
+                </div>
+
+                <form [formGroup]="frm" (submit)="save()" class="form-horizontal">
+
+                    <div class="form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">{{"contact_admin.subject" | translate}}:</label>
+                            <div class="selectbox">
+                                <select class="form-control pro-input-des album-drop-down" formControlName="subject"
+                                    required>
+                                    <option value="" disabled selected hidden>Select Subject</option>
+                                    <option [value]="subject.subject" selected *ngFor="let subject of sub_dropdown">{{subject.subject}}</option>
+                                    <!-- <option value="Accounts and Finance">Accounts and Finance</option>
+                                    <option value="Technical Support">Technical Support</option>
+                                    <option value="Other">Other</option> -->
+                                </select>
+                            </div>
+                            <div *ngIf="frm.controls['subject'].hasError('required') && isSubmited"
+                                class="error-div help-block requiredClass">
+                                {{"contact_admin.req_sub" | translate}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-item">
+                        <div class="form-group">
+                            <label class="main-lbl">Message:</label>
+                            <textarea placeholder="{{'contact_admin.msg_placeholder' | translate}}" formControlName="message"
+                                maxlength="1000"></textarea>
+                            <div *ngIf="frm.controls['message'].hasError('required') && isSubmited"
+                                class="error-div help-block requiredClass">
+                                {{"contact_admin.req_msg" | translate}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pay-action">
+                        <button type="submit">{{"buttons.submit" | translate}}</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+    </div>
+</div>

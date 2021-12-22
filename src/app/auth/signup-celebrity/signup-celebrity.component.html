@@ -1,0 +1,137 @@
+  <div class="modal-outer">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <img src="../../../assets/img/modal-close.svg">
+    </button>
+    <div class="modal-body">
+      <div class="modal-left">
+        <h2>{{"signup.star_signup"|translate}}</h2>
+        <form [formGroup]="signUpForm" (submit)="signUp()">
+          <div class="form-group">
+            <label>{{"signup.first_name"|translate}}<sup>*</sup></label>
+            <span class="auth-ini"><img src="../../../assets/img/user.svg"></span>
+            <input type="text" placeholder="" formControlName="fname_en" maxlength="20" required
+              [ngClass]="{ 'is-invalid': isSignSubmited && f.fname_en.errors }">
+            <div *ngIf="isSignSubmited && f.fname_en.errors" class="invalid-feedback">
+              <div *ngIf="f.fname_en.errors.required">{{"validations.first_name_require"|translate}}</div>
+              <div *ngIf="f.fname_en.errors.maxlength">{{"validations.first_name_limit"|translate}}</div>
+            </div>
+            <!-- <div *ngIf="f.fname_en.errors.pattern" class="error-div help-block requiredClass">
+              Enter letters only
+           </div> -->
+          </div>
+          <div class="form-group">
+            <label>{{"signup.last_name"|translate}}<sup>*</sup></label>
+            <span class="auth-ini"><img src="../../../assets/img/user.svg"></span>
+            <input type="text" placeholder="" formControlName="lname_en" maxlength="20" required
+              [ngClass]="{ 'is-invalid': isSignSubmited && f.lname_en.errors }">
+            <div *ngIf="isSignSubmited && f.lname_en.errors" class="invalid-feedback">
+              <div *ngIf="f.lname_en.errors.required">{{"validations.last_name_require"|translate}}</div>
+              <div *ngIf="f.lname_en.errors.maxlength">{{"validations.last_name_limit"|translate}}</div>
+            </div>
+            <!-- <div *ngIf="f.lname_en.errors.pattern" class="error-div help-block requiredClass">
+              Enter letters only
+           </div> -->
+          </div>
+          <div class="form-group">
+            <label>{{"signup.email"|translate}}<sup>*</sup></label>
+            <span class="auth-ini"><img src="../../../assets/img/user.svg"></span>
+            <input type="email" placeholder="Email" name="email" formControlName="email" maxlength="50" required
+              [ngClass]="{ 'is-invalid': isSignSubmited && f.email.errors }" />
+            <div *ngIf="isSignSubmited && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">{{"validations.email_require"|translate}}</div>
+              <div *ngIf="f.email.errors.maxlength">{{"validations.email_limit"|translate}}</div>
+              <div *ngIf="f.email.errors.pattern">{{"validations.email_invalid"|translate}}</div>
+              
+            </div>
+          </div>
+          <div class="form-group">
+            <label>{{"signup.country_code"|translate}}<sup>*</sup></label>
+            <select class="form-control pro-input-des" id="state" formControlName="std_code">
+              <option [value]="code.isdcode" *ngFor="let code of countryCodeList">{{code.name}} ({{code.isdcode}})
+              </option>
+            </select>
+            <!-- <div *ngIf="frm.controls['std_code'].hasError('required') && isSubmited" class="error-div help-block requiredClass">
+               Country Code is required.
+              </div> -->
+          </div>
+          <div class="form-group">
+            <label>{{"signup.mobile_no"|translate}} <sup>*</sup>{{"signup.number_sharing_msg" | translate}}</label>
+            <span class="auth-ini"><img src="../../../assets/img/user.svg"></span>
+            <input type="text" placeholder="" formControlName="phone" maxlength="10" required
+              [ngClass]="{ 'is-invalid': isSignSubmited && f.phone.errors }">
+            <div *ngIf="isSignSubmited && f.phone.errors" class="invalid-feedback">
+              <div *ngIf="f.phone.errors.required">{{"validations.mobile_require"|translate}}</div>
+              <div *ngIf="f.phone.errors.minlength">{{"validations.mobile_limit"|translate}}</div>
+              <div *ngIf="f.phone.errors.pattern">Enter digit Only</div>
+            </div>
+            
+          </div>
+         <!-- <div class="form-group">
+            <label>Date of Birth<sup>*</sup></label>
+            <span class="auth-ini"><img src="../../../assets/img/user.svg"></span>
+  
+            <p-calendar  class="form-control pro-input-des" formControlName="dob" placeholder="Select expire date"
+            [minDate]="minDate" [maxDate]="maxDate" [showIcon]="true" [ngClass]="{ 'is-invalid': isSignSubmited && f.dob.errors }"></p-calendar>          
+            <div *ngIf="isSignSubmited && f.dob.errors" class="invalid-feedback">
+              <div *ngIf="f.dob.errors.required">Date of birth is required</div>
+            </div>
+          </div> -->
+  
+          <div class="form-group">
+            <label>{{"signup.password"|translate}}<sup>*</sup></label>
+            <span class="auth-ini"><img src="../../../assets/img/lock.svg"></span>
+            <input [type]="isTextFieldType ? 'password' : 'text'" placeholder="" formControlName="password" required maxlength="15"
+              [ngClass]="{ 'is-invalid': isSignSubmited && f.password.errors }">
+              <span class="auth-eye" (click)="togglePasswordFieldType()"><img src="../../../assets/img/eye.svg"></span>
+            <div *ngIf="isSignSubmited && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">{{"validations.password_require"|translate}}</div>
+              <div *ngIf="f.password.errors.pattern">{{"validations.password_limit"|translate}} </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Confirm Password<sup>*</sup></label>
+            <span class="auth-ini"><img src="../../../assets/img/lock.svg"></span>
+            <input [type]="ispasswordFieldType ? 'password' : 'text'" placeholder="" formControlName="confirmPassword" required maxlength="15"
+              [ngClass]="{ 'is-invalid': isSignSubmited && f.confirmPassword.errors }">
+              <span class="auth-eye" (click)="togglePasswordConfirmFieldType()"><img src="../../../assets/img/eye.svg"></span>
+
+            <div *ngIf="isSignSubmited && f.confirmPassword.errors" class="invalid-feedback">
+              <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+              <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+            </div>
+          </div>
+          <button type="submit">{{"signup.signup"|translate}}</button>
+  
+        </form>
+        <div class="auth-or">{{"signup.or"|translate}}</div>
+        <div class="social-login">
+          <button type="button" (click)="initiateSocialLogin('facebook')" class="facebook">
+            <img src="../../../assets/img/facebook.svg">{{"signup.facebook"|translate}}
+          </button>
+          <button type="submit" (click)="initiateSocialLogin('google')" class="google">
+            <img src="../../../assets/img/google.svg">{{"signup.google"|translate}}
+          </button>
+        </div>
+        <div class="auth-form-link">
+          {{"signup.aggrement"|translate}} <a href="">{{"footer.terms_link"|translate}}</a> {{"signup.and"|translate}} <a href="">{{"footer.privacy_link"|translate}}</a>
+        </div>
+        <div class="auth-form-link">
+          <i class="fa fa-info-circle" aria-hidden="true"></i> {{"signup.signup_note"|translate}}
+        </div>
+      </div>
+      <div class="modal-right">
+        <div class="modal-right-content">
+          <img src="../../../assets/img/main-logo.svg">
+          <p>{{"signup.popup_text"|translate}}</p>
+        </div>
+      </div>  
+     
+    </div>
+  
+    <div class="modal-footer">
+      <a (click)="login()">{{"signup.signin"|translate}}</a>, {{"signup.already_account"|translate}}
+    </div>
+  </div>
+  
+  
+  

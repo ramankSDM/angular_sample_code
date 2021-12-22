@@ -1,0 +1,89 @@
+<div class="" id="page-wrapper">
+    <div class="">
+        <div class="row row-stat">
+            <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading panel-heading-divider">
+                        <div class="db-hdd-1">
+                            <h2> {{ isEditable ? "Update" : 'Add' }} Faq</h2>
+                        </div>
+                    </div>
+                    <div class="panel-body p-a-15 bx-shadow-white">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <form [formGroup]="frm" (submit)="save()" class="form-horizontal">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="pro-lbl-one" for="form-control-1">Question in
+                                                        English<em>*</em></label>
+                                                    <input class="form-control pro-input-des" id="question_en"
+                                                        placeholder="Enter Question" formControlName="question_en"
+                                                        maxlength="100" name="question_en" required type="text">
+                                                    <div *ngIf="frm.controls['question_en'].hasError('required') && isSubmited"
+                                                        class="error-div help-block requiredClass">
+                                                        Question is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="pro-lbl-one" for="form-control-2">Question in
+                                                        Arabic<em>*</em></label>
+                                                    <input class="form-control pro-input-des" id="question_ar"
+                                                        placeholder="Enter question" formControlName="question_ar"
+                                                        #LastName maxlength="100" name="question_ar" type="text">
+                                                    <div *ngIf="frm.controls['question_ar'].hasError('required') && isSubmited"
+                                                        class="error-div help-block requiredClass">
+                                                        Question is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="pro-lbl-one" for="form-control-1">Answer in
+                                                        English<em>*</em></label>
+
+                                                    <textarea class="form-control pro-input-des"
+                                                        formControlName="answer_en" col="50"
+                                                        placeholder="Enter Description" required></textarea>
+                                                    <div *ngIf="frm.controls['answer_en'].hasError('required') && isSubmited"
+                                                        class="error-div help-block requiredClass">
+                                                        Answer is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="pro-lbl-one" for="form-control-1">Answer in
+                                                        Arabic<em>*</em></label>
+
+                                                    <textarea class="form-control pro-input-des"
+                                                        formControlName="answer_ar" col="50"
+                                                        placeholder="Enter Description" required></textarea>
+                                                    <div *ngIf="frm.controls['answer_ar'].hasError('required') && isSubmited"
+                                                        class="error-div help-block requiredClass">
+                                                        Answer is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row text-right two-btn-group mt-4">
+                                            <div class="col-md-12">
+                                                <button class="project-btn-1 project-btn-secondary-color"
+                                                    routerLink="/admin/faq">Cancel</button>
+                                                <button [disabled]="!frm.valid" class="project-btn-1">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

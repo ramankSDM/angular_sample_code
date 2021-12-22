@@ -1,0 +1,56 @@
+@import "../login//login.component.scss";
+::ng-deep .pac-container {
+  background-color: #fff;
+  z-index: 1052 !important;
+  position: fixed;
+  display: inline-block;
+  float: left;
+}
+.policy-link {
+  p {
+    color: #8a8a8a;
+    font-weight: 500;
+    a {
+      color: #4a3683;
+      text-decoration: underline;
+    }
+  }
+}
+::ng-deep input.ui-inputtext {
+  display: block;
+  border: none;
+  width: 100%;
+  padding: 10px 0;
+  border-bottom: solid 1px #e4e4e4;
+  transition: 0.36s all;
+  color: #4a3683;
+  margin-top: 19px;
+  font-size: 18px;
+}
+
+.vendor-phone{
+  margin-left: 35px;
+}
+
+.countryCode{
+  position: absolute;
+  top: 30px;
+  font-size: 18px;
+}
+.out-box {
+  border: 1px solid #fff !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  label{
+    padding-left: 20px;
+  }
+  input{
+    padding-left: 20px !important;
+  }
+  .countryCode{
+    left: 20px;
+  }
+}
+.form-outer{
+  border: 1px solid #ddd;
+}

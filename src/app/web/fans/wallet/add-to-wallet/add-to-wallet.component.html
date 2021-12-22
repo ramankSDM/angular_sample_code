@@ -1,0 +1,58 @@
+<ngx-spinner bdOpacity="0" bdColor="rgba(51,51,51,0)" size="medium" color="#261143" zIndex=99999 type="ball-clip-rotate"
+    [fullScreen]="true">
+    <p style="color: white;"></p>
+</ngx-spinner>
+
+<div class="modal-outer">
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <img src="../../../assets/img/modal-close.svg">
+    </button>
+    <div class="modal-body">
+        <div class="service-modal-head align-item-start">
+            <div class="zoom-content">
+                <h1>Add Bank Account</h1>
+            </div>
+        </div>
+        <div class="service-modal-content">
+            <form [formGroup]="frm"  class="form-horizontal">
+                <div class="">
+                        <div class="form-item">
+                            <div class="form-group">
+                                <label>Amount $ </label>
+                                <input type="text" formControlName="amount">
+                                
+                            </div>
+                        </div>
+                    
+                        <div *ngFor="let item of cardDetail; let i = index;">
+                            <div class="form-item">
+                                <div class="form-group">
+                                    <input type="radio" (click)="existingCardClick()" formControlName="card"
+                                        id="radio{{i}}" [value]=item.id>
+                                    <label for="radio{{i}}"> {{ "**** **** "+ item.last4 || '?'}} </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-item" *ngIf="cardDetail && cardDetail.length > 0">
+                            <div class="form-group">
+                                <input type="radio" (click)="newCardClick()" formControlName="newCard">
+                                <label class="main-lbl">New Card</label>
+                            </div>
+                        </div>
+                        <div *ngIf="newCard">
+                            <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions">
+                            </ngx-stripe-card>
+                        </div>
+                        <div class="pay-action">
+                        <button [disabled]="!frm.valid" (click)="save()" type="submit">{{"buttons.confirm" | translate}}</button>
+                        <span>
+                            <img src="../../../../assets/img/secure-payment.svg">
+                            {{"common_model.ssl_msg" | translate}}
+                        </span>
+                  
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

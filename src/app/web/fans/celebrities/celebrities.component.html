@@ -1,0 +1,217 @@
+<div class="user-inner-main">
+  <div class="inner-head">
+    <h2>{{"my_star" | translate}}</h2>
+    <div class="inner-head-rt">
+      <div class="custom-search-form flex-grow-1 flex-shrink-1">
+        <input class="form-control pro-input-des" placeholder="Search..." type="text" [(ngModel)]="searchKey">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="getFans()">
+            <img src="../../../../assets/img/main-search.svg">
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="inner-body">
+    <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+      <p>{{"msg_notfound" | translate}}</p>
+    </div>
+
+    <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+      <div class="custom-table-outer">
+        <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="10">
+          <thead>
+            <tr>
+              <th >
+                <sv-default-sorter by="title_en" (click)="sortBy('item.celebrity.fname_en')">{{"fan_coupon.name" | translate}}<i
+                    class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'title_en'"></i></sv-default-sorter>
+              </th>
+              <!-- <th class="text-center">
+                <sv-default-sorter by="title_ar" (click)="sortBy('item.celebrity.lname_en')">Last Name<i
+                    class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'title_ar'"></i></sv-default-sorter>
+              </th>              -->
+              <th class="text-center" width="20%">{{"request_header.action" | translate}}</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+
+            <tr *ngFor="let item of sv.data; let i = index">
+              
+              <td >
+
+                <!-- <i *ngIf="item.isFav == true" class="fa fa-star starColor"></i>&nbsp;&nbsp;
+                <i  *ngIf="item.isFav == true"class="fa fa-star"></i>&nbsp;&nbsp;  -->
+                <!-- <a
+                  routerLink="/celebrities/{{item.celebrity.slug}}">
+                  <span *ngIf="selectedLang =='en'">{{ item.celebrity.fname_en }} {{ item.celebrity.lname_en }}</span>
+                  <span *ngIf="selectedLang =='ar'">
+                    {{item.celebrity.fname_ar ? item.celebrity.fname_ar:item.celebrity.fname_en}}
+                    {{item.celebrity.lname_ar ? item.celebrity.lname_ar:item.celebrity.lname_ar}}
+                </span>
+                
+                </a> -->
+<div class="d-flex align-items-center">
+               <span><img src="{{ item.celebrity.image }}" width="50" height="50" class="rounded-circle mr-2"></span>
+                 <a routerLink="/celebrities/{{item.celebrity.slug}}" >
+                  <span *ngIf="selectedLang =='en'">{{ item.celebrity.fname_en }} {{ item.celebrity.lname_en }}</span>
+                  <span *ngIf="selectedLang =='ar'">
+                    {{item.celebrity.fname_ar ? item.celebrity.fname_ar:item.celebrity.fname_en}}
+                    {{item.celebrity.lname_ar ? item.celebrity.lname_ar:item.celebrity.lname_ar}}
+                </span>
+                </a>
+                  <i *ngIf="item.isFav == true" class="fa fa-star starColor"></i>
+                </div>
+              </td>
+              <!-- <td class="text-center">
+                {{ item.celebrity.lname_en }}
+              </td>             -->
+              
+              <td class="text-center">
+                <div class="cust-table-act-btns">
+                  <span class="table-act-btn" (click)="openModal(dmcel,item)">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 373.232 373.232"
+                      style="enable-background:new 0 0 373.232 373.232;" xml:space="preserve">
+                      <g>
+                        <g>
+                          <path
+                            d="M187.466,0c-0.1,0.1-0.3,0.1-0.6,0.1c-101.2,0-183.5,82.3-183.5,183.5c0,41.3,14.1,81.4,39.9,113.7l-26.7,62
+                         c-2.2,5.1,0.2,11,5.2,13.1c1.8,0.8,3.8,1,5.7,0.7l97.9-17.2c19.6,7.1,40.2,10.7,61,10.6c101.2,0,183.5-82.3,183.5-183.5
+                         C370.066,82.1,288.366,0.1,187.466,0z M186.466,346.6c-19.3,0-38.4-3.5-56.5-10.3c-1.7-0.7-3.5-0.8-5.3-0.5l-82.4,14.4l21.8-50.7
+                         c1.5-3.5,0.9-7.6-1.6-10.5c-11.8-13.7-21.2-29.3-27.8-46.2c-7.4-18.9-11.2-39-11.2-59.3c0-90.2,73.4-163.5,163.5-163.5
+                         c89.9-0.2,162.9,72.5,163,162.4c0,0.2,0,0.4,0,0.6C349.966,273.3,276.566,346.6,186.466,346.6z" />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <path
+                            d="M178.666,146.7h-54c-5.5,0-10,4.5-10,10s4.5,10,10,10h54c5.5,0,10-4.5,10-10S184.166,146.7,178.666,146.7z" />
+                        </g>
+                      </g>
+                      <g>
+                        <g>
+                          <path
+                            d="M248.666,196.7h-124c-5.5,0-10,4.5-10,10s4.5,10,10,10h124c5.5,0,10-4.5,10-10S254.166,196.7,248.666,196.7z" />
+                        </g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                    </svg>
+                  </span>
+                  <span routerLink="/celebrities/{{item.celebrity.slug}}" class="table-act-btn" tooltip="Request">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="31.523" height="26.025" viewBox="0 0 31.523 26.025">
+                      <g id="Group_8822" data-name="Group 8822" transform="translate(0.25 0.264)">
+                        <g id="megaphone_3_" data-name="megaphone (3)" transform="translate(0 0)">
+                          <g id="Group_161" data-name="Group 161" transform="translate(0 0)">
+                            <g id="Group_160" data-name="Group 160">
+                              <path id="Path_214" data-name="Path 214"
+                                d="M27.927,57.382a3.055,3.055,0,0,0-2.686-3.028V46.531a1.045,1.045,0,0,0-1.949-.525,12.523,12.523,0,0,1-7.736,5.776,16.441,16.441,0,0,1-4.825.639.605.605,0,0,0-.095,0H5.071a5.07,5.07,0,0,0-.482,10.117l1.679,6.9A2.027,2.027,0,0,0,8.243,71H9.408a2.033,2.033,0,0,0,1.975-2.513L9.943,62.564h.692a.6.6,0,0,0,.1,0,16.441,16.441,0,0,1,4.826.639,12.523,12.523,0,0,1,7.736,5.776,1.032,1.032,0,0,0,.9.521,1.073,1.073,0,0,0,.279-.037,1.034,1.034,0,0,0,.773-1.009V60.633A3.055,3.055,0,0,0,27.927,57.6v-.223Zm-17.913,10.6.191.787a.821.821,0,0,1-.8,1.015H8.243a.819.819,0,0,1-.8-.627l-1.6-6.593H8.7l.428,1.76h-.29a.606.606,0,1,0,0,1.212h.584l.3,1.234h-.19a.606.606,0,1,0,0,1.212Zm.077-9.2H6.325a.606.606,0,1,0,0,1.212h3.766v1.359H5.053a3.858,3.858,0,0,1,.017-7.717h5.02Zm13.938-3.844V67.864a13.97,13.97,0,0,0-8.182-5.836A18.263,18.263,0,0,0,11.3,61.35V53.637a18.264,18.264,0,0,0,4.544-.679,13.971,13.971,0,0,0,8.182-5.836ZM26.715,57.6a1.842,1.842,0,0,1-1.474,1.8V55.58a1.842,1.842,0,0,1,1.474,1.8Z"
+                                transform="translate(0 -45.484)" stroke-width="0" />
+                              <path id="Path_215" data-name="Path 215"
+                                d="M454.492,141.873a.6.6,0,0,0,.408-.158l1.748-1.592a.606.606,0,0,0-.816-.9l-1.748,1.592a.606.606,0,0,0,.408,1.054Z"
+                                transform="translate(-426.384 -133.399)" stroke-width="0" />
+                              <path id="Path_216" data-name="Path 216"
+                                d="M454.9,302.182a.606.606,0,0,0-.816.9l1.748,1.592a.606.606,0,0,0,.816-.9Z"
+                                transform="translate(-426.384 -286.479)" stroke-width="0" />
+                              <path id="Path_217" data-name="Path 217"
+                                d="M471.8,233.68h-1.342a.606.606,0,1,0,0,1.212H471.8a.606.606,0,0,0,0-1.212Z"
+                                transform="translate(-441.383 -222.277)" stroke-width="0" />
+                              <path id="Path_218" data-name="Path 218"
+                                d="M54.346,265.3a.6.6,0,0,0-.056-.1.61.61,0,0,0-.272-.223.644.644,0,0,0-.113-.035.6.6,0,0,0-.237,0,.615.615,0,0,0-.113.035.623.623,0,0,0-.1.056.59.59,0,0,0-.167.167.6.6,0,0,0-.056.1.612.612,0,0,0-.035.113.6.6,0,0,0-.012.118.608.608,0,0,0,.012.119.641.641,0,0,0,.035.113.612.612,0,0,0,.056.1.574.574,0,0,0,.075.092.614.614,0,0,0,.092.076.621.621,0,0,0,.1.056.6.6,0,0,0,.113.034.614.614,0,0,0,.237,0,.6.6,0,0,0,.218-.09.652.652,0,0,0,.093-.076.615.615,0,0,0,.131-.2.64.64,0,0,0,.035-.113.606.606,0,0,0,.012-.119.6.6,0,0,0-.012-.118A.612.612,0,0,0,54.346,265.3Z"
+                                transform="translate(-49.958 -251.632)" fill="#d6006d" stroke="#d6006d"
+                                stroke-width="0" />
+                            </g>
+                          </g>
+                        </g>
+                      </g>
+                    </svg>
+                  </span>
+                  <span class="table-act-btn" tooltip="Remove Star" (click)="removeFan(item._id)">
+                    <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <g>
+                        <path
+                          d="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z" />
+                        <path
+                          d="m256 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z" />
+                        <path
+                          d="m336 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z" />
+                        <path
+                          d="m176 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z" />
+                      </g>
+                    </svg>
+                  </span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          
+        </table>
+      </div>
+      <div class="custom-pagination-outer">
+        <pagination [totalItems]="totalRecords" [itemsPerPage]="10" (pageChanged)="pageChanged($event)">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #dmcel>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">DM Celebrity </h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+  
+  
+          <div class="req-row">
+            <div class="w-100">
+              <label>Message</label>
+              <textarea [(ngModel)]="dm_message" required></textarea>
+             
+            </div>
+          </div>
+          
+          <div class="two-btn-group mt-3 text-right">
+            
+            <button type="button" class="project-btn-1" (click)="closeModal()">Cancel</button>
+            <button type="button" class="project-btn-1 project-btn-secondary-color " (click)="dmCelebrity()">Ok</button>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </ng-template>

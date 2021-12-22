@@ -1,0 +1,135 @@
+<footer *ngIf="!hideFooter">
+  <div class="footer">
+    <!-- <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-md-3">
+          <div class="footer-links">
+            <h3>Vndr <br />Let's Party.</h3>
+            <a
+              target="_blank"
+              href="https://app.termly.io/document/terms-of-use-for-online-marketplace/8545f2ad-c2bb-4826-b9a8-c7a0deca8a65"
+              >Terms & Conditions</a
+            >
+            <a
+              target="_blank"
+              href="https://app.termly.io/document/privacy-policy/fe2dd143-e006-45ce-9c00-c229a3dc1018"
+              >Privacy Policy</a
+            >
+            <a
+              target="_blank"
+              href="https://app.termly.io/document/return-policy/b493e836-731c-4c4b-9df9-36625d64091f"
+              >Refund Policy</a
+            >
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="footer-links">
+            <h3>Become a Vendor</h3>
+            <a
+              [routerLink]=""
+              routerLinkActive="router-link-active"
+              (click)="signUpVendor()"
+              >Signup
+            </a>
+            <a
+              routerLink="/become-a-vendor"
+              routerLinkActive="router-link-active"
+              >Learn More</a
+            >
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="footer-links">
+            <h3>Support</h3>
+            <a
+              [routerLink]=""
+              routerLinkActive="router-link-active"
+              (click)="open()"
+              >Contact Us</a
+            >
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-3">
+          <div class="footer-links">
+            <h3>Download the app</h3>
+            <a
+              [routerLink]=""
+              routerLinkActive="router-link-active"
+              class="mt-4"
+            >
+              <img
+                src="../../../../assets/images/logo-app-store.png"
+                alt="app store"
+                class="img-fluid"
+                style="max-width: 150px;"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="footer-upper">
+      <div class="footer-left">
+        <!-- <h3>
+          {{"footer.subscribe_mail" | translate}}
+          <span>{{"footer.subscribe_tagline" | translate}}</span>
+        </h3> -->
+        <!-- <div class="form-group">
+          <input type="text" placeholder="{{'footer.email' | translate}}">
+          <button type="submit"><img src="../../../../assets/img/footer-sub-arrow.svg"></button>
+        </div> -->
+      </div>
+      <div class="footer-right">
+        <h3>{{"footer.follow_icon" | translate}}</h3>
+          <div class="social">
+              <a href="{{insta_link}}" target="_blank">
+                <img src="../../../../assets/img/instagram.svg">
+              </a>
+              <a href="{{fb_link}}" target="_blank">
+                <img src="../../../../assets/img/facebook-footer.svg">
+              </a>
+              <a href="#" target="_blank">
+                <img src="../../../../assets/img/youtube.svg">
+              </a>
+              <a href="#" target="_blank">
+                <img src="../../../../assets/img/tiktok.svg">
+              </a>
+              <a href="#" target="_blank">
+                <img src="../../../../assets/img/snapchat.svg">
+              </a>
+              <a href="{{twitter_link}}" target="_blank">
+                <img src="../../../../assets/img/twitter.svg">
+              </a>
+              <a href="{{linkedin_link}}" target="_blank">
+                <img src="../../../../assets/img/linkedin.svg">
+              </a>
+          </div>
+          <div class="footer-links">
+            <a routerLink="/news">{{"footer.news_link" | translate}}</a>
+            <a routerLink="/about-us">{{"footer.about_us" | translate}}</a>
+            <a routerLink="/career">{{"footer.career_link" | translate}}</a>
+            <a routerLink="/faq">{{"footer.faq_link" | translate}}</a>
+            <a routerLink="/support">{{"footer.support_link" | translate}}</a>
+            <a routerLink="/contact">{{"footer.contact_link" | translate}}</a>
+          </div>
+          <div class="footer-sub-links">
+              <a routerLink="/terms-condition">{{"footer.terms_link" | translate}}</a>
+              <a routerLink="/privacy-policy">{{"footer.privacy_link" | translate}}</a>
+          </div>
+      </div>
+    </div>
+
+    <div class="bottom-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="copyright">
+              <p>© {{"footer.lbl_copyright" | translate}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,101 @@
+<div class="db-hdd-1">
+  <h2>Celebrities</h2>
+</div>
+
+<div class="search-and-btn-top">
+  <div class="row custom-rw-btn-search-bottom ">
+    <div class="col-12"> <label class="pro-lbl-one">Search By :</label></div>
+    <div class="col-12">
+    <div class="d-flex align-items-center">
+     
+      <div class="custom-search-form flex-grow-1">
+        <input class="form-control pro-input-des" placeholder="Search..." type="text" [(ngModel)]="searchKey">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="getAll()">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+      <div class=" flex-shrink-0 ml-3">
+        <button routerLink="/admin/categories" class="project-btn-1">Back</button>
+      </div>
+    </div>   
+  </div>
+   
+  </div>
+
+</div>
+
+<div class="bx-shadow-white mt-4 mt-md-5">
+  <div class="bx-shadow-hdd p-a-15">
+    <h3>Listing</h3>
+  </div>
+  <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+    <p>No Record Found</p>
+  </div>
+
+  <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+    <div class="custom-table-outer">
+      <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="20">
+        <thead>
+          <tr>
+            <th class="text-center">
+              Featured
+            </th>
+            <th class="text-center">
+              Rank
+            </th>
+            <th class="text-center">
+              Name English
+            </th>
+            <th class="text-center">
+              Name Arabic
+            </th>
+            <th class="text-center">
+              Email
+            </th>
+            <th class="text-center">
+              Phone
+            </th>
+
+            <!-- <th class="text-center">Actions</th> -->
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr *ngFor="let item of sv.data; let i = index">
+            <td class="text-center">
+              <ui-switch class="project-cust-switch" (valueChange)="changeStatus(
+                      item, $event)" color="#4be250" defaultBgColor="#f16565" checkedLabel="Featured"
+                [checked]="item.isFeatured" size="small" uncheckedLabel="Not Featured"
+                [tooltip]="item.isFeatured ? 'Not Featured' : 'Featured'">
+              </ui-switch>
+            </td>
+            <td class="text-center" *ngIf="item && item.user_id">
+              <i *ngIf="i+1!==sv.data.length" class="fa fa-arrow-down" aria-hidden="true"
+                (click)="updateRank(item._id,item.rank+1)"></i>
+              <i *ngIf="i!==0" class="fa fa-arrow-up" aria-hidden="true" (click)="updateRank(item._id,item.rank-1)"></i>
+            </td>
+            <td class="text-center" *ngIf="item && item.user_id">
+             <a target="_blank" href="/celebrities/{{item.user_id.slug}}"> {{ item.user_id.fname_en }} {{ item.user_id.lname_en }}</a>
+            </td>
+            <td class="text-center" *ngIf="item && item.user_id">
+                <a target="_blank" href="/celebrities/{{item.user_id.slug}}">  {{ item.user_id.fname_ar }} {{ item.user_id.lname_ar}}</a>
+            </td>
+            <td class="text-center" *ngIf="item && item.user_id">
+              {{ item.user_id.email }}
+            </td>
+            <td class="text-center" *ngIf="item && item.user_id">
+              {{ item.user_id.std_code }} {{ item.user_id.phone }}
+            </td>
+
+          </tr>
+        </tbody>
+        
+      </table>
+    </div>
+    <div class="custom-pagination-outer pb-5">
+      <pagination [totalItems]="totalRecords" [itemsPerPage]="20" (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+  </div>
+</div>

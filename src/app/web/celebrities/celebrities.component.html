@@ -1,0 +1,461 @@
+<div class="celeb-header" *ngIf="dataList">
+    <div class="celeb-head-left">
+        <div class="celeb-head-img">
+            <img [src]="dataList.image">
+        </div>
+        <div class="celeb-mask">
+            <img src="../../../assets/img/celeb-profile/celeb-mask.png">
+
+        </div>
+    </div>
+    <div class="celeb-head-right">
+        <div class="celeb-head-top">
+            <h1 *ngIf="selectedLang =='en'">{{dataList.fname_en}} {{dataList.lname_en}}
+                <span *ngIf="dataList.isLogin == true" class="online-status">{{"celebrity.online" | translate}}</span>
+                <span *ngIf="selectedLang =='en'">{{dataList.short_description_en}}</span>
+            </h1>
+            <h1 *ngIf="selectedLang =='ar'"> {{dataList.fname_ar ? dataList.fname_ar:dataList.fname_en}}
+                {{dataList.lname_ar ? dataList.lname_ar:dataList.lname_ar}}
+                <span *ngIf="dataList.isLogin == true" class="online-status">{{"celebrity.online" | translate}}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{dataList.short_description_ar ? dataList.short_description_ar:dataList.short_description_en}}
+                    <!-- {{dataList.lname_ar ? dataList.lname_ar:dataList.lname_ar}} -->
+                </span>
+            </h1>
+
+            <button title="Follow Star" type="submit" *ngIf="dataList.isFan == false || fanClub == 'false'"
+                (click)="becomeFan(dataList._id)">{{"celebrity.becomeFan" | translate}} ({{dataList.fancount}})</button>
+            <button tittle="Unfollow Star" type="submit" *ngIf="dataList.isFan == true  || fanClub == 'true'"
+                (click)="removeFan(dataList.fan_club_id)">Fan Club ({{dataList.fancount}})</button>
+
+        </div>
+        <div class="celeb-content" *ngIf="selectedLang =='en'">
+            {{dataList.description_en}}
+        </div>
+        <div class="celeb-content" *ngIf="selectedLang =='ar'">
+            {{dataList.description_ar ? dataList.description_ar:dataList.description_en}}
+        </div>
+
+        <div class="celeb-tags" *ngIf="selectedLang =='en'">
+            <div *ngFor="let tag of tagList;let i=index">
+
+                <a href="">#{{tag.title_en}}</a>
+            </div>
+        </div>
+        <div class="celeb-tags" *ngIf="selectedLang =='ar'">
+            <div *ngFor="let tag of tagList;let i=index">
+                <a href="">#{{tag.title_ar}}</a>
+            </div>
+        </div>
+        <div class="celeb-head-bottom">
+            <div class="celeb-head-rating">
+                {{"celebrity.avg_rating" | translate}} <span>{{dataList.averageRating | number : '1.0-1'}}/5</span>
+                <star-rating value="{{dataList.averageRating}}" totalstars="5" checkedcolor="#FFC400"
+                    uncheckedcolor="white" size="24px" readonly="true"></star-rating>
+                <a class="" (click)="allReview()">{{"celebrity.all-review" | translate}}</a>
+            </div>
+            <div class="celeb-head-response">
+                <img src="../../../assets/img/celeb-profile/response-time.svg">
+                <h3>{{dataList.averageResponseTime | number: '1.0-0' }}-{{"celebrity.days" | translate}}
+                    <span>{{"celebrity.responseTime" | translate}}</span></h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="celeb-service-list row" *ngIf="dataList">
+    <div class=" col-lg-4 col-md-6 " *ngIf="dataList.dedicated_price>0 && dataList.dedicated">
+        <div class="service top-service">
+            <div class="service-left">
+                <img src="../../../assets/img/celeb-profile/shoutout-service.svg">
+                <h4 class="pink-text">
+                    <span>{{"tips.shout-out" | translate}}</span>
+                    ${{dataList.dedicated_price}}
+                </h4>
+            </div>
+            <button type="submit" *ngIf="(dataList.onVacation == false) && (isCelebrity == false)" class="pink-bg"
+                (click)="shoutOut()">{{"celebrity.sendRequest" | translate}}</button>
+            <a href="" class="tooltip-custom fade" data-title="Sample"><img src="../../../assets/img/info.svg"></a>
+        </div>
+    </div>
+
+    <div class=" col-lg-4 col-md-6" *ngIf="dataList.i_got_talent_price>0 && dataList.i_got_talent">
+        <div class="service top-service ">
+            <div class="service-left">
+                <img src="../../../assets/img/celeb-profile/igt-service.svg">
+                <h4 class="d-blue-text">
+                    <span>{{"tips.igot-talent" | translate}}</span>
+
+                    ${{dataList.i_got_talent_price}}
+                </h4>
+            </div>
+            <button type="submit" *ngIf="(dataList.onVacation == false) && (isCelebrity == false)" class="d-blue-bg"
+                (click)="iot()">{{"celebrity.sendRequest" | translate}}
+
+                <!-- {{dataList.onVacation}} {{isCelebrity}} -->
+
+            </button>
+            <a href="" class="tooltip-custom fade" data-title="Sample"><img src="../../../assets/img/info.svg"></a>
+        </div>
+    </div>
+    <div class=" col-lg-4 col-md-6" *ngIf="dataList.webinar_price>0 && dataList.webinar">
+        <div class="service top-service">
+            <div class="service-left">
+                <img src="../../../assets/img/celeb-profile/webinar-service.svg">
+                <h4 class="n-blue-text">
+                    <span>{{"tips.webinar" | translate}}</span>
+
+                    ${{dataList.webinar_price}}
+                </h4>
+            </div>
+            <button routerLink="/celebrities/webinars/{{dataList.slug}}" type="submit" class="n-blue-bg"
+                *ngIf="(dataList.onVacation == false) && (isCelebrity == false)">{{"celebrity.joinNow" | translate}}</button>
+            <a href="" class="tooltip-custom fade" data-title="Sample"><img src="../../../assets/img/info.svg"></a>
+        </div>
+    </div>
+    <div class=" col-lg-4 col-md-6" *ngIf="dataList.connect_on_zoom_price>0 && dataList.connect_on_zoom">
+        <div class="service bottom-service">
+            <div class="service-left">
+                <img src="../../../assets/img/celeb-profile/zoom-service.svg">
+                <h4 class="blue-text">
+                    <span>{{"tips.zoomConnect" | translate}}</span>
+                    ${{dataList.connect_on_zoom_price}}
+                </h4>
+            </div>
+            <button type="submit" class="blue-bg" (click)="bookZoom()"
+                *ngIf="(dataList.onVacation == false) && (isCelebrity == false)">{{"celebrity.connectNow" | translate}}</button>
+            <a href="" class="tooltip-custom fade" data-title="Sample"><img src="../../../assets/img/info.svg"></a>
+        </div>
+    </div>
+    <div class=" col-lg-4 col-md-6" *ngIf="dataList.dm_text_price>0 && dataList.dm_text">
+        <div class="service bottom-service">
+            <div class="service-left">
+                <img src="../../../assets/img/celeb-profile/chat-service.svg">
+                <h4 class="black-text">
+                    <span>{{"tips.dmText" | translate}}</span>
+
+                    ${{dataList.dm_text_price}}
+                </h4>
+            </div>
+            <button type="submit" class="black-bg" (click)="dmText()"
+                *ngIf="(dataList.onVacation == false) && (isCelebrity == false)">{{"celebrity.chatNow" | translate}}</button>
+            <a href=""><img src="../../../assets/img/info.svg"></a>
+        </div>
+    </div>
+    <!-- <div class="service bottom-service" *ngIf="dataList.dm_video_price>0">
+        <div class="service-left">
+            <img src="../../../assets/img/celeb-profile/video-service.svg">
+            <h4 class="black-text">
+                <span>DM Video</span>
+                ${{dataList.dm_video_price}}
+            </h4>
+        </div>
+        <button type="submit" class="black-bg">Send Now</button>
+        <a href=""><img src="../../../assets/img/info.svg"></a>
+    </div> -->
+</div>
+
+<div class="custom-tabs-parent" *ngIf="dataList">
+    <ul>
+        <li (click)="activeTab($event, 'tab1', 'tab-data', 'custom-tabs-parent',1)" class="s-tab active">
+            <span>{{shoutOutCount}}</span>
+        </li>
+        <li (click)="activeTab($event, 'tab2', 'tab-data', 'custom-tabs-parent',2)" class="i-tab">
+            <span>{{gotTalentCount}}</span>
+        </li>
+        <!-- <li (click)="activeTab($event, 'tab3', 'tab-data', 'custom-tabs-parent',3)" class="w-tab">
+            <span>0</span>
+        </li> -->
+        <li *ngIf="dmList && dmList.length != 0 " (click)="activeTab($event, 'tab4', 'tab-data', 'custom-tabs-parent',5)" class="d-tab">
+            <!-- <img src="../../../assets/img/celeb-profile/dm_text.png"> -->
+            <span>{{dmCount}}</span>
+        </li>
+    </ul>
+
+    <div class="tabs-content-parent">
+        <div id="tab1" class="tab-data" style="display: block">
+            <div class="tab-shoutout">
+                <div *ngIf="timeLineData.length == 0">
+                    {{"msg_notfound" | translate}}
+                </div>
+                <div class="custom-item col-lg-3 col-md-6 " *ngFor="let tdata of timeLineData; let i = index">
+                    <div class="celeb-img" (mouseenter)="playVideo(tdata,i)" (mouseleave)="removeVideo(tdata,i)">
+                        <div class="celeb-videoImg" id="{{tdata.receiverData._id}}{{tdata._id}}{{i}}">
+                            <img *ngIf="tdata && tdata != ''" src="{{tdata.thumbImage}}" title="">
+                            <img *ngIf="!tdata || tdata == ''"
+                                src="../../../assets/img/celeb-profile/abadialjohar/2.jpg" title="Image">
+                            <div class="shoutout-tag">#{{tdata.occasion}}</div>
+                        </div>
+                        <div class="video-layer" style="display: none;"
+                            id="{{i}}{{tdata._id}}{{tdata.receiverData._id}}">
+                            <video allow="autoplay" id="celeb-video{{tdata._id}}{{i}}" class="video-js vjs-default-skin"
+                                width="100%" height="100%" controls preload="none"
+                                data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }' [muted]="muted">
+                                <source src="{{tdata.videoUrl}}" type='video/mp4' />
+                                <source src="{{tdata.videoUrl}}" type='video/webm' />
+                            </video>
+                            <span class="custom-unmute" (click)="toggleVideoMute()"
+                                [ngClass]="muted === true ? '' : 'muted'" [innerHTML]="muted === true ? '' : ''"></span>
+
+                            <div class="celeb-vid-actions">
+                                <button class="like-main" *ngIf="showLikes">
+                                    <div class="s-like" *ngIf="tdata.likeCount > 0">
+                                        <img src=".././../../assets/img/heart-like.png" alt=""
+                                            [title]="tdata.likeCount">
+                                    </div>
+                                    <div class="s-unlike" *ngIf="tdata.likeCount == 0">
+                                        <img src=".././../../assets/img/heart-unlike.png" alt="">
+                                    </div>
+                                </button>
+
+                                <button class="like-main" *ngIf="!showLikes && isLikeButtonShow"
+                                    (click)="likeUnlike(tdata._id,tdata.isLike)">
+                                    <div class="s-like" *ngIf="tdata.isLike">
+                                        <img src=".././../../assets/img/heart-like.png" alt=""
+                                            [title]="tdata.likeCount">
+                                    </div>
+                                    <div class="s-unlike" *ngIf="!tdata.isLike">
+                                        <img src=".././../../assets/img/heart-unlike.png" alt=""
+                                            [title]="tdata.likeCount">
+                                    </div>
+                                </button>
+
+                                <div class="right-act">
+                                    <div class="download-vid" (click)="downloadFile(tdata.videoUrl)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16.918" height="24.741"
+                                            viewBox="0 0 16.918 24.741">
+                                            <path id="Path_1221" data-name="Path 1221"
+                                                d="M173.365,150.777l7.178-7.178a1.274,1.274,0,1,0-1.8-1.8l-5,5V127.681a1.281,1.281,0,1,0-2.563,0v19.105l-5-5a1.274,1.274,0,1,0-1.8,1.8l7.178,7.178a1.3,1.3,0,0,0,1.813.01Z"
+                                                transform="translate(-164 -126.4)" fill="#d6006d" />
+                                        </svg>
+                                    </div>
+
+                                    <div class="share-vid" (click)="copyText(tdata.videoUrl)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24.741" height="24.741"
+                                            viewBox="0 0 24.741 24.741">
+                                            <path id="share_2_" data-name="share (2)"
+                                                d="M19.439,14.138a5.284,5.284,0,0,0-4.265,2.182L10.35,13.906A5.23,5.23,0,0,0,10.6,12.37a5.23,5.23,0,0,0-.254-1.536l4.825-2.413A5.28,5.28,0,1,0,14.138,5.3a5.229,5.229,0,0,0,.254,1.536L9.566,9.25a5.3,5.3,0,1,0,0,6.24L14.391,17.9a5.229,5.229,0,0,0-.254,1.536,5.3,5.3,0,1,0,5.3-5.3Zm0-12.37A3.534,3.534,0,1,1,15.9,5.3,3.538,3.538,0,0,1,19.439,1.767ZM5.3,15.9a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,5.3,15.9Zm14.138,7.069a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,19.439,22.974Z"
+                                                transform="translate(0)" fill="#d6006d" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="tab2" class="tab-data">
+            <div class="tab-shoutout">
+                <div *ngIf="gotTalentData.length == 0">
+                    {{"msg_notfound" | translate}}
+                </div>
+                <div class="row w-100">
+                    <div class="custom-item col-lg-3 col-md-6 ng-tns-c8-4 ng-star-inserted"
+                        *ngFor="let ts of gotTalentData; let i = index">
+                        <div class="celeb-img" (mouseenter)="playVideo(ts,i)" (mouseleave)="removeVideo(ts,i)">
+                            <div class="celeb-videoImg" id="{{ts.receiverData._id}}{{ts._id}}{{i}}">
+                                <!-- <img *ngIf="ts.talentVideo && ts.talentVideo != ''" src="{{ts.talentImages[i]}}" title=""> -->
+                                <img *ngIf="ts.talentVideo && ts.talentVideo != ''"
+                                    src="../../../assets/img/celeb-profile/abadialjohar/2.jpg" title="">
+
+                                <img *ngIf="!ts.talentVideo || ts.talentVideo == ''"
+                                    src="../../../assets/img/celeb-profile/abadialjohar/2.jpg" title="">
+                                <div class="shoutout-tag">#{{ts.talentCategory}}</div>
+                            </div>
+                            <div class="video-layer" style="display: none;" id="{{i}}{{ts._id}}{{ts.receiverData._id}}">
+                                <video allow="autoplay" id="celeb-video{{ts._id}}{{i}}"
+                                    class="video-js vjs-default-skin" width="100%" height="100%" controls preload="none"
+                                    data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                                    <source src="{{ts.talentVideo}}" type='video/mp4' />
+                                    <source src="{{ts.talentVideo}}" type='video/webm' />
+                                </video>
+                                <span class="custom-unmute" (click)="toggleVideoMute()"
+                                    [ngClass]="muted === true ? 'muted' : ''"
+                                    [innerHTML]="muted === true ? '' : ''"></span>
+                                <div class="celeb-vid-actions">
+                                    <button class="like-main" *ngIf="showLikes">
+                                        <div class="s-like" *ngIf="ts.likeCount > 0">
+                                            <img src=".././../../assets/img/heart-like.png" alt=""
+                                                [title]="ts.likeCount">
+                                        </div>
+                                        <div class="s-unlike" *ngIf="ts.likeCount == 0">
+                                            <img src=".././../../assets/img/heart-unlike.png" alt="">
+                                        </div>
+                                    </button>
+
+                                    <button class="like-main" *ngIf="!showLikes && isLikeButtonShow"
+                                        (click)="likeUnlike(ts._id,ts.isLike)">
+                                        <div class="s-like" *ngIf="ts.isLike">
+                                            <img src=".././../../assets/img/heart-like.png" alt=""
+                                                [title]="ts.likeCount">
+                                        </div>
+                                        <div class="s-unlike" *ngIf="!ts.isLike">
+                                            <img src=".././../../assets/img/heart-unlike.png" alt=""
+                                                [title]="ts.likeCount">
+                                        </div>
+                                    </button>
+                                    <div class="right-act">
+                                        <div class="download-vid" (click)="downloadFile(ts.talentVideo)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16.918" height="24.741"
+                                                viewBox="0 0 16.918 24.741">
+                                                <path id="Path_1221" data-name="Path 1221"
+                                                    d="M173.365,150.777l7.178-7.178a1.274,1.274,0,1,0-1.8-1.8l-5,5V127.681a1.281,1.281,0,1,0-2.563,0v19.105l-5-5a1.274,1.274,0,1,0-1.8,1.8l7.178,7.178a1.3,1.3,0,0,0,1.813.01Z"
+                                                    transform="translate(-164 -126.4)" fill="#d6006d" />
+                                            </svg>
+                                        </div>
+                                        <div class="share-vid" (click)="copyText(ts.talentVideo)">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24.741" height="24.741"
+                                                viewBox="0 0 24.741 24.741">
+                                                <path id="share_2_" data-name="share (2)"
+                                                    d="M19.439,14.138a5.284,5.284,0,0,0-4.265,2.182L10.35,13.906A5.23,5.23,0,0,0,10.6,12.37a5.23,5.23,0,0,0-.254-1.536l4.825-2.413A5.28,5.28,0,1,0,14.138,5.3a5.229,5.229,0,0,0,.254,1.536L9.566,9.25a5.3,5.3,0,1,0,0,6.24L14.391,17.9a5.229,5.229,0,0,0-.254,1.536,5.3,5.3,0,1,0,5.3-5.3Zm0-12.37A3.534,3.534,0,1,1,15.9,5.3,3.538,3.538,0,0,1,19.439,1.767ZM5.3,15.9a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,5.3,15.9Zm14.138,7.069a3.534,3.534,0,1,1,3.534-3.534A3.538,3.538,0,0,1,19.439,22.974Z"
+                                                    transform="translate(0)" fill="#d6006d" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="tab3" class="tab-data">
+            <div class="tab-shoutout">
+                <div *ngIf="timeLineData.length == 0">
+                    {{"msg_notfound"|translate}}
+                </div>
+            </div>
+        </div>
+         -->
+
+        <div id="tab4" class="tab-data">
+            <div *ngIf="dmList.length == 0">
+                {{"msg_notfound" | translate}}
+
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-6" *ngFor="let dm of dmList">
+
+                    <div class="webinar_card">
+                        <div class="star_details">
+                            <div class="service-modal-left">
+                                <div class="celeb-head-img"
+                                    *ngIf="dm && dm.userId && dm.userId.image && dm.userId.image != ''">
+                                    <img [src]="dm.userId.image">
+
+                                </div>
+                                <div class="celeb-head-img"
+                                    *ngIf="!dm || !dm.userId || !dm.userId.image || dm.userId.image == ''">
+                                    <img src="../../../assets/img/dummyimg.png">
+                                </div>
+                                <div class="celeb-mask">
+                                    <img src="../../../assets/img/celeb-profile/celeb-mask.png">
+                                </div>
+                            </div>
+                            <div class="service-modal-right">
+                                <div class="user-comment">
+                                    {{dm.dm_text }}
+                                </div>
+                                <div class="user-name">
+                                    <!-- {{dm.userId.fname_en }} {{dm.userId.lname_en }} -->
+                                    <h3 *ngIf="selectedLang =='en'">{{dm.userId.fname_en }} {{dm.userId.lname_en }}</h3>
+                                    <h3 *ngIf="selectedLang =='ar'">
+                                        {{dm.userId.fname_ar ? dm.userId.fname_ar:dm.userId.fname_en}}
+                                        {{dm.userId.lname_ar ? dm.userId.lname_ar:dm.userId.lname_ar}}
+                                    </h3>
+
+                                    <!-- <span>Dubai, UAE</span> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="testimonials-main">
+    <h3>{{"testimonials" | translate}}</h3>
+    <div class="testimonials">
+        <div class="t-box" *ngFor="let testData of testimonialList">
+            <div class="user-comments">
+                {{testData.message}}
+            </div>
+            <div class="user-details">
+                <div class="user-t">
+                    <div class="user-pic"
+                        *ngIf="testData && testData.fans[0] && testData.fans[0].image && testData.fans[0].image != ''">
+                        <img [src]="testData.fans[0].image">
+                    </div>
+                    <div class="user-pic"
+                        *ngIf="!testData || !testData.fans[0] || !testData.fans[0].image || testData.fans[0].image == ''">
+                        <img src="../../../assets/img/dummyimg.png">
+                    </div>
+                    <div class="user-mask">
+                        <img src="../../../assets/img/celeb-profile/celeb-mask.png">
+                    </div>
+                </div>
+                <div class="user-name">
+                    {{testData.fans[0].fname_en}} {{testData.fans[0].lname_en}}
+                    <!-- <span>Dubai, UAE</span> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="celeb-prof-footer" *ngIf="dataList">
+    <div class="tips-sec">
+        <h4>{{"tips.tip_text" | translate}}</h4>
+        <div class="tips-tab">
+            <ul>
+                <li (click)="activeTab1($event, 's-tip', 'tab-data2', 'tips-tab',1)" class="active">
+                    {{"tips.shout-out" | translate}}</li>
+                <li (click)="activeTab1($event, 'i-tip', 'tab-data2', 'tips-tab',2)">{{"tips.igot-talent" | translate}}
+                </li>
+                <li (click)="activeTab1($event, 'w-tip', 'tab-data2', 'tips-tab',3)">{{"tips.webinar" | translate}}</li>
+            </ul>
+            <div class="tabs-content-parent" *ngFor="let msg of tipMsgList">
+                <div id="s-tip" class="tab-data2" style="display: block">
+                    {{msg.shoutOutMsg}}
+
+                </div>
+                <div id="i-tip" class="tab-data2">
+                    {{msg?.igt_msg}}
+                </div>
+                <div id="w-tip" class="tab-data2">
+                    {{msg?.webinarmsg}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="celeb-social"
+        *ngIf="(dataList.insta_link != undefined && dataList.insta_link != '') || (dataList.fb_link != undefined && dataList.fb_link != '') || (dataList.youtube_link != undefined && dataList.youtube_link != '') || (dataList.tiktok_link != undefined && dataList.tiktok_link != '') || (dataList.snap_link != undefined && dataList.snap_link != '') || (dataList.tw_link != undefined && dataList.tw_link != '') || (dataList.linkin_link != undefined && dataList.linkin_link != '') || (dataList.web_link != undefined && dataList.web_link != '')">
+        <h4>{{"follow"|translate}} <span *ngIf="selectedLang =='en'"> {{dataList.displayName_en}} </span>
+            <span
+                *ngIf="selectedLang =='ar'">{{dataList.displayName_ar ? dataList.displayName_ar:dataList.displayName_en}}
+            </span>
+            {{"on"|translate}}</h4>
+
+        <div class="celeb-social-links">
+            <a *ngIf="dataList.insta_link && dataList.insta_link != ''" href="{{dataList.insta_link}}"><img
+                    src="../../../assets/img/celeb-profile/celeb-instagram.svg"></a>
+            <a *ngIf="dataList.fb_link && dataList.fb_link != ''" href="{{dataList.fb_link}}"><img
+                    src="../../../assets/img/celeb-profile/celeb-facebook.svg"></a>
+            <a *ngIf="dataList.youtube_link && dataList.youtube_link != ''" href="{{dataList.youtube_link}}"><img
+                    src="../../../assets/img/celeb-profile/youtube.svg"></a>
+            <a *ngIf="dataList.tiktok_link && dataList.tiktok_link != ''" href="{{dataList.tiktok_link}}"><img
+                    src="../../../assets/img/celeb-profile/tiktok.svg"></a>
+            <a *ngIf="dataList.snap_link && dataList.snap_link != ''" href="{{dataList.snap_link}}"><img
+                    src="../../../assets/img/celeb-profile/snapchat.svg"></a>
+            <a *ngIf="dataList.tw_link && dataList.tw_link != ''" href="{{dataList.tw_link}}"><img
+                    src="../../../assets/img/celeb-profile/twitter.svg"></a>
+            <a *ngIf="dataList.linkin_link && dataList.linkin_link != ''" href="{{dataList.linkin_link}}"><img
+                    src="../../../assets/img/celeb-profile/celeb-linkedin.svg"></a>
+            <a *ngIf="dataList.web_link && dataList.web_link != ''" href="{{dataList.web_link}}"><img
+                    src="../../../assets/img/celeb-profile/world-wide-web.svg"></a>
+        </div>
+    </div>
+</div>

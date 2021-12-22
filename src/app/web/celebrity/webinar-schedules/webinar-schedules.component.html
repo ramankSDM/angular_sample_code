@@ -1,0 +1,544 @@
+<div class="user-inner-main">
+  <!-- <div *ngIf="events.length != 0" class="calendar-schedules">
+    <full-calendar [options]="calendarOptions"></full-calendar>
+  </div> -->
+    <div class="inner-head">
+      <h2>{{"headerMenu.my_webinar"| translate}}</h2>
+      <div class="inner-head-rt">
+        <div class="custom-search-form  d-flex justify-content-between flex-wrap">
+          <div >
+            <p-calendar class="form-control pro-input-des dob-new" [(ngModel)]="searchDate" placeholder="{{'select_date'|translate}}" [showIcon]="true" dateFormat="mm/dd/yy"></p-calendar>
+          </div>
+          <div >
+            <input class="form-control pro-input-des" placeholder="{{'fan_wallet.search_placeholder' | translate}}" type="text" [(ngModel)]="searchKey">
+          </div>
+          <div >
+            <span class="pay-action"> 
+              <button class="project-btn-1 " type="button" (click)="getAll()">
+                <!-- <img src="../../../../assets/img/main-search.svg"> --> {{"buttons.go" | translate}}
+              </button>
+            </span>
+          </div>
+          <div>
+          <span class="pay-action">
+            <button routerLink="add" class="project-btn-1 add-btn">{{"add_new" | translate}}</button>
+          </span>
+      </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="inner-body"> 
+        <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+            <p>{{"msg_notfound" | translate}}</p>
+          </div>          
+          <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+              <div class="custom-table-outer">
+                  <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="10">
+                      <thead>
+                        <tr>                                                                                        
+                          <th class="text-center">
+                            {{"request_header.title" | translate}}
+                          </th>                          
+                          <th class="text-center">
+                            {{"request_header.topic" | translate}}
+                          </th>
+                          <th class="text-center">
+                            <sv-default-sorter by="webinarDate" (click)="sortBy('webinarDate')">
+                              {{"request_header.date&time" | translate}}
+                              <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'webinarDate'"></i></sv-default-sorter>
+                          </th> 
+                          <th class="text-center">{{"request_header.timezone" | translate}}</th>
+                          <th class="text-center">{{"request_header.status" | translate}}</th>
+                          <th class="text-center">Type</th>
+
+                          <th class="text-center">{{"request_header.action" | translate}}</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tableBody">
+                        <tr *ngFor="let item of sv.data; let i = index">
+                          <td class="text-center">
+                            {{ item.title  | titlecase }}
+                          </td>                          
+
+                          <td class="text-center">
+                            {{item.topic | titlecase }}
+                          </td>                   
+                          <td class="text-center">
+                            {{ item.webinar_date  | date: 'MMM d, y' }} {{ item.start_time  | date: 'hh:mm a' }}
+                          </td> 
+                          <td class="text-center">{{item.timezone }}</td>
+                          <td class="text-center">
+                            <!-- <ui-switch class="project-cust-switch" (valueChange)="changeStatus(
+                            item, $event)" color="#4be250" defaultBgColor="#f16565" checkedLabel="Activated"
+                              [checked]="item.status" size="small" uncheckedLabel="Deactivated"
+                              [tooltip]="item.status ? 'Deactivate' : 'Activate'">
+                            </ui-switch>-->
+                            {{ item.webinar_status | titlecase}}
+                          </td> 
+                          <td class="text-center">{{item.webinar_type | titlecase}}</td>
+
+                          <td class="text-center">
+                            <div class="cust-table-act-btns">                                                      
+                              <span class="table-act-btn view" tooltip="View Detail" (click)="openModal2(viewModal,item)">
+                                <svg id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512"
+                                  width="512" xmlns="http://www.w3.org/2000/svg">
+                                  <g>
+                                    <path
+                                      d="m15 91c8.284 0 15-6.716 15-15v-46h46c8.284 0 15-6.716 15-15s-6.716-15-15-15h-61c-8.284 0-15 6.716-15 15v61c0 8.284 6.716 15 15 15z" />
+                                    <path
+                                      d="m15 512h61c8.284 0 15-6.716 15-15s-6.716-15-15-15h-46v-46c0-8.284-6.716-15-15-15s-15 6.716-15 15v61c0 8.284 6.716 15 15 15z" />
+                                    <path
+                                      d="m497 91c8.284 0 15-6.716 15-15v-61c0-8.284-6.716-15-15-15h-61c-8.284 0-15 6.716-15 15s6.716 15 15 15h46v46c0 8.284 6.716 15 15 15z" />
+                                    <path
+                                      d="m497 421c-8.284 0-15 6.716-15 15v46h-46c-8.284 0-15 6.716-15 15s6.716 15 15 15h61c8.284 0 15-6.716 15-15v-61c0-8.284-6.716-15-15-15z" />
+                                    <path
+                                      d="m256 361c57.897 0 105-47.103 105-105s-47.103-105-105-105-105 47.103-105 105 47.103 105 105 105zm0-180c41.355 0 75 33.645 75 75s-33.645 75-75 75-75-33.645-75-75 33.645-75 75-75z" />
+                                    <path
+                                      d="m256 301c24.813 0 45-20.187 45-45s-20.187-45-45-45-45 20.187-45 45 20.187 45 45 45zm0-60c8.271 0 15 6.729 15 15s-6.729 15-15 15-15-6.729-15-15 6.729-15 15-15z" />
+                                    <path
+                                      d="m76.023 342.381c50.592 43.433 113.077 78.619 179.977 78.619 66.903 0 129.389-35.19 179.977-78.619 44.516-38.216 72.029-76.003 73.179-77.593 3.793-5.246 3.793-12.332 0-17.577-1.149-1.59-28.663-39.377-73.179-77.593-50.592-43.432-113.077-78.618-179.977-78.618-66.903 0-129.389 35.19-179.977 78.619-44.516 38.216-72.029 76.003-73.179 77.593-3.793 5.246-3.793 12.332 0 17.577 1.15 1.589 28.664 39.377 73.179 77.592zm179.977-221.381c63.673 0 122.116 38.583 159.933 70.951 29.612 25.345 51.609 51.001 62.093 64.044-10.341 12.847-31.897 37.957-61.025 63.071-41.709 35.962-98.941 71.934-161.001 71.934-63.673 0-122.116-38.583-159.933-70.951-29.614-25.347-51.612-51.004-62.093-64.044 10.341-12.847 31.898-37.956 61.026-63.071 41.708-35.962 98.94-71.934 161-71.934z" />
+                                  </g>
+                                </svg>
+                              </span> 
+                              <span class="table-act-btn" tooltip="Edit"><i class="fas fa-edit"
+                                [routerLink]="['update/'+item._id]"></i></span>
+                              <span class="table-act-btn" tooltip="Delete" (click)="openModal2(template, item)"><i
+                                class="fas fa-trash"></i></span>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+              </div>
+              <div class="custom-pagination-outer">
+                <pagination [totalItems]="totalRecords" [itemsPerPage]="10" (pageChanged)="pageChanged($event)"></pagination>
+              </div>
+            </div>   
+    </div>
+</div>  
+
+<ng-template #template>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">{{"star_webinar.delete_webinar" | translate}}</h2>      
+      <button type="button" class="close" aria-label="Close" (click)="closeModal2()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+    <div class="modal-body text-center del-popup">
+      <div class="request-content">       
+        <h5>{{"star_webinar.del_confirm_msg" | translate}}</h5>
+        <p>{{"star_webinar.del_confirm_msg2" | translate}} </p>
+        <div class="pay-action">
+          <button type="button" class="project-btn-1 project-btn-secondary-color " (click)="delete()">{{"buttons.ok" | translate}}</button>&nbsp;
+          <button type="button" class="project-btn-1" (click)="closeModal2()">{{"buttons.cancel" | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</ng-template>
+
+<ng-template #viewModal>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">{{"request_header.webinar_details" | translate}}</h2>      
+      <button type="button" class="close" aria-label="Close" (click)="closeModal2()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+    <div class="modal-body text-center del-popup">
+      <div class="request-content">
+        <div class="req-row">
+          <div class="req-item">
+            <label>{{"request_header.webinar_type" | translate}}</label>
+            <span>{{viewData.webinar_type | titlecase}}</span>
+          </div>
+          <div class="req-item" *ngIf="viewData.no_of_days">
+            <label>{{"request_header.noOfDays" | translate}}</label>
+            <span>{{viewData.no_of_days}}</span>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-item">
+            <label>{{"request_header.title"| translate}}</label>
+            <span>{{viewData.title | titlecase}}</span>
+          </div>
+          <div class="req-item">
+            <label>{{"profile.description" | translate}}</label>
+            <span>{{viewData.description | titlecase}}</span>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-item">
+            <label>{{"request_header.topic"| translate}}</label>
+            <span>{{viewData.topic | titlecase}}</span>
+          </div>
+          <div class="req-item">
+            <label>{{"request_header.duration"| translate}}</label>
+            <span>{{viewData.duration}} Minutes</span>
+          </div>         
+        </div>
+        <div class="req-row">
+          <div class="req-item">
+            <label>{{"request_header.datetime"| translate}}</label>
+            <span>{{viewData.webinar_date | date:'yyyy-M-d'}}  {{ viewData.start_time  | date: 'hh:mm a' }}</span>
+          </div>
+          <div class="req-item">
+            <label>{{"request_header.timezone"| translate}}</label>
+            <span>{{viewData.timezone }}</span>
+          </div>
+        </div>
+        <div class="req-row">          
+          <div class="req-item">
+            <label>{{"star_webinar.noOfParticipant" | translate}}</label>
+            <span>{{viewData.number_of_participants}}</span>
+          </div>
+          <div class="req-item">
+           
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-item">
+            <label>{{"star_webinar.webinar_booked_price" | translate}}</label>
+            <span>${{viewData.booked_price}}</span>
+          </div>
+          <div class="req-item">
+            <label>{{"star_webinar.webinar_recorded_price" | translate}}</label>
+            <span>${{viewData.recorded_price}}</span>
+          </div>
+        </div>  
+        
+        <div class="req-row" *ngIf="viewData.special_instructions != ''">
+          <div class="req-item">
+            <label>{{"star_webinar.instruction" | translate}}</label>
+            <span>{{viewData.special_instructions}}</span>
+          </div>
+          <div class="req-item">
+            
+          </div>
+        </div> 
+        
+        
+        <h5>{{"star_webinar.web_loginDetails" | translate}}</h5>
+        <div class="req-row">
+          <div class="req-item">
+            <label>{{"star_webinar.meeting_id" | translate}}</label>
+            <span>{{ viewData.webinar_id }}</span>
+          </div>
+          <div class="req-item">
+            <label>{{"request_header.join_url" | translate}}</label>
+            <span class="brek-text"><a href="{{viewData.join_url}}" target="_blank">{{viewData.join_url}}</a></span>
+          </div>        
+        </div>   
+          
+
+        <div *ngIf="viewData.subscriber_list.length >0">
+          <h5>{{"star_webinar.fan_list_details" | translate}}</h5>
+          <div class="req-row">
+            <div class="req-item" *ngFor="let item of viewData.subscriber_list; let i = index">
+              <label>{{"fan_coupon.name" | translate}}</label>
+              
+              <span>{{ item.subscriber_name}}</span>
+            </div>
+            <!-- <div class="req-item">
+              <label>Name2</label>
+              <span>test2</span>
+            </div>         -->
+          </div>   
+        </div>   
+
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #viewCalendarPop>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Request Details</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal3()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+    <div class="modal-body text-center del-popup" *ngIf="viewData.requestType == 3">
+      <div class="request-content">
+        <div class="req-row">
+          <div class="req-item">
+            <label>Receipt Id</label>
+            <span>{{viewData.receiptId}}</span>
+          </div>
+          <div class="req-item">
+            <label>Booking Time</label>
+            <span>{{viewData.bookingDateTime | date:'yyyy-M-d h:mm a'}}</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Title</label>
+            <span>{{viewData.webinar.title}}</span>              
+          </div>
+          <div class="req-item">
+            <label>Topic</label>
+            <span>{{viewData.webinar.topic}}</span>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Webinar Date Time</label>
+            <span>{{viewData.webinar.webinar_date  | date:'yyyy-MM-d' }} &nbsp; {{viewData.webinar.start_time  | date:'hh:mm a' }}</span>
+          </div>
+          <div class="req-item">
+            <label>Duration</label>
+            <span>{{viewData.webinar.duration}} Minutes</span>
+          </div>
+        </div>  
+        <div class="req-row">
+          <div class="req-item">
+            <label>Webinar Booked Price</label>
+            <span>${{viewData.webinar.booked_price}}</span>
+          </div>
+          <div class="req-item">
+            <label>Webinar Recorded Price</label>
+            <span>${{viewData.webinar.recorded_price}}</span>
+          </div>
+        </div>           
+
+        <div class="req-row" *ngIf="viewData.status == 3">
+          <div class="req-item">
+            <label>Reject Reason</label>
+            <span>{{viewData.rejectReason}}</span>
+          </div>
+          <div class="req-item">
+            <label></label>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="req-row" *ngIf="viewData.promoCode != ''">                
+          <div class="req-item">
+            <label>Promo Code</label>
+            <span>{{(viewData.promoCode != '') ? viewData.promoCode : '--' }}</span>
+          </div>
+          <div class="req-item">
+            <label></label>
+            <span></span>
+          </div>
+        </div>  
+        
+        <div *ngIf="viewData.fanRating > 0">
+          <h5>Fan Rating & Feedback</h5>
+          <div class="req-row" >
+            <div class="req-item" *ngIf="viewData.fanRating > 0">
+              <label>Rating</label>
+              <star-rating value="{{viewData.fanRating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                size="24px" readonly="true"></star-rating>
+            </div>
+            <div class="req-item" *ngIf="viewData.fanComment && viewData.fanComment != ''">
+              <label>Comments</label>
+              <span>{{viewData.fanComment}}</span>
+            </div>
+          </div>
+        </div>
+        
+        <h5>Webinar Details</h5>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Join URL</label>
+            <span>{{viewData.webinar.join_url}}</span>
+          </div>         
+        </div>
+
+        <h5>Celebrity Details</h5>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Name</label>
+            <span>{{viewData.receiverData.fname_en}} {{viewData.receiverData.lname_en}}</span>
+          </div>         
+        </div>
+
+        <h5>Payment Details</h5>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Service Fee</label>
+            <span>${{viewData.serviceFee}}</span>
+          </div>
+          <div class="req-item">
+            <label>Tax</label>
+            <span>$0</span>
+          </div>
+          <!-- <div class="req-item">
+            <label>Admin Fee</label>
+            <span>${{viewData.adminFee}}</span>
+          </div> -->
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Discount</label>
+            <span>${{viewData.discountAmount}}</span>
+          </div>
+          <div class="req-item">
+            <label>Sub-Total Fee</label>
+            <span>${{viewData.subTotalAmount}}</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label></label>
+            <span></span>
+          </div>
+          <div class="req-item">
+            <label>Total Paid Amount</label>
+            <span>${{viewData.totalAmount}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-body text-center del-popup" *ngIf="viewData.requestType == 4">
+      <div class="request-content">
+        <div class="req-row">
+          <div class="req-item">
+            <label>Receipt Id</label>
+            <span>{{viewData.receiptId}}</span>
+          </div>
+          <div class="req-item">
+            <label>Booking Time</label>
+            <span>{{viewData.bookingDateTime | date:'yyyy-M-d h:mm a'}}</span>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Zoom Requested Date</label>
+            <span>{{viewData.zoom_date | date:'yyyy-M-d'}}</span>
+          </div>
+          <div class="req-item">
+            <label>Time Slot</label>
+            <span>{{viewData.zoom_time_slot}}</span>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Name</label>
+            <span>{{viewData.name}}</span>
+          </div>
+          <div class="req-item">
+            <label>Email</label>
+            <span>{{viewData.email}}</span>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Occasion</label>
+            <span>{{viewData.zoom_occasion}}</span>
+          </div>
+          <div class="req-item">
+            <label>Icebreakers</label>
+            <span>{{viewData.zoom_icebreakers}}</span>
+          </div>
+        </div>       
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Name of Guest 1</label>
+            <span>{{ viewData.zoom_guest_details[0]['name'] }}</span>
+          </div>
+          <div class="req-item">
+            <label>Email of Guest 1</label>
+            <span>{{ viewData.zoom_guest_details[1]['email'] }}</span>
+          </div>
+        </div>  
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Name of Guest 2</label>
+            <span>{{ viewData.zoom_guest_details[1]['name'] }}</span>
+          </div>
+          <div class="req-item">
+            <label>Email of Guest 2</label>
+            <span>{{ viewData.zoom_guest_details[1]['email'] }}</span>
+          </div>
+        </div>  
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Name of Guest 3</label>
+            <span>{{ viewData.zoom_guest_details[2]['name'] }}</span>
+          </div>
+          <div class="req-item">
+            <label>Email of Guest 3</label>
+            <span>{{ viewData.zoom_guest_details[2]['email'] }}</span>
+          </div>
+        </div>  
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Name of Guest 4</label>
+            <span>{{ viewData.zoom_guest_details[3]['name'] }}</span>
+          </div>
+          <div class="req-item">
+            <label>Email of Guest 4</label>
+            <span>{{ viewData.zoom_guest_details[3]['email'] }}</span>
+          </div>
+        </div>  
+
+        <div class="req-row" *ngIf="viewData.status == 3">
+          <div class="req-item">
+            <label>Reject Reason</label>
+            <span>{{viewData.rejectReason}}</span>
+          </div>
+          <div class="req-item">
+            <label></label>
+            <span></span>
+          </div>
+        </div>              
+
+        <h5>Receiver Details</h5>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Name</label>
+            <span>{{viewData.receiverData.fname_en}} {{viewData.receiverData.lname_en}}</span>
+          </div>         
+        </div>
+
+        <!-- <h5>Payment Details</h5>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Service Fee</label>
+            <span>${{viewData.serviceFee}}</span>
+          </div>
+          <div class="req-item">
+            <label>Admin Fee</label>
+            <span>${{viewData.adminFee}}</span>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Discount Fee</label>
+            <span>${{viewData.discountAmount}}</span>
+          </div>
+          <div class="req-item">
+            <label>Sub-Total Fee</label>
+            <span>${{viewData.subTotalAmount}}</span>
+          </div>
+        </div> 
+
+        <div class="req-row">
+          <div class="req-item">
+            <label></label>
+            <span></span>
+          </div>
+          <div class="req-item">
+            <label>Total Paid Amount</label>
+            <span>${{viewData.totalAmount}}</span>
+          </div>
+        </div>-->  
+      </div>
+
+    </div>
+  </div>
+</ng-template>

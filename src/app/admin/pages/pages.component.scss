@@ -1,0 +1,32 @@
+.custom-table-outer {
+    table {
+      thead {
+        background: #301152;
+        th {
+          color: #ffffff;
+        }
+      }
+      tbody {
+        td {
+          img {
+            height: 50px;
+            width: 50px;
+            border-radius: 15px;
+          }
+        }
+      }
+    } 
+  }  
+  .project-btn-1 {
+    border-radius: 30px;
+    background: #1c00b9;
+    background: linear-gradient(97deg, #1c00b9 0%, #b90070 100%);
+}
+.modal-header {
+  h2 {
+      font-size: 24px;
+      color: #D6006D;
+      font-weight: 600;
+      padding: 5px 20px;
+  }
+}

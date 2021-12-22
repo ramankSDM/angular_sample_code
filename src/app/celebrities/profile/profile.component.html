@@ -1,0 +1,184 @@
+<div class="edit-profile-page-outer">
+<div class="">
+        <div class="db-hdd-2">
+            <h3>Profile</h3>
+        </div>
+        <form #profileForm="ngForm">
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-xl-3 ">
+                <div class="col-md-12 col-lg-12 col-xl-11 edit-profile-img-box-outer">
+                    <div class="bx-shadow-white p-a-15">
+                        <div class="edit-profile-img-box text-center">
+                            <div class="edit-profile-img-box-in">
+                                <figure><img [src]="admin.image" alt="" /></figure>
+                                <div class="profile-dp-uploader">
+                                    <img class="up-pencil-icon" src="assets/img/edit-pencile-icon.svg" alt="" />
+                                    <input type="file" name="file" (change)="onUpload($event, profileForm)" accept="image/*"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-xl-11 edit-profile-img-box-outer">
+                    <div class="bx-shadow-white p-a-15">
+                        <app-video-records (getRecordedVideo)="setVideo($event)"></app-video-records>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-xl-11 edit-profile-img-box-outer">
+                    <div class="bx-shadow-white p-a-15">
+                       <button (click)="videoUpload">Upload</button>
+                    </div>
+                </div>
+            </div>
+
+                <div class="col-md-8 col-lg-8 col-xl-9">
+                    <div class="bx-shadow-white p-a-15">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">First Name*</label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="First Name"
+                                        [(ngModel)]="admin.fname" name="fname" #fname="ngModel" maxlength="100"
+                                        required>
+                                    <div *ngIf="fname.errors" class="error-div">
+                                        <div *ngIf="fname.errors.required && fname.touched"
+                                            class="help-block requiredClass">
+                                            First Name is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">Last Name*</label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Last Name"
+                                        [(ngModel)]="admin.lname" name="lname" #lname="ngModel" maxlength="100"
+                                        required>
+                                    <div *ngIf="lname.errors" class="error-div">
+                                        <div *ngIf="lname.errors.required && lname.touched"
+                                            class="help-block requiredClass">
+                                            Last Name is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">Email</label>
+                                    <input type="email" class="form-control pro-input-des" placeholder="Email"
+                                        [(ngModel)]="admin.email" name="email" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">Phone</label>
+                                    <input class="form-control" placeholder="Enter Mobile Number"
+                                        [(ngModel)]="admin.phone" #mobileNumber="ngModel" minlength="10" maxlength = "10" name="mobile"
+                                        type="text">
+                                    <div *ngIf="mobileNumber.errors" class="error-div">
+                                        <div *ngIf="mobileNumber.errors?.minlength" class="help-block requiredClass">
+                                            Mobile should contain 10 digits.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">Facebook Link</label>
+                                    <input class="form-control" placeholder="Enter Facebook Link"
+                                        [(ngModel)]="admin.fb_link" #mobileNumber="ngModel" name="fb_link"
+                                        type="text" >
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">Twitter Link</label>
+                                   
+                                        <input class="form-control" placeholder="Enter Twitter Link"
+                                        [(ngModel)]="admin.tw_link" #mobileNumber="ngModel" name="tw_link"
+                                        type="text" >
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">Instagram Link</label>
+                                   
+                                        <input class="form-control" placeholder="Enter Instagram Link"
+                                        [(ngModel)]="admin.insta_link" #mobileNumber="ngModel" name="insta_link"
+                                        type="text" >
+                                    
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="pro-lbl-one" for="form-control-2">Select Categories</label>   
+                                  <div class="checkbox">
+                                    <label class="checkbox-inline mr-2"
+                                      *ngFor="let categories of itemTypeList; let i = index">
+                                      <input type="checkbox" name="category"  [checked]="categories.flag"
+                                        (change)="selectItemType(categories._id,$event.target.checked)">
+                                      {{categories.category_name_en}}
+                                    </label>
+                                  </div>
+                                  <div class="error" *ngIf="
+                                    itemTypeChk 
+                                    ">
+                                    {{ "Please select" }}
+                                  </div>
+                                  <div class="error" *ngIf="
+                                  itemTypeChklength
+                                  ">
+                                  {{ "Please select max 3 categories" }}
+                                </div>
+                                </div>
+                              </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">Address</label>
+                                    <input type="text" class="form-control pro-input-des" name="address"
+                                        placeholder="Enter complete address" [(ngModel)]="admin.address" maxlength="250"
+                                        ngx-google-places-autocomplete #placesRef="ngx-places"
+                                        (onAddressChange)="handleAddressChange($event)" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">City</label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Enter City"
+                                        [(ngModel)]="admin.city" name="city" maxlength="50" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">State</label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Enter State"
+                                        [(ngModel)]="admin.state" name="state" maxlength="50" />
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="pro-lbl-one">ZipCode</label>
+                                    <input type="text" class="form-control pro-input-des" placeholder="Enter Zip Code"
+                                        [(ngModel)]="admin.zipcode" name="zip" maxlength="7" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 two-btn-group text-right">
+                                <button class="project-btn-1 project-btn-secondary-color" routerLink="/admin/dashboard">Cancel</button>
+                                <button class="project-btn-1" [disabled]="profileForm.invalid"
+                                    (click)="update(profileForm)">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="48.304" height="44" viewBox="0 0 48.304 44">
+  <defs>
+    <filter id="Path_1224" x="0" y="5.807" width="24.007" height="32.015" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_1225" x="7.509" y="0" width="27.011" height="43.631" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.302"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Path_1230" x="19.554" y="4" width="28.75" height="40" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-3"/>
+      <feFlood flood-opacity="0.298"/>
+      <feComposite operator="in" in2="blur-3"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="mute_1_" data-name="mute (1)" transform="translate(9 9)">
+    <g id="Group_8833" data-name="Group 8833" transform="translate(0 5.807)">
+      <g id="Group_8832" data-name="Group 8832">
+        <g transform="matrix(1, 0, 0, 1, -9, -14.81)" filter="url(#Path_1224)">
+          <path id="Path_1224-2" data-name="Path 1224" d="M2.253,116A2.255,2.255,0,0,0,0,118.257v9.51a2.255,2.255,0,0,0,2.253,2.253H6.007V116Z" transform="translate(9 -101.2)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+    <g id="Group_8835" data-name="Group 8835" transform="translate(7.509 0)">
+      <g id="Group_8834" data-name="Group 8834">
+        <g transform="matrix(1, 0, 0, 1, -16.51, -9)" filter="url(#Path_1225)">
+          <path id="Path_1225-2" data-name="Path 1225" d="M157.714.216a2.237,2.237,0,0,0-2.4.309L150,4.954V20.675l5.316,4.43a2.253,2.253,0,0,0,3.694-1.731V2.256A2.232,2.232,0,0,0,157.714.216Z" transform="translate(-133.49 9)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+    <g id="speaker-filled-audio-tool" transform="translate(-41.37 -27.564)">
+      <g transform="matrix(1, 0, 0, 1, 32.37, 18.56)" filter="url(#Path_1230)">
+        <path id="Path_1230-2" data-name="Path 1230" d="M58.668,27.232c-.031,0-.06,0-.09,0a1.256,1.256,0,0,1-.889-.368L57.52,26.7A1.257,1.257,0,0,1,57.4,25.06a7.313,7.313,0,0,0-.193-8.961,1.257,1.257,0,0,1,.087-1.682l.168-.168a1.23,1.23,0,0,1,.952-.366,1.259,1.259,0,0,1,.911.46,10.072,10.072,0,0,1,.262,12.388A1.258,1.258,0,0,1,58.668,27.232Zm5.2,3.886a1.259,1.259,0,0,1-.908.445h-.053a1.257,1.257,0,0,1-.889-.368l-.165-.165a1.258,1.258,0,0,1-.073-1.7,13.4,13.4,0,0,0-.222-17.511,1.258,1.258,0,0,1,.051-1.721l.165-.165a1.224,1.224,0,0,1,.927-.37,1.258,1.258,0,0,1,.9.422,16.147,16.147,0,0,1,.265,21.131Z" transform="translate(-28.37 0.44)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

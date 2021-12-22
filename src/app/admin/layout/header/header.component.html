@@ -1,0 +1,58 @@
+<header class="db-header">
+  <nav class="navbar navbar-expand">
+    <a class="navbar-brand" routerLink="/dashboard">
+      <img src="assets/img/logo.png" alt="" />
+    </a>
+    <div class="sidebar-btn" (click)="sidebarToggle()">
+      <i class="fas fa-bars"></i>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="hdr-top-menu collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item dropdown hdr-noti-drop">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-bell"></i>
+          </a>
+          <div class="dropdown-menu"  aria-labelledby="navbarDropdown">
+            <h3>Notification </h3>
+            <ul>
+              <li class="notifications-item" *ngFor="let notiData of notificationData"
+                  [ngClass]="{'unread': notiData.isRead == false}" (click)="readNotification(notiData)">
+                  <a class="dropdown-item" href="javascript:void(0)">
+                    <p>{{notiData.message}}</p>
+                    <span>{{notiData.createdAt | date: 'MMM d, y, h:mm:ss a'}}</span>
+                  </a>
+              </li> 
+            </ul>
+            <div class="p-2 pt-3"><button class="project-btn-1 project-btn-secondary-color btn-block">View All</button></div>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown hdr-user-drop">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <figure>
+              <img *ngIf="loggedInAdmin.image == undefined || loggedInAdmin.image == ''" src="assets/img/dummyimg.png" alt="" />
+              <img *ngIf="loggedInAdmin.image != ''" [src]="loggedInAdmin.image" alt="" />
+            </figure>
+            {{ loggedInAdmin.fname }} {{ loggedInAdmin.lname }}
+            <i class="fas fa-angle-down"></i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <ul>
+              <li><a class="dropdown-item" routerLink="/admin/profile">Profile</a></li>
+              <li><a class="dropdown-item" routerLink="/admin/change-password">Change Password</a></li>
+              <li><a class="dropdown-item" (click)="logout()">Log out</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

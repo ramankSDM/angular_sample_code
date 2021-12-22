@@ -1,0 +1,392 @@
+<div class="user-inner-main">
+  <h2>{{"star_webinar.webinar_&_zoom" | translate}}</h2>
+    <span class="col-md-3 col-lg-3 left">
+      <!-- <label class="pro-lbl-one">Filter By Request Type:</label> -->
+      <select class="form-control select" [(ngModel)]="requestType" (change)="filterRecords()">
+        <option value="" selected>All</option>
+        <option value="3">Webnier</option>
+        <option value="4">Video Call</option>
+      </select>
+    </span>
+
+  <div *ngIf="events.length != 0" class="calendar-schedules"><full-calendar [options]="calendarOptions"></full-calendar></div>
+  </div>  
+  
+ 
+  
+  <ng-template #viewModal>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"request_header.webinar_details" | translate}}</h2>      
+        <button type="button" class="close" aria-label="Close" (click)="closeModal2()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_header.webinar_type" | translate}}</label>
+              <span>{{viewData.webinar_type | titlecase}}</span>
+            </div>
+            <div class="req-item" *ngIf="viewData.no_of_days">
+              <label>{{"request_header.noOfDays" | translate}}</label>
+              <span>{{viewData.no_of_days}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_header.title" | translate}}</label>
+              <span>{{viewData.title | titlecase}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"profile.description" | translate}}</label>
+              <span>{{viewData.description | titlecase}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_header.topic" | translate}}</label>
+              <span>{{viewData.topic | titlecase}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_header.duration" | translate}}</label>
+              <span>{{viewData.duration}} Minutes</span>
+            </div>         
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_header.datetime" | translate}}</label>
+              <span>{{viewData.webinar_date | date:'yyyy-M-d'}}  {{ viewData.start_time  | date: 'hh:mm a' }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_header.timezone" | translate}}</label>
+              <span>{{viewData.timezone }}</span>
+            </div>
+          </div>
+          <div class="req-row">          
+            <div class="req-item">
+              <label>{{"star_webinar.noOfParticipant" | translate}}</label>
+              <span>{{viewData.number_of_participants}}</span>
+            </div>
+            <div class="req-item">
+             
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"star_webinar.webinar_booked_price" | translate}}</label>
+              <span>${{viewData.booked_price}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"star_webinar.webinar_recorded_price" | translate}}</label>
+              <span>${{viewData.recorded_price}}</span>
+            </div>
+          </div>  
+          
+          <div class="req-row" *ngIf="viewData.special_instructions != ''">
+            <div class="req-item">
+              <label>{{"star_webinar.instruction" | translate}}</label>
+              <span>{{viewData.special_instructions}}</span>
+            </div>
+            <div class="req-item">
+              
+            </div>
+          </div> 
+          
+          
+          <h5>{{"star_webinar.web_loginDetails" | translate}}</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"star_webinar.meeting_id" | translate}}</label>
+              <span>{{ viewData.webinar_id }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_header.join_url" | translate}}</label>
+              <span>{{ viewData.join_url }}</span>
+            </div>        
+          </div>   
+            
+  
+          <div *ngIf="viewData.subscriber_list.length >0">
+            <h5>{{"star_webinar.fan_list_details" | translate}}</h5>
+            <div class="req-row">
+              <div class="req-item" *ngFor="let item of viewData.subscriber_list; let i = index">
+                <label>{{"fan_coupon.name" | translate}}</label>
+                <span>{{ item.subscriber_name}}</span>
+              </div>
+              <!-- <div class="req-item">
+                <label>Name2</label>
+                <span>test2</span>
+              </div>         -->
+            </div>   
+          </div>   
+  
+        </div>
+  
+      </div>
+    </div>
+  </ng-template>
+  
+  <ng-template #viewCalendarPop>
+    <div class="modal-outer">
+      <div class="modal-header">
+        <h2 class="modal-title">{{"request_popup.request_details"| translate}}</h2>
+        <button type="button" class="close" aria-label="Close" (click)="closeModal3()">
+          <img src="../../../assets/img/modal-close.svg">
+        </button>
+      </div>
+      <div class="modal-body text-center del-popup" *ngIf="viewData.requestType == 3">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.receipt_id"| translate}}</label>
+              <span>{{viewData.receiptId}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.booking_time"| translate}}</label>
+              <span>{{viewData.bookingDateTime | date:'yyyy-M-d h:mm a'}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_header.title"| translate}}</label>
+              <span>{{viewData.webinar.title}}</span>              
+            </div>
+            <div class="req-item">
+              <label>{{"request_header.topic"| translate}}</label>
+              <span>{{viewData.webinar.topic}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_header.webinar_D&T"| translate}}</label>
+              <span>{{viewData.webinar.webinar_date  | date:'yyyy-MM-d' }} &nbsp; {{viewData.webinar.start_time  | date:'hh:mm a' }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_header.duration"| translate}}</label>
+              <span>{{viewData.webinar.duration}} Minutes</span>
+            </div>
+          </div>  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"star_webinar.webinar_booked_price"| translate}}</label>
+              <span>${{viewData.webinar.booked_price}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"star_webinar.webinar_recorded_price"| translate}}</label>
+              <span>${{viewData.webinar.recorded_price}}</span>
+            </div>
+          </div>           
+  
+          <div class="req-row" *ngIf="viewData.status == 3">
+            <div class="req-item">
+              <label>{{"request_popup.reject_reason"| translate}}</label>
+              <span>{{viewData.rejectReason}}</span>
+            </div>
+            <div class="req-item">
+              <label></label>
+              <span></span>
+            </div>
+          </div>
+  
+          <div class="req-row" *ngIf="viewData.promoCode != ''">                
+            <div class="req-item">
+              <label>{{"star_webinar.promocode"| translate}}</label>
+              <span>{{(viewData.promoCode != '') ? viewData.promoCode : '--' }}</span>
+            </div>
+            <div class="req-item">
+              <label></label>
+              <span></span>
+            </div>
+          </div>  
+          
+          <div *ngIf="viewData.fanRating > 0">
+            <h5>{{"star_webinar.rating_feedback"| translate}}</h5>
+            <div class="req-row" >
+              <div class="req-item" *ngIf="viewData.fanRating > 0">
+                <label>{{"request_popup.rating"| translate}}</label>
+                <star-rating value="{{viewData.fanRating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                  size="24px" readonly="true"></star-rating>
+              </div>
+              <div class="req-item" *ngIf="viewData.fanComment && viewData.fanComment != ''">
+                <label>{{"request_popup.comments"| translate}}</label>
+                <span class="brek-text">{{viewData.fanComment}}</span>
+              </div>
+            </div>
+          </div>
+          
+          <h5>{{"request_header.webinar_details"| translate}}</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_header.join_url" | translate}}</label>
+              <span>{{viewData.webinar.join_url}}</span>
+            </div>         
+          </div>
+  
+          <h5>{{"celebrity_detail.star_detail" | translate}}</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"celebrity_detail.name" | translate}}</label>
+              <span>
+                <!-- {{viewData.receiverData.fname_en}} {{viewData.receiverData.lname_en}} -->
+                <span *ngIf="selectedLang =='en'">{{viewData.receiverData.fname_en}} {{viewData.receiverData.lname_en}}</span>
+                <span *ngIf="selectedLang =='ar'">
+                    {{viewData.receiverData.fname_ar ? viewData.receiverData.fname_ar : viewData.receiverData.fname_en}}
+                    {{viewData.receiverData.lname_ar ? viewData.receiverData.lname_ar : viewData.receiverData.lname_ar}}
+                </span>
+              </span>
+            </div>         
+          </div>
+  
+          <h5>{{"request_popup.payment_details" | translate}}</h5>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.service_fee" | translate}}</label>
+              <span>${{viewData.serviceFee}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.tax" | translate}}</label>
+              <span>$0</span>
+            </div>
+            <!-- <div class="req-item">
+              <label>Admin Fee</label>
+              <span>${{viewData.adminFee}}</span>
+            </div> -->
+          </div>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.discount" | translate}}</label>
+              <span>${{viewData.discountAmount}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.sub_total_fee" | translate}}</label>
+              <span>${{viewData.subTotalAmount}}</span>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label></label>
+              <span></span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.total_paid_amount" | translate}}</label>
+              <span>${{viewData.totalAmount}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body text-center del-popup" *ngIf="viewData.requestType == 4">
+        <div class="request-content">
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.receipt_id" | translate}}</label>
+              <span>{{viewData.receiptId}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.booking_time" | translate}}</label>
+              <span>{{viewData.bookingDateTime | date:'yyyy-M-d h:mm a'}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.zoom_req_date" | translate}}</label>
+              <span>{{viewData.zoom_date | date:'yyyy-M-d'}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.time_slot" | translate}}</label>
+              <span>{{viewData.zoom_time_slot}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"fan_coupon.name" | translate}}</label>
+              <span>{{viewData.name}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"profile.email" | translate}}</label>
+              <span>{{viewData.email}}</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"request_popup.occasion" | translate}}</label>
+              <span>{{viewData.zoom_occasion}}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"request_popup.icebreakers" | translate}}</label>
+              <span class="brek-text">{{viewData.zoom_icebreakers}}</span>
+            </div>
+          </div>       
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name1" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[0]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email1" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[1]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name2" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[1]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email2" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[1]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name3" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[2]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email3" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[2]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"guest.name4" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[3]['name'] }}</span>
+            </div>
+            <div class="req-item">
+              <label>{{"guest.email4" | translate}}</label>
+              <span>{{ viewData.zoom_guest_details[3]['email'] }}</span>
+            </div>
+          </div>  
+  
+          <div class="req-row" *ngIf="viewData.status == 3">
+            <div class="req-item">
+              <label>{{"request_popup.reject_reason" | translate}}</label>
+              <span>{{viewData.rejectReason}}</span>
+            </div>
+            <div class="req-item">
+              <label></label>
+              <span></span>
+            </div>
+          </div>              
+  
+          <h5>{{"request_popup.receiver_details" | translate}}</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>{{"celebrity_detail.name" | translate}}</label>
+              <span>{{viewData.receiverData.fname_en}} {{viewData.receiverData.lname_en}}</span>
+            </div>         
+          </div>
+        </div>
+  
+      </div>
+    </div>
+  </ng-template>

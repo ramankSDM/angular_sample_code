@@ -1,0 +1,72 @@
+<section class="web_homePage" (scroll)="onWindowScroll($event);">
+    <div class="user-inner-main">
+        <div class="inner-head"> <h2>Latest Videos</h2></div>
+       
+        <div class="tabs-content-parent">
+            <div *ngIf="homeData.length == 0">
+                {{"msg_notfound" | translate}}
+            </div>
+            <div id="tab1" class="tab-data" style="display: block">
+                <div class="tab-shoutout">
+                    <div *ngIf="homeData.length == 0">
+                       {{"msg_notfound" | translate}}
+                    </div>
+                    <div class="custom-item col-lg-3 col-md-6" *ngFor="let tdata of homeData; let i = index">
+                        <div class="celeb-img" (mouseenter)="playVideo(tdata,i)" (mouseleave)="removeVideo(tdata,i)">
+                            <div class="celeb-videoImg" id="{{tdata.receiverData._id}}{{tdata._id}}{{i}}">
+                                <img *ngIf="tdata && tdata != ''" src="{{tdata.thumbImage}}" title="">
+                                <img *ngIf="!tdata || tdata == ''"
+                                    src="../../../assets/img/celeb-profile/abadialjohar/1.jpg" title="">
+                                <div class="shoutout-tag">#{{tdata.occasion}}</div>
+                            </div>
+                            <div class="video-layer" style="display: none;"
+                                id="{{i}}{{tdata._id}}{{tdata.receiverData._id}}">
+                                <video allow="autoplay" id="celeb-video{{tdata._id}}{{i}}" class="video-js vjs-default-skin"
+                                    width="100%" height="100%" controls preload="none"
+                                    poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                                    data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                                    <source src="{{tdata.videoUrl}}" type='video/mp4' />
+                                    <source src="{{tdata.videoUrl}}" type='video/webm' />
+                                </video>
+                                <span class="custom-unmute" (click)="toggleVideoMute()"
+                                    [ngClass]="muted === true ? 'muted' : ''" [innerHTML]="muted === true ? '' : ''"></span>
+                              
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div id="tab1" class="tab-data" style="display: block" *ngIf="homeData.length > 0">
+                <div class="tab-shoutout">
+                    <div class="custom-item" *ngFor="let hd of homeData;  let j = index">
+                        <div class="celeb-img">
+                            <a [routerLink]="['/celebrities',hd.userData.slug]"
+                                routerLinkActive="router-link-active">
+                                <img src="{{hd.thumbImage}}" id="{{hd.createdAt}}{{hd._id}}{{j}}">
+                            </a>
+                            <div class="celeb-actions">
+                                <a class="list-shoutout">${{hd.userData.dedicated_price}}</a>
+                            </div>
+                        </div>
+                        <div class="celeb-details">
+                            <div class="celeb-name">
+                                {{hd.userData.fname_en}}
+                                <span>Actor</span>
+                            </div>
+                            <div *ngIf="hd.userData.isLogin == true" class="celeb-status">Online</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div> -->
+
+        </div>
+        <div class="custom-pagination-outer">
+            <pagination [totalItems]="totalRecords" [itemsPerPage]="10" (pageChanged)="pageChanged($event)">
+            </pagination>
+        </div>
+    </div>
+    
+
+</section>

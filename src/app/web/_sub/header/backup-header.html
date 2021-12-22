@@ -1,0 +1,144 @@
+<div style="margin-top: 71px;">
+    <!-- <header class="row" (scroll)="onWindowScroll($event);" id="myheader" class="fadeInDown"> -->
+    <header class="row" id="myheader" class="fadeInDown">
+      <nav class="navbar site-nav">
+        <a class="navbar-brand" [routerLink]="['/']" routerLinkActive="router-link-active">
+          <img src="../../assets/images/logo-new.png" alt="Brand Logo" class="logo">
+        </a>
+        <div class="header_navbar">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            (click)="mediaFunction(mediaCss)">
+            <img src="../../../../assets/images/menu.svg" alt="" />
+          </button>
+          <div class="navbar menu-links" [ngClass]="{'hide_menu':!mediaCss}">
+            <span (click)="chatOpen()" class="pointer">
+              <a class="nav-item nav-link" (click)="mediaFunction(mediaCss)"
+                *ngIf="loginUser && loginUser.role==3">{{'Message'}}</a>
+            </span>
+  
+            <a class="nav-item nav-link" (click)="mediaFunction(mediaCss)" href="javascript:void(0)">Help</a>
+            <a class="nav-item nav-link" (click)="mediaFunction(mediaCss)" href="javascript:void(0)">Saved</a>
+            <a class="nav-item nav-link" (click)="mediaFunction(mediaCss)" [routerLink]="['/home/customer/my-bookings']"
+              *ngIf="loginUser && loginUser.role==3">{{'Booking'}}</a>
+  
+            <div ngbDropdown class="d-inline-block">
+  
+              <a class="nav-item nav-link" id="dropdownBasic1" ngbDropdownToggle>{{'Profile'}}</a>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <ul>
+                  
+                  <li><a routerLink="/home/customer/edit">Edit Profile</a></li>
+                  <li><a routerLink="/home/customer/change-password">Change Password</a></li>
+                  <li><a class="nav-item nav-link button-link" (click)="mediaFunction(mediaCss)" href="javascript:void(0)"
+                    (click)="onLoggedout()" *ngIf="loginUser">{{'Logout'}}</a></li>
+                </ul>
+              </div>
+            </div>
+  
+  
+            <a class="nav-item nav-link button-link" (click)="mediaFunction(mediaCss)" *ngIf="!loginUser"
+              (click)="login(loginmodal)">{{'Login'}}</a>
+            <a class="nav-item nav-link button-link" (click)="mediaFunction(mediaCss)" *ngIf="!loginUser"
+              (click)="signUp(signupmodal)">{{'Signup'}}</a>
+  
+          </div>
+          <div ngbDropdown class="d-inline-block">
+            <a href="javascript:void(0)" id="dropdownBasic1" ngbDropdownToggle class="cart-checkout"
+              (click)="getCart()"><img src="../../../assets/images/cart-icon.png" alt="cart" />
+              <span>{{cartCount}}</span>
+            </a>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <div class="order-detail">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="modal-basic-title">Order</h4>
+                </div>
+                <div class="" *ngIf="cartCount>0 && cartFinalArr && cartFinalArr.length>0">
+                  <p class="modal-title">{{'From'}} {{cartFinalArr[0].companyName}}</p>
+                  <div class="responsive-table">
+                    <table class="table">
+                      <tbody>
+                        <tr *ngFor="let cart of cartFinalArr">
+                          <td>{{cart.packageName}}</td>
+                          <!-- <br>{{cart.itemName}} -->
+                          <td>${{cart.packagePrice}}</td>
+                          <td align ="right">
+                            <a href="javascript:void(0)" (click)="removeItem(cart.packageId)">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="23.604" viewBox="0 0 23.604 29.071">
+                                <g transform="translate(-45.905 0.25)">
+                                  <g transform="translate(46.155)">
+                                    <path class="a"
+                                      d="M66,3.423H61.548a3.866,3.866,0,0,0-7.682,0H49.419a3.268,3.268,0,0,0-3.264,3.264v.167a3.267,3.267,0,0,0,2.063,3.032v15.42a3.268,3.268,0,0,0,3.264,3.264H63.933A3.268,3.268,0,0,0,67.2,25.307V9.887a3.267,3.267,0,0,0,2.063-3.032V6.687A3.268,3.268,0,0,0,66,3.423ZM57.707,1.548a2.323,2.323,0,0,1,2.277,1.875H55.431A2.323,2.323,0,0,1,57.707,1.548Zm7.941,23.759a1.718,1.718,0,0,1-1.716,1.716H51.482a1.718,1.718,0,0,1-1.716-1.716V10.119H65.648ZM67.711,6.855A1.718,1.718,0,0,1,66,8.571H49.419A1.718,1.718,0,0,1,47.7,6.855V6.687a1.718,1.718,0,0,1,1.716-1.716H66a1.718,1.718,0,0,1,1.716,1.716v.167Z"
+                                      transform="translate(-46.155)" />
+                                    <path class="a"
+                                      d="M158.849,259.834a.774.774,0,0,0,.774-.774v-8.715a.774.774,0,1,0-1.548,0v8.715A.774.774,0,0,0,158.849,259.834Z"
+                                      transform="translate(-151.447 -234.791)" />
+                                    <path class="a"
+                                      d="M228.919,259.834a.774.774,0,0,0,.774-.774v-8.715a.774.774,0,1,0-1.548,0v8.715A.774.774,0,0,0,228.919,259.834Z"
+                                      transform="translate(-217.367 -234.791)" />
+                                    <path class="a"
+                                      d="M298.988,259.834a.774.774,0,0,0,.774-.774v-8.715a.774.774,0,1,0-1.548,0v8.715A.774.774,0,0,0,298.988,259.834Z"
+                                      transform="translate(-283.286 -234.791)" />
+                                  </g>
+                                </g>
+                              </svg>
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="modal-footer" *ngIf="cartCount==0">
+                  <p class="modal-title">{{'No item in the cart'}}</p>
+                </div>
+                <div class="modal-footer ng-star-inserted" *ngIf="cartCount>0 && loginUser">
+                  <button class="btn btn-outline-dark" type="button" (click)="moveToCart()">{{'Request to Book'}}</button>
+                </div>
+                <div class="modal-footer ng-star-inserted" *ngIf="cartCount>0 && !loginUser">
+                  <button class="btn btn-outline-dark" type="button" (click)="login()">{{'Login'}}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+  
+  </div>
+  <!-- 
+   <ng-template #mymodal let-modal>
+    <div class="order-detail">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+  
+      </div>
+      <div class="modal-body" *ngIf="cartCount>0">
+       
+        <p class="modal-title">{{'From'}} {{cartFinalArr[0].companyName}}</p>
+        <div class="responsive-table">
+          <table class="table">
+            <tbody>
+              <tr *ngFor="let cart of cartFinalArr">
+                <td>{{cart.packageName}}<br>{{cart.itemName}}</td>
+                <td>${{cart.packagePrice}}</td>
+                <td><a  href="javascript:void(0)" (click)="removeItem(cart.packageId)"><i class="fa fa-trash"></i></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-body" *ngIf="cartCount==0">
+        <p class="modal-title">{{'No item in the cart'}}</p>
+      </div>
+      <div class="modal-footer" *ngIf="cartCount>0 && loginUser">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('moveToCart')">{{'Request to Book'}}</button>
+      </div>
+      <div class="modal-footer" *ngIf="cartCount>0 && !loginUser">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('login')">{{'Login'}}</button>
+      </div>
+    </div>
+  </ng-template> -->

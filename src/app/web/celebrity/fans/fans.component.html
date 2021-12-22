@@ -1,0 +1,348 @@
+<div class="user-inner-main">
+  <div class="inner-head">
+    <h2>{{"profile.my_fans" | translate}}</h2>
+    <div class="inner-head-rt">
+      <div class="custom-search-form">
+        <input class="form-control pro-input-des" placeholder="{{'fan_wallet.search_placeholder' | translate}}" type="text" [(ngModel)]="searchKey">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="getFans()">
+            <img src="../../../../assets/img/main-search.svg">
+          </button>
+        </span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="inner-body">
+    <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+      <p>{{"msg_notfound" | translate}}</p>
+    </div>
+    <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+      <div class="custom-table-outer">
+        <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="10">
+          <thead>
+            <tr>
+              <th class="text-center">
+                <sv-default-sorter by="title_en" (click)="sortBy('item.fans.fname_en')">{{"profile.first_name"| translate}}<i class="fa fa-sort"
+                    aria-hidden="true" *ngIf="sortKey !== 'title_en'"></i></sv-default-sorter>
+              </th>
+              <th class="text-center">
+                <sv-default-sorter by="title_ar" (click)="sortBy('item.fans.lname_en')">{{"profile.last_name"| translate}}<i class="fa fa-sort"
+                    aria-hidden="true" *ngIf="sortKey !== 'title_ar'"></i></sv-default-sorter>
+              </th>
+              <th class="text-center">
+                {{"profile.count_req" | translate}}
+              </th>             
+              <th class="text-center">{{"request_header.action" | translate}}</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr *ngFor="let item of sv.data; let i = index">
+              
+              <td class="text-center">
+                
+                <!-- {{ item.fans.fname_en }} -->
+                <div *ngIf="selectedLang =='en'">{{ item.fans.fname_en }}</div>
+                <div *ngIf="selectedLang =='ar'">
+                    {{item.fans.fname_ar ? item.fans.fname_ar:item.fans.fname_en}}
+                    
+                </div>
+              </td>
+              <td class="text-center">
+                <!-- {{ item.fans.lname_en }} -->
+                <div *ngIf="selectedLang =='en'">{{ item.fans.lname_en }}</div>
+                <div *ngIf="selectedLang =='ar'">
+                    {{item.fans.lname_ar ? item.fans.lname_ar:item.fans.lname_en}}
+                    
+                </div>
+              </td>
+             <td class="text-center">
+                  {{ item.requestCount }}
+                </td>               
+              <td class="text-center">
+                <div class="cust-table-act-btns d-flex align-items-center justify-content-center">
+                  <span class="table-act-btn" *ngIf="item.flag == false" tooltip="Flag Fan (to report)"
+                    (click)="openModal(flagModal,item)">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="493.353px" height="493.353px"
+                      viewBox="0 0 493.353 493.353" style="enable-background:new 0 0 493.353 493.353;"
+                      xml:space="preserve">
+                      <g>
+                        <g>
+                          <path d="M62.384,38.114c-7.138-7.133-15.752-10.706-25.837-10.706c-10.089,0-18.702,3.576-25.841,10.706
+			C3.571,45.253,0,53.867,0,63.955C0,77.658,6.088,88.128,18.271,95.36v361.45c0,2.475,0.902,4.617,2.714,6.424
+			c1.807,1.807,3.949,2.71,6.423,2.71h18.271c2.474,0,4.615-0.896,6.423-2.71c1.809-1.807,2.712-3.949,2.712-6.424V95.36
+			c12.185-7.236,18.271-17.703,18.271-31.405C73.085,53.87,69.518,45.257,62.384,38.114z" />
+                          <path
+                            d="M487.932,69.385c-3.62-3.617-7.905-5.426-12.854-5.426c-2.471,0-7.659,1.997-15.558,5.996
+			c-7.897,3.999-16.275,8.47-25.125,13.418c-8.843,4.949-19.321,9.419-31.401,13.418c-12.087,3.999-23.271,5.996-33.544,5.996
+			c-9.521,0-17.895-1.809-25.133-5.424c-23.982-11.231-44.816-19.607-62.522-25.127c-17.7-5.519-36.732-8.277-57.099-8.277
+			c-35.214,0-75.279,11.418-120.197,34.258c-11.043,5.52-18.56,9.613-22.557,12.277c-5.902,4.38-8.854,9.611-8.854,15.703v211.842
+			c0,4.948,1.812,9.236,5.429,12.847c3.612,3.62,7.898,5.428,12.847,5.428c3.044,0,6.18-0.855,9.419-2.567
+			c51.772-27.791,95.93-41.685,132.475-41.685c13.893,0,27.454,2.094,40.678,6.279c13.229,4.188,24.222,8.758,32.976,13.702
+			c8.761,4.948,19.082,9.521,30.978,13.709c11.902,4.179,23.654,6.276,35.262,6.276c29.314,0,64.433-11.036,105.352-33.119
+			c5.144-2.663,8.897-5.277,11.276-7.848c2.381-2.569,3.572-6.231,3.572-10.995V82.226C493.353,77.279,491.546,73,487.932,69.385z" />
+                        </g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                    </svg>
+
+                  </span>
+                  <span class="table-act-btn flaggedFan" *ngIf="item.flag == true" tooltip="Un-Flag"
+                    (click)="flagFan(item._id,'false')">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="493.353px" height="493.353px"
+                      viewBox="0 0 493.353 493.353" style="enable-background:new 0 0 493.353 493.353;"
+                      xml:space="preserve">
+                      <g>
+                        <g>
+                          <path d="M62.384,38.114c-7.138-7.133-15.752-10.706-25.837-10.706c-10.089,0-18.702,3.576-25.841,10.706
+			C3.571,45.253,0,53.867,0,63.955C0,77.658,6.088,88.128,18.271,95.36v361.45c0,2.475,0.902,4.617,2.714,6.424
+			c1.807,1.807,3.949,2.71,6.423,2.71h18.271c2.474,0,4.615-0.896,6.423-2.71c1.809-1.807,2.712-3.949,2.712-6.424V95.36
+			c12.185-7.236,18.271-17.703,18.271-31.405C73.085,53.87,69.518,45.257,62.384,38.114z" />
+                          <path
+                            d="M487.932,69.385c-3.62-3.617-7.905-5.426-12.854-5.426c-2.471,0-7.659,1.997-15.558,5.996
+			c-7.897,3.999-16.275,8.47-25.125,13.418c-8.843,4.949-19.321,9.419-31.401,13.418c-12.087,3.999-23.271,5.996-33.544,5.996
+			c-9.521,0-17.895-1.809-25.133-5.424c-23.982-11.231-44.816-19.607-62.522-25.127c-17.7-5.519-36.732-8.277-57.099-8.277
+			c-35.214,0-75.279,11.418-120.197,34.258c-11.043,5.52-18.56,9.613-22.557,12.277c-5.902,4.38-8.854,9.611-8.854,15.703v211.842
+			c0,4.948,1.812,9.236,5.429,12.847c3.612,3.62,7.898,5.428,12.847,5.428c3.044,0,6.18-0.855,9.419-2.567
+			c51.772-27.791,95.93-41.685,132.475-41.685c13.893,0,27.454,2.094,40.678,6.279c13.229,4.188,24.222,8.758,32.976,13.702
+			c8.761,4.948,19.082,9.521,30.978,13.709c11.902,4.179,23.654,6.276,35.262,6.276c29.314,0,64.433-11.036,105.352-33.119
+			c5.144-2.663,8.897-5.277,11.276-7.848c2.381-2.569,3.572-6.231,3.572-10.995V82.226C493.353,77.279,491.546,73,487.932,69.385z" />
+                        </g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                    </svg>
+
+                  </span>
+                  
+                  <span class="table-act-btn" *ngIf="item.blocked == false" tooltip="Block Fan"
+                    (click)="openModal(blockModal,item)">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 185 185"
+                      style="enable-background:new 0 0 185 185;" xml:space="preserve">
+                      <path
+                        d="M0,92.5C0,143.505,41.495,185,92.5,185S185,143.505,185,92.5S143.505,0,92.5,0S0,41.495,0,92.5z M170,92.5
+	c0,42.733-34.767,77.5-77.5,77.5c-18.671,0-35.821-6.639-49.215-17.678L152.322,43.284C163.361,56.679,170,73.828,170,92.5z
+	 M92.5,15c18.671,0,35.821,6.639,49.215,17.678L32.678,141.716C21.639,128.321,15,111.172,15,92.5C15,49.767,49.767,15,92.5,15z" />
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                    </svg>
+
+                  </span>
+                  <span class="table-act-btn blockedFan" *ngIf="item.blocked == true" tooltip="Un-Block Fan"
+                    (click)="blockFan(item._id,'false')">
+                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 185 185"
+                      style="enable-background:new 0 0 185 185;" xml:space="preserve">
+                      <path
+                        d="M0,92.5C0,143.505,41.495,185,92.5,185S185,143.505,185,92.5S143.505,0,92.5,0S0,41.495,0,92.5z M170,92.5
+	c0,42.733-34.767,77.5-77.5,77.5c-18.671,0-35.821-6.639-49.215-17.678L152.322,43.284C163.361,56.679,170,73.828,170,92.5z
+	 M92.5,15c18.671,0,35.821,6.639,49.215,17.678L32.678,141.716C21.639,128.321,15,111.172,15,92.5C15,49.767,49.767,15,92.5,15z" />
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                      <g>
+                      </g>
+                    </svg>
+                  </span>
+                  <span class="table-act-btn" tooltip="Remove Star" (click)="removeFan(item._id)">
+                      <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                          <path
+                            d="m424 64h-88v-16c0-26.467-21.533-48-48-48h-64c-26.467 0-48 21.533-48 48v16h-88c-22.056 0-40 17.944-40 40v56c0 8.836 7.164 16 16 16h8.744l13.823 290.283c1.221 25.636 22.281 45.717 47.945 45.717h242.976c25.665 0 46.725-20.081 47.945-45.717l13.823-290.283h8.744c8.836 0 16-7.164 16-16v-56c0-22.056-17.944-40-40-40zm-216-16c0-8.822 7.178-16 16-16h64c8.822 0 16 7.178 16 16v16h-96zm-128 56c0-4.411 3.589-8 8-8h336c4.411 0 8 3.589 8 8v40c-4.931 0-331.567 0-352 0zm313.469 360.761c-.407 8.545-7.427 15.239-15.981 15.239h-242.976c-8.555 0-15.575-6.694-15.981-15.239l-13.751-288.761h302.44z" />
+                          <path
+                            d="m256 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z" />
+                          <path
+                            d="m336 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z" />
+                          <path
+                            d="m176 448c8.836 0 16-7.164 16-16v-208c0-8.836-7.164-16-16-16s-16 7.164-16 16v208c0 8.836 7.163 16 16 16z" />
+                        </g>
+                      </svg>
+                    </span>
+
+                </div>
+              </td>
+            </tr>
+
+          </tbody>
+          
+        </table>
+      </div>
+      <div class="custom-pagination-outer">
+        <pagination [totalItems]="totalRecords" [itemsPerPage]="10" (pageChanged)="pageChanged($event)">
+        </pagination>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #flagModal>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Flag Fan</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+    <div class="modal-body text-center del-popup">
+      <div class="request-content request-content-adj">
+
+        <div class="req-row">
+          <div class="req-item req-item-width">
+            <label>Reason:</label>
+            <textarea [(ngModel)]="reason" required></textarea>
+          </div>
+        </div>
+
+        <div class="two-btn-group mt-3 text-right">
+          <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">Cancel</button>
+          <button type="button" class="project-btn-1" (click)="flagFan(itemValue._id,'true')">Ok</button>
+         
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #blockModal>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Block Fan</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+    <div class="modal-body text-center del-popup">
+      <div class="request-content request-content-adj ">
+
+        <div class="req-row">
+          <div class="req-item req-item-width">
+            <label>Reason: </label>
+            <textarea [(ngModel)]="reason" required></textarea>
+          </div>
+        </div>
+
+        <div class="two-btn-group mt-3 text-right">
+        
+          <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">Cancel</button>
+          <button type="button" class="project-btn-1 " (click)="blockFan(itemValue._id,'true')">Ok</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ng-template>

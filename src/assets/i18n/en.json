@@ -1,0 +1,750 @@
+{
+ 
+  "have":"Have",
+  "booked":"Booked",
+  "book_now" :"Book Now",
+  "Both": "Both",
+  "tip_text" : "Tips for Best Results",
+  "testimonials": "Testimonials",
+  "msg_notfound" : "No Record Found",
+  "follow": "Follow",
+  "on": "on",
+  "star_details" : "Star Details",
+  "celebrity_name" : "Star Name",
+  "tax" : "Tax",
+  "name" :"Name",
+  "email" : "Email",
+  "request1": "Request",
+  "pending" :"Pending",
+  "private" : "Private",
+  "public": "Public",
+  "image_size": "Image (Size should be maximum of 50 mb)",
+  "video_size" : "Video (Size should be maximum of 50 mb)",
+  "vat" :"Vat",
+
+  
+
+  "welcome_text":"Welcome",
+  "filter_by" : {
+    "filter" : "Filter By :",
+    "all" :"All",
+    "in_process":"In process",
+    "canceled" : "Cancelled",
+    "completed" : "Completed",
+    "rejected" : "Rejected",
+    "reschedule" : "Re-scheduled",
+    "refund_approved" : "Refund Approved",
+    "refund_rejected" : "Refund Rejected",
+    "req_for_refund" : "Request For Refund",
+    "reject_request" :"Reject Request",
+    "postpone": "Postpone",
+    "read" : "Read",
+    "accepted" : "Accepted",
+    "refund_req" : "Refund Request"
+
+
+
+  },
+      "header": {
+        "all_categories":"All Categories",
+        "login":"Log In", 
+        "signup" :"Sign Up",
+        "latest_video":"Latest Videos",
+        "all_webinar":"All Webinars",
+        "Notifications" :"Notifications"
+        
+
+        
+      },
+      "footer": {
+        "subscribe_mail":"Subscribe to our Mailing List",
+        "subscribe_tagline": "Stay updated with the latest things happening at Stars In",
+        "faq_link": "FAQ",
+        "terms_link": "Terms of Service",
+        "privacy_link": "Privacy Policy",
+        "contact_link": "Contact Us",
+        "about_us": "About Us",
+        "lbl_copyright": "Copyrights 2020. All Rights Reserved.",
+        "follow_icon":"Follow Us",
+        "news_link":"News",
+        "career_link":"Careers",
+        "support_link":"Support",
+         "email" : "Email Address",
+         "meeting_link" : "Meeting Link",
+         "faq_text" : "FAQ's"
+         
+
+      },
+      "home": {        
+        "slider_text":"Get Personalized Video Messages",
+        "slider_text_bold":"From Your Favourite Celebrities",
+        "browse_cat":"Browse Celebrities",
+        "star_signup":"Join as a Star",
+        "services_on_home":"Learn more about our services",
+        "personalize_expr":"For a Personalized Experience",
+        "how_it_work":"How it works",
+        "select":"Select",
+        "celebrity":"Celebrity",
+        "book_service":"Book service & Pay",
+        
+        "receive_request":"Receive Your Request",
+        "request":"Your Request"
+      },
+      "headerMenu":{
+        "profile":"Profile",
+        "wallet":"Wallet",
+        "my_request":"My Requests",
+        "my_coupons":"My Coupons",
+        "timeline":"Timeline",
+        "my_star":"My Stars",
+        "scheduled_meeting":"My Scheduled Meetings",
+        "contact_admin":"Contact Admin",
+        "change_pass":"Change Password",
+        "logout":"Logout",
+        "dashboard":"Dashboard",
+        "tags":"Tags",
+        "fans":"Fans",
+        "zoom_call_schedule":"Video Call Schedule",
+        "bank-account":"Bank Account",
+        "my_webinar":"My Webinars",
+        "message":"Messages",
+        "Calender":"Calender",
+        "current_pass" : "Current Password",
+        "new_pass" : "New Passoword",
+        "confirm_pass" : "Confirm New Passoword",
+        "current_pass_holder": "Enter Old Password",
+        "new_pass_holder": "Enter New Password",
+        "statistics" : "Statistics"
+        
+
+
+        
+
+
+      },
+      "signup":{
+        "star_signup":"Stars Sign up",
+        "signup":"SIGN UP",
+        "first_name":"First Name",
+        "last_name":"Last Name",
+        "email":"Email",
+        "country_code":"Choose Country Code",
+        "mobile_no":"Mobile Number",
+        "password":"Password",
+        "aggrement":"By signing up, you agree to StarsIn",
+        "and":"and",
+        "signup_note":"Signing up will not guarantee automatic enrollment on StarsIn. Once approved, you will receive a confirmation email. A talent representative may contact you to finalize onboarding requirements.",
+        "signin":"Sign in",
+        "already_account":"if you are already having an account.",
+        "popup_text":"10% Discount on your first purchase and receive celebrity updates!",
+        "or":"or",
+        "facebook":"Facebook",
+        "google":"Google",
+        "number_sharing_msg": "(your phone will never be shared)"
+      },
+      "validations":{
+        "first_name_require":"First name is required",
+        "first_name_arabic_require":"First name arabic is required",
+        "first_name_limit":"First name cannot be greater than 20 charaters",
+        "last_name_require":"Last name is required",
+        "last_name_arabic_require":"Last name arabic is required",
+        "last_name_limit":"Last name cannot be greater than 20 charaters",
+        "email_require":"Email is required",
+        "email_limit":"Email cannot be greater than 50 charaters",
+        "email_invalid":"Invalid email",
+        "mobile_require":"Mobile number is required",
+        "mobile_limit":"Mobile number is should have atleast 10 digits",
+        "password_require":"Password is required",
+        "password_limit":"Password atleast 8 letter with lowercase ,  uppercase, number and a special character",
+        "address_require":"Address is required",
+        "country_require":"Country is required",
+        "city_require":"City is required",
+        "timezone_require":"Timezone is required",
+        "std_code_require":"Std Code is required.",
+        "phone_require":"Phone number is required",
+        "dob_require":"Date of birth is required",
+        "gender_require":"Gender is required",
+        "display_name_require":"Display name is required",
+        "display_name_arabic_require":"Display name arabic is required",
+        "select_categories":"Please select categories",
+        "max_cat_select":"Please select max 3 categories",
+        "facebook_required" : "Facebook is required.",
+        "invalid_url": "Please enter the valid URL",
+        "bio_required": "Bio is required",
+        "bio_requiredAr": "Bio (Arabic) is required",
+        "profession_required": "Profession is required",
+        "profession_requiredAR": "Profession (Arabic) is required"
+
+
+
+      },
+      "login":{
+        "signin":"SIGNIN",
+        "email":"Email",
+        "password":"Password",
+        "remember_me":"Remember me",
+        "login":"Login",
+        "signup_fan":"Sign up As Fan",
+        "signup_cel":"Sign up As Celebrity",
+        "forgot_pass":"Forgot your password?"
+      },
+      "forgotPassword":{
+        "forgot_pass":"Forgot Password"        
+      },
+
+      "cart":{
+        "card_number":"Card Number",
+        "expiry_date":"Expiry Date"
+      },
+
+      "profile":{
+        "my_profile":"My Profile",
+        "my_media":"My Media",
+        "profile_detail":"Profile Details",
+        "personal_detail":"Personal Details",
+        "social_info":"My Social Info",
+        "referral":"Send Reference",
+        "referralCode":"Referral Code",
+        "introduction_video":"Introduction Video",
+        "media_file":"My Media Files",
+        "profile_complete_note":"To activate your account and access the full features, please complete your profile by filling these fields First Name (English & Arabic), Last Name (English & Arabic), Display name, Profile image, intro video, email, phone number, atleast one service to be sent for admin verification.",
+        "first_name":"First Name",
+        "first_name_arabic":"First Name Arabic",
+        "last_name":"Last Name",
+        "last_name_arabic":"Last Name Arabic",
+        "display_name":"Display Name",
+        "display_name_arabic":"Display Name Arabic",
+        "select_categories":"Select Categories",
+        "address":"Address(Select address from autocomplete)",
+        "city":"City",
+        "state":"State",
+        "zipcode":"Zipcode",
+        "country":"Country",
+        "profession":"Profession",
+        "profession_arabic":"Profession Arabic",
+        "description":"Description",
+        "description_arabic":"Description Arabic",
+        "shoutout":"Shout-out",
+        "igot":"i-Got Talent",
+        "webinar":"Webinar",
+        "connect_zoom":"Connect on Video Call",
+        "dm_text":"DM Text",
+        "chat_pref":"Chat Preference",
+        "select_gender":"Select Gender",
+        "male":"Male",
+        "female":"Female",
+        "both":"Both",
+        "choose_timezone":"Choose Your Timezone",
+        "Lang_pref":"Language Preference",
+        "select_lang":"Select Language",
+        "vacation":"On Vacation",
+        "vac_start":"Vacation Start Date",
+        "vac_end":"Vacation End Date",
+        "super_star":"My Super Star",
+        "select_star":"Select Star",
+        "personal_info_note":"Your personal information won't be part of your public information.",
+        "gender":"Gender",
+        "email":"Email",
+        "country_code":"Choose Country Code",
+        "phone":"Phone",
+        "dob":"Date of birth",
+        "insta_link":"Instagram Link",
+        "fb_link":"Facebook Link",
+        "youtube_link":"Youtube Link",
+        "tw_link":"Twitter Link",
+        "tiktok_link":"Tiktok Link",
+        "snap_link":"Snapchat Link",
+        "ln_link":"Linkedin Link",
+        "web_link":"Website Link",
+        "English": "English",
+         "Arabic": "Arabic",
+         "my_fans" : "My Fans",
+         "count_req" : "Request Count",
+         "bio_en": "Bio",
+         "bio_ar": "Bio Arabic",
+         "bio_required": "Bio is required"
+
+      },
+
+      "buttons":{
+        "save_upload":"Save Upload",
+        "update":"Update",
+        "submit":"Submit",
+        "upload":"Upload",
+        "save":"Save",
+        "cancel" : "Cancel",
+        "go" : "Go",
+        "ok" : "Ok",
+        "apply" :" Apply",
+        "back" : "Back",
+        "make_payment" : "MAKE PAYMENT",
+        "confirm" : "Confirm",
+        "schedule_event" : "Schedule Event",
+        "launch" : "Launch",
+        "accept" : "Accept"
+
+
+      },
+      "tips":{
+        "tip_text" : "Tips for Best Results",
+        "shout-out" :"Shoutout",
+        "igot-talent": "i-Got Talent",
+        "webinar" : "Webinar",
+        "zoomConnect": "Connect on Video Call",
+        "dmText" : "DM Text"
+    
+      },
+      "celebrity":{
+        "avg_rating": "Avg. Ratings",
+        "responseTime": "Response Time",
+        "days": "days",
+        "all-review": "See All Reviews",
+        "online" : "Online",
+        "becomeFan" : "Become a Fan",
+        "sendRequest" : "Send Request",
+        "connectNow" : "Connect Now",
+        "chatNow" : "Chat Now",
+        "joinNow" : "Join Now",
+        "latest_review": "Latest Review"
+
+
+
+      },
+      "Profile_placeholder":{
+        "insta_link":"Enter Instagram Link",
+        "fb_link":"Enter Facebook Link",
+        "youtube_link":"Enter Youtube Link",
+        "tw_link":"Enter Twitter Link",
+        "tiktok_link":"Enter Tiktok Link",
+        "snap_link":"Enter Snapchat Link",
+        "ln_link":"Enter Linkedin Link",
+        "web_link":"Enter Website Link"
+
+      },
+      "role":{
+        "fan": "Fan",
+        "celebrity": "Celebrity",
+        "selectRole": "Select Role"
+      },
+      "fan_wallet": {
+      "refund_request":"My Refund Requests",
+        "wallet_point":"Total Wallet Point",
+        "fan" : "Fan",
+        "celebrity":"Celebrity",
+        "occasion" :"Occasion",
+        "total_refunded_amount": "Total Refunded Amount",
+        "requested_date":"Requested date",
+        "booking_status" :"Booking Status",
+        "refund_status": "Refund Status",
+         "action": "Actions",
+         "search_placeholder": "Search...",
+         "my_wallet": "My Wallet"
+
+      },
+      "request_popup":{
+        "request_details": "Request Details",
+        "receipt_id" :"Receipt Id",
+        "booking_time": "Booking Time",
+        "to" : "To",
+        "from": "From",
+        "occasion": "Occasion",
+        "refund_reason": "Refund Reason",
+        "rating": "Rating",
+        "comments": "Comments",
+        "payment_details": "Payment Details",
+        "service_fee" : "Service Fee",
+        "tax": "Tax",
+        "discount": "Discount",
+        "sub_total_fee": "Sub-Total Fee",
+        "admin_fee": "Admin Fee",
+        "total_paid_amount": "Total Paid Amount",
+        "reject_reason" : "Reject Reason",
+        "zoom_req_date" : "Video Call Requested Date",
+        "time_slot" : "Time Slot",
+        "icebreakers" : "Icebreakers",
+        "receiver_details" : "Receiver Details",
+        "language" : "Language",
+        "net_serviceFee": "Net Service Fee",
+        "vat" :"Vat",
+        "cancel_request" : "Cancel Request",
+        "subTotal_fee" : "Sub-Total Fee",
+        "postpone_request" : "Postpone Request",
+        "postpone_msg": "Do you really want to postpone this request?"
+
+
+        
+
+
+      },
+      "request":  {
+       "schedule_meeting" :"Scheduled Meetings & Chats",
+        "my_request": "My Requests",
+        "shoutout":"Shoutout",
+        "igot":"i-Got Talent",
+        "webinar":"Webinar",
+        "zoom_call": "Video-Call",
+        "dm_text":"DM Text",
+        "all": "All",
+        "req_shoutout" :"My Shoutout Requests",
+          "req_IGT" : "My IGot Talent Requests",
+           "req_webinar":"My Webinars Requests"
+
+      },
+
+      "request_header":
+      {
+        "request_to" :"Request To",
+        "from_name": "From Name",
+        "video_to" : "Video To",
+        "occasion" :"Occasion",
+        "video_privacy" : "Video Privacy",
+        "booking_date" : "Booking Date",
+        "status": "Status",
+        "action": "Actions",
+        "requested_date":"Requested date",
+        "topic" : "Topic",
+        "webinar_D&T" : "Webinar Date & Time",
+        "join_url" : "Join URL",
+        "passcode" : "Passcode",
+        "booking_red_date" :"Booking Requested date ",
+        "zoom_meeting_date" : "Video Call Meeting Date",
+        "zoom_time_slot": "Video Call Time Slot",
+        "timezone" : "Timezone",
+        "dm_text":"DM Text",
+        "fan_req_from" : "Fan (Request From)",
+        "to_name" : "To Name ",
+        "video_for": "Video For",
+        "rating": "Rating",
+        "req_from" : "Request From",
+        "talent_cat" : "Talent Category",
+        "title": "Title",
+        "fans":"Fans",
+        "date&time" : "DateTime",
+        "webinar_details" : "Webinar Details",
+        "webinar_type" : "Webinar Type",
+        "noOfDays" :"Number of days",
+        "duration" : "Duration",
+        "datetime" : "Date & Time",
+        "reschedule_booking" : "Reschedule Booking",
+        "talent_req": "Talent is required"
+
+
+
+      },
+
+      "tags":{
+        "tag_status": "Status",
+        "tag_name_en" : "Tag Name English",
+        "tag_name_ar" : "Tag Name Arabic",
+        "action": "Actions",
+        "mytag": "My Tags",
+        "activated" : "Activated",
+        "deactivated" : "Deactivated",
+        "tag_header": "Select Tags from Admin Tags",
+        "selected_tags" : "Selected Tags",
+        "custom_tags" : "Custom Tags"
+        
+      },
+
+      "fan_coupon":{
+        "promo_coupon": "Promotional Coupons",
+        "name" : "Name", 
+        "title": "Title",
+        "description_en" : "Description (English)",
+        "description_arabic":"Description Arabic",
+        "discount": "Discount",
+        "code" : "Code",
+        "expiry_date" : "Expiry Date",
+        "title_ar": "Title Arabic"
+
+
+
+      },
+      "favourite" : "My Favourite",
+      "my_star": "My Star",
+
+      "contact_admin": {
+        "ct_admin" : "Contact Admin",
+        "subject": "Subject",
+        "select_subject": "Select Subject",
+        "accn_&_finc" : "Accounts and Finance",
+        "tect_support" : "Technical Support",
+        "other" : "Other",
+        "message": "Message",
+        "msg_placeholder": "Please enter message for admin",
+        "req_msg" : "Message is required.",
+        "req_sub": "Subject is required."
+      
+      },
+
+      "manage_schedule"  : {
+        "manage_avail" : "Manage Availability",
+        "date_time" : "Available Dates & Time",
+        "day": "Day",
+        "select_timezone" : "Selected Time Zone",
+        "selected_time" : "Selected Time",
+        "edit_avail" : "Edit Availability",
+        "start_time" : "Start Time",
+        "end_time" : "End Time",
+        "choose_undates": "Choose Un-Available Dates",
+        "selected_undates" : "Selected Un-Available Dates"
+
+      },
+      "time" : "Time",
+      "select_date" : "Select date",
+      "add_new" :" Add New",
+
+      "star_webinar":{
+        "noOfParticipant" : "No of Participants",
+        "webinar_booked_price" : "Webinar Booked Price",
+        "webinar_recorded_price" : "Webinar Recorded Price",
+        "instruction" : "Special Instructions",
+        "web_loginDetails" : "Webinar Login details",
+        "meeting_id" : "Meeting ID",
+        "fan_list_details" : "List of fans who has paid to join webinar",
+        "promocode" : "Promo Code",
+        "rating_feedback" : "Fan Rating & Feedback",
+        "delete_webinar" : "Delete Webinar",
+        "del_confirm_msg" : "Are you sure?",
+        "del_confirm_msg2" : "Do you really want to delete this record?",
+        "webinar_&_zoom" : "My Webinars and Video Call",
+        "multiple_webinar" : "Multiple Webinar",
+        "single_webinar" :"Signle Webinar",
+        "daysNumber" :"No of Days*",
+        "req_daysNumber" : "No of Days is required.",
+        "title_required" : "Title is required.",
+        "desc_required" : "Description is required",
+        "topic_required" : "Topic is required.",
+        "duration_required" : "Duration is required",
+        "choose_date" : "Choose Date",
+        "date_required" : "Date is required.",
+        "start_time" : "Start Time",
+        "time_required" :"Time is required.",
+        "choose_timezone" : "Choose Timezone",
+        "partic_required" : "No of Participants is required.",
+        "bookedPrice_required" : "Booked Price is required.",
+        "recordPrice_required" : "Recorded Price is required.",
+        "meeting_details": "Meeting Details"
+
+
+        
+
+
+
+      },
+      "celebrity_detail":
+      {
+        "star_detail": "Celebrity Details",
+        "name": "Name",
+        "fans_msg" : "My Fans Messages"
+      },
+
+      "guest":
+      {
+        "name1" : "Name of Guest 1",
+        "name2" : "Name of Guest 2",
+        "name3" : "Name of Guest 3",
+        "name4" : "Name of Guest 4",
+        "email1" :"Email of Guest 1",
+        "email2" :"Email of Guest 2",
+        "email3" :"Email of Guest 3",
+        "email4" :"Email of Guest 4",
+        "same_mailError" : "Guest Emails can't be same.Please provide unique emails."
+
+      },
+      "payment":{
+        "heading":"Payment Information",
+        "description": "We'll place a temporary hold on your card for 7 days. Your account will not be charged until the video is complete."
+      },
+
+      "model_shoutout":{
+        "shoutout_req":"Shoutout request from",
+        "someone_else" :"Someone else",
+        "me" : "Me",
+        "shout_lang" :"Shoutout Language",
+        "name_required" : "To Name is required.",
+        "from" : "From",
+        "from_name_required" : "From Name is required.",
+        "choose_occasion" : "Choose The Occasion",
+        "relationship": "Relationship",
+        "max_word" : "(Max 300)",
+        
+        "inst_required" : " Instructions is required.",
+        "error_msg3" : "Please enter maximum 300 characters.",
+        "video_private": "Make this Video Private",
+        "send_video_directly": "Send video directly to my friend email.(Optional)",
+        "friend_email_add" : "Friend Email Address",
+        "to" : "To",
+        "friend_email" : "Friend Email Address"
+        
+    
+      },
+      "common_model":{
+
+      "ssl_msg" : "Payment Secured by SSL encryption",
+      "occasion_date" :"Date of Occasion",
+      "required_error" : "Occasion date is required.",
+      "msg_instruction": "Message Instructions for",
+      "speak_only" :"speaks only",
+      "write_inst": "in their videos. Kindly write your instructions in",
+      "inst_required" : " Instructions is required.",
+      "error_msg2": "Please enter minimum 25 characters.",
+      "error_emailreq" : "Email is required.",
+      "your_email" : "Your Email Address",
+      "private_video" :"Make this Video Public",
+      "promo_code" : "+ Add Promo Code",
+      "available_coupon" : "Availabe Coupons:",
+      "available_point" : "Available Points:",
+      "what_heppenes_msg" : "What happens after I pay?",
+      "term_condition" : "By sending this request for shoutout, you agree to the",
+      "termOfService" : "Terms of Services",
+      "termOfServie2" : "set by Stars In.",
+      "use_wallet_msg" : "Use your available wallet points in booking.",
+      "aggrement_msg" :"Stay updated with exclusive offers and discounts at Stars I" ,
+      "email_invalid" : "Email is not valid.",
+      "occasion_req": "Occasion is required.",
+      "this_errorReq" : "This is required.",
+      "name_suggestion" : "If you have entered email then please enter name also.",
+      "email_suggestion" : "If you have entered name then please enter Email also.",
+       "reject_request" : "Do you really want to reject this request?",
+       "reject_reason" :"Please enter the reject reason",
+       "complete_req" : "Complete Request",
+       "sender_detail" : "Sender Details",
+       "del_msg" : "Do you really want to cancel this request?",
+       "confirm_msg" : "Do you really want to",
+       "confirm_msg2" : "this request?",
+       "relation_req": "Relationship is required"
+       
+
+       
+
+
+      
+      
+
+      },
+
+      "model_igt":{
+        "igt_req" :"i-Got Talent request from",
+        "igt_type" : "IGT Type",
+        "video" :"Video",
+        "mp3" :"MP3",
+        "image" :"Images",
+        "upload_video" : "Upload Video",
+        "video_select" : "Select your file here",
+        "upload_mp3" : "Upload MP3",
+        "select&Drop" : "Select or Drop your file here",
+        "upload_image" : "Upload Images",
+        "talent_category" : "Choose Talent Category",
+        "igt_lang" : "IGT Language",
+        "sentToFriend" :"Send to Friend",
+        "daysPostpone": "Postpone Days",
+        "till_postpone" : "Postpone Till",
+        "coupon": "Coupon Code",
+        "talent_video" : "Talent Video",
+        "audio_file" : "Audio File",
+        "video_instruction" : "Special Instruction for video",
+        "rating_feedback" : "Celebrity Rating & Feedback",
+        "video_url" : "Video URL",
+        "refunding_msg" : "Do you really want to refund this request?",
+        "refund_msg" : "Please enter the refund reason"
+
+
+
+
+        
+
+        
+
+      },
+
+      "model_zoom":
+      {
+        "book_zoom" : "Book Video Call",
+        "go_live" : "Go Live With",
+        "onZoom_call":"On A Video Call",
+        "zoom_detailsInfo" : " Video Call details to be provided upon confirmation",
+        "join":"join you for a Virtual meet and greet",
+        "schedule_timeText" :"Schedule a time for you and upto",
+        "schedule_timeText2":"friends, family, or colleagues for a live video Call with your favorite celebrity.",
+        "choose_interval" : "Choose Interval",
+        "available_time": "No time Available.",
+        "zoom_meetingDate" : "Video Call meeting Date",
+        "choose_date" : "Choose date",
+        "time_interval" : "Time Interval",
+        "total_amount" : "Total Amount",
+        "choose_otherTimezone": "Choose Other Timezone",
+        "icebreaker_text" :"Share some icebreakers with",
+        "icebreaker_text2": "to get the conversation started! Where are you from? How do you know each other? (college friends, fantasy football league, family!) Anything else you'd like to share?",
+        "minichar_error": "Please enter minimum 50 characters.",
+        "maxchar_error" :"Please enter maximum 500 characters.",
+        "terms_agreement": "By booking, you agree to STARSIN's",
+        "confirm_link_text" : "After you book, you'll receive a confirmation link email with",
+      "select_date_time" : "Your selected date & time",
+      "purchase_reciept" : "A receipt of your purchase",
+      "videoLink_text" : "A link to the video call that will be valid till your scheduled time (please have Video Call downloaded prior)",
+      "imp_note_header": "Important Notes:",
+      "imp_note_text": " If you choose to not show up for the meeting, for any reason, the meeting will be a no-show and will not be rescheduled for any circumstances. Similarly, if you turn up late for the meeting, the timing of the meeting will not be extended. It will go as scheduled.",
+      "confirm_msg" :"Do you really want to",
+      "confirm_msg2" :"this request?",
+      "enter_msg" :"Please enter the",
+      "reason" : "reason",
+      "call_details" : "Zoom Call Details"
+
+
+
+      },
+
+      "site_review":
+      {
+        "review_header" :"Please tell us how was your booking experience so we can alway improve",
+        "write_comment" :"Write Comment"
+      },
+
+      "model_dmText":
+      {
+        "dm_header" :"Send DM Text to",
+        "payment_info" : "Payment Information",
+        "card_name" : "Name on the Card",
+        "card_detail": "Card Details",
+        "card_required" : "Card Number is required.",
+        "exp_required": "Expiry is required.",
+        "cvv_required" : "CVV is required.",
+        "name_required" : "Name is required."
+
+      },
+      "model_webnar" : {
+
+        "on_webinar": "On A Webinar",
+        "webinar" : "Webinar",
+        "attend": "Attend Webinar",
+        "recorded_video" : "Recorded Video",
+        "about_yourself": "About Yourself"
+      },
+
+      "dashboard":{
+        "total_fan": "Total Fan",
+        "all_request" : " All Requests",
+        "pending": "Pending",
+        "total_revenu" : "Total Revenue",
+        "total_amount" : "Total Amount",
+        "dm" : "DM",
+        "zoom_call" : "Video Call"
+
+
+
+      }
+
+
+
+     
+
+      
+
+
+
+
+      
+    
+     
+    }

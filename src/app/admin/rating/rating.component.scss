@@ -1,0 +1,100 @@
+
+.fa-sort {padding-left: 3px;color: darkgray;}
+
+
+
+
+
+.action-links {  float: left;}
+
+.del-button {color: #20a8d8 !important;text-decoration: none !important;background-color: transparent;cursor: pointer;}
+
+.del-button:hover {color: #167495 !important;text-decoration: underline !important;}
+
+.custom-search-form {position: relative;
+  .input-group-btn{position: absolute;right: 0;top: 0;}
+  .form-control {padding-right: 45px;}
+}
+
+.modal-header {
+  h2 {
+      font-size: 24px;
+      color: #D6006D;
+      font-weight: 600;
+      padding: 5px 20px;
+  }
+}
+
+.request-content {
+  width: 100%;
+  padding: 20px;
+  text-align: left;
+  h5 {
+      margin: 20px 0;
+      font-size: 18px;
+      font-weight: 600;
+      padding-bottom: 10px;
+      border-bottom: 1px solid#ced4da;
+  }
+  .req-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      .req-item {
+          max-width: calc(50% - 10px);
+          width: 100%;
+          label {
+              font-size: 14px;
+              font-weight: 600;
+              color: rgba(48, 17, 82, 0.5);
+              display: flex;
+              align-items: center;
+              margin-bottom: 5px;
+          }
+          span {
+              font-family: 'Myriad Pro Regular';
+              font-size: 16px;
+              color: #D6006D;
+          }
+      }
+  }
+}
+
+.req-item-width {max-width: 100% !important;}
+
+.custom-table-outer {
+    table {
+      thead {
+        background: #301152;
+        th {
+          color: #ffffff;
+        }
+      }
+      tbody {
+        td {
+          img {
+            height: 50px;
+            width: 50px;
+            border-radius: 15px;
+          }
+        }
+      }
+    } 
+  }  
+  .project-btn-1 {
+    border-radius: 30px;
+    background: #1c00b9;
+    background: linear-gradient(97deg, #1c00b9 0%, #b90070 100%);
+}
+.dot {
+  height: 15px;
+  width: 15px;
+  //background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.left{
+  float: right;
+}

@@ -1,0 +1,101 @@
+<div class="db-hdd-1">
+    <h2>Support Tickets</h2>
+</div>
+
+<div class="search-and-btn-top">
+    <div class="row custom-rw-btn-search-bottom ">
+        <div class="col-md-4 col-lg-4">
+            <label class="pro-lbl-one">Search By :</label>
+            <div class="custom-search-form">
+                <input class="form-control pro-input-des" placeholder="Search..." type="text" [(ngModel)]="searchKey">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" (click)="getAll()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+
+        </div>
+        <div class="col-md-4 col-lg-4 mt-md-0 mt-2">
+            <label class="pro-lbl-one">Filter By :</label>
+            <select class="form-control pro-input-des album-drop-down" [(ngModel)]="filterStatus"
+                (change)="filterRecords()">
+                <option value="" selected>All</option>
+                <option value="open">Open</option>
+                <option value="closed">Closed</option>
+            </select>
+        </div>
+        <div class="col-md-4 col-lg-4 mt-md-0 mt-3 text-right text-md-left">
+            <button (click)="clearFilter()" class="project-btn-1">Clear</button>
+        </div>
+    </div>
+
+</div>
+
+<div class="bx-shadow-white mt-4 mt-md-5">
+    <div class="bx-shadow-hdd p-a-15">
+        <h3>Listing</h3>
+    </div>
+    <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="ticketList && ticketList.length == 0">
+        <p>No Record Found</p>
+    </div>
+
+    <div class="bx-shadow-body" *ngIf="ticketList && ticketList.length != 0">
+        <div class="custom-table-outer">
+            <table class="table" [svData]="ticketList" #sv="svDataTable" [svRowsOnPage]="rowsOnPage">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            Ticket No.
+                        </th>
+                        <th class="text-center">
+                            Name
+                        </th>
+                        <th class="text-center">
+                            User Type
+                        </th>
+                        <th class="text-center">
+                            Subject
+                        </th>
+                        <th class="text-center">
+                            Message
+                        </th>
+                        <th class="text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr *ngFor="let item of sv.data; let i = index">
+                        <td class="text-center">
+                            {{item.ticketNo}}
+                        </td>
+                        <td class="text-center">
+                            {{ item.senderData.fname_en }} {{ item.senderData.lname_en }}
+                        </td>
+                        <td class="text-center">
+                            {{ (item.senderData.role == 2) ? 'Fan' : 'Star' }}
+                        </td>
+                        <td class="text-center">
+                            {{ item.subject }}
+                        </td>
+                        <td class="text-center">
+                            {{ item.message }}
+                        </td>
+                        <td class="text-center">
+                            <ui-switch class="project-cust-switch" (valueChange)="changeStatus(
+                                item, $event)" color="#4be250" defaultBgColor="#f16565" checkedLabel="Closed"
+                                [checked]="item.status" size="small" uncheckedLabel="Open"
+                                [tooltip]="item.status ? 'Closed' : 'Open'">
+                            </ui-switch>
+                        </td>
+                    </tr>
+                </tbody>
+               
+            </table>
+        </div>
+        <div class="custom-pagination-outer pb-md-5 pb-4">
+            <pagination [totalItems]="totalRecords" [itemsPerPage]="rowsOnPage"
+                (pageChanged)="pageChanged($event)">
+            </pagination>
+        </div>
+    </div>
+</div>

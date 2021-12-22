@@ -1,0 +1,30 @@
+<section class="web_homePage">
+    <section class="category-listing">
+      <div class="category-page-inner">
+    
+          <div class="category-listing-items">
+
+              <div class="custom-tabs-parent">
+                <h2>All Categories</h2>
+                <div class="tabs-content-parent">
+                  <div *ngIf="categoryList.length == 0">
+                    No records found
+                  </div>
+                  <div id="tab1" class="tab-data" style="display: block" *ngIf="categoryList.length > 0">
+                    <div class="tab-shoutout">
+                      <div class="custom-item" *ngFor="let hd of categoryList;  let j = index">
+                        <div class="celeb-img">
+                            <a [routerLink]="['/category',hd.slug]" routerLinkActive="router-link-active"> {{hd.category_name_en}} </a> 
+                        </div>                        
+                      </div>            
+                    </div>
+                  </div>
+            
+                </div>
+              </div>           
+             
+            </div>
+      </div>
+    </section>    
+</section>
+    

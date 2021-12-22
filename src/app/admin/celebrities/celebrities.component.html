@@ -1,0 +1,441 @@
+<div class="db-hdd-1">
+  <h2>Celebrities</h2>
+</div>
+
+<div class="search-and-btn-top">
+  <div class="row custom-rw-btn-search-bottom ">
+    <div class="col-md-3 col-lg-3">
+      <label class="pro-lbl-one">Search By :</label>
+      <div class="custom-search-form">
+        <input class="form-control pro-input-des" placeholder="Search..." type="text" [(ngModel)]="searchKey">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="getAll()">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+    </div>
+    <div class="col-md-3 col-lg-3 mt-md-0 mt-2">
+      <label class="pro-lbl-one">Filter By :</label>
+      <select class="form-control pro-input-des album-drop-down" [(ngModel)]="filterStatus" (change)="filterRecords()">
+        <option value="" selected>All</option>
+        <option value="activated">Activated</option>
+        <option value="deactivated">Deactivated</option>
+      </select>
+    </div>
+    <div class="col-md-3 col-lg-3 mt-md-0 mt-2">
+      <label class="pro-lbl-one">Category :</label>
+      <select class="form-control pro-input-des album-drop-down" [(ngModel)]="filterCat" (change)="filterRecords()">
+        <option value="" selected>All</option>
+        <option value="{{cat._id}}" *ngFor="let cat of catList">{{cat.category_name_en}}</option>
+      </select>
+    </div>
+    <!-- <div class="col-md-2 col-lg-2">
+      <label class="pro-lbl-one">Tags :</label>
+      <select class="form-control pro-input-des album-drop-down" [(ngModel)]="filterTag" (change)="filterRecords()">
+        <option value="" selected>All</option>
+        <option value="{{tag._id}}" *ngFor="let tag of tagList">{{tag.title_en}}</option>
+      </select>
+    </div> -->
+
+    <div class="col-md-3 mt-md-0 mt-3 text-right text-md-left">
+      <button routerLink="add" class="project-btn-1 mr-2">Add New</button>
+      <button (click)="downloadReport()" class="project-btn-1 project-btn-secondary-color">Download</button>
+    </div>
+    
+  </div>
+
+</div>
+
+<div class="bx-shadow-white mt-4 mt-md-5">
+  <div class="bx-shadow-hdd p-a-15">
+    <h3>Listing</h3>
+  </div>
+  <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+    <p>No Record Found</p>
+  </div>
+
+  <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+    <div class="custom-table-outer">
+      <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="20">
+        <thead>
+          <tr>
+            <th class="text-center">
+              Status
+            </th>
+            <th class="text-center">
+              Image
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="fname_en" (click)="sortBy('fname_en')">Full Name<i class="fa fa-sort"
+                  aria-hidden="true" *ngIf="sortKey !== 'fname_en'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="lname_en" (click)="sortBy('lname_en')">Display Name <i class="fa fa-sort"
+                  aria-hidden="true" *ngIf="sortKey !== 'lname_en'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="level" (click)="sortBy('email')">Email <i class="fa fa-sort" aria-hidden="true"
+                  *ngIf="sortKey !== 'email'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              Phone
+            </th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr *ngFor="let item of sv.data; let i = index">
+            <td class="text-center">
+              <i *ngIf="item.isReviewed == false" title="Review Pending" class="fa fa-star"></i>
+              <ui-switch class="project-cust-switch" (valueChange)="changeStatus(
+                  item, $event)" color="#4be250" defaultBgColor="#f16565" checkedLabel="Activated"
+                [checked]="item.status" size="small" uncheckedLabel="Deactivated"
+                [tooltip]="item.status ? 'Deactivate' : 'Activate'">
+              </ui-switch>
+            </td>
+            <td>
+              <figure>
+                <a
+              [routerLink]="['/celebrities/'+item.slug]"             
+              target="_blank"> 
+              <img *ngIf="item.image == undefined || item.image == ''" src="assets/img/dummyimg.png" alt="" class="rounded-circle" />
+              <img *ngIf="item.image && item.image != ''" [src]="item.image" alt="" class="rounded-circle" />
+              </a >
+               
+              </figure>
+            </td>
+            <td class="text-center">
+              <a
+              [routerLink]="['/celebrities/'+item.slug]"             
+              target="_blank">{{ item.fname_en }} {{ item.lname_en }}</a>
+              
+            </td>
+            <td class="text-center">
+              <a
+              [routerLink]="['/celebrities/'+item.slug]"             
+              target="_blank"> {{ item.displayName_en }}</a>
+             
+            </td>
+            <td class="text-center">
+              {{ item.email }}
+            </td>
+            <td class="text-center">
+              {{ item.std_code}}{{ item.phone}}
+            </td>
+            <td class="text-center">
+              <div class="cust-table-act-btns">
+                <span class="table-act-btn" tooltip="View" (click)="openModal(viewModal,item)"><i
+                    class="fas fa-eye"></i></span>
+                <span class="table-act-btn" tooltip="Edit"><i class="fas fa-edit"
+                    [routerLink]="['update/'+item._id]"></i></span>
+                <span class="table-act-btn" tooltip="Delete" (click)="openModal(template, item)"><i
+                    class="fas fa-trash"></i></span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        
+      </table>
+    </div>
+    <div class="custom-pagination-outer pb-md-5 pb-4">
+      <pagination [totalItems]="totalRecords" [itemsPerPage]="20" (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Delete Record</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>   
+  <div class="modal-body text-center del-popup">
+    <div class="delete-content">
+
+    <h5>Are you sure?</h5>
+    <p>Do you really want to delete this record? </p>
+    <div class="two-btn-group mt-3">
+      
+      <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">Cancel</button>
+      <button type="button" class="project-btn-1" (click)="delete()">Ok</button>
+    </div>
+</div>
+</div>
+  </div>
+</ng-template>
+
+
+<ng-template #viewModal>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Profile</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+      
+    <div class="modal-body text-center  del-popup">
+      <div class="request-content">
+        <div class="req-row">
+          <div class="req-item">
+            <label>Profile Image</label>
+            <span><img src="{{itemValue.image}}"></span>
+          </div>
+          <div class="req-item">
+              <label>Intro Video</label>
+              <video *ngIf="itemValue.intro_video != ''" allow="autoplay" id="celeb-video" class="video-js vjs-default-skin" width="100%" height="100%"
+                controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                <source src="{{itemValue.intro_video}}" type='video/mp4' />
+                <source src="{{itemValue.intro_video}}" type='video/webm' />
+              </video>
+          </div>
+        </div>
+        
+        <div class="req-row">
+          <div class="req-item">
+            <label>Name English</label>
+            <span>{{itemValue.fname_en}} {{itemValue.lname_en}}</span>
+          </div>
+          <div class="req-item">
+            <label>Name Arabic</label>
+            <span>{{(itemValue.fname_ar && itemValue.fname_ar != '') ? itemValue.fname_ar : '-'}}
+              {{(itemValue.lname_ar && itemValue.lname_ar != '') ? itemValue.lname_ar : '-'}}</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Display Name English</label>
+            <span>{{(itemValue.displayName_en && itemValue.displayName_en != '') ? itemValue.displayName_en : '-' }}</span>
+          </div>
+          <div class="req-item">
+            <label>Display Name Arabic</label>
+            <span>{{(itemValue.displayName_ar && itemValue.displayName_ar != '') ? itemValue.displayName_ar : '-' }}</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Email</label>
+            <span>{{itemValue.email}}</span>
+          </div>
+          <div class="req-item">
+            <label>Phone Number</label>
+            <span>{{itemValue.phone}}</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Shout-out</label>
+            <span>{{itemValue.dedicated_price }}</span>
+          </div>
+          <div class="req-item">
+            <label>I-got Talent</label>
+            <span>{{itemValue.i_got_talent_price}}</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Webinar</label>
+            <span>{{itemValue.webinar_price}}</span>
+          </div>
+          <div class="req-item">
+            <label>Connect on Video Call</label>
+            <span>{{itemValue.connect_on_zoom_price}}</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>DM Text</label>
+            <span>{{itemValue.dm_text_price}}</span>
+          </div>
+          <div class="req-item">
+            <label>DM Video</label>
+            <span>{{itemValue.dm_video_price}}</span>
+          </div>
+        </div>
+        <h5>Social Media Information</h5>
+        <div class="row ">
+          <div class="col-3" *ngIf="itemValue.fb_link !==''">
+            <div><a href="{{itemValue.fb_link}}" target="_blank"><img src="../../../assets/img/social_Media_icons/facebook.png" ></a></div>
+          </div>
+
+          <div class="col-3" *ngIf="itemValue.insta_link !==''">
+            <div><a href="{{itemValue.insta_link}}" target="_blank"><img src="../../../assets/img/social_Media_icons/instagram.png" ></a></div>
+          </div>
+
+          <div class="col-3" *ngIf="itemValue.youtube_link !==''">
+            <div><a href="{{itemValue.youtube_link}}" target="_blank"><img src="../../../assets/img/social_Media_icons/youtube.png" ></a></div>
+          </div>
+
+          <div class="col-3" *ngIf="itemValue.snap_link !==''">
+            <div><a href="{{itemValue.snap_link}}" target="_blank"><img src="../../../assets/img/social_Media_icons/snapchat.png" ></a></div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-3" *ngIf="itemValue.linkin_link !==''">
+            <div><a href="{{itemValue.linkin_link}}" target="_blank"><img src="../../../assets/img/social_Media_icons/linkedin.png" ></a></div>
+          </div>
+
+          <div class="col-3" *ngIf="itemValue.tiktok_link !==''">
+            <div><a href="{{itemValue.tiktok_link}}" target="_blank"><img src="../../../assets/img/social_Media_icons/tiktok-square.png" ></a></div>
+          </div>
+
+          <div class="col-3" *ngIf="itemValue.tw_link !==''">
+            <div><a href="{{itemValue.tw_link}}" target="_blank"><img src="../../../assets/img/social_Media_icons/twitter.png" ></a></div>
+          </div>
+
+          <div class="col-3" *ngIf="itemValue.web_link !==''">
+            <div><a href="{{itemValue.web_link}}" target="_blank"><img src="../../../assets/img/social_Media_icons/globe.png" ></a></div>
+          </div>
+        </div>
+          
+        
+
+
+
+        <!-- 
+          <div class="req-row">
+            <div class="req-item" *ngIf="viewData.requestType == 1">
+              <label>Video for</label>
+              <span>{{viewData.videoFor}}</span>
+            </div>
+            <div class="req-item" *ngIf="viewData.requestType == 2">
+              <label>Talent Category</label>
+              <span>{{viewData.talentCategory}}</span>
+            </div>
+            <div class="req-item">
+              <label>Promo Code</label>
+              <span>{{(viewData.promoCode != '') ? viewData.promoCode : '--' }}</span>
+            </div>
+          </div>
+  
+  
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>Special Instruction for video</label>
+              <span>{{viewData.instruction}}</span>
+            </div>
+          </div>
+  
+  
+          <div class="req-row" *ngIf="viewData.requestType == 2">
+            <div class="req-item req-item-width" *ngIf="viewData.talentType == 'video'">
+              <label>Talent Video</label>
+              <video allow="autoplay" id="celeb-video" class="video-js vjs-default-skin" width="100%" height="100%"
+                controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                <source src="{{viewData.talentVideo}}" type='video/mp4' />
+                <source src="{{viewData.talentVideo}}" type='video/webm' />
+              </video>
+            </div>
+  
+            <div class="req-item req-item-width" *ngIf="viewData.talentType == 'mp3'">
+              <label>Audio File</label>
+              <div>
+                <ngx-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle" [autoPlay]="false"
+                  muted="muted" (trackEnded)="onEnded($event)" [displayVolumeControls]="msaapDisplayVolumeControls"
+                  [disablePositionSlider]="msaapDisablePositionSlider" [expanded]="true"></ngx-audio-player>
+  
+              </div>
+            </div>
+  
+            <div class="req-item req-item-width" *ngIf="viewData.talentType == 'img'">
+              <label>Images</label>
+              <owl-carousel-o [options]="customOptions">
+                <ng-container *ngFor="let slide of viewData.talentImages">
+                  <ng-template carouselSlide>
+                    <img [src]="slide" [alt]="slide" [title]="slide">
+                  </ng-template>
+                </ng-container>
+              </owl-carousel-o>
+            </div>
+          </div>
+  
+          <div class="req-row">
+            <div class="req-item">
+              <label>Rating</label>
+              <star-rating value="{{viewData.rating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+                size="24px" readonly="true"></star-rating>
+            </div>
+            <div class="req-item">
+              <label>Comments</label>
+              <span>{{viewData.comment}}</span>
+            </div>
+          </div>
+  
+  
+          <div class="req-row" *ngIf="(viewData.requestType == 1 || viewData.requestType == 2) && viewData.status == 5">
+            <div class="req-item req-item-width">
+              <label>Video URL</label>
+              <video allow="autoplay" id="celeb-video" class="video-js vjs-default-skin" width="100%" height="100%"
+                controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+                data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+                <source src="{{viewData.videoUrl}}" type='video/mp4' />
+                <source src="{{viewData.videoUrl}}" type='video/webm' />
+              </video>
+            </div>
+          </div>
+  
+          <h5>Fan Details</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>Name</label>
+              <span>{{viewData.senderData.fname_en}} {{viewData.senderData.lname_en}}</span>
+            </div>
+          </div>
+  
+  
+          <h5>Celebrity Details</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>Name</label>
+              <span>{{viewData.receiverData.fname_en}} {{viewData.receiverData.lname_en}}</span>
+            </div>
+          </div>
+  
+          <h5>Payment Details</h5>
+          <div class="req-row">
+            <div class="req-item">
+              <label>Service Fee</label>
+              <span>${{viewData.serviceFee}}</span>
+            </div>
+            <div class="req-item">
+              <label>Tax</label>
+              <span>$0</span>
+            </div>
+          </div>
+          <div class="req-row">
+            <div class="req-item">
+              <label>Discount</label>
+              <span>${{viewData.discountAmount}}</span>
+            </div>
+            <div class="req-item">
+              <label>Sub-Total Fee</label>
+              <span>${{viewData.subTotalAmount}}</span>
+            </div>
+          </div> -->
+
+        <!-- <div class="req-row">
+            <div class="req-item">
+              <label>Admin Fee</label>
+              <span>${{viewData.adminFee}}</span>
+            </div>
+            <div class="req-item">
+              <label>Total Paid Amount</label>
+              <span>${{viewData.totalAmount}}</span>
+            </div>
+          </div> -->
+      </div>
+    </div>
+  </div>
+</ng-template>

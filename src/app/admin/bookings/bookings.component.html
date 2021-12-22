@@ -1,0 +1,578 @@
+<div class="db-hdd-1">
+  <h2>Bookings</h2>
+</div>
+
+<div class="search-and-btn-top">
+  <div class="row custom-rw-btn-search-bottom ">
+    <div class="col-md-3 col-lg-3">
+      <label class="pro-lbl-one">Search By :</label>
+      <div class="custom-search-form">
+        <input class="form-control pro-input-des" placeholder="Search..." (change)="searchByName()" type="text" [(ngModel)]="searchKey">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" (click)="getAll()">
+            <i class="fa fa-search"></i>
+          </button>
+        </span>
+      </div>
+
+    </div>
+    <div class="col-md-3 col-lg-3 mt-md-0 mt-2">
+      <label class="pro-lbl-one">Filter By Request Status:</label>
+      <select class="form-control pro-input-des album-drop-down" [(ngModel)]="filterStatus" (change)="filterRecords()">
+        <option value="" selected>All</option>
+        <option value="In process">In process</option>
+        <option value="Canceled">Canceled</option>
+        <option value="Completed">Completed</option>
+        <option value="Rejected">Rejected</option>
+        <option value="Rescheduled">Re-scheduled</option>
+      </select>
+    </div>
+    <div class="col-md-3 col-lg-3 mt-md-0 mt-2">
+      <label class="pro-lbl-one">Filter By Request Type:</label>
+      <select class="form-control pro-input-des album-drop-down" [(ngModel)]="requestType" (change)="filterRecords()">
+        <option value="" selected>All</option>
+        <option value="1">Dedicated</option>
+        <option value="2">i-Got Talent</option>
+        <option value="3">Webnier</option>
+        <option value="4">Video Call</option>
+        <option value="5">Dm Text</option>
+        <option value="6">Dm Video</option>
+      </select>
+    </div>
+
+    <div class="col-md-3 col-lg-3 mt-md-0 mt-3 text-right text-md-left">
+      <button (click)="downloadReport()" class="project-btn-1">Download</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="bx-shadow-white mt-4 mt-md-5">
+  <div class="bx-shadow-hdd p-a-15">
+    <div class="d-flex justify-content-between flex-column flex-sm-row">
+      <div class="flex-grow-1 mr-3">
+        <h3>Listing</h3>        
+      </div>
+      <div class="d-flex flex-shrink-0 mt-3 mt-sm-0">
+        <div class="mr-2">
+          <button title="{{(checkedList == undefined || checkedList == '')?'Select booking to send mail':''}}"
+            [disabled]="checkedList == undefined || checkedList == ''" (click)="openModal4(mailTemplate,'fan')"
+            class="project-btn-1"> <i class="fa fa-envelope" aria-hidden="true"></i> -  Send Mail Fan </button>
+        </div>
+      
+        <div >
+          <button title="{{(checkedList == undefined || checkedList == '')?'Select booking to send mail':''}}"
+            [disabled]="checkedList == undefined || checkedList == ''" (click)="openModal4(mailTemplate,'celebrity')"
+            class="project-btn-1 project-btn-secondary-color"> <i class="fa fa-envelope" aria-hidden="true"></i> -  Send Mail Celebrity</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bx-shadow-body text-center p-a-15 no-record-found-outer" *ngIf="dataList && dataList.length == 0">
+    <p>No Record Found</p>
+  </div>
+  
+  <div class="bx-shadow-body" *ngIf="dataList && dataList.length != 0">
+    <div class="custom-table-outer table-responsive">
+      <table class="table" [svData]="dataList" #sv="svDataTable" [svRowsOnPage]="rowsOnPage">
+        <thead>
+          <tr>
+            <th class="text-center">
+              <input type="checkbox" [(ngModel)]="masterSelected" name="list_name" value="m1"
+                (change)="checkUncheckAll()" />
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="fan" (click)="sortBy('fan')">
+                Fan
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'fan'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              
+              <sv-default-sorter by="celebrity" (click)="sortBy('celebrity')">
+                Celebrity
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'celebrity'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              
+              <sv-default-sorter by="toName" (click)="sortBy('toName')">
+                To Name
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'toName'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="fromName" (click)="sortBy('fromName')">
+                From Name
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'fromName'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="videoFor" (click)="sortBy('videoFor')">
+                Video For
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'videoFor'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="occasion" (click)="sortBy('occasion')">
+                Occasion
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'occasion'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="talentCategory" (click)="sortBy('talentCategory')">
+                Talent Category
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'talentCategory'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="bookingDateTime" (click)="sortBy('bookingDateTime')">
+                Requested date
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'bookingDateTime'"></i></sv-default-sorter>
+            </th>
+
+            <th class="text-center">
+              <sv-default-sorter by="requestType" (click)="sortBy('requestType')">
+                Request Type
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'requestType'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              
+              <sv-default-sorter by="expiryDate" (click)="sortBy('expiryDate')">
+                Expiry Date
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'expiryDate'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="videoPrivacy" (click)="sortBy('videoPrivacy')">
+                Video Privacy
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'videoPrivacy'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">
+              <sv-default-sorter by="status" (click)="sortBy('status')">
+                Status
+                <i class="fa fa-sort" aria-hidden="true" *ngIf="sortKey !== 'status'"></i></sv-default-sorter>
+            </th>
+            <th class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr *ngFor="let item of sv.data; let i = index">
+            <td class="text-center">
+              <input type="checkbox" [(ngModel)]="item.isSelected" name="list_name" value="{{item._id}}"
+               (change)="isAllSelected()" /> 
+            </td>
+            <td class="text-center">
+              {{ item.senderData.fname_en }}
+            </td>
+            <td class="text-center">
+              {{ item.receiverData.fname_en }}
+            </td>
+            <td class="text-center">
+              {{(item.toName) ? item.toName : '--'}}
+            </td>
+            <td class="text-center">
+              {{item.fromName ? item.fromName : '--'}}
+            </td>
+            <td class="text-center">
+              <!-- {{ item.videoFor }} -->
+              <span *ngIf="item.videoFor === 'me'">--</span>
+              <span *ngIf="item.videoFor === 'other'">Other</span>
+              
+            </td>
+            <td class="text-center">
+              {{ item.occasion != ''?item.occasion:item.zoom_occasion != null?item.zoom_occasion:'--' }}
+            </td>
+            <td class="text-center">
+              {{ (item.talentCategory != '') ?  item.talentCategory : '--' }}
+            </td>
+            <td class="text-center">
+              {{ item.bookingDateTime  | date: 'MMM d, y' }}
+            </td>
+            <td class="text-center">
+              <span *ngIf="item.requestType == 1">Dedicated</span>
+              <span *ngIf="item.requestType == 2">i-Got Talent</span>
+              <span *ngIf="item.requestType == 3">Webinar</span>
+              <span *ngIf="item.requestType == 4">Video Call</span>
+              <span *ngIf="item.requestType == 5">Dm Text</span>
+              <span *ngIf="item.requestType == 6">Dm Video</span>
+            </td>
+            <td class="text-center">
+              {{ item.expiryDate | date: 'MMM d, y' }}
+            </td>
+            <td class="text-center">
+              {{ (item.isPublic == true) ? 'Public' : 'Private' }}
+            </td>
+            <td class="text-center">
+              <div class="d-flex justify-content-center align-items-center">
+              <span class="dot mr-2" [ngStyle]="{'background-color': item.colorCode}"></span>
+              <span *ngIf="item.status == 1 || item.status == 2 || item.status == 7">In
+                process</span>
+              <span *ngIf="item.status == 4">Cancelled</span>
+              <span *ngIf="item.status == 5">Completed</span>
+              <span *ngIf="item.status == 3">Rejected</span>
+              <span *ngIf="item.status == 6">Re-scheduled</span>
+            </div>
+            </td>
+            <td class="text-center">
+              <div class="cust-table-act-btns">
+                <span class="table-act-btn" tooltip="View Booking" (click)="openModal2(viewModal,item)"><i
+                    class="fas fa-eye"></i></span>
+                <span *ngIf="item.status == 1" class="table-act-btn" tooltip="Reject"
+                  (click)="openModal(template,item,3)"><i class="fas fa-trash"></i></span>
+                <span *ngIf="item.status == 2" class="table-act-btn" tooltip="Cancelled"><i
+                    class="fas fa-minus-circle"></i></span>
+                <span *ngIf="item.status == 1" (click)="openModal3(postpone,item)" class="table-act-btn"
+                  tooltip="Postpone"><i class="fas fa-calendar"></i></span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+        
+      </table>
+    </div>
+    <div class="custom-pagination-outer pb-md-5 pb-4">
+      <pagination [totalItems]="totalRecords" [itemsPerPage]="rowsOnPage" (pageChanged)="pageChanged($event)">
+      </pagination>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Reject Request</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+    <div class="modal-body text-center del-popup">
+      <div class="request-content">
+        <div class="req-row">
+          <div class="req-item">
+            <label>Are you sure?</label>
+            <span>Do you really want to reject this request?</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <textarea [(ngModel)]="reject_reason" required rowspan=""></textarea>
+            <p *ngIf="reasornError == true">Please enter the reject reason</p>
+          </div>
+        </div>
+        <div class="two-btn-group mt-3">
+          <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal()">Cancel</button>
+          <button type="button" class="project-btn-1  " (click)="reject()">Ok</button>
+         
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+<ng-template #viewModal>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Request Details</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal2()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+
+    <div class="modal-body text-center del-popup">
+      <div class="request-content">
+        <div class="req-row">
+          <div class="req-item">
+            <label>Receipt Id</label>
+            <span>{{viewData.receiptId}}</span>
+          </div>
+          <div class="req-item">
+            <label>Booking Time</label>
+            <span>{{viewData.bookingDateTime | date:'yyyy-M-d h:mm a'}}</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>To</label>
+            <span *ngIf="viewData.requestType == 1">{{viewData.toName}}</span>
+            <span *ngIf="viewData.requestType == 2">{{viewData.receiverData.fname_en}}</span>
+          </div>
+          <div class="req-item">
+            <label>From</label>
+            <span *ngIf="viewData.requestType == 1">{{viewData.fromName}}</span>
+            <span *ngIf="viewData.requestType == 2">{{viewData.senderData.fname_en}}</span>
+          </div>
+        </div>
+
+        <div class="req-row" *ngIf="viewData.requestType == 1">
+          <div class="req-item">
+            <label>Occasion</label>
+            <span>{{viewData.occasion}}</span>
+          </div>
+          <div class="req-item">
+            <label>Relationship</label>
+            <span>{{viewData.relationShip}}</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Language</label>
+            <span>{{(viewData.language == 'en') ? 'English' : 'Arabic'}}</span>
+          </div>
+          <div class="req-item">
+            <label>Video Privacy</label>
+            <span>{{(viewData.isPublic == true) ? 'Public' : 'Private'}}</span>
+          </div>
+        </div>
+
+        <div class="req-row" *ngIf="viewData.requestType == 1">
+          <div class="req-item">
+            <label>Send to Friend</label>
+            <span>{{(viewData.sendToFriend == true) ? 'Yes' : 'No'}}</span>
+          </div>
+          <div class="req-item">
+            <label>Email</label>
+            <span>{{viewData.email}}</span>
+          </div>
+        </div>
+
+        <div class="req-row" *ngIf="viewData.status == 6">
+          <div class="req-item">
+            <label>Postpone Days</label>
+            <span>{{viewData.postponeDays}} Days</span>
+          </div>
+          <div class="req-item">
+            <label>Postpone Till</label>
+            <span>{{viewData.postponeDate | date:'yyyy-M-d'}}</span>
+          </div>
+        </div>
+
+        <div class="req-row" *ngIf="viewData.status == 3">
+          <div class="req-item">
+            <label>Reject Reason</label>
+            <span>{{viewData.rejectReason}}</span>
+          </div>
+          <div class="req-item">
+            <label></label>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item" *ngIf="viewData.requestType == 1">
+            <label>Video for</label>
+            <span>{{viewData.videoFor}}</span>
+          </div>
+          <div class="req-item" *ngIf="viewData.requestType == 2">
+            <label>Talent Category</label>
+            <span>{{viewData.talentCategory}}</span>
+          </div>
+          <div class="req-item">
+            <label>Coupon Code</label>
+            <span>{{(viewData.promoCode != '') ? viewData.promoCode : '--' }}</span>
+          </div>
+        </div>
+
+
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Special Instruction for video</label>
+            <span>{{viewData.instruction}}</span>
+          </div>
+        </div>
+
+
+        <div class="req-row" *ngIf="viewData.requestType == 2">
+          <div class="req-item req-item-width" *ngIf="viewData.talentType == 'video'">
+            <label>Talent Video</label>
+            <video allow="autoplay" id="celeb-video" class="video-js vjs-default-skin" width="100%" height="100%"
+              controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+              data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+              <source src="{{viewData.talentVideo}}" type='video/mp4' />
+              <source src="{{viewData.talentVideo}}" type='video/webm' />
+            </video>
+          </div>
+
+          <div class="req-item req-item-width" *ngIf="viewData.talentType == 'mp3'">
+            <label>Audio File</label>
+            <div>
+              <ngx-audio-player [playlist]="msaapPlaylist" [displayTitle]="msaapDisplayTitle" [autoPlay]="false"
+                muted="muted" (trackEnded)="onEnded($event)" [displayVolumeControls]="msaapDisplayVolumeControls"
+                [disablePositionSlider]="msaapDisablePositionSlider" [expanded]="true"></ngx-audio-player>
+
+            </div>
+          </div>
+
+          <div class="req-item req-item-width" *ngIf="viewData.talentType == 'img'">
+            <label>Images</label>
+            <owl-carousel-o [options]="customOptions">
+              <ng-container *ngFor="let slide of viewData.talentImages">
+                <ng-template carouselSlide>
+                  <img [src]="slide" [alt]="slide" [title]="slide">
+                </ng-template>
+              </ng-container>
+            </owl-carousel-o>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Rating</label>
+            <star-rating value="{{viewData.rating}}" totalstars="5" checkedcolor="red" uncheckedcolor="black"
+              size="24px" readonly="true"></star-rating>
+          </div>
+          <div class="req-item">
+            <label>Comments</label>
+            <span>{{viewData.comment}}</span>
+          </div>
+        </div>
+
+
+        <div class="req-row" *ngIf="(viewData.requestType == 1 || viewData.requestType == 2) && viewData.status == 5">
+          <div class="req-item req-item-width">
+            <label>Video URL</label>
+            <video allow="autoplay" id="celeb-video" class="video-js vjs-default-skin" width="100%" height="100%"
+              controls preload="none" poster='http://video-js.zencoder.com/oceans-clip.jpg'
+              data-setup='{ "aspectRatio":"267:640", "playbackRates": [1, 1.5, 2] }'>
+              <source src="{{viewData.videoUrl}}" type='video/mp4' />
+              <source src="{{viewData.videoUrl}}" type='video/webm' />
+            </video>
+          </div>
+        </div>
+
+        <h5>Fan Details</h5>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Name</label>
+            <span>{{viewData.senderData.fname_en}} {{viewData.senderData.lname_en}}</span>
+          </div>
+        </div>
+
+
+        <h5>Celebrity Details</h5>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Name</label>
+            <span>{{viewData.receiverData.fname_en}} {{viewData.receiverData.lname_en}}</span>
+          </div>
+        </div>
+
+        <h5>Payment Details</h5>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Service Fee</label>
+            <span>${{viewData.serviceFee}}</span>
+          </div>
+          <div class="req-item">
+            <label>VAT</label>
+            <span>$0</span>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="req-item">
+            <label>Discount</label>
+            <span>${{viewData.discountAmount}}</span>
+          </div>
+          <div class="req-item">
+            <label>Sub-Total Fee</label>
+            <span>${{viewData.subTotalAmount}}</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="req-item">
+            <label>Admin Fee</label>
+            <span>${{viewData.adminFee}}</span>
+          </div>
+          <div class="req-item">
+            <label>Total Paid Amount</label>
+            <span>${{viewData.totalAmount}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #postpone>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Postpone Request</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal3()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+    <div class="modal-body text-center del-popup">
+      <div class="request-content">
+        <div class="req-row">
+          <div class="w-100">
+            <label>Are you sure?</label>
+            <span>Do you really want to postpone this request?</span>
+          </div>
+        </div>
+
+        <div class="req-row">
+          <div class="w-100">
+            <select class="form-control pro-input-des album-drop-down" [(ngModel)]="postponeDays">
+              <option value="" selected>Select Days</option>
+              <option value="1">1 Day</option>
+              <option value="2">2 Day</option>
+              <option value="3">3 Day</option>
+              <option value="4">4 Day</option>
+              <option value="5">5 Day</option>
+              <option value="6">6 Day</option>
+              <option value="7">7 Day</option>
+            </select>
+            <p *ngIf="postponeError == true" style="display: block">Please select the postpone days</p>
+          </div>
+        </div>
+        <div class="two-btn-group mt-3 text-right">
+         
+          <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal3()">Cancel</button>
+          <button type="button" class="project-btn-1  "
+          (click)="postponeSubmit()">Ok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+<ng-template #mailTemplate>
+  <div class="modal-outer">
+    <div class="modal-header">
+      <h2 class="modal-title">Send Mail</h2>
+      <button type="button" class="close" aria-label="Close" (click)="closeModal4()">
+        <img src="../../../assets/img/modal-close.svg">
+      </button>
+    </div>
+    <div class="modal-body text-center del-popup">
+      <div class="request-content">
+        <div class="req-row">
+          <div class="w-100">
+            <h4>Mail to {{sendMailTo}}</h4>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="w-100">
+            <label class="pro-lbl-one">Subject<em>*</em></label>
+            <input type="text" [(ngModel)]="mail_subject" class="form-control pro-input-des" required>
+          </div>
+        </div>
+        <div class="req-row">
+          <div class="w-100">
+            <label class="pro-lbl-one">Content<em>*</em></label>
+            <textarea [(ngModel)]="mail_message" class="form-control pro-input-des" required></textarea>
+          </div>
+        </div>
+        <div class="two-btn-group mt-3 text-right">
+         
+          <button type="button" class="project-btn-1 project-btn-secondary-color" (click)="closeModal4()">Cancel</button>
+          <button type="button" class="project-btn-1  " (click)="sendMail()">Ok</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</ng-template>

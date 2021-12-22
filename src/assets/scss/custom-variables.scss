@@ -1,0 +1,88 @@
+$body-bg-color: #ffffff;
+$theme-color:#479ed8;
+$body-font-color: #1d1d1d;
+$body-secondary-font-color: #676767;
+$border-color:#d8d8d8;
+
+$project-red-color: #fc6180;
+
+
+
+$font-size-body: 14px;
+$font-size-level-1: 20px;
+$font-size-level-2: 24px;
+$font-size-level-3: 30px;
+$font-size-level-4: 40px;
+
+$full-width:100%;
+
+$bx-shadow:0 1px 7px 0 rgba(0,0,0,.12);
+
+
+$font-light:'SegoeUI-Light';
+$font-semi-light:'SegoeUI-Semilight';
+$font-regular:'SegoeUI';
+$font-semi-bold:'SegoeUI-Semibold';
+$font-bold:'SegoeUI-Bold';
+$font-black:'SegoeUIBlack';
+
+
+@mixin HW($width, $height: $width) {
+   width: $width;
+   height: $height;
+}
+
+
+@mixin border-radius($radius) {
+    border-radius:$radius;
+    -webkit-border-radius:$radius;
+}
+
+@mixin transition($what: all, $time: 0s, $how: ease-in-out) {
+    -webkit-transition: $what $time $how;
+    -moz-transition:    $what $time $how;
+    -ms-transition:     $what $time $how;
+    -o-transition:      $what $time $how;
+    transition:         $what $time $how;
+}
+
+@mixin breakpoint($point) {
+   @if $point == width1600 {
+     @media (max-width: 1820px) { @content ; }
+  }
+
+@else if $point == width1330 {
+   @media (max-width: 1330px) { @content ; }
+}
+
+  @else if $point == desktop {
+   @media (max-width: 1200px) { @content ; }
+}
+
+  @else if $point == belowdesktop {
+     @media (max-width: 1199px) { @content ; }
+  }
+    @else if $point == tablet {
+     @media (max-width: 991px) { @content ; }
+  }
+
+  @else if $point == mobile {
+     @media (max-width: 767px)  { @content ; }
+
+  }
+  @else if $point == mobilemini {
+     @media (max-width: 575px)  { @content ; }
+
+  }
+  @else if $point == mobilemicro {
+     @media (max-width: 375px)  { @content ; }
+
+  }
+}
+
+.m-p-0{margin: 0; padding: 0;}
+.p-a-15{padding: 15px;}
+.p-a-20{padding: 20px;}
+.p-a-25{padding: 25px;}
+.text-ellips{display: inline-block;width: 100%;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
+.bx-shadow-white{@include border-radius(4px); box-shadow: $bx-shadow;background: #fff;}

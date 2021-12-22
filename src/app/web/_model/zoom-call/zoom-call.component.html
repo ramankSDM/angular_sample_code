@@ -1,0 +1,705 @@
+<div class="modal-outer">
+   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <img src="../../../assets/img/modal-close.svg">
+   </button>
+   <div class="modal-body">
+      <div class="service-modal-head align-items-start">
+         <div class="service-modal-left flex-shrink-0">
+            <div class="celeb-head-img">
+               <img [src]="dataList.image">
+            </div>
+            <div class="celeb-mask">
+               <img src="../../../../assets/img/celeb-profile/celeb-mask.png">
+            </div>
+         </div>
+         <div class="zoom-content">
+            <h1>{{"model_zoom.book_zoom" | translate}} </h1>
+            <h2> {{"model_zoom.go_live" | translate}}
+
+               <span>{{dataList.name}}</span>
+
+               {{"model_zoom.onZoom_call" | translate}}
+            </h2>
+            <h3 class="col-md-2">
+               <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="559.98px" height="559.98px"
+                  viewBox="0 0 559.98 559.98" style="enable-background:new 0 0 559.98 559.98;" xml:space="preserve">
+                  <g>
+                     <g>
+                        <path
+                           d="M279.99,0C125.601,0,0,125.601,0,279.99c0,154.39,125.601,279.99,279.99,279.99c154.39,0,279.99-125.601,279.99-279.99
+                            C559.98,125.601,434.38,0,279.99,0z M279.99,498.78c-120.644,0-218.79-98.146-218.79-218.79
+                            c0-120.638,98.146-218.79,218.79-218.79s218.79,98.152,218.79,218.79C498.78,400.634,400.634,498.78,279.99,498.78z" />
+                        <path d="M304.226,280.326V162.976c0-13.103-10.618-23.721-23.716-23.721c-13.102,0-23.721,10.618-23.721,23.721v124.928
+                            c0,0.373,0.092,0.723,0.11,1.096c-0.312,6.45,1.91,12.999,6.836,17.926l88.343,88.336c9.266,9.266,24.284,9.266,33.543,0
+                            c9.26-9.266,9.266-24.284,0-33.544L304.226,280.326z" />
+                     </g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+               </svg>
+               10 mins
+            </h3>
+            <h3 class="col-md-2">
+               <svg id="Layer_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <g>
+                     <path
+                        d="m456 80h-400c-30.878 0-56 25.122-56 56v240c0 30.878 25.122 56 56 56h400c30.878 0 56-25.122 56-56v-240c0-30.878-25.122-56-56-56zm-400 32h400c13.233 0 24 10.767 24 24v32h-448v-32c0-13.233 10.767-24 24-24zm400 288h-400c-13.233 0-24-10.767-24-24v-176h448v176c0 13.233-10.767 24-24 24z" />
+                     <path
+                        d="m112 352h-16c-8.836 0-16-7.164-16-16v-16c0-8.836 7.164-16 16-16h16c8.836 0 16 7.164 16 16v16c0 8.836-7.164 16-16 16z" />
+                  </g>
+               </svg>
+               ${{ dataList.price }} USD
+            </h3>
+            <h3 class="col-md-7">
+               <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
+                  style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                  <g>
+                     <g>
+                        <path
+                           d="M496,112h-48c-4.253-0.025-8.34,1.645-11.36,4.64L409.44,144H384v-16c0-26.51-21.49-48-48-48H48c-26.51,0-48,21.49-48,48
+                            v256c0,26.51,21.49,48,48,48h288c26.51,0,48-21.49,48-48v-16h25.44l27.36,27.36c2.98,2.956,7.003,4.622,11.2,4.64h48
+                            c8.837,0,16-7.163,16-16V128C512,119.163,504.837,112,496,112z M480,368h-25.44l-27.36-27.36c-2.98-2.956-7.003-4.622-11.2-4.64
+                            h-48c-8.837,0-16,7.163-16,16v32c0,8.837-7.163,16-16,16H48c-8.837,0-16-7.163-16-16V128c0-8.837,7.163-16,16-16h288
+                            c8.837,0,16,7.163,16,16v160h32V176h32c4.253,0.025,8.341-1.645,11.36-4.64l27.2-27.36H480V368z" />
+                     </g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+                  <g>
+                  </g>
+               </svg>
+               {{"model_zoom.zoom_detailsInfo" | translate}}
+            </h3>
+            <p>{{"have"|translate}} {{dataList.name}} {{"model_zoom.join" | translate}}</p>
+
+            <p>{{"model_zoom.schedule_timeText" | translate}} <strong>4</strong>
+               {{"model_zoom.schedule_timeText2" | translate}}</p>
+         </div>
+      </div>
+      <div class="service-modal-content">
+         <form [formGroup]="frm" class="form-horizontal">
+            <div class="serv-row">
+               <div class="zoom-form">
+                  <div *ngIf="isShowForm == false && isShowReview == false">
+                     <div class="form-item fan-zoom-cal">
+                        <label class="main-lbl">{{"model_zoom.choose_date" | translate}}</label>
+                        <div class="form-group">
+                           <div class="calendar-wrapper">
+                              <mat-calendar #calendar (selectedChange)="select($event,calendar)"
+                                 [dateClass]="isSelected" [minDate]="minDate" [maxDate]="maxDate"
+                                 [dateFilter]="myFilter">
+                              </mat-calendar>
+                           </div>
+                           <!-- <div class="req-item timezone">
+                            <label class="pro-lbl-one">Choose Other Timezone </label>
+                            <ng-moment-timezone-picker [formControlName]="'zoom_timezone'"
+                                [(ngModel)]="selectedZone" getUserZone=true customPlaceholderText=""
+                                (click)="getCurrentTime($event)"></ng-moment-timezone-picker>
+                            
+                            </div> -->
+                        </div>
+                     </div>
+                     <div class="form-item fan-zoom-time">
+                        <label class="main-lbl"
+                           *ngIf="intrevals.length > 0">{{"model_zoom.choose_interval" | translate}}</label>
+                        <div class="form-group" *ngIf="intrevals.length == 0">
+                           {{"model_zoom.available_time" | translate}}
+
+                        </div>
+                        <div class="time-slots">
+                           <div *ngFor="let item of intrevals; let i = index" class="form-group">
+                              <span (click)="showConfirmButtom(item,i)" class="timeSlot">{{ item }}</span>
+                              <button type="button" (click)="showForm(item)"
+                                 *ngIf="isNumber == i && isConfirm == true">{{"buttons.confirm" | translate}}</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="requestForm" *ngIf="isShowForm == true && isShowReview == false">
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"model_zoom.zoom_meetingDate" | translate}}</label>
+                              {{ reviewData.zoom_date | date: 'MMM d, y' }}
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"model_zoom.time_interval" | translate}}</label>
+                              {{ reviewData.zoom_time_slot }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"request_header.timezone" | translate}}</label>
+                              {{ reviewData.zoom_timezone.nameValue }}
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"model_zoom.total_amount" | translate}}</label>
+                              ${{ dataList.price }} USD
+                           </div>
+                        </div>
+                     </div>
+                     <input type="hidden" formControlName="zoom_date">
+                     <input type="hidden" formControlName="zoom_time_slot">
+                     <input type="hidden" formControlName="zoomBookingDateTime">
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"fan_coupon.name" | translate}}</label>
+                              <input type="text" placeholder="" formControlName="name" maxlength="100">
+                              <div *ngIf="frm.controls['name'].hasError('required') && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"model_shoutout.name_required" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"signup.email" | translate}}</label>
+                              <input type="text" placeholder="" formControlName="email" maxlength="100">
+                              <div *ngIf="frm.controls['email'].hasError('required') && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.error_emailreq" | translate}}
+                              </div>
+                              <div
+                                 *ngIf="(frm.controls['email'].hasError('email') || frm.controls['email'].hasError('pattern')) && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.email_invalid" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"request_header.occasion" | translate}}</label>
+                              <div class="selectbox">
+                                 <select formControlName="zoom_occasion">
+                                    <option [value]="occasion.zoomOccsion" *ngFor="let occasion of zoom_occasion">
+                                       {{occasion.zoomOccsion}}</option>
+                                 </select>
+                              </div>
+                              <div *ngIf="frm.controls['zoom_occasion'].hasError('required') && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.occasion_req" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row serv-row-adj">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"model_zoom.icebreaker_text" | translate}} {{dataList.name}}
+                                 {{"model_zoom.icebreaker_text2" | translate}}</label>
+                              <textarea placeholder="" formControlName="zoom_icebreakers" minlength="50"
+                                 maxlength="300"></textarea>
+                              <div *ngIf="frm.controls['zoom_icebreakers'].hasError('required') && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.this_errorReq" | translate}}
+                              </div>
+                              <div *ngIf="frm.controls['zoom_icebreakers'].hasError('minlength') && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"model_zoom.minichar_error" | translate}}
+                              </div>
+                              <div *ngIf="frm.controls['zoom_icebreakers'].hasError('maxlength') && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"model_shoutout.error_msg3" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.name1" | translate}}</label>
+                              <input type="text" placeholder="" formControlName="name_guest1" maxlength="100"
+                                 (change)="customValidations()">
+                              <div *ngIf="isName1 == true" class="error-div help-block requiredClass">
+                                 {{"common_model.name_suggestion" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.email1" | translate}} </label>
+                              <input type="text" placeholder="" formControlName="email_guest1" maxlength="100"
+                                 (change)="customValidations()">
+                              <div *ngIf="frm.controls['email_guest1'].hasError('required') && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.this_errorReq" | translate}}
+                              </div>
+                              <div
+                                 *ngIf="(frm.controls['email_guest1'].hasError('email') || frm.controls['email_guest1'].hasError('pattern') ) && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.email_invalid" | translate}}
+                              </div>
+                              <div
+                                 *ngIf="( (!frm.controls['email_guest1'].hasError('email')) && (!frm.controls['email_guest1'].hasError('pattern')) )">
+                                 <div *ngIf="isEmail1 == true" class="error-div help-block requiredClass">
+                                    {{"common_model.email_suggestion" | translate}}
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.name2" | translate}}</label>
+                              <input type="text" placeholder="" formControlName="name_guest2" maxlength="100"
+                                 (change)="customValidations()">
+                              <div *ngIf="isName2 == true" class="error-div help-block requiredClass">
+                                 {{"common_model.name_suggestion" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.email2" | translate}} </label>
+                              <input type="text" placeholder="" formControlName="email_guest2" maxlength="100"
+                                 (change)="customValidations()">
+                              <div *ngIf="frm.controls['email_guest2'].hasError('required') && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.this_errorReq" | translate}}
+                              </div>
+                              <div
+                                 *ngIf="( (!frm.controls['email_guest2'].hasError('email')) && (!frm.controls['email_guest2'].hasError('pattern')) )">
+                                 <div *ngIf="isEmail2 == true" class="error-div help-block requiredClass">
+                                    {{"common_model.email_suggestion" | translate}}
+                                 </div>
+                              </div>
+                              <div
+                                 *ngIf="(frm.controls['email_guest2'].hasError('email') || frm.controls['email_guest2'].hasError('pattern') ) && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.email_invalid" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.name3" | translate}}</label>
+                              <input type="text" placeholder="" formControlName="name_guest3" maxlength="100"
+                                 (change)="customValidations()">
+                              <div *ngIf="isName3 == true" class="error-div help-block requiredClass">
+                                 {{"common_model.name_suggestion" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.email3" | translate}} </label>
+                              <input type="text" placeholder="" formControlName="email_guest3" maxlength="100"
+                                 (change)="customValidations()">
+                              <div *ngIf="frm.controls['email_guest3'].hasError('required') && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.this_errorReq" | translate}}
+                              </div>
+                              <div
+                                 *ngIf="( (!frm.controls['email_guest3'].hasError('email')) && (!frm.controls['email_guest3'].hasError('pattern')) )">
+                                 <div *ngIf="isEmail3 == true" class="error-div help-block requiredClass">
+                                    {{"common_model.email_suggestion" | translate}}
+                                 </div>
+                              </div>
+                              <div
+                                 *ngIf="(frm.controls['email_guest3'].hasError('email') || frm.controls['email_guest3'].hasError('pattern')) && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.email_invalid" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.name4" | translate}}</label>
+                              <input type="text" placeholder="" formControlName="name_guest4" maxlength="100"
+                                 (change)="customValidations()">
+                              <div *ngIf="isName4 == true" class="error-div help-block requiredClass">
+                                 {{"common_model.name_suggestion" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.email4" | translate}} </label>
+                              <input type="text" placeholder="" formControlName="email_guest4" maxlength="100"
+                                 (change)="customValidations()">
+                              <div *ngIf="frm.controls['email_guest4'].hasError('required') && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.this_errorReq" | translate}}
+                              </div>
+                              <div
+                                 *ngIf="( (!frm.controls['email_guest4'].hasError('email')) && (!frm.controls['email_guest4'].hasError('pattern')) )">
+                                 <div *ngIf="isEmail4 == true" class="error-div help-block requiredClass">
+                                    {{"common_model.email_suggestion" | translate}}
+                                 </div>
+                              </div>
+                              <div
+                                 *ngIf="(frm.controls['email_guest4'].hasError('email') || frm.controls['email_guest4'].hasError('pattern')) && isSubmited"
+                                 class="error-div help-block requiredClass">
+                                 {{"common_model.email_invalid" | translate}}
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div *ngIf="sameEmail == true" class="error-div help-block requiredClass">
+                           {{"guest.same_mailError" | translate}}
+                        </div>
+                     </div>
+                     <div class="serv-row serv-row-adj">
+                        <div class="form-item custom-padd">
+                           <input class="styled-checkbox" id="styled-checkbox-2" type="checkbox"
+                              formControlName="terms">
+                           <label for="styled-checkbox-2">{{"model_zoom.terms_agreement" | translate}} <a
+                                 routerLink="/terms-condition"
+                                 target="_blank">{{"common_model.termOfService" | translate}}</a>
+                           </label>
+                           <div *ngIf="frm.controls['terms'].hasError('required') && isSubmited"
+                              class="error-div help-block requiredClass">
+                              {{"common_model.this_errorReq" | translate}}
+                           </div>
+                        </div>
+                     </div>
+
+                     <a href="#" class="promo-trigger" (click)="showCoupon()">{{"common_model.promo_code" | translate}}</a>
+                     <div *ngIf="applyCouponDiv == 'true'">
+                        <div class="couponList row">
+                           <h4 class="col-md-12">{{"common_model.available_coupon" | translate}}</h4>
+                           <div class="coupons" *ngIf="applyCodeButton == 'false'">
+                              <span *ngFor="let item of couponList; let i = index">
+                                 <!--(click)="applyCode(item.promocodes[0].code)"-->
+                                 <a class="apply-coupon">
+                                    {{ item.promocodes[0].code }} </a>
+                              </span>
+                              <input type="text" name="couponcode" class="form-control" style="margin: 0 2px 0 1rem;"
+                                 formControlName="promoCode">
+                              <button (click)="applyCode(frm.controls.promoCode.value)"
+                                 class="button btn btn-primary">{{"buttons.apply" | translate}}</button>
+                           </div>
+                           <div class="coupons" *ngIf="applyCodeButton == 'true'">
+                              <span *ngFor="let item of couponList; let i = index">
+                                 <span *ngIf="item.promocodes[0].code == appliedCode" class="applied-coupon">
+                                    {{ item.promocodes[0].code }} </span>
+                                 <span *ngIf="item.promocodes[0].code != appliedCode" class="disabled-code">
+                                    {{ item.promocodes[0].code }} </span>
+                                 <button *ngIf="item.promocodes[0].code == appliedCode" type="button"
+                                    (click)="removeCode(item.promocodes[0].code)" class="remove-coupon">
+                                    <img src="../../../assets/img/remove.png">
+                                 </button>
+                              </span>
+                           </div>
+                        </div>
+                     </div>
+
+                     <div class="pay-action">
+                        <button type="button"
+                           (click)="showReview()">{{"buttons.schedule_event" | translate}}</button>&nbsp;
+                        <button type="button" (click)="back()">{{"buttons.back" | translate}}</button>
+                     </div>
+                  </div>
+                  <div class="reviewForm" *ngIf="isShowReview == true">
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"model_zoom.zoom_meetingDate" | translate}}</label>
+                              {{ reviewData.zoom_date | date: 'MMM d, y' }}
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"model_zoom.time_interval" | translate}}</label>
+                              {{ reviewData.zoom_time_slot }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"request_header.timezone" | translate}}</label>
+                              {{ reviewData.zoom_timezone.nameValue }}
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"model_zoom.total_amount" | translate}}</label>
+                              ${{ reviewData.subTotalAmount }} USD
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">Discount Amount</label>
+                              ${{ reviewData.discountAmount}} USD
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">Total Amount To Pay</label>
+                              ${{ reviewData.totalAmount }} USD
+                           </div>
+                        </div>
+                        <!-- {{reviewData | json}} -->
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"fan_coupon.name" | translate}}</label>
+                              {{ reviewData.name }}
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"signup.email" | translate}}</label>
+                              {{ reviewData.email }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"request_popup.occasion" | translate}}</label>
+                              {{ reviewData.zoom_occasion }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"model_zoom.icebreaker_text" | translate}} {{dataList.name}}
+                                 {{"model_zoom.icebreaker_text2" | translate}}</label>
+                              {{ reviewData.zoom_icebreakers }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.name1" | translate}}</label>
+                              {{ reviewData.name_guest1 }}
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.email1" | translate}}</label>
+                              {{ reviewData.email_guest1 }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.name2" | translate}}</label>
+                              {{ reviewData.name_guest2 }}
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.email2" | translate}}</label>
+                              {{ reviewData.email_guest2 }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.name3" | translate}}</label>
+                              {{ reviewData.name_guest3 }}
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.email3" | translate}}</label>
+                              {{ reviewData.email_guest3 }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="serv-row">
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.name4" | translate}}</label>
+                              {{ reviewData.name_guest4 }}
+                           </div>
+                        </div>
+                        <div class="form-item">
+                           <div class="form-group">
+                              <label class="main-lbl">{{"guest.email4" | translate}}</label>
+                              {{ reviewData.email_guest4 }}
+                           </div>
+                        </div>
+                     </div>
+                     <div class="pay-info">
+                        <h2> {{"payment.heading" | translate}} </h2>
+                        <p> {{"payment.description" | translate}} <span> <img src="../../../../assets/img/info.svg">
+                           </span>
+                        </p>
+
+                        <div class="serv-row">
+                           <div class="form-item">
+                              <label class="main-lbl">To
+                                 <span><img src="../../../../assets/img/info.svg"></span></label>
+                              <div *ngIf="(fanDetail)">
+                                 <div
+                                    *ngIf="(fanDetail.available_wallet_points) && fanDetail.available_wallet_points > 0">
+                                    <div class="serv-row serv-row-adj points-row">
+                                       <div class="form-item">
+                                          <label>{{"common_model.available_point" | translate}} $
+                                             {{ fanDetail.available_wallet_points }} </label>
+                                       </div>
+                                    </div>
+                                    <input type="hidden" formControlName="available_wallet_points">
+                                    <div class="serv-row serv-row-adj points-row-div">
+                                       <div class="form-item">
+                                          <input class="styled-checkbox" id="styled-checkbox-3" type="checkbox"
+                                             (change)="walletChecked()" formControlName="use_points">
+                                          <label for="styled-checkbox-3">{{"common_model.use_wallet_msg" | translate}}
+                                          </label>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+
+                        <div *ngIf="showCardDetail && cardCharges > 0">
+                           <label for="pendingBalance"><span>Pending Balance: </span> $ {{ cardCharges }} </label>
+                           <div *ngFor="let item of cardDetail; let i = index;">
+                            <div class="form-item input-item-list">
+                                <label class="item-row">
+                                    <span class="radio-cell d-inline-flex position-relative">
+                                        <input type="radio" (click)="existingCardClick()" formControlName="card"
+                                            id="radio{{i}}" [value]=item.id class="position-absolute">
+                                        <span
+                                            class="icon d-inline-flex align-items-center justify-content-center rounded-circle">
+                                            <span class="rounded-circle"></span>
+                                        </span>
+                                    </span>
+                                    <span> {{ "**** **** "+ item.last4 || '?'}} </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-item input-item-list" *ngIf="cardDetail.length > 0">
+                            <label class="item-row">
+                                <span class="radio-cell d-inline-flex position-relative">
+                                    <input type="radio" (click)="newCardClick()" formControlName="newCard"
+                                        class="position-absolute" for="new-card">
+                                    <span
+                                        class="icon d-inline-flex align-items-center justify-content-center rounded-circle">
+                                        <span class="rounded-circle"></span>
+                                    </span>
+                                </span>
+                                <span class="main-lbl mb-0" id="new-card">New Card</span>
+                            </label>
+                        </div>
+                        <div *ngIf="newCard" class="payment-card-blc">
+                            <ngx-stripe-card [options]="cardOptions" [elementsOptions]="elementsOptions">
+                            </ngx-stripe-card>
+                        </div>
+                        </div>
+                     </div>
+                     <div class="pay-action">
+                        <button type="button" (click)="back()">{{"buttons.back" | translate}}</button>&nbsp;
+                        <button type="submit" (click)="save()" >{{"buttons.confirm" | translate}}</button>
+                        <!-- <span>
+                         <img src="../../../../assets/img/secure-payment.svg">
+                         Payment Secured by SSL encryption
+                         </span> -->
+                     </div>
+                  </div>
+               </div>
+               <div class="zoom-content zoom_content">
+                  <!-- <p><strong>What happens after your book?</strong></p> -->
+                  <div class="after-booking">
+                     <h2>{{"model_zoom.confirm_link_text" | translate}}</h2>
+                     <ul>
+                        <li>{{"model_zoom.select_date_time" | translate}}</li>
+                        <li>{{"model_zoom.purchase_reciept" | translate}}</li>
+                        <li>{{"model_zoom.videoLink_text" | translate}}</li>
+                     </ul>
+                     <div class="note-box" *ngIf="isShowReview == true">
+                        <strong>{{"model_zoom.imp_note_header" | translate}}</strong>:<br>
+                        {{"model_zoom.imp_note_text" | translate}}
+                     </div>
+                  </div>
+                  <div *ngIf="isShowForm == false && isShowReview == false" class="form-item fan-zoom-cal"
+                     style="max-width: 100%;">
+                     <div class="form-group">
+                        <div class="req-item timezone">
+                           <label class="pro-lbl-one">{{"model_zoom.choose_otherTimezone" | translate}} </label>
+                           <ng-moment-timezone-picker [formControlName]="'zoom_timezone'" [(ngModel)]="selectedZone"
+                              getUserZone=true customPlaceholderText="" (click)="getCurrentTime($event)">
+                           </ng-moment-timezone-picker>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>
